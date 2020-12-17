@@ -10,10 +10,10 @@ class apitest(TestCase):
     def setUp(self):
         new_organization = models.Organization.objects.create(name="Manuels Organization")
         A1 = models.Help.objects.create(name="Cole", latitude=1.215, longitude=-77.276, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
-        description="Lorem ipsum dolor sit amet consectetur adipiscing elit interdum, etiam torquent faucibus parturient.", organization=new_organization, category="Cole")
+        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing..", organization=new_organization, category="Cole")
 
         A2 = models.Help.objects.create(name="Exito", latitude=1.215, longitude=-77.279, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
-        description="Lorem ipsum dolor sit amet consectetur adipiscing elit interdum, etiam torquent faucibus parturient.", organization=new_organization, category="Exito")
+        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing.", organization=new_organization, category="Exito")
 
         self.name = A2.name
 

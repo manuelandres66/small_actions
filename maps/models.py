@@ -23,7 +23,7 @@ class Help(models.Model):
     longitude = models.DecimalField(max_digits=5, decimal_places=3)
     name = models.CharField(max_length=20)
     short_description = models.TextField(max_length=900)
-    recomedations = models.TextField(max_length=900, null=True)
+    recomedations = models.TextField(max_length=900, null=True, blank=True)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="help_points")
     category = models.CharField(max_length=11)
 
