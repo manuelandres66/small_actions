@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+#all_bar {
+    margin-top: 1vh;
+}
+
+#principal_logo {
+    width: 27vw;
+    margin-left: 2vw;
+}
+
+#rigth_superior {
+    float: right;
+}
+
+#rigth_superior h6 {
+    font-family: 'Sora', sans-serif;
+    font-size: 45px;
+    color: #ff3a3a;
+    font-weight: normal;
+    display: inline-block;
+    position: relative;
+    bottom: 2vh;
+    margin-right: 2vw;
+}
+
+#rigth_superior img {
+    width: 3.7vw;
+    display: inline-block;
+    margin-right: 2vw;
+}
+
+#inferior {
+    background-color: #ff3a3a;
+    margin-top: 2vh;
+    height: 2.5vh;
+    padding-top: 0.3vh;
+    transition: height 1s;
+}
+
+#inferior nav {
+    margin-left: 2vw;
+}
+
+#inferior nav a {
+    font-family: 'Sora', sans-serif;
+    outline: none;
+    text-decoration: none;
+    color: #fff;
+    font-weight: normal;
+    margin-right: 1.5vw;
+    font-size: 15px;
+    transition: display 2s;
+}
+
+#bars {
+    display: none;
+}
+
+@media screen and (max-width: 1300px) {
+    #all_bar {
+        margin-top: 2vh;
+    }
+
+    #principal_logo {
+        width: 57vw;
+        margin-left: 2.5vw;
+        margin-top: 2vh;
+    }
+
+    #rigth_superior h6 {
+        position: static;
+        display: block;
+        font-size: 18px;
+    }
+
+    #rigth_superior img {
+        width: 6vw;
+        margin: 0;
+        margin-top: 1.5vh;
+        margin-right: 8vw;
+    }
+
+    #bars {
+        display: inline-block;
+        font-size: 3vh;
+        color: #ff3a3a;
+        position: relative;
+        bottom: .7vh;
+        text-align: right;
+    }
+
+    #inferior{
+        margin-top: 4vh;
+        height: 1.5vh;
+        z-index: 100;
+    }
+
+    #inferior nav a {
+        font-size: 40px;
+        display: none;
+        margin-top: 1vh;
+        font-size: 20px;
+    }
+    
+}

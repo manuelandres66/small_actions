@@ -1,0 +1,152 @@
+#map {
+    display: inline-block;
+    margin-left: 2vw;
+    margin-top: 5vh;
+    width: 62vw;
+    height: 75vh;
+
+}
+
+#react {
+    display: inline-block;
+}
+
+#info_point {
+    display: inline-block;
+    width: 30vw;
+    margin-right: 2vw;
+    margin-left: 3.5vw;
+}
+
+#info_point h1 {
+    font-size: 40px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    text-align: justify;
+}
+
+#grid_info {
+    margin-top: 2.5vh;
+    display: grid;
+    grid-template-columns: repeat(2, 15vw);
+    grid-template-rows: 5vh, 7vh;
+}
+
+.info_grid h6 {
+    font-family: 'Sora', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 1vh;
+}
+
+#info_type h6 {
+    font-weight: 300;
+    text-align: right;
+}
+
+#info_point p {
+    font-size: 19px;
+    text-align: justify;
+    font-family: 'Sora', sans-serif;
+    width: 30vw;
+    margin-top: 1vh;
+}
+
+#more_info, #view_rute {
+    font-family: 'Sora', sans-serif;
+    font-size: 25px;
+    width: 100%;
+    margin-top: 2.5vh;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 3px;
+}
+
+#more_info {
+    border: none;
+    background-color: #ff3a3a;
+    color: #fff;
+}
+
+#view_rute {
+    border: 2px solid  #ff3a3a;
+    color: #ff3a3a ;
+    background-color: #fff;
+}
+
+#non_button {
+    position: absolute;
+    top: 0;
+    margin-top: 17.4vh;
+}
+
+#button {
+    position: relative;
+    bottom: 2vh;
+}
+
+@media screen and (max-width: 1300px) {
+    #non_button {
+        position: static;
+    }
+
+    #map {
+        display: block;
+        width: 90vw;
+        height: 22vh;
+        margin-left: 5vw;
+    }
+
+    #react{
+        display: block;
+        width: 90vw;
+        height: 22vh;
+        margin: 0;
+        margin-left: 5vw;
+    }
+
+    #info_point {
+        margin: 0;
+        position: static;
+        width: 100%;
+        height: 100%;
+        margin-top: 2.5vh;
+    }
+
+    #non_button {
+        margin-top: 0;
+    }
+
+    #non_button h1 {
+        font-size: 20px;
+    }
+
+    #grid_info {
+        grid-template-columns: repeat(2, 50%);
+    }
+    #info_point p {
+        width: 100%;
+    }
+    .info_grid h6 {
+        font-size: 15px;
+    }
+
+    #info_point p {
+        font-size: 10px;
+    }
+
+    #more_info, #view_rute {
+        font-size: 15px;
+        margin: 0;
+        width: 40vw;
+    }
+
+    #view_rute {
+        float: right;
+    } 
+
+    #button {
+        position: static;
+        margin-top: 2.5vh;
+    }
+}
