@@ -8,5 +8,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run Django Test
       run: |
+        python -m pip install Pillow
         pip3 install --user django
         python3 manage.py test
