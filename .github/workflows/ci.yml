@@ -3,11 +3,11 @@ on: push
 
 jobs:
   test_actions:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - name: Run Django Test
       run: |
-        pip3 install Pillow
-        pip3 install --user django
-        python3 manage.py test
+        pip install Pillow
+        pip install --user django
+        python manage.py test
