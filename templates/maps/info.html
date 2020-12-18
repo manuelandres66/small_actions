@@ -3,33 +3,47 @@
 {% load static %}
 <html>
     <head>
-        <title>Info</title>
+        <title>{{point.name}} | Small Actions</title>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
+        <link href="{% static 'maps/css/info.css' %}" rel="stylesheet">
     </head>
     {% include 'maps/nav.html' %}
     <body>
-        <div>
-            <h1>{{point.name}}</h1>
-            <div>
-                <div id="map"></div>
-                <p>{{point.short_description}}</p>
+        <div id="grid_all">
+            <div id="all_info">
+                <h1>{{point.name}}</h1>
+                <div id="map_container">
+                    <span id="longitude">{{point.longitude}}</span>
+                    <span id="latitude">{{point.latitude}}</span>
+                    <div id="map"></div>
+                    <p>{{point.short_description}}</p>
+                </div>
+                <div id="go">
+                    <a>
+                        <i class="fas fa-circle"></i>
+                        <h4>Go there!</h4>
+                    </a>
+                    <h4 id="category">{{point.category}}</h4>
+                </div>
+                <div id="recomedations">
+                    <p>{{point.recomedations}}</p>
+                </div>
             </div>
-            <div>
-                <i class="fas fa-circle"></i>
-                <h4>Go there!</h4>
-                <h4>Food Donation</h4>
-            </div>
-            <div>
-                <p>{{point.recomedations}}</p>
+            <div id="organization_info">
+                <h3>{{point.organization.name}}</h3>
+                <div>
+                    <i class="fas fa-circle" id="frist"></i>
+                    <img src="{{point.organization.circular_icon.url}}">
+                </div>
+                <div id="org_info">   
+                    <p id="org_descrp">{{point.organization.short_description}}</p>
+                    <p id="org_quote">“{{point.organization.quote}}”</p>
+                </div>
+
             </div>
         </div>
-        <div>
-            <h3>{{point.organization.name}}</h3>
-            <div>
-                <i class="fas fa-grip-lines"></i>
-                <img src="{{point.organization.circular_icon.url}}">
-            </div>
-            <p>{{point.organization.short_description}}</p>
-            <p>{{point.organization.quote}}</p>
-        </div>
+        <script src="{% static 'maps/javascript/singleMap.js' %}"></script>
     </body>
 </html>

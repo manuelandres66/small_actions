@@ -1,0 +1,146 @@
+* {
+    font-family: 'Sora', sans-serif;
+}
+
+#grid_all {
+    display: grid;
+    grid-template-columns: 72vw, 28vw;
+}
+
+#all_info {
+    width: 70vw;
+    display: inline-block;
+    margin-top: 4vh;
+    margin-left: 2vw;
+    grid-column: 1;
+}
+
+#all_info h1{
+    font-size: 60px;
+    font-weight: 600;
+    margin-bottom: 3vh;
+}
+
+span {
+    display: none;
+}
+
+#map_container {
+    display: grid;
+    grid-template-columns: 30vw, 39vw;
+}
+
+#map {
+    width: 30vw;
+    height: 37vh;
+    display: inline-block;
+    grid-column: 1;
+}
+
+#map_container p {
+    display: inline-block;
+    width: 37vw;
+    text-align: justify;
+    margin-left: 2vw;
+    grid-column: 2;
+    font-size: 22px;
+}
+
+#go {
+    margin-top: 4vh;
+}
+
+#go a {
+    transition: font-size 1s;
+    cursor: pointer;
+}
+
+#go a:hover {
+    font-size: 80px;
+}
+
+#go a i {
+    font-size: 60px;
+    color:#ff3a3a;
+}
+
+#go a h4 {
+    font-size: 50px;
+    font-weight: 300;
+    display: inline-block;
+    margin-left: 1vw;
+    position: relative;
+    bottom: 0.6vh;
+}
+
+#category {
+    font-size: 40px;
+    float: right;
+}
+
+#recomedations p {
+    margin-top: 2.5vh;
+    font-size: 20px;
+    text-align: justify;
+}
+
+#organization_info {
+    display: inline-block;
+    background-color: #ff3a3a;
+    width: 22vw;
+    height: 81vh;
+    margin-left: 3vw;
+    margin-top: 4vh;
+    grid-column: 2;
+}
+
+#organization_info h3 {
+    font-size: 40px;
+    color: #ffffff;
+    margin-top: 3vh;
+    text-align: center;
+    font-weight: 600;
+}
+
+#organization_info img {
+    width: 9vw;
+    height: 16vh;
+    object-fit: contain;
+    object-position: center;
+    margin-left: 6.5vw;
+    margin-top: 4vh;
+}
+
+#organization_info i {
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+}
+
+#org_descrp {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+#org_info {
+    margin-left: 2vw;
+    width: 18vw;
+    margin-top: 5vh;
+}
+
+
+#org_descrp {
+    color: #fff;
+    font-size: 20px;
+    text-align: justify;
+}
+
+#org_quote {
+    margin-top: 2.5vh;
+    font-size: 25px;
+    text-align: justify;
+    color: #ffffff;
+    opacity: 0.8;
+    letter-spacing: 6px;
+}

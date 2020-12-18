@@ -13,10 +13,10 @@ class Point(models.Model):
 
 class Organization(models.Model):
     name = models.CharField(max_length=20)
-    image = models.ImageField(upload_to="organizations")
-    circular_icon = models.ImageField(upload_to="organizations/circle")
-    short_description = models.TextField(max_length=300, null=True)
-    quote = models.CharField(max_length=60, null=True)
+    image = models.ImageField(upload_to="organizations", blank=True, null=True)
+    circular_icon = models.ImageField(upload_to="organizations/circle", blank=True, null=True)
+    short_description = models.TextField(max_length=300)
+    quote = models.CharField(max_length=60)
 
     def __str__(self):
         return f"{self.name}"

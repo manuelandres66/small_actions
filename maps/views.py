@@ -32,7 +32,8 @@ def all_helps(request):
                 'category' : single.category,
                 'organization' : single.organization.name,
                 'description' : single.short_description,
-                'rute' : f"https://www.google.com/maps/dir//{single.latitude},{single.longitude}"
+                'rute' : f"https://www.google.com/maps/dir//{single.latitude},{single.longitude}",
+                'uuid' : single.uuid
             }
             points_response.append(point)
             latitude_sum += single.latitude
