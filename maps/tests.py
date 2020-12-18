@@ -5,6 +5,12 @@ from . import models
 import json
 # Create your tests here.
 
+class htmltest(TestCase):
+    def test_index(self):
+        c = Client()
+        response = c.get('/')
+        self.assertEqual(response.status_code, 200)
+
 class apitest(TestCase):
 
     def setUp(self):
@@ -15,14 +21,12 @@ class apitest(TestCase):
         A2 = models.Help.objects.create(name="Exito", latitude=1.215, longitude=-77.279, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
         recomedations="Lorem ipsum dolor sit amet consectetur adipiscing.", organization=new_organization, category="Exito")
 
-        self.name = A2.name
-
+        print(A1.uuid, A2.uuid)
 
     def test_secend(self):
         c = Client()
         response = c.post('/api/all_helps', {'data' : 'all'}, content_type="application/json")
         data = json.loads(response.content)
-
         self.assertEqual(data['points'], [
             {
                 'name' : "Cole",

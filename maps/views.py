@@ -11,7 +11,6 @@ def index(request):
 def all_helps(request):
     if request.method != "POST":
         return JsonResponse({'error' : 'The request must be POST'}, status=400)
-    
     data = json.loads(request.body)
 
     if 'data' in data and data['data'] == 'all':

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-import uuid
+from shortuuidfield import ShortUUIDField
+
 # Create your models here.
 
 class Point(models.Model):
@@ -18,7 +19,7 @@ class Organization(models.Model):
         return f"{self.name}"
 
 class Help(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = ShortUUIDField()
     latitude = models.DecimalField(max_digits=5, decimal_places=3)
     longitude = models.DecimalField(max_digits=5, decimal_places=3)
     name = models.CharField(max_length=20)
