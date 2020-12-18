@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .models import Help
 
 import json
@@ -7,6 +7,12 @@ import json
 
 def index(request):
     return render(request, 'maps/index.html')
+
+def info_point(request, uuid):
+    help_point = Help.objects.get(uuid=uuid)
+
+    ctx = {'point' : help_point}
+    return render(request, 'maps/info.html', ctx)
 
 def all_helps(request):
     if request.method != "POST":
@@ -32,8 +38,11 @@ def all_helps(request):
             latitude_sum += single.latitude
             longitude_sum += single.longitude
 
-        latitude_avarage = float("{0:.3f}".format(latitude_sum / len(all_helps)))
-        longitude_avarage = float("{0:.3f}".format(longitude_sum / len(all_helps)))
+        if len(all_helps) > 0:
+            latitude_avarage = float("{0:.3f}".format(latitude_sum / len(all_helps)))
+            longitude_avarage = float("{0:.3f}".format(longitude_sum / len(all_helps)))
+        else:
+            latitude_avarage, longitude_avarage = 0, -78
 
         response = {
             'latitude' : latitude_avarage,

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html>
+    <head>
+        <title>Info</title>
+    </head>
+    {% include 'maps/nav.html' %}
+    <body>
+        <div>
+            <h1>{{point.name}}</h1>
+            <div>
+                <div id="map"></div>
+                <p>{{point.short_description}}</p>
+            </div>
+            <div>
+                <i class="fas fa-circle"></i>
+                <h4>Go there!</h4>
+                <h4>Food Donation</h4>
+            </div>
+            <div>
+                <p>{{point.recomedations}}</p>
+            </div>
+        </div>
+        <div>
+            <h3>{{point.organization.name}}</h3>
+            <div>
+                <i class="fas fa-grip-lines"></i>
+                <img src="{{point.organization.circular_icon.url}}">
+            </div>
+            <p>{{point.organization.short_description}}</p>
+            <p>{{point.organization.quote}}</p>
+        </div>
+    </body>
+</html>
