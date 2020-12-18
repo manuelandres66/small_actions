@@ -8,7 +8,8 @@ class App extends React.Component {
             type: 'Help Web',
             organization: 'Small Actions',
             description: "Lorem ipsum dolor sit amet consectetur adipiscing, elit aenean nisl litora donec, blandit sociosqu venenatis ad sollicitudin. Congue nunc non diam morbi posuere, venenatis torquent quis conubia. Rutrum blandit felis praesent cubilia euismod tortor cras, non massa duis proin fusce lacus metus, ultricies primis varius urna penatibus iaculis. Scelerisque ornare iaculis molestie vehicula nec morbi ultricies dictumst, sagittis velit sodales facilisis orci enim primis tortor vestibulum, penatibus litora cum conubia tellus platea ullamcorper. Dapibus inceptos lectus nulla vitae ligula lacinia interdum sem quisque dictum faucibus, tempor eleifend nam phasellus conubia enim mauris ut morbi praesent. Volutpat aliquam nibh conubia turpis quam primis fames, montes iaculis sollicitudin nisl magna accumsan, pellentesque gravida aptent vestibulum nisi lectus. Parturient lectus fringilla inceptos tellu.",
-            url: "#"
+            url: "#",
+            uuid: "#"
         };
         this.newMap()
     }
@@ -46,7 +47,7 @@ class App extends React.Component {
             data.points.forEach(point => {
                 const popup = new mapboxgl.Popup(parameters).setHTML(`<h3>${point.name}</h3>`);
                 popup.on('open', () => {
-                    this.changeState(point.name, point.category, point.organization, point.description, point.rute);
+                    this.changeState(point.name, point.category, point.organization, point.description, point.rute, point.uuid);
                 });
 
                 new mapboxgl.Marker({
@@ -59,13 +60,14 @@ class App extends React.Component {
         })
     };
 
-    changeState = (name, type, organization, description, url) => {
+    changeState = (name, type, organization, description, url, uuid) => {
         this.setState({
             name: name,
             type: type,
             organization: organization,
             description: description,
-            url: url
+            url: url,
+            uuid: `/points/info/${uuid}`
         });
     };
 
@@ -88,8 +90,8 @@ class App extends React.Component {
             </div>
 
             <div id="button">
-                <button id="more_info">More Info</button>
-                <a href={this.state.url}><button id="view_rute">View Rute</button></a>
+                <a href={this.state.uuid}><button id="more_info">More Info</button></a>
+                <a href={this.state.url} target="_blank"><button id="view_rute">View Rute</button></a>
             </div>
         </div>
       );
