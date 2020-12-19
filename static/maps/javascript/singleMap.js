@@ -28,38 +28,3 @@ new mapboxgl.Marker({
 .setPopup(popup)
 .addTo(map);
 
-window.addEventListener('load', () => {
-    // Animations
-    const rect = document.querySelector('#organization_info img').getBoundingClientRect();
-    console.log(rect)
-
-
-    // init part, set your own values
-    var sat = {
-        elt: null,
-        a: 0,         // in radian,
-        r: 110,        // radius
-        da: 0.1,     // in radian
-        x: 0,
-        y: 0,
-
-        center: { x: ((rect.left + rect.right) / 2), y: ((rect.top + rect.bottom) / 2) - 5}
-    }
-
-    sat.move = function(){
-        // each modification
-        this.a += this.da
-        this.x = this.center.x + (this.r * Math.sin(this.a));
-        this.y = this.center.y + (this.r * Math.cos(this.a));
-        //console.log(this.x, this.y);
-        this.elt.style.top = this.y + "px";
-        this.elt.style.left = this.x + "px";
-
-    }
-
-    sat.elt = document.querySelector('#frist');
-    var loopTimer = setInterval(function(){
-        sat.move();
-    }, 50);
-
-});

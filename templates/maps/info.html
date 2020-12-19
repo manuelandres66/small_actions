@@ -44,6 +44,15 @@
 
             </div>
         </div>
+        <div id="images">
+            {% for photo in point.photos.all %}
+                <img src="{{photo.photo.url}}" class="slice">
+            {% endfor %}
+            {% for photo in point.photos.all %}
+                <img src="{{photo.photo.url}}" class="slice">
+            {% endfor %}
+        </div>
         <script src="{% static 'maps/javascript/singleMap.js' %}"></script>
+        <script src="{% static 'maps/javascript/slicer.js' %}"></script>
     </body>
 </html>

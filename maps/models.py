@@ -21,6 +21,9 @@ class Organization(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+class HelpPhoto(models.Model):
+    photo = models.ImageField(upload_to="help", blank=True, null=True)
+
 class Help(models.Model):
     uuid = ShortUUIDField()
     latitude = models.DecimalField(max_digits=5, decimal_places=3)
@@ -30,6 +33,7 @@ class Help(models.Model):
     recomedations = models.TextField(max_length=900)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="help_points")
     category = models.CharField(max_length=11)
+    photos = models.ManyToManyField(HelpPhoto)
 
     def __str__(self):
         return f"{self.organization}: {self.name}"
