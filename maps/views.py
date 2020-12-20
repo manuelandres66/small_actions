@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.http import JsonResponse, HttpResponse
+
 from .models import Help
 
 import json
@@ -14,6 +15,7 @@ def info_point(request, uuid):
     ctx = {'point' : help_point}
     return render(request, 'maps/info.html', ctx)
 
+#API
 def all_helps(request):
     if request.method != "POST":
         return JsonResponse({'error' : 'The request must be POST'}, status=400)
@@ -33,7 +35,7 @@ def all_helps(request):
                 'organization' : single.organization.name,
                 'description' : single.short_description,
                 'rute' : f"https://www.google.com/maps/dir//{single.latitude},{single.longitude}",
-                'uuid' : single.uuid
+                'uuid' : reverse('info', kwargs={'uuid' : single.uuid})
             }
             points_response.append(point)
             latitude_sum += single.latitude
@@ -43,7 +45,7 @@ def all_helps(request):
             latitude_avarage = float("{0:.3f}".format(latitude_sum / len(all_helps)))
             longitude_avarage = float("{0:.3f}".format(longitude_sum / len(all_helps)))
         else:
-            latitude_avarage, longitude_avarage = 0, -78
+            latitude_avarage, longitude_avarage = 0, 0
 
         response = {
             'latitude' : latitude_avarage,
@@ -53,6 +55,38 @@ def all_helps(request):
 
         return JsonResponse(response, status=200)
     
-    return JsonResponse({'error' : 'no data especified'}, status=400)
+    return JsonResponse({'error' : 'no data specified'}, status=400)
+
+def search_helps(request):
+    # if request.method != "POST":
+    #     return JsonResponse({'error' : 'The request must be POST'}, status=400)
+
+    # data = json.loads(request.body)
+
+    data = request.GET
+
+    if 'search_type' in data and 'search' in data:
+        search_type = data['search_type']
+
+        if search_type == "name":
+            search = Help.objects.filter(name__contains=data['search'])
+        elif search_type == "description":
+            search = Help.objects.filter(short_description__contains=data['search'])
+        elif search_type == "recomendations":
+            search = Help.objects.filter(recomedations__contains=data['search'])
+
+        response = {'results' : []}
+        for point in search:
+            response['results'].append({
+                'name': point.name,
+                'organization' : point.organization.name,
+                'url' : reverse('info', kwargs={'uuid' : point.uuid})
+            })
+
+        print(response)
+        return JsonResponse(response, status=200)
+
+    else:
+        return JsonResponse({'error' : 'no search_type or search specified'}, status=400)
 
     

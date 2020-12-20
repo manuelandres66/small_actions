@@ -67,7 +67,7 @@ class App extends React.Component {
             organization: organization,
             description: description,
             url: url,
-            uuid: `/points/info/${uuid}`
+            uuid: uuid
         });
     };
 

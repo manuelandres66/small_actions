@@ -4,7 +4,8 @@ from . import views
 urlpatterns = [
     path('', views.index, name="index"),
 
-    path('points/info/<str:uuid>', views.info_point),
+    path('points/info/<str:uuid>', views.info_point, name="info"),
 
-    path('api/all_helps', views.all_helps, name="apiPHelps")
+    path('api/all_helps', views.all_helps, name="apiPHelps"),
+    path('api/search_helps', views.search_helps, name="apiSearchHelps")
 ]
