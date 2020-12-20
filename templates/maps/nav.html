@@ -12,12 +12,12 @@
 <body>
     <div id="all_bar">
         <div id="superior">
-            <img src="{% static 'maps/images/logo.svg' %}" id="principal_logo">
+            <img src="{% static 'maps/images/logo.svg' %}" id="principal_logo" alt="logo">
             <div id="rigth_superior">
                 {% if request.user.is_authenticated %}
                 <h6>{{request.user.points.points}} Points</h6>
                 {% endif %}
-                <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}">
+                <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account">
                 <i class="fas fa-bars" id="bars"></i>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <nav>
                 <a href="/">Home</a>
                 <a href="/">Organizations</a>
-                <a href="/">Search Help Points</a>
+                <a href="{% url 'SerchPoints' %}">Search Help Points</a>
                 <a href="/">Become an Organization</a>
                 <a href="/">Categories</a>
             </nav>

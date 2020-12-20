@@ -102,10 +102,3 @@ ReactDOM.render(
     <App />,
     document.getElementById('react')
 );
-
-const changeProps = () => {
-    let app = new App
-    app.setState({
-        name: "Hi"
-    })
-}

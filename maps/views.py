@@ -15,6 +15,9 @@ def info_point(request, uuid):
     ctx = {'point' : help_point}
     return render(request, 'maps/info.html', ctx)
 
+def points(request):
+    return render(request, 'maps/points.html')
+
 #API
 def all_helps(request):
     if request.method != "POST":
@@ -58,35 +61,29 @@ def all_helps(request):
     return JsonResponse({'error' : 'no data specified'}, status=400)
 
 def search_helps(request):
-    # if request.method != "POST":
-    #     return JsonResponse({'error' : 'The request must be POST'}, status=400)
+    if request.method != "POST":
+        return JsonResponse({'error' : 'The request must be POST'}, status=400)
 
-    # data = json.loads(request.body)
+    data = json.loads(request.body)
 
-    data = request.GET
 
-    if 'search_type' in data and 'search' in data:
-        search_type = data['search_type']
+    if 'search' in data:
 
-        if search_type == "name":
-            search = Help.objects.filter(name__contains=data['search'])
-        elif search_type == "description":
-            search = Help.objects.filter(short_description__contains=data['search'])
-        elif search_type == "recomendations":
-            search = Help.objects.filter(recomedations__contains=data['search'])
+        search = Help.objects.filter(name__contains=data['search'])
+        search = search | Help.objects.filter(short_description__contains=data['search'])
+        search = search | Help.objects.filter(recomedations__contains=data['search'])
 
         response = {'results' : []}
-        for point in search:
+        for point in search[:10]:
             response['results'].append({
                 'name': point.name,
                 'organization' : point.organization.name,
                 'url' : reverse('info', kwargs={'uuid' : point.uuid})
             })
 
-        print(response)
         return JsonResponse(response, status=200)
 
     else:
-        return JsonResponse({'error' : 'no search_type or search specified'}, status=400)
+        return JsonResponse({'error' : 'no search specified'}, status=400)
 
     
