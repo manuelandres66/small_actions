@@ -110,6 +110,17 @@ body {
     }
 }
 
+@keyframes fromLeftImgResponsive {
+    0% {
+        left: 50vw;
+        transform: rotate(180deg);
+    }
+    100% {
+        left: 0;
+        transform: rotate(0);
+    }
+}
+
 
 #info div img {
     width: 12vw;
@@ -123,4 +134,77 @@ body {
     animation-duration: 2s;
     animation-delay: 1s;
     animation-fill-mode: forwards;
+}
+
+@media screen and (max-width: 1000px) {
+    #grid {
+        display: block;
+    }
+    #react {
+        display: block;
+    }
+    #searchBar {
+        width: 100vw;
+        display: block;
+    }
+
+    #searchBar input {
+        width: 75vw;
+        height: 28px;
+        font-size: 11px;
+        margin-left: 2.5vw;
+        padding-left: 3vw;
+        display: inline-block;
+    }
+
+    #searchBar i {
+        display: inline-block;
+        font-size: 20px;
+    }
+
+    .result div {
+        margin-left: 2.5vw;
+        width: 95vw;
+    }
+
+    .result h4 {
+        font-size: 20px;
+    }
+
+    .result h4 {
+        font-size: 20px;
+    }
+
+    #info {
+        margin-left: 2.5vw;
+        width: 95vw;
+        display: grid;
+        grid-template-columns: 47vw, 48vw;
+    }
+
+    #info p {
+        width: 47vw;
+        font-size: 10px;
+        display: inline-block;
+        height: 22vh;
+        grid-column: 1;
+        animation: none;
+    }
+
+    #info div {
+        display: inline-block;
+        width: 39vw;
+        height: 22vh;
+        grid-column: 2;
+        margin: 0;
+    }
+
+    #info div img {
+        width: 25.5vw;
+        height: 14.34vh;
+        margin-left: 7vw;
+        margin-top: 3.83vh;
+        left: 50vw;
+        animation-name: fromLeftImgResponsive;
+    }
 }

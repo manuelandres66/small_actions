@@ -57,10 +57,12 @@ span {
 @keyframes moveRigth{
     0% {
         right: 20vw;
+        opacity: 0;
     }
 
     100% {
         right: 0;
+        opacity: 1;
     }
 }
 
@@ -68,10 +70,13 @@ span {
     transition: font-size 1s;
     cursor: pointer;
     position: relative;
+    right: 20vw;
+    opacity: 0;
 
     animation-name: moveRigth;
     animation-duration: 2s;
     animation-fill-mode: forwards;
+    animation-delay: 1s;
 }
 
 #go a:hover {
