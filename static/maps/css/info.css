@@ -54,9 +54,24 @@ span {
     margin-top: 4vh;
 }
 
+@keyframes moveRigth{
+    0% {
+        right: 20vw;
+    }
+
+    100% {
+        right: 0;
+    }
+}
+
 #go a {
     transition: font-size 1s;
     cursor: pointer;
+    position: relative;
+
+    animation-name: moveRigth;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
 }
 
 #go a:hover {

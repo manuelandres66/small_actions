@@ -1,0 +1,126 @@
+#grid {
+    display: grid;
+    grid-template-columns: 70vw, 30vw;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+#react {
+    grid-column: 1;
+    margin-top: 3.5vh;
+    width: 68vw;
+    margin-left: 2vw;
+}
+
+#searchBar input{
+    background-color: #fff;
+    border: 2px solid #ff3a3a;
+    border-radius: 50px;
+    display: inline-block;
+    width: 60vw;
+    height: 4vh;
+    font-size: 30px;
+    color: #000;
+    padding-left: 1.5vw;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    font-family: 'Sora', sans-serif;
+}
+
+#searchBar input::placeholder {
+    color: #b8b8b8;
+}
+
+#searchBar i {
+    font-size: 4vh;
+    margin-left: 1.5vw;
+}
+
+#results {
+    margin-top: 5vh;
+}
+
+.result {
+    font-family: 'Sora', sans-serif;
+    color: #000;
+    text-decoration: none;
+}
+
+.result div {
+    margin-bottom: 2.5vh;
+}
+
+.result h4 {
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.result h6 {
+    font-size: 25px;
+    font-weight: 300;
+}
+
+#info {
+    grid-column: 2;
+    margin-top: 3.5vh;
+}
+
+
+@keyframes fromLeft {
+    from {
+        left: 10vw;
+    }
+    to {
+        left: 0;
+    }
+}
+
+#info p {
+    width: 20vw;
+    text-align: justify;
+    font-size: 27px;
+    font-weight: 200;
+    font-family: 'Sora', sans-serif;
+
+    position: relative;
+    animation-name: fromLeft;
+    animation-duration: 2s;
+}
+
+
+#info div {
+    background-color: #ff3a3a;
+    width: 20vw;
+    height: 27vh;
+    border-radius: 32px;
+    margin-top: 5vh;
+
+}
+
+@keyframes fromLeftImg {
+    0% {
+        left: 20vw;
+        transform: rotate(180deg);
+    }
+    100% {
+        left: 0;
+        transform: rotate(0);
+    }
+}
+
+
+#info div img {
+    width: 12vw;
+    margin: auto;
+    margin-left: 4vw;
+    margin-top: 1.8vh;
+    position: relative;
+    left: 20vw;
+
+    animation-name: fromLeftImg;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}

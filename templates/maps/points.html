@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-    <head>
+    <head lang="en">
         <title>Search Help Points</title>
 
         <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
@@ -12,11 +12,13 @@
     </head>
     {% include 'maps/nav.html' %}
     <body>
-        <div id="react"></div>
-        <div>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit condimentum habitasse eros ac proin suspendisse, luctus himenaeos vitae ad accumsan maecenas volutpat quis inceptos mattis suscipit. Commodo vehicula laoreet elementum dictumst dictum fringilla, magnis eleifend faucibus eu. eleifend faucibus eu. eleifend faucibus eu.</p>
-            <div>
-                <img src="{% static 'maps/images/logo_small_icon_only.png' %}" alt="logo_down">
+        <div id="grid">
+            <div id="react"></div>
+            <div id="info">
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit condimentum habitasse eros ac proin suspendisse, luctus himenaeos vitae ad accumsan maecenas volutpat quis inceptos mattis suscipit. Commodo vehicula laoreet elementum dictumst dictum fringilla, magnis eleifend faucibus eu. eleifend faucibus eu. eleifend faucibus eu.</p>
+                <div>
+                    <img src="{% static 'maps/images/logo_small_icon_only.png' %}" alt="logo_down">
+                </div>
             </div>
         </div>
 

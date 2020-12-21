@@ -19,6 +19,11 @@ class htmltest(TestCase):
         response = c.get('/')
         self.assertEqual(response.status_code, 200)
 
+    def test_points(self):
+        c = Client()
+        response = c.get('/points/')
+        self.assertEqual(response.status_code, 200)
+
 class apitest(TestCase):
 
     def setUp(self):
@@ -51,7 +56,7 @@ class apitest(TestCase):
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
                 'rute' : "https://www.google.com/maps/dir//1.215,-77.276",
-                'uuid' : self.example.uuid
+                'uuid' : f'/points/info/{self.example.uuid}'
             },
             {
                 'name' : "Exito",
@@ -60,7 +65,7 @@ class apitest(TestCase):
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
                 'rute' : "https://www.google.com/maps/dir//1.215,-77.279",
-                'uuid' : self.second_example.uuid
+                'uuid' : f'/points/info/{self.second_example.uuid}'
             }
 
         ])
@@ -78,5 +83,13 @@ class apitest(TestCase):
                 path_to_file = os.path.join(path, file)
                 os.remove(path_to_file)
 
-
+    def test_search(self):
+        c = Client()
+        response = c.post('/api/search_helps', {'search' : 'Col'}, content_type='application/json')
+        data = json.loads(response.content)
+        self.assertEqual(data['results'], [{
+            'name' : 'Cole',
+            'organization' : 'Manuels Organization',
+            'url' : f'/points/info/{self.example.uuid}'
+        }])
 
