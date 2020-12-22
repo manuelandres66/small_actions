@@ -34,7 +34,7 @@ class App extends React.Component {
                 container: 'map',
                 style: 'mapbox://styles/mapbox/streets-v11',
                 center: [data.longitude, data.latitude], // starting position
-                zoom: 13, // starting zoom
+                zoom: 7, // starting zoom
             });
 
             map.addControl(new mapboxgl.NavigationControl());

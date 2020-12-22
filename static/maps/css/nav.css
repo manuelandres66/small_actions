@@ -64,12 +64,16 @@
 @media screen and (max-width: 1300px) {
     #all_bar {
         margin-top: 2vh;
-    }
+    } 
 
     #principal_logo {
         width: 57vw;
         margin-left: 2.5vw;
         margin-top: 2vh;
+    }
+
+    #rigth_superior {
+        margin-right: 2.5vw;
     }
 
     #rigth_superior h6 {

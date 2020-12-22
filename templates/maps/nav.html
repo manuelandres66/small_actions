@@ -15,7 +15,7 @@
             <img src="{% static 'maps/images/logo.svg' %}" id="principal_logo" alt="logo">
             <div id="rigth_superior">
                 {% if request.user.is_authenticated %}
-                <h6>{{request.user.points.points}} Points</h6>
+                <h6>{{request.user.points}} Points</h6>
                 {% endif %}
                 <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account">
                 <i class="fas fa-bars" id="bars"></i>
@@ -32,7 +32,7 @@
                 {% if request.user.is_authenticated %}
                 <a href="/">Logout</a>
                 {% else %}
-                <a href="/">Login</a>
+                <a href="{% url 'login' %}">Login</a>
                 {% endif %}
             </nav>
         </div>

@@ -171,13 +171,14 @@ body {
         font-size: 20px;
     }
 
-    .result h4 {
-        font-size: 20px;
+    .result h6 {
+        font-size: 12px;
     }
 
     #info {
         margin-left: 2.5vw;
         width: 95vw;
+        margin-right: 0;
         display: grid;
         grid-template-columns: 47vw, 48vw;
     }
@@ -201,10 +202,15 @@ body {
 
     #info div img {
         width: 25.5vw;
-        height: 14.34vh;
         margin-left: 7vw;
         margin-top: 3.83vh;
         left: 50vw;
         animation-name: fromLeftImgResponsive;
+    }
+}
+
+@media screen and (max-height: 500px) {
+    #info div {
+        height: 30vh;
     }
 }
