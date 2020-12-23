@@ -26,6 +26,8 @@ class htmltest(TestCase):
 
 class apitest(TestCase):
 
+    maxDiff = None
+
     def setUp(self):
         uploaded = SimpleUploadedFile('test.gif', small_gif, content_type='image/gif')
 
@@ -51,20 +53,20 @@ class apitest(TestCase):
         self.assertEqual(data['points'], [
             {
                 'name' : "Cole",
-                'cordinates' : ['-77.276', '1.215'],
+                'cordinates' : ['-77.2760', '1.2150'],
                 'category' : "Cole",
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
-                'rute' : "https://www.google.com/maps/dir//1.215,-77.276",
+                'rute' : "https://www.google.com/maps/dir//1.2150,-77.2760",
                 'uuid' : f'/points/info/{self.example.uuid}'
             },
             {
                 'name' : "Exito",
-                'cordinates' : ['-77.279', '1.215'],
+                'cordinates' : ['-77.2790', '1.2150'],
                 'category' : "Exito",
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
-                'rute' : "https://www.google.com/maps/dir//1.215,-77.279",
+                'rute' : "https://www.google.com/maps/dir//1.2150,-77.2790",
                 'uuid' : f'/points/info/{self.second_example.uuid}'
             }
 

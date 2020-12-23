@@ -1,15 +1,36 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
     <head>
         <title>Login | Small Actions</title>
+        <link href="{% static 'login/css/login.css' %}" rel="stylesheet">
     </head>
     {% include 'maps/nav.html' %}
     <body>
-        <form>
-            <label>Username</label>
-            {{form.user}}
-            <label>Password</label>
-            {{form.password}}
-        </form>
+        <div id="for_animation">
+            <div id="sigin">
+                <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="logo">
+                <h1>Sig in</h1>
+                <span>{{error}}</span>
+                <form method="POST">  {% csrf_token %}
+                    <div class="field">
+                        <i class="fas fa-user-circle"></i>
+                        {{form.username}}
+                        <span>{{form.username.errors}}</span>
+                    </div>
+                    <div class="field">
+                        <i class="fas fa-lock"></i>
+                        {{form.password}}
+                        <span>{{form.password.errors}}</span>
+                    </div>
+                    <input type="hidden" value="{{request.get.next}}">
+                    <input type="submit" value="Log In" id="submit">
+                </form>
+            </div>
+            <div id="links">
+                <a>Forgot Password?</a>
+                <a id="register">REGISTER HERE</a>
+            </div>
+        </div>
     </body>
 </html>

@@ -1,0 +1,126 @@
+#sigin {
+    border-radius: 50px;
+    border: solid 0.5px #8d8d8d;
+    background-color: rgba(178, 177, 177, 0.25);
+    width: 37vw;
+    height: 64vh;
+    margin-left: 31.5vw;
+    margin-top: 9vh;
+}
+
+#sigin img {
+    width: 6.5vw;
+    margin-left: 15.25vw;
+    position: relative;
+    bottom: 5.8vh;
+}
+
+#sigin h1 {
+    text-align: center;
+    font-size: 60px;
+    font-weight: 600;
+    position: relative;
+    bottom: 3vh;
+}
+
+form {
+    margin-top: 3.5vh;
+}
+
+.field {
+    width: 27vw;
+    margin-left: 5vw;
+    background-color: #fff;
+    height: 5.3vh;
+    margin-bottom: 4.5vh;
+    border-radius: 10px;
+}
+
+.field i{
+    font-size: 40px;
+    margin-left: 0.6vw;
+    margin-top: 4.62px;
+}
+
+.field input {
+    height: 5.1vh;
+    font-size: 30px;
+    font-weight: 300;
+    border: none;
+    padding: 0;
+    position: relative;
+    bottom: 0.31vh;
+    margin-left: 1vw;
+    width: 85%;
+}
+
+span {
+    text-align: center;
+    color: red;
+    display: block;
+}
+
+#submit {
+    font-size: 35px;
+    border-radius: 10px;
+    background-color: #ff3a3a;
+    color: #fff;
+    border: none;
+    width: 27vw;
+    margin-left: 5vw;
+    height: 6vh;
+    margin-top: 3.5vh;
+}
+
+#links {
+    margin-left: 36.5vw;
+    width: 27vw;
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 2vh;
+}
+
+#register {
+    float: right;
+    text-decoration: underline;
+}
+
+body {
+    overflow: hidden;
+}
+
+@keyframes left {
+    0% {
+        left: 100%;
+    }
+    
+    100% {
+        left: 0;
+    }
+}
+
+#for_animation {
+    position: relative;
+    animation-name: left;
+    animation-duration: 2s; 
+}
+
+@keyframes later {
+    0% {
+        left: 100%;
+        transform: rotate(180deg);
+    }
+    
+    100% {
+        left: 0;
+        transform: rotate(0);
+    }
+}
+
+#sigin img {
+    left: 100%;
+    animation-name: later;
+    animation-duration: 2s; 
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
