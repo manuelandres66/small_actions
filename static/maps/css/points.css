@@ -36,6 +36,21 @@ body {
 #searchBar i {
     font-size: 4vh;
     margin-left: 1.5vw;
+    position: relative;
+    color: #fff;
+    top: 0.5vh;
+}
+
+#search_container {
+    display: inline-block;
+    position: relative;
+    right: 5vw;
+    background-color: #ff3a3a;
+    height: 5.2vh;
+    bottom: 0.1vh;
+    width: 4.93vw;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 #results {
@@ -76,7 +91,7 @@ body {
         left: 0;
     }
 }
-
+ 
 #info p {
     width: 20vw;
     text-align: justify;
@@ -160,7 +175,17 @@ body {
     #searchBar i {
         display: inline-block;
         font-size: 20px;
+        top: 1vh;
+        left: 1vw;
     }
+
+    #search_container {
+        width: 12vw;
+        right: 12vw;
+        bottom: 0.8vh;
+        height: 38px;
+    }
+
 
     .result div {
         margin-left: 2.5vw;
@@ -212,5 +237,9 @@ body {
 @media screen and (max-height: 500px) {
     #info div {
         height: 30vh;
+    }
+
+    #search_container {
+        height: 34px;
     }
 }

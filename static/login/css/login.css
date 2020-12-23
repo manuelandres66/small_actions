@@ -70,6 +70,7 @@ span {
     margin-left: 5vw;
     height: 6vh;
     margin-top: 3.5vh;
+    cursor: pointer;
 }
 
 #links {

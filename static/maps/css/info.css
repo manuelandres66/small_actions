@@ -111,7 +111,7 @@ span {
 #organization_info {
     display: inline-block;
     background-color: #ff3a3a;
-    width: 22vw;
+    min-width: 22vw;
     height: 81vh;
     margin-left: 3vw;
     margin-top: 4vh;
@@ -184,7 +184,7 @@ span {
 
     #grid_all {
         display: block;
-    }
+    } 
 
     #all_info {
         margin: 0;
