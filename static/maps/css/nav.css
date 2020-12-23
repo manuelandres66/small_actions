@@ -62,6 +62,14 @@
     display: none;
 }
 
+#porfile_photo_nav {
+    height: calc(3.7vw - 3px);
+    object-fit: cover;
+    object-position: center;
+    border-radius: 100px;
+    border: 3px solid #ff3a3a;
+}
+
 @media screen and (max-width: 1300px) {
     #all_bar {
         margin-top: 2vh;
@@ -88,6 +96,11 @@
         margin: 0;
         margin-top: 1.5vh;
         margin-right: 8vw;
+    }
+
+    #porfile_photo_nav {
+        height: calc(6vw - 2px);
+        border-width: 2px;
     }
 
     #bars {

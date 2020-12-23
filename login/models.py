@@ -1,9 +1,11 @@
 from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import AbstractUser
 
+from maps.models import Help
 
 class User(AbstractUser):
-    points = models.IntegerField(default=0)
-    
+    points = models.PositiveIntegerField(default=0)
+    photo = models.ImageField(upload_to="people", null=True, blank=True)
+    latitude = models.DecimalField(max_digits=6, decimal_places=4, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=6, decimal_places=4, null=True, blank=True)
+    visited = models.ManyToManyField(Help, related_name="persons_visited")

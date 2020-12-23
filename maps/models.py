@@ -9,6 +9,7 @@ class Organization(models.Model):
     circular_icon = models.ImageField(upload_to="organizations/circle", blank=True, null=True)
     short_description = models.TextField(max_length=300)
     quote = models.CharField(max_length=60)
+    points = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.name}"

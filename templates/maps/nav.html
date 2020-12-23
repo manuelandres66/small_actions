@@ -17,7 +17,13 @@
                 {% if request.user.is_authenticated %}
                 <h6>{{request.user.points}} Points</h6>
                 {% endif %}
-                <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account">
+
+                {% if request.user.photo %}
+                    <a><img src="{{request.user.photo.url}}" alt="account" id="porfile_photo_nav"></a>
+                {% else %}
+                    <a href="{% url 'login' %}"><img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account"></a>
+                {% endif %}
+
                 <i class="fas fa-bars" id="bars"></i>
             </div>
         </div>
