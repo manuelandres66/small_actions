@@ -10,7 +10,7 @@
         <div id="for_animation">
             <div id="sigin">
                 <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="logo">
-                <h1>Sig in</h1>
+                <h1>Sign in</h1>
                 <span>{{error}}</span>
                 <form method="POST">  {% csrf_token %}
                     <div class="field">
@@ -29,7 +29,7 @@
             </div>
             <div id="links">
                 <a>Forgot Password?</a>
-                <a id="register">REGISTER HERE</a>
+                <a id="register" href="{% url 'register'%}">REGISTER HERE</a>
             </div>
         </div>
     </body>
