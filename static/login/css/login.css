@@ -3,7 +3,7 @@
     border: solid 0.5px #8d8d8d;
     background-color: rgba(178, 177, 177, 0.25);
     width: 37vw;
-    height: 64vh;
+    min-height: 64vh;
     margin-left: 31.5vw;
     margin-top: 9vh;
 }
@@ -31,7 +31,7 @@ form {
     width: 27vw;
     margin-left: 5vw;
     background-color: #fff;
-    height: 5.3vh;
+    min-height: 5.3vh;
     margin-bottom: 4.5vh;
     border-radius: 10px;
 }
@@ -124,4 +124,73 @@ body {
     animation-duration: 2s; 
     animation-delay: 1s;
     animation-fill-mode: forwards;
+}
+
+@media screen and (max-width: 1300px) {
+    #sigin {
+        margin: 0;
+        margin-left: 2vw;
+        margin-top: 8vh;
+        width: 96vw;
+    }
+
+    #sigin img {
+        bottom: 5.9vh;
+        width: 21vw;
+        margin-left: 37.5vw;
+    }
+
+    #sigin h1 {
+        font-size: 40px;
+        bottom: 4vh;
+    }
+
+    .field {
+        width: 80vw;
+        margin-left: 8vw;
+        min-height: 37px;
+    }
+
+    .field i {
+        font-size: 20px;
+        margin-left: 2.5vw;
+        margin-top: 8.5px;
+    }
+
+    .field input {
+        font-size: 18px;
+        bottom: 0;
+        margin-left: 3vw;
+        width: 80%;
+    }
+
+    #submit {
+        font-size: 25px;
+        width: 80vw;
+        margin-left: 8vw;
+    }
+
+    #links {
+         margin-left: 10vw;
+         width: 80vw;
+         margin-bottom: 5vh;
+    }
+
+    #links a {
+        font-size: 15px;
+    }
+
+    #register {
+        margin-top: 1vh;
+    }
+
+    span {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-height: 500px) {
+    #sigin {
+        height: 90vh;
+    }
 }
