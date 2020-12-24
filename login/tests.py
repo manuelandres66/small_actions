@@ -13,7 +13,13 @@ class htmltest(TestCase):
     def test_logout(self):
         c = Client()
         response = c.get('/login/logout')
-        self.assertEqual(response.status_code, 301)
+        code = response.status_code == 301 or response.status_code == 302
+        self.assertTrue(code)
+
+    def test_register(self):
+        c = Client()
+        response = c.get('/login/register')
+        self.assertEqual(response.status_code, 200)
 
 
 class UserTest(TestCase):
