@@ -1,0 +1,113 @@
+#all_for {
+    border-radius: 50px;
+    border: solid 0.5px #8d8d8d;
+    background-color: rgba(178, 177, 177, 0.25);
+    width: 76vw;
+    margin-left: 12vw;
+    margin-top: 6.5vh;
+}
+
+#all_for h1 {
+    margin-top: 4vh;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 600;
+}
+
+#grid {
+    width: 61vw;
+    margin-left: 7.5vw;
+    margin-top: 7vh;
+}
+
+.input_container {
+    background-color: #fff;
+    margin-bottom: 4.5vh;
+    display: inline-block;
+    width: 27vw;
+    height: 5.2vh;
+    border-radius: 10px;
+}
+
+.input_container:nth-child(even) {
+    float: right;
+}
+
+.input_container i {
+    font-size: 40px;
+    margin-top: 0.5vh;
+    margin-left: 0.5vw;
+}
+
+.input_container input {
+    font-size: 35px;
+    font-weight: 300;
+    position: relative;
+    bottom: .3vh;
+    border: none;
+    width: 85%;
+    margin-left: 1vw;
+}
+
+#optional_super {
+    width: 61vw;
+    margin-left: 7.5vw;
+}
+
+.optional_container {
+    width: 27vw;
+    display: inline-block;
+}
+
+#rigth_opt {
+    float: right;
+}
+
+.optional_container h3 {
+    font-size: 35px;
+    font-weight: 500;
+    margin-bottom: 1vh;
+}
+
+#lat_long {
+    width: 100%;
+}
+
+#lat_long input {
+    font-size: 35px;
+    font-weight: 300;
+    padding-left: 0.7vw;
+    border-radius: 10px;
+    border: none;
+    width: 10vw;
+}
+
+#id_longitude {
+    float: right;
+}
+
+.optional_container p {
+    font-size: 10px;
+    font-weight: 300;
+    text-align: justify;
+    margin-top: 1vh;
+}
+
+
+input[type="file"] {
+    font-size: 35px;
+    width: 27vw;
+}
+
+input[type="submit"] {
+    color: #ffffff;
+    background-color: #ff3a3a;
+    font-size: 35px;
+    height: 5.5vh;
+    width: 61vw;
+    margin-left: 7.5vw;
+    border: none;
+    border-radius: 10px; 
+    margin-top: 7vh;
+    margin-bottom: 7vh;
+}
