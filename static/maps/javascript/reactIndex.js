@@ -29,13 +29,16 @@ class App extends React.Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            const map = new mapboxgl.Map({
+
+            let mapConfig = {
                 container: 'map',
                 style: 'mapbox://styles/mapbox/streets-v11',
                 center: [data.longitude, data.latitude], // starting position
-                zoom: 7, // starting zoom
-            });
+            }
+
+            mapConfig.zoom = (data.user ? 14 : 1);
+
+            const map = new mapboxgl.Map(mapConfig);
 
             map.addControl(new mapboxgl.NavigationControl());
 

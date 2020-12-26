@@ -1,0 +1,145 @@
+h1 {
+    text-align: center;
+    font-size: 60px;
+    font-weight: 500;
+    margin-top: 3vh;
+}
+
+#superior_grid {
+    margin-top: 5vh;
+    display: grid;
+    margin-left: 2vw;
+    width: 96vw;
+    grid-template-rows: repeat(2, 6vh);
+    grid-template-columns: repeat(2, 48vw);
+}
+
+#frist_place {
+    grid-row: 1 / 2;
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: 100px 38vw;
+    grid-template-rows: repeat(2, 50px);
+    margin-left: 12vw;
+}
+
+#frist_place i {
+    font-size: 100px;
+    color: #FFD700;
+    grid-row: 1 / 2;
+    grid-column: 1;
+}
+
+#frist_place h2 {
+    font-size: 30px;
+    display: inline-block;
+    margin-left: 2vw;
+    font-weight: 600;
+    grid-row: 1;
+    grid-column: 2;
+}
+
+#frist_place span {
+    grid-row: 2;
+    grid-column: 2;
+    color: #ff3a3a;
+    font-size: 40px;
+    margin-left: 2vw;
+}
+
+#second_place {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+#second_place i {
+    font-size: 50px;
+    color: #D0D2D1;
+}
+
+#third_place {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+#third_place i {
+    font-size: 50px;
+    color: #B1560F;
+}
+
+
+.other_place h3, .other_place h4 {
+    display: inline-block;
+    font-size: 30px;
+    position: relative;
+    bottom: 10px;
+    font-weight: 400;
+    margin-left: 1vw;
+}
+
+.other_place span {
+    font-size: 30px;
+    font-weight: 500;
+    color: #ff3a3a;
+    float: right;
+    text-align: right;
+    margin-right: 7vw;
+}
+
+
+#you {
+    background-color: #ff3a3a;
+}
+
+#headers {
+    margin-top: 7vh;
+    margin-bottom: 3vh;
+}
+
+#headers h4 {
+    font-size: 25px;
+    color: #ff3a3a;
+    font-weight: 600;
+}
+
+.column, #headers {
+    display: grid;
+    grid-template-columns: 16.6vw 40vw 36.6vw;
+}
+
+.column h5 {
+    grid-column: 1;
+    font-size: 25px;
+    font-weight: 500;
+    text-align: right;
+    padding-right: 3vw;
+    border-right: 3px solid #ff3a3a;
+} 
+
+#headers h4:nth-child(1) {
+    text-align: right;
+    padding-right: 3vw;
+}
+
+.column h6 {
+    grid-column: 2;
+    font-size: 20px;
+    font-weight: 400;
+    padding-left: 3vw;
+} 
+
+#headers h4:nth-child(2) {
+    padding-left: 3vw;
+}
+
+.column span {
+    grid-column: 3;
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 3vw;
+    border-left: 3px solid #ff3a3a;
+} 
+
+#headers h4:nth-child(3) {
+    padding-left: 3vw;
+}

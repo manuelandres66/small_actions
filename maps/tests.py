@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from django.shortcuts import reverse
 from . import models
 
 import json
@@ -16,12 +17,12 @@ small_gif = (
 class htmltest(TestCase):
     def test_index(self):
         c = Client()
-        response = c.get('/')
+        response = c.get(reverse('index'))
         self.assertEqual(response.status_code, 200)
 
     def test_points(self):
         c = Client()
-        response = c.get('/points/')
+        response = c.get(reverse('SerchPoints'))
         self.assertEqual(response.status_code, 200)
 
 class apitest(TestCase):
@@ -48,7 +49,7 @@ class apitest(TestCase):
 
     def test_secend(self):
         c = Client()
-        response = c.post('/api/all_helps', {'data' : 'all'}, content_type="application/json")
+        response = c.post(reverse('apiPHelps'), {'data' : 'all'}, content_type="application/json")
         data = json.loads(response.content)
         self.assertEqual(data['points'], [
             {
@@ -74,7 +75,7 @@ class apitest(TestCase):
 
     def test_info(self):
         c = Client()
-        response = c.get(f'/points/info/{self.example.uuid}')
+        response = c.get(reverse('info', kwargs={'uuid' : self.example.uuid}))
         self.assertEqual(response.status_code, 200)
         paths = (os.path.abspath(os.getcwd()) + "/media/organizations", os.path.abspath(os.getcwd()) + "/media/organizations/circle")
 
@@ -87,7 +88,7 @@ class apitest(TestCase):
 
     def test_search(self):
         c = Client()
-        response = c.post('/api/search_helps', {'search' : 'Col'}, content_type='application/json')
+        response = c.post(reverse('apiSearchHelps'), {'search' : 'Col'}, content_type='application/json')
         data = json.loads(response.content)
         self.assertEqual(data['results'], [{
             'name' : 'Cole',

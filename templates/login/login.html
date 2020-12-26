@@ -23,7 +23,7 @@
                         {{form.password}}
                         <span>{{form.password.errors}}</span>
                     </div>
-                    <input type="hidden" value="{{request.get.next}}">
+                    <input type="hidden" value="{{request.GET.next}}" name="next">
                     <input type="submit" value="Log In" id="submit">
                 </form>
             </div>

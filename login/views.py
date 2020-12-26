@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import login_required
 
 from .forms import FormLogin, FromCreateUser
 from .models import User
+
+import json
 # Create your views here.
 def entry(request):
     form = FormLogin()
@@ -18,8 +21,8 @@ def entry(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                if 'next' in request.POST:
-                    return redirect(request.POST.get('next'))
+                if 'next' in request.POST and request.POST['next'] != '':
+                    return redirect(request.POST['next'])
                 return redirect(reverse('index'))
             else:
                 error = "The username and password you entered don't match"
@@ -57,3 +60,42 @@ def register(request):
                 error = "Passwords don't match"
 
     return render(request, 'login/register.html', {'form' : form, 'error':error})
+
+
+@login_required(login_url='/account/login')
+def ranking(request):
+    user = User.objects.get(username=request.user)
+    all_ranking = User.objects.all().order_by('-points')
+    ranking = list(all_ranking).index(user)
+
+    ctx = {'frist' : all_ranking[:3], 'ranking' : ranking}
+    return render(request, 'login/ranking.html', ctx)
+
+
+def ranking_api(request):
+    if request.method != "POST":
+        return JsonResponse({'error' : 'The request must be POST'}, status=400)
+ 
+    data = json.loads(request.body)
+
+    if 'start' in data and 'end' in data:
+        start = int(data['start'])
+        if start == 0:
+            return JsonResponse({'error' : 'Start cant be cero'})
+
+        try:
+            results = User.objects.all().order_by('-points')[start - 1 : int(data['end'])]
+        except:
+            return JsonResponse({'last' : 'No more elements'})
+
+        response = {'people' : []}
+        for i in range(len(results)):
+            response['people'].append({
+                'ranking' : start + i,
+                'username' : results[i].username,
+                'points' : results[i].points
+            })
+        return JsonResponse(response, status=200)
+
+    else:
+        return JsonResponse({'error' : 'please provide start and end'}, status=400)

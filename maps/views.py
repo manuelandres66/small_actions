@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse
 from django.http import JsonResponse, HttpResponse
 
 from .models import Help
+from login.models import User
 
 import json
 # Create your views here.
@@ -44,17 +45,25 @@ def all_helps(request):
             latitude_sum += single.latitude
             longitude_sum += single.longitude
 
-        if len(all_helps) > 0:
-            latitude_avarage = float("{0:.3f}".format(latitude_sum / len(all_helps)))
-            longitude_avarage = float("{0:.3f}".format(longitude_sum / len(all_helps)))
+        check = request.user.is_authenticated and request.user.latitude != None and request.user.longitude != None
+
+        if check:
+            latitude_avarage = request.user.latitude
+            longitude_avarage = request.user.longitude
+        elif len(all_helps) > 0:
+            latitude_avarage = float("{0:.4f}".format(latitude_sum / len(all_helps)))
+            longitude_avarage = float("{0:.4f}".format(longitude_sum / len(all_helps)))
         else:
-            latitude_avarage, longitude_avarage = 0, 0
+            latitude_avarage, longitude_avarage = -78, 0
 
         response = {
             'latitude' : latitude_avarage,
             'longitude' : longitude_avarage,
             'points' : points_response
         }
+
+        if check:
+            response['user'] = True
 
         return JsonResponse(response, status=200)
     
@@ -74,7 +83,7 @@ def search_helps(request):
         search = search | Help.objects.filter(recomedations__contains=data['search'])
 
         response = {'results' : []}
-        for point in search[:10]:
+        for point in search[:7]:
             response['results'].append({
                 'name': point.name,
                 'organization' : point.organization.name,
