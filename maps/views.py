@@ -12,12 +12,17 @@ def index(request):
 
 def info_point(request, uuid):
     help_point = Help.objects.get(uuid=uuid)
-
     ctx = {'point' : help_point}
     return render(request, 'maps/info.html', ctx)
 
 def points(request):
     return render(request, 'maps/points.html')
+
+def go(request, uuid):
+    help_point = Help.objects.get(uuid=uuid)
+    ctx = {'point' : help_point}
+    return render(request, 'maps/go.html', ctx)
+
 
 #API
 def all_helps(request):
@@ -38,7 +43,7 @@ def all_helps(request):
                 'category' : single.category,
                 'organization' : single.organization.name,
                 'description' : single.short_description,
-                'rute' : f"https://www.google.com/maps/dir//{single.latitude},{single.longitude}",
+                'rute' : reverse('go', kwargs={'uuid' : single.uuid}),
                 'uuid' : reverse('info', kwargs={'uuid' : single.uuid})
             }
             points_response.append(point)

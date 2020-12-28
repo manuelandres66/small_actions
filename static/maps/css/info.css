@@ -72,6 +72,8 @@ span {
     position: relative;
     right: 20vw;
     opacity: 0;
+    color: #000;
+    text-decoration: none;
 
     animation-name: moveRigth;
     animation-duration: 2s;

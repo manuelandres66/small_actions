@@ -41,6 +41,7 @@ class App extends React.Component {
             const map = new mapboxgl.Map(mapConfig);
             map.addControl(new mapboxgl.NavigationControl());
             
+            // Geolocalizacion
             const track =  new mapboxgl.GeolocateControl({
                     positionOptions: {
                         enableHighAccuracy: true
@@ -49,14 +50,15 @@ class App extends React.Component {
             });
             map.addControl(track, 'top-left');
 
-            const full = new mapboxgl.FullscreenControl();
-            map.addControl(full, 'top-left');
+            //Fullscreen
+            map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
 
             const parameters = {
                 closeOnClick: true,
                 closeButton: false,
             };
 
+            //Agregando puntos
             data.points.forEach(point => {
                 const popup = new mapboxgl.Popup(parameters).setHTML(`<h3>${point.name}</h3>`);
                 popup.on('open', () => {
