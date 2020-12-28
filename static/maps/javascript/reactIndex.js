@@ -39,8 +39,18 @@ class App extends React.Component {
             mapConfig.zoom = (data.user ? 14 : 1);
 
             const map = new mapboxgl.Map(mapConfig);
-
             map.addControl(new mapboxgl.NavigationControl());
+            
+            const track =  new mapboxgl.GeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true
+                    },
+                    trackUserLocation: true
+            });
+            map.addControl(track, 'top-left');
+
+            const full = new mapboxgl.FullscreenControl();
+            map.addControl(full, 'top-left');
 
             const parameters = {
                 closeOnClick: true,

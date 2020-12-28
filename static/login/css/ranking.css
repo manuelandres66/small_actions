@@ -114,6 +114,7 @@ h1 {
     text-align: right;
     padding-right: 3vw;
     border-right: 3px solid #ff3a3a;
+    font-family: 'Roboto', 'Sora', sans-serif;
 } 
 
 #headers h4:nth-child(1) {
@@ -126,6 +127,7 @@ h1 {
     font-size: 20px;
     font-weight: 400;
     padding-left: 3vw;
+    font-family: 'Roboto', 'Sora', sans-serif;
 } 
 
 #headers h4:nth-child(2) {
@@ -142,4 +144,78 @@ h1 {
 
 #headers h4:nth-child(3) {
     padding-left: 3vw;
+}
+
+@media screen and (max-width: 1300px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    #superior_grid {
+        display: block;
+    }
+
+    #frist_place {
+        margin: 0;
+        grid-template-columns: 70px 50vw;
+        grid-template-rows: repeat(2, 36px);
+        margin-left: 12vw;
+        margin-top: 4vh;
+    }
+
+    #frist_place i {
+        font-size: 70px;
+    }
+
+    #frist_place h2 {
+        font-size: 20px;
+        margin-left: 5vw;
+    }
+
+    #frist_place span {
+        font-size: 20px;
+        margin-left: 5vw;
+    }
+
+    .other_place {
+        width: 98vw;
+        margin-left: 2vw;
+    }
+
+    #second_place i, #third_place i  {
+        font-size: 30px;
+        position: relative;
+        bottom: 4px;
+    }
+
+    .other_place h3, .other_place h4 {
+        font-size: 15px;
+        margin-left: 3vw;
+    }
+
+    .other_place span {
+        font-size: 15px;
+    }
+
+    #second_place {
+        margin-top: 6vh;
+        margin-bottom: 2.5vh;
+    }
+
+    #headers {
+        margin-top: 5vh;
+        margin-bottom: 1.5vh;
+    }
+
+    .column, #headers {
+        grid-template-columns: 20vw 50vw 30vw;
+    }
+
+    #headers h4 {
+        font-size: 12px;
+    }
+
+    .column h6, .column h5, .column span {
+        font-size: 10px;
+    }
 }

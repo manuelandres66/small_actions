@@ -80,14 +80,15 @@ def ranking_api(request):
 
     if 'start' in data and 'end' in data:
         start = int(data['start'])
+        end = int(data['end'])
         if start == 0:
             return JsonResponse({'error' : 'Start cant be cero'})
-
-        try:
-            results = User.objects.all().order_by('-points')[start - 1 : int(data['end'])]
-        except:
+        
+        users = User.objects.all()
+        if end > len(users) + 10:
             return JsonResponse({'last' : 'No more elements'})
 
+        results = users.order_by('-points')[start - 1 : end]
         response = {'people' : []}
         for i in range(len(results)):
             response['people'].append({

@@ -11,7 +11,7 @@ const petiton = (start, end) => {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.last === undefined) {
+        if (data.last == undefined) {
             let mayorDiv = document.querySelector('#mayor');
             const username = document.querySelector('#username').innerHTML;
             data.people.forEach(position => {
@@ -34,10 +34,10 @@ const petiton = (start, end) => {
                 const you = document.getElementById('you');
                 you.scrollIntoView({ behavior: 'smooth', block: 'center' })
             };
-        }
+        };
         
     })
-}
+};
 
 let current = parseInt(document.querySelector('#ranking').innerHTML) + 10;
 
