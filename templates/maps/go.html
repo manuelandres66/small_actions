@@ -16,15 +16,53 @@
 
         <link href="{% static 'maps/css/go.css' %}" rel="stylesheet">
     </head>
+    {% include 'maps/nav.html' %}
     <body>
+        <h1>We are very happy that you go to {{point.name}}</h1>
+
         <div style="display: none;">
             <span id="latitude">{{point.latitude}}</span>
             <span id="longitude">{{point.longitude}}</span>
-
             <span id="user_latitude">{{request.user.latitude}}</span>
             <span id="user_longitude">{{request.user.longitude}}</span>
         </div>
-        <div id="map"></div>
+
+        <div id='grid'>
+            <div id="map"></div>
+
+            <div id='code'>
+                <h2>How to get Points</h2>
+                <ol>
+                    <li> Go to {{point.name}} <i class="fas fa-map-signs"></i></li>
+                    <li id='second_li'> Help Each Other <i class="fas fa-hands-helping"></i></li>
+                    <li id='third_li'> Ask for a code <i class="fas fa-file-alt" id='last_icon'></i></li>
+                </ol>  
+                <h3>4. Enter the code</h3>
+                        
+                <form action="" method="POST"> {% csrf_token %} 
+                    {{form.frist}}
+                    <span>-</span>
+                    {{form.second}}
+                    <span>-</span>
+                    {{form.third}}
+
+                    <a class='error' href="{% url 'login' %}?next={{ request.path }} ">{{login_error}}</a>
+                    <p class='error' >{{form.frist.errors}} {{form.second.errors}} {{form.third.errors}} {{error}}</p>
+                </form>
+            </div>
+        
+            <div id='recomendations'>
+                <p>
+                    If you are not logged, please do it to get the points, and also to automatically get the origin marker.  
+                    Considers that you go there to help, not to get points.  
+                    The organization can ban you from the web if you don’t obey the rules of the site or 
+                    go there with another intention more than help, please be nice.
+                </p>
+                <i class="fas fa-route"></i>
+            </div>
+        </div>
+
+
         <script src="{% static 'maps/javascript/go.js' %}"></script>
     </body>
 </html>

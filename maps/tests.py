@@ -3,6 +3,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 from django.shortcuts import reverse
 from . import models
+from login.models import User
 
 import json
 import pathlib
@@ -39,13 +40,15 @@ class apitest(TestCase):
                         image = uploaded)
 
         A1 = models.Help.objects.create(name="Cole", latitude=1.215, longitude=-77.276, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
-        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing..", organization=new_organization, category="Cole")
+        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing..", organization=new_organization, category="Cole", temporal_code='AAD-458-JJU')
 
         A2 = models.Help.objects.create(name="Exito", latitude=1.215, longitude=-77.279, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
-        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing.", organization=new_organization, category="Exito")
+        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing.", organization=new_organization, category="Exito", temporal_code='AAC-458-JJU')
 
         self.example = A1
         self.second_example = A2
+        self.organization = new_organization
+        self.user = User.objects.create_user(username="PEPE", password="hola1234")
 
     def test_secend(self):
         c = Client()
@@ -58,7 +61,7 @@ class apitest(TestCase):
                 'category' : "Cole",
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
-                'rute' : "https://www.google.com/maps/dir//1.2150,-77.2760",
+                'rute' : reverse('go', kwargs={'uuid' : self.example.uuid}),
                 'uuid' : f'/points/info/{self.example.uuid}'
             },
             {
@@ -67,7 +70,7 @@ class apitest(TestCase):
                 'category' : "Exito",
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
-                'rute' : "https://www.google.com/maps/dir//1.2150,-77.2790",
+                'rute' : reverse('go', kwargs={'uuid' : self.second_example.uuid}),
                 'uuid' : f'/points/info/{self.second_example.uuid}'
             }
 
@@ -95,4 +98,16 @@ class apitest(TestCase):
             'organization' : 'Manuels Organization',
             'url' : f'/points/info/{self.example.uuid}'
         }])
+
+    def test_go(self):
+        c = Client()
+        c.login(username="PEPE", password="hola1234")
+        response = c.post(reverse('go', kwargs={'uuid' : self.example.uuid}), {'frist' : 'AAC', 'second' : '488', 'third': 'JJJ'})
+        self.assertEqual(response.status_code, 200) #If not ok
+
+        response = c.post(reverse('go', kwargs={'uuid' : self.example.uuid}), {'frist' : 'AAD', 'second' : '458', 'third': 'JJU'})
+        self.assertEqual(response.status_code, 302) #If ok
+
+        new_points = User.objects.get(username=self.user.username).points
+        self.assertEqual(new_points, 10)
 

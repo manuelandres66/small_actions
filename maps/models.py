@@ -27,6 +27,9 @@ class Help(models.Model):
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="help_points")
     category = models.CharField(max_length=11)
     photos = models.ManyToManyField(HelpPhoto)
+    temporal_code = models.CharField(max_length=11)
+    points_for_completed = models.PositiveIntegerField(default=10)
+
 
     def __str__(self):
         return f"{self.organization}: {self.name}"

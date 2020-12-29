@@ -1,10 +1,14 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from .models import Help
+from .forms import FromCode
 from login.models import User
 
 import json
+import random
+import string
 # Create your views here.
 
 def index(request):
@@ -20,9 +24,39 @@ def points(request):
 
 def go(request, uuid):
     help_point = Help.objects.get(uuid=uuid)
-    ctx = {'point' : help_point}
-    return render(request, 'maps/go.html', ctx)
+    form = FromCode()
+    login_error = ''
+    code_error = ''
 
+    if request.method == 'POST':
+        if request.user.is_authenticated: #Check user is log in
+            form = FromCode(request.POST)
+            if form.is_valid():
+                code = f"{request.POST['frist']}-{request.POST['second']}-{request.POST['third']}".upper() #make the code and upper to avoid erros
+
+                if code == help_point.temporal_code:
+                    #New Random Code
+                    letters = string.ascii_uppercase
+                    first = ''.join(random.choice(letters) for i in range(3))
+                    second = random.randint(111, 999)
+                    third = ''.join(random.choice(letters) for i in range(3))
+                    
+                    help_point.temporal_code = f"{first}-{second}-{third}".upper()
+                    help_point.save()
+
+                    #Get Points
+                    current_user = User.objects.get(username=request.user.username)
+                    current_user.points += help_point.points_for_completed
+                    current_user.save()
+
+                    return redirect('/') #Redirect
+                else:
+                    code_error = 'Invalid Code'
+        else:
+            login_error = 'You are not authenticated, please log in'
+
+    ctx = {'point' : help_point, 'form' : form, 'login_error' : login_error, 'error' : code_error}
+    return render(request, 'maps/go.html', ctx)
 
 #API
 def all_helps(request):

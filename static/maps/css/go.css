@@ -1,4 +1,121 @@
+#grid {
+     display: grid;
+     grid-template-columns: repeat(2, 50%);
+     grid-template-rows: 53vh 12vh;
+}
+
 #map {
-     height: 50vw;
-     width: 50vw;
+     height: 65vh;
+     width: 48vw;
+     margin-left: 2vw;
+     grid-row: 1 / 2;
+}
+
+
+h1 {
+     font-size: 50px;
+     font-weight: 800;
+     text-align: center;
+     margin-top: 3vh;
+     margin-bottom: 3vh;
+}
+
+#code {
+     width: 30vw;
+     margin-left: 10vw;
+     grid-row: 1;
+}
+
+h2 {
+     font-size: 40px;
+     font-weight: 600;
+     text-align: center;
+     margin-bottom: 3vh;
+}
+
+li {
+     font-size: 35px;
+     font-weight: 300;
+     margin-bottom: 3.5vh;
+}
+
+li i {
+     float: right;
+     font-size: 50px;
+}
+
+#last_icon {
+     position: relative;
+     right: 10px;
+}
+
+#second_li {
+     margin-left: 15%;
+}
+
+#third_li {
+     margin-left: 30%;
+}
+
+h3 {
+     font-size: 40px;
+     font-weight: 600;
+     text-align: right;
+     margin-bottom: 4vh;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+input {
+     text-transform: uppercase;
+     width: 8vw;
+     height: 5.5vh;
+     border: 1px solid rgb(150, 150, 150);
+     border-radius: 15px;
+     font-size: 40px;
+     text-align: center;
+     -moz-appearance: textfield;
+}
+
+input::placeholder {
+     color: rgba(153, 153, 153, 0.3);
+}
+
+form span {
+     height: 5.5vh;
+     font-size: 40px;
+     font-weight: 600;
+     margin-left: 0.7vw;
+     margin-right: 0.7vw;
+}
+
+#recomendations {
+     width: 30vw;
+     margin-left: 10vw;
+     grid-column: 2;
+     grid-row: 2;
+}
+
+#recomendations p {
+     font-size: 15px;
+     font-weight: 300;
+     width: 22vw;
+     display: inline-block;
+     text-align: justify;
+}
+
+#recomendations i {
+     font-size: 12vh;
+     float: right;
+}
+
+.error {
+     color: #f00;
+     text-align: right;
+     margin-top: 0.5vh;
 }
