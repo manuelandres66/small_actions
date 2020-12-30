@@ -93,17 +93,17 @@ class apitest(TestCase):
         data = json.loads(response.content)
         self.assertEqual(data['results'], [{
             'name' : 'Cole',
-            'organization' : 'Manuels Organization',
+            'organization' : 'Manuels Organization', 
             'url' : f'/points/info/{self.example.uuid}'
         }])
 
     def test_go(self):
         c = Client()
         c.login(username="PEPE", password="hola1234")
-        response = c.post(reverse('go', kwargs={'uuid' : self.example.uuid}), {'frist' : 'AAC', 'second' : '488', 'third': 'JJJ'})
+        response = c.post(reverse('go', kwargs={'uuid' : self.example.uuid}), {'first' : 'AAC', 'second' : '488', 'third': 'JJJ'})
         self.assertEqual(response.status_code, 200) #If not ok
 
-        response = c.post(reverse('go', kwargs={'uuid' : self.example.uuid}), {'frist' : 'AAD', 'second' : '458', 'third': 'JJU'})
+        response = c.post(reverse('go', kwargs={'uuid' : self.example.uuid}), {'first' : 'AAD', 'second' : '458', 'third': 'JJU'})
         self.assertEqual(response.status_code, 302) #If ok
 
         new_points = User.objects.get(username=self.user.username).points
