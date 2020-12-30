@@ -47,19 +47,19 @@ map.on('load', function () {
 map.addControl(directions, 'top-left');
 
 
-let frist = document.querySelector('#id_frist');
+let first = document.querySelector('#id_first');
 let second = document.querySelector('#id_second');
 let third = document.querySelector('#id_third');
 let form = document.querySelector('form');
 
 form.setAttribute('onsubmit', 'subCode()');
-frist.setAttribute('onchange', 'subCode()');
+first.setAttribute('onchange', 'subCode()');
 second.setAttribute('onchange', 'subCode()');
 third.setAttribute('onchange', 'subCode()');
 
 
 const subCode = () => {
-    if (frist.value.length == 3 & second.value.length == 3 & third.value.length == 3) {
+    if (first.value.length == 3 & second.value.length == 3 & third.value.length == 3) {
         form.submit()
     };
 }

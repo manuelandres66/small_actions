@@ -9,6 +9,7 @@ from .models import User
 
 import json
 # Create your views here.
+
 def entry(request):
     form = FormLogin()
     error = ""

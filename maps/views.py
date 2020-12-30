@@ -22,6 +22,7 @@ def info_point(request, uuid):
 def points(request):
     return render(request, 'maps/points.html')
 
+
 def go(request, uuid):
     help_point = Help.objects.get(uuid=uuid)
     form = FromCode()
@@ -32,7 +33,7 @@ def go(request, uuid):
         if request.user.is_authenticated: #Check user is log in
             form = FromCode(request.POST)
             if form.is_valid():
-                code = f"{request.POST['frist']}-{request.POST['second']}-{request.POST['third']}".upper() #make the code and upper to avoid erros
+                code = f"{request.POST['first']}-{request.POST['second']}-{request.POST['third']}".upper() #make the code and upper to avoid erros
 
                 if code == help_point.temporal_code:
                     #New Random Code
