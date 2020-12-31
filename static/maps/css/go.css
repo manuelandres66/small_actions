@@ -118,4 +118,80 @@ form span {
      color: #f00;
      text-align: right;
      margin-top: 0.5vh;
+} 
+
+@media screen and (max-width: 1300px) {
+     #grid {
+          display: block;
+     }
+
+     h1 {
+          width: 96vw;
+          margin-left: 2vw;
+          font-size: 30px;
+          text-align: left;
+     }
+     
+     #map {
+          width: 96vw;
+          height: 60vh;
+     }
+
+     #code {
+          width: 96vw;
+          margin-left: 2vw;
+     }
+
+     #code h2 {
+          font-size: 30px;
+          margin-top: 4vh;
+     }
+
+     li {
+          font-size: 20px;
+          height: 35px;
+     }
+
+     li i {
+          font-size: 35px;
+     }
+
+     #first_li {
+          margin-left: 6vw;
+     }
+
+     h3 {
+          font-size: 25px;
+     }
+     
+     input {
+          width: 23vw;
+          font-size: 25px;
+          height: 40px;
+     }
+
+     form span {
+          display: inline-block;
+          width: 8vw;
+          height: 40px;
+          text-align: center;
+     }
+
+     .error {
+          font-size: 15px;
+     }
+
+     #recomendations {
+          width: 96vw;
+          margin: 5vh 0 5vh 2vw;
+     }
+
+     #recomendations p {
+          font-size: 12px;
+          width: 60vw;
+     }
+
+     #recomendations i {
+          font-size: 112px;
+     }
 }
