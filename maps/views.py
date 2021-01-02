@@ -48,6 +48,7 @@ def go(request, uuid):
                     #Get Points
                     current_user = User.objects.get(username=request.user.username)
                     current_user.points += help_point.points_for_completed
+                    current_user.visited.add(help_point)
                     current_user.save()
 
                     return redirect('/') #Redirect

@@ -34,6 +34,13 @@ def out(request):
     logout(request)
     return redirect(reverse('index'))
 
+@login_required(login_url='/account/login')
+def account(request):
+    user = User.objects.get(username=request.user)
+    index = list(User.objects.order_by('-points')).index(user) + 1
+    ctx = {'user' : user, 'index' : index}
+    return render(request, 'login/account.html', ctx)
+
 def register(request):
     form = FromCreateUser()
     error = ""
@@ -86,7 +93,7 @@ def ranking_api(request):
             return JsonResponse({'error' : 'Start cant be cero'})
         
         users = User.objects.all()
-        if end > len(users) + 10:
+        if end > len(users) + 20:
             return JsonResponse({'last' : 'No more elements'})
 
         results = users.order_by('-points')[start - 1 : end]

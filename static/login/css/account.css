@@ -1,0 +1,109 @@
+#info {
+    margin-top: 4vh;
+    margin-left: 7vw;
+    width: 64vw;
+    display: inline-block;
+}
+
+#info_info {
+    width: 60%;
+    display: inline-block;
+}
+
+h1, h2 {
+    font-size: 60px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+h2 {
+    float: right;
+    margin-right: 10vw;
+    color: #ff3a3a;
+}
+
+h3, #coordinates_title, #where {
+    font-size: 30px;
+    font-weight: 800;
+    margin-top: 2vh;
+}
+
+h3 {
+    margin-top: 5vh;
+}
+
+h4, h5 {
+    font-size: 30px;
+    font-weight: 300;
+}
+
+h5 span  {
+    margin-right: 4vw;
+}
+
+#security {
+    margin-top: .5vh;
+    font-size: 15px;
+}
+
+#security i {
+    margin-right: .5vw;
+    color: #00bb2d;
+}
+
+#person {
+    width: 15vw;
+    float: right;
+    margin-top: 1.5vh;
+}
+
+#where {
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+}
+
+#map {
+    width: 54vw;
+    height: 35vh;
+}
+
+#links {
+    display: inline-block;
+    width: 18vw;
+}
+
+#account_photo, #account_prede {
+    width: 100%;
+    height: 18vw;
+    object-fit: cover;
+    /* margin-top: 4vh; */
+}
+
+#account_photo {
+    border: 5px solid #ff3a3a;
+    border-radius: 100%;
+}
+
+#links_links {
+    margin-top: 6vh;
+    position: relative;
+    bottom: 1vh;
+}
+
+#links_links a {
+    margin-top: 2vh;
+    font-size: 30px;
+    font-weight: 300;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #000;
+}
+
+#links_links #report {
+    font-size: 28px;
+}
+
+#links_links  .danger {
+    color: #ff3a3a;
+}

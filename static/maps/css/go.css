@@ -114,11 +114,13 @@ form span {
      float: right;
 }
 
-.error {
+.error, .errorlist, .errorlist li  {
      color: #f00;
      text-align: right;
      margin-top: 0.5vh;
+     font-size: 20px;
 } 
+
 
 @media screen and (max-width: 1300px) {
      #grid {

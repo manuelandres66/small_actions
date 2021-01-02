@@ -21,6 +21,8 @@ let directions = new MapboxDirections({
     language: 'es',
     interactive: false,
     placeholderOrigin: 'Elije un origen',
+    congestion: true,
+    alternatives: true,
     controls: {
         instructions: false
     }
