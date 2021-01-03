@@ -1,3 +1,7 @@
+body {
+     overflow-x: hidden;
+}
+
 #grid {
      display: grid;
      grid-template-columns: repeat(2, 50%);
@@ -37,6 +41,7 @@ li {
      font-size: 35px;
      font-weight: 300;
      margin-bottom: 3.5vh;
+     position: relative;
 }
 
 li i {
@@ -49,12 +54,18 @@ li i {
      right: 10px;
 }
 
+#first_li {
+     animation-delay: 1s;
+}
+
 #second_li {
      margin-left: 15%;
+     animation-delay: 1.5s;
 }
 
 #third_li {
      margin-left: 30%;
+     animation-delay: 2s;
 }
 
 h3 {
@@ -89,7 +100,7 @@ input::placeholder {
 form span {
      height: 5.5vh;
      font-size: 40px;
-     font-weight: 600;
+     font-weight: 600; 
      margin-left: 0.7vw;
      margin-right: 0.7vw;
 }
@@ -120,6 +131,26 @@ form span {
      margin-top: 0.5vh;
      font-size: 20px;
 } 
+
+/* Animations */
+@keyframes appear {
+     0% {
+          left: 80vw;
+          opacity: 0;
+     }
+     100% {
+          left: 0;
+          opacity: 1;
+     }
+}
+
+li {
+     left: 80vw;
+     
+     animation-name: appear;
+     animation-duration: 2s;
+     animation-fill-mode: forwards;
+}
 
 
 @media screen and (max-width: 1300px) {

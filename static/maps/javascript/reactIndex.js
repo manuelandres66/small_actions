@@ -58,21 +58,7 @@ class App extends React.Component {
                 closeButton: false,
             };
 
-            // //Agregando puntos
-            // data.points.forEach(point => {
-            //     const popup = new mapboxgl.Popup(parameters).setHTML(`<h3>${point.name}</h3>`);
-            //     popup.on('open', () => {
-            //         this.changeState(point.name, point.category, point.organization, point.description, point.rute, point.uuid);
-            //     });
-
-            //     new mapboxgl.Marker({
-            //         color: '#ff3a3a'
-            //     })
-            //     .setLngLat(point.cordinates)
-            //     .setPopup(popup)
-            //     .addTo(map);
-            // });
-
+            // Agregando puntos
 
             let features = [];
             data.points.forEach(point => {
@@ -96,7 +82,7 @@ class App extends React.Component {
 
             map.on('load', () => {
                 map.loadImage(
-                    '/static/maps/images/logo_small_icon_only_inverted.png',
+                    '/static/maps/images/point.png',
                     (error, image) => {
                         if (error) throw error;
                         map.addImage('pointer', image);
@@ -115,7 +101,7 @@ class App extends React.Component {
                             'source': 'points',
                             'layout': {
                                 'icon-image': 'pointer',
-                                'icon-size': 0.15,
+                                'icon-size': 0.12,
 
                                 // get the title name from the source's "title" property
                                 'text-field': ['get', 'title'],
@@ -123,7 +109,7 @@ class App extends React.Component {
                                     'Open Sans Semibold',
                                     'Arial Unicode MS Bold'
                                 ],
-                                'text-offset': [0, 1.25],
+                                'text-offset': [0, 1.8],
                                 'text-anchor': 'top'
                             }
                         });

@@ -58,6 +58,10 @@ class UserTest(TestCase):
         response = c.get(reverse('account'))
         self.assertEqual(response.status_code, 200)
 
+        response = c.post(reverse('account'), {'username' : 'PEPE2', 'email' : 'manuel.andres66.mab@gmail.com', 'latitude' : -78.458, 'longitude' : 14.587})
+        self.assertFalse(c.login(username="PEPE", password="hola1234")) #Not old Username
+        self.assertTrue(c.login(username="PEPE2", password="hola1234")) #New username
+
 class ApiTest(TestCase):
     def setUp(self):
         User.objects.create_user(username="PEPE", password="hola1234", points=0)
