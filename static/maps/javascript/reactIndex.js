@@ -58,19 +58,87 @@ class App extends React.Component {
                 closeButton: false,
             };
 
-            //Agregando puntos
-            data.points.forEach(point => {
-                const popup = new mapboxgl.Popup(parameters).setHTML(`<h3>${point.name}</h3>`);
-                popup.on('open', () => {
-                    this.changeState(point.name, point.category, point.organization, point.description, point.rute, point.uuid);
-                });
+            // //Agregando puntos
+            // data.points.forEach(point => {
+            //     const popup = new mapboxgl.Popup(parameters).setHTML(`<h3>${point.name}</h3>`);
+            //     popup.on('open', () => {
+            //         this.changeState(point.name, point.category, point.organization, point.description, point.rute, point.uuid);
+            //     });
 
-                new mapboxgl.Marker({
-                    color: '#ff3a3a'
-                })
-                .setLngLat(point.cordinates)
-                .setPopup(popup)
-                .addTo(map);
+            //     new mapboxgl.Marker({
+            //         color: '#ff3a3a'
+            //     })
+            //     .setLngLat(point.cordinates)
+            //     .setPopup(popup)
+            //     .addTo(map);
+            // });
+
+
+            let features = [];
+            data.points.forEach(point => {
+                let newPoint = {
+                    'type': 'Feature',
+                    'geometry' : {
+                        'type': 'Point',
+                        'coordinates': point.cordinates,
+                    },
+                    'properties': {
+                        'title': point.name,
+                        'category' : point.category,
+                        'organization' : point.organization,
+                        'description' : point.description,
+                        'rute' : point.rute,
+                        'uuid' : point.uuid
+                    }
+                };
+                features.push(newPoint);
+            });
+
+            map.on('load', () => {
+                map.loadImage(
+                    '/static/maps/images/logo_small_icon_only_inverted.png',
+                    (error, image) => {
+                        if (error) throw error;
+                        map.addImage('pointer', image);
+
+                        map.addSource('points', {
+                            'type': 'geojson',
+                            'data': {
+                                'type': 'FeatureCollection',
+                                'features': features
+                            }
+                        });
+
+                        map.addLayer({
+                            'id': 'points',
+                            'type': 'symbol',
+                            'source': 'points',
+                            'layout': {
+                                'icon-image': 'pointer',
+                                'icon-size': 0.15,
+
+                                // get the title name from the source's "title" property
+                                'text-field': ['get', 'title'],
+                                'text-font': [
+                                    'Open Sans Semibold',
+                                    'Arial Unicode MS Bold'
+                                ],
+                                'text-offset': [0, 1.25],
+                                'text-anchor': 'top'
+                            }
+                        });
+                    });
+            });
+
+            map.on('click', 'points', (e) => {
+                let properties = e.features[0].properties;
+                this.changeState(properties.title, 
+                    properties.category, 
+                    properties.organization,
+                    properties.description, 
+                    properties.rute, 
+                    properties.uuid
+                );
             });
         })
     };
