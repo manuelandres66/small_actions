@@ -24,6 +24,7 @@ class htmltest(TestCase):
         response = c.get(reverse('register'))
         self.assertEqual(response.status_code, 200)
 
+
 class UserTest(TestCase):
     def setUp(self):
         self.pepe = User.objects.create_user(username="PEPE", password="hola1234")
@@ -49,6 +50,12 @@ class UserTest(TestCase):
         c = Client()
         c.login(username="PEPE", password="hola1234")
         response = c.get(reverse('ranking'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_account(self):
+        c = Client()
+        c.login(username="PEPE", password="hola1234")
+        response = c.get(reverse('account'))
         self.assertEqual(response.status_code, 200)
 
 class ApiTest(TestCase):
