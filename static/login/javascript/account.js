@@ -25,3 +25,38 @@ const track =  new mapboxgl.GeolocateControl({
 
 map.addControl(new mapboxgl.NavigationControl());
 map.addControl(track, 'top-left');
+
+
+//Change to inputs
+
+let countClick = 0;
+
+const title = document.querySelector('h1');
+const email = document.querySelector('h4');
+const latitudeObject = document.getElementById('latitude');
+const longitudeObject = document.getElementById('longitude');
+let inArray = [title, email, latitudeObject, longitudeObject];
+
+const changeLink = document.querySelector('#change');
+
+const inputs = document.querySelectorAll('input');
+inputs.forEach(input => input.style.display = 'none');
+
+changeLink.addEventListener('click', () => {
+    if (countClick % 2 == 0) {
+        //Change link iner html
+        changeLink.innerHTML = 'Submit Changes';
+        
+        for (let i = 1; i < inputs.length; i++) {
+            inputs[i].setAttribute('value', inArray[i-1].innerHTML);
+        };
+
+        inArray.forEach(title => title.style.display = 'none');
+        inputs.forEach(input => input.style.display = 'inline-block');
+
+    } else {
+        document.querySelector('form').submit();
+    }
+
+    countClick++;
+})

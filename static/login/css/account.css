@@ -10,6 +10,19 @@
     display: inline-block;
 }
 
+input {
+    border: 2px solid rgb(196, 196, 196);
+    border-radius: 10px;
+}
+
+#id_username {
+    font-size: 60px;
+    font-weight: 600;
+    padding-left: 1vw;
+    padding-top: 0.2vh;
+    padding-bottom: 0.2vh;
+}
+
 h1, h2 {
     font-size: 60px;
     font-weight: 600;
@@ -20,6 +33,13 @@ h2 {
     float: right;
     margin-right: 10vw;
     color: #ff3a3a;
+}
+
+#id_email {
+    font-size: 30px;
+    font-weight: 300;
+    padding: 0.1vh 1vw;
+    width: 32vw;
 }
 
 h3, #coordinates_title, #where {
@@ -35,6 +55,14 @@ h3 {
 h4, h5 {
     font-size: 30px;
     font-weight: 300;
+}
+
+#id_latitude, #id_longitude {
+    font-size: 30px;
+    font-weight: 300;
+    margin-right: 4vw;
+    width: 10.2vw;
+    padding: 0.1vh 1vw;
 }
 
 h5 span  {
@@ -98,6 +126,7 @@ h5 span  {
     width: 100%;
     text-decoration: none;
     color: #000;
+    cursor: pointer;
 }
 
 #links_links #report {
@@ -106,4 +135,8 @@ h5 span  {
 
 #links_links  .danger {
     color: #ff3a3a;
+}
+
+.errorlist {
+    position: absolute;
 }

@@ -4,7 +4,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 
-from .forms import FormLogin, FromCreateUser
+from .forms import FormLogin, FromCreateUser, ChangeUser
 from .models import User
 
 import json
@@ -38,7 +38,18 @@ def out(request):
 def account(request):
     user = User.objects.get(username=request.user)
     index = list(User.objects.order_by('-points')).index(user) + 1
-    ctx = {'user' : user, 'index' : index}
+    form = ChangeUser()
+
+    if request.method == "POST":
+        form = ChangeUser(request.POST)
+        if form.is_valid():
+            user.username =  form.cleaned_data['username']
+            user.email =     form.cleaned_data['email']
+            user.latitude =  form.cleaned_data['latitude']
+            user.longitude = form.cleaned_data['longitude']
+            user.save()
+
+    ctx = {'user' : user, 'index' : index, 'form' : form}
     return render(request, 'login/account.html', ctx)
 
 def register(request):
