@@ -101,10 +101,10 @@ h5 span  {
 }
 
 #account_photo, #account_prede {
+    object-fit: cover;
+    object-position: center;
     width: 100%;
     height: 18vw;
-    object-fit: cover;
-    /* margin-top: 4vh; */
 }
 
 #account_photo {

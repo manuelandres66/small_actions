@@ -42,13 +42,21 @@ def account(request):
     form = ChangeUser()
 
     if request.method == "POST":
-        form = ChangeUser(request.POST)
+        form = ChangeUser(request.POST, request.FILES)
         if form.is_valid():
             user.username =  form.cleaned_data['username']
             user.email =     form.cleaned_data['email']
             user.latitude =  form.cleaned_data['latitude']
             user.longitude = form.cleaned_data['longitude']
-            user.save()
+            if form.cleaned_data['photo'] != None:
+                user.photo = form.cleaned_data['photo']
+                
+            try:
+                user.save()
+            except:
+                pass
+
+            return redirect(reverse('account'))
 
     ctx = {'user' : user, 'index' : index, 'form' : form}
     return render(request, 'login/account.html', ctx)
@@ -66,7 +74,7 @@ def repassword(request, re):
                 user = User.objects.get(username=request.user.username)
                 user.can_change = True
                 user.save()
-                return redirect(reverse('reset_password' if re == 1 else 'account'))
+                return redirect(reverse('eliminate' if re == 2 else 'reset_password'))
             else:
                 error = "It's not your password"
 
@@ -95,6 +103,22 @@ def reset_password(request):
     else:
         return redirect(reverse('password', kwargs={'re' : 1})) 
 
+@login_required(login_url='/account/login')
+def eliminate(request):
+    if request.user.can_change:
+        if request.method == 'POST':
+            user = User.objects.get(username=request.user)
+            if request.POST['answer'] == 'no':
+                user.can_change = False
+                user.save()
+                return redirect(reverse('account'))
+            elif request.POST['answer'] == 'yes':
+                user.delete()
+                return redirect(reverse('index'))
+
+        return render(request, 'login/eliminate.html')
+    else:
+        return redirect(reverse('password', kwargs={'re' : 2})) 
 
 def register(request):
     form = FromCreateUser()
@@ -104,7 +128,6 @@ def register(request):
         form = FromCreateUser(request.POST, request.FILES)
         if form.is_valid():
             if form.cleaned_data['password'] == form.cleaned_data['repeat_password']:
-                print(form.cleaned_data['photo'])
                 new_user = User.objects.create_user(
                     username=   form.cleaned_data['username'],
                     password=   form.cleaned_data['password'],

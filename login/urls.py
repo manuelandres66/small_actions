@@ -10,6 +10,7 @@ urlpatterns = [
 
     path('password/<int:re>', views.repassword, name='password'),
     path('password/reset/', views.reset_password, name='reset_password'),
+    path('password/eliminate', views.eliminate, name='eliminate'),
 
     path('api/ranking', views.ranking_api, name="RankingAPI"),
 ] 

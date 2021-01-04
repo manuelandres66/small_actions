@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Eliminate: {{request.user}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            * {
+                font-family: 'Sora', sans-serif;
+            }
+
+            h1, input, p {
+                width: 50vw;
+                margin-left: 25vw;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 60px;
+                margin-top: 20vh;
+                color: #ff3a3a;
+            }
+
+            input {
+                font-size: 25px;
+                margin-top: 5vh;
+                border-radius: 15px;
+                padding: 10px;                
+                border: none;
+                cursor: pointer;
+            }
+
+            p {
+                margin-top: 5vh;
+                text-align: justify;
+            }
+
+            #sure {
+                background-color: #ff3a3a;
+                color: #fff;
+            }
+
+            input[type='submit'] {
+                background-color: #000;
+                color: #fff;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Are you sure you want to eliminate {{request.user}} account?</h1>
+        <form method="POST"> {% csrf_token %}
+            <input type="hidden" value="yes" name="answer">
+            <input type="submit" value="Yes, I'm Sure" id="sure">
+        </form>
+        <form method="POST"> {% csrf_token %}
+            <input type="hidden" value="no" name="answer">
+            <input type="submit" value="No, I'm not">
+        </form>
+        <p>If you say yes, your account will no longer exist, your points, ranking, and personal info like email, username, coordinates, and Help points will be eliminated, and you will not be able to recreate the account.</p>
+    </body>
+</html>

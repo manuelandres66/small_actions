@@ -10,58 +10,65 @@
     </head>
     {% include 'maps/nav.html' %}
     <body>
-        <div id='info'>
-            <form method="POST"> {% csrf_token %}
-                <div id="title_container">
-                    <h1>{{user.username}}</h1>
-                    {{form.username}}
-                    {{form.username.errors}}
-                    <a href="{% url 'ranking' %}"><h2>#{{index}}</h2></a>
-                </div>
-                <div id="info_info">
-                    <div id="email_container">
-                        <h3>Email:</h3>
-                        <h4>{{user.email}}</h4>
-                        {{form.email}}
-                        {{form.email.errors}}
-                    </div>
-                    <div>
-                        <h5 id="coordinates_title">Cordinates:</h5>
-                        <h5 id="cordiantes">
-                            <span id="latitude">{{user.latitude}}</span>
-                            {{form.latitude}} 
-                            <span>-</span> 
-                            <span id="longitude">{{user.longitude}}</span>
-                            {{form.longitude}}
-                        </h5>
-                        {{form.latitude.errors}}
-                        {{form.longitude.errors}}
-                        <p id="security"><i class="fas fa-lock"></i>Only you can see this</p>
-                    </div>
-                </div>
-                <img src="{% static 'login/images/account.png' %}" alt='person' id="person">
-                <div>
-                    <h6 id="where">Where you help:</h6>
-                    <div id="map"></div>
-                </div>
-            </form>
-        </div>
-        <div id="links">
-            {% if request.user.photo %}
-                <img src="{{request.user.photo.url}}" alt="account" id="account_photo">
-            {% else %}
-                <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account" id="account_prede">
-            {% endif %}
+        <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            <div id='info'>
 
-            <div id="links_links">
-                <a id="change">Change Info</a>
-                <a href="{% url 'password' 1 %}">Reset password</a>
-                <a>Customer Support</a>
-                <a href="{% url 'ranking' %}">View Ranking</a>
-                <a class="danger" href="{% url 'password' 2 %}">Eliminate Account</a>
-                <a id="report" class="danger">Report another account or organization</a>
+                    <div id="title_container">
+                        <h1>{{user.username}}</h1>
+                        {{form.username}}
+                        {{form.username.errors}}
+                        <span>{{error}}</span>
+                        <a href="{% url 'ranking' %}"><h2>#{{index}}</h2></a>
+                    </div>
+                    <div id="info_info">
+                        <div id="email_container">
+                            <h3>Email:</h3>
+                            <h4>{{user.email}}</h4>
+                            {{form.email}}
+                            {{form.email.errors}}
+                        </div>
+                        <div>
+                            <h5 id="coordinates_title">Cordinates:</h5>
+                            <h5 id="cordiantes">
+                                <span id="latitude">{{user.latitude}}</span>
+                                {{form.latitude}} 
+                                <span>-</span> 
+                                <span id="longitude">{{user.longitude}}</span>
+                                {{form.longitude}}
+                            </h5>
+                            {{form.latitude.errors}}
+                            {{form.longitude.errors}}
+                            <p id="security"><i class="fas fa-lock"></i>Only you can see this</p>
+                        </div>
+                    </div>
+                    <img src="{% static 'login/images/account.png' %}" alt='person' id="person">
+                    <div>
+                        <h6 id="where">Where you help:</h6>
+                        <div id="map"></div>
+                    </div>
+
             </div>
-        </div>
+            <div id="links">
+                <div id="img_container">
+                    {% if request.user.photo %}
+                        <img src="{{request.user.photo.url}}" alt="account" id="account_photo">
+                    {% else %}
+                        <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account" id="account_prede">
+                    {% endif %}
+                    {{form.photo}}
+                    {{form.photo.errors}}
+                </div>
+
+                <div id="links_links">
+                    <a id="change">Change Info</a>
+                    <a href="{% url 'password' 1 %}">Reset password</a>
+                    <a>Customer Support</a>
+                    <a href="{% url 'ranking' %}">View Ranking</a>
+                    <a class="danger" href="{% url 'password' 2 %}">Eliminate Account</a>
+                    <a id="report" class="danger">Report another account or organization</a>
+                </div>
+            </div>
+        </form>
         <script src="{% static 'login/javascript/account.js' %}"></script>
     </body>
 </html>

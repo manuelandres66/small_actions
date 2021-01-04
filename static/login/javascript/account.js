@@ -36,7 +36,7 @@ const email = document.querySelector('h4');
 const latitudeObject = document.getElementById('latitude');
 const longitudeObject = document.getElementById('longitude');
 let inArray = [title, email, latitudeObject, longitudeObject];
-
+console.log(inArray)
 const changeLink = document.querySelector('#change');
 
 const inputs = document.querySelectorAll('input');
@@ -46,8 +46,7 @@ changeLink.addEventListener('click', () => {
     if (countClick % 2 == 0) {
         //Change link iner html
         changeLink.innerHTML = 'Submit Changes';
-        
-        for (let i = 1; i < inputs.length; i++) {
+        for (let i = 1; i < inputs.length - 1; i++) {
             inputs[i].setAttribute('value', inArray[i-1].innerHTML);
         };
 
