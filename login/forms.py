@@ -25,3 +25,10 @@ class ChangeUser(forms.Form):
     email = forms.EmailField()
     latitude = forms.DecimalField(max_digits=6, decimal_places=4)
     longitude = forms.DecimalField(max_digits=7, decimal_places=4)
+
+class FormPassword(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
+
+class ResetPassword(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'New Password'}))
+    repeat_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Repeat New Password'}))

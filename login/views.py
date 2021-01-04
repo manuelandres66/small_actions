@@ -4,10 +4,11 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 
-from .forms import FormLogin, FromCreateUser, ChangeUser
+from .forms import FormLogin, FromCreateUser, ChangeUser, FormPassword, ResetPassword
 from .models import User
 
 import json
+import random
 # Create your views here.
 
 def entry(request):
@@ -51,6 +52,49 @@ def account(request):
 
     ctx = {'user' : user, 'index' : index, 'form' : form}
     return render(request, 'login/account.html', ctx)
+
+@login_required(login_url='/account/login')
+def repassword(request, re):
+    form = FormPassword()
+    error = ''
+
+    if request.method == 'POST':
+        form = FormPassword(request.POST)
+        if form.is_valid():
+            user = authenticate(username=request.user.username, password=form.cleaned_data['password'])
+            if user is not None:
+                user = User.objects.get(username=request.user.username)
+                user.can_change = True
+                user.save()
+                return redirect(reverse('reset_password' if re == 1 else 'account'))
+            else:
+                error = "It's not your password"
+
+    return render(request, 'login/repassword.html', {'form' : form, 'error' : error})
+
+@login_required(login_url='/account/login')
+def reset_password(request):
+    if request.user.can_change:
+        form = ResetPassword()
+        error = ''
+
+        if request.method == 'POST':
+            form = ResetPassword(request.POST)
+            if form.is_valid():
+                if form.cleaned_data['password'] == form.cleaned_data['repeat_password']:
+                    user = User.objects.get(username=request.user)
+                    user.set_password(form.cleaned_data['password'])
+                    user.can_change = False
+                    user.save()
+
+                    return redirect(reverse('account'))
+                else:
+                    error = "Passwords don't match"
+
+        return render(request, 'login/reset_password.html', {'form' : form, 'error' : error})
+    else:
+        return redirect(reverse('password', kwargs={'re' : 1})) 
+
 
 def register(request):
     form = FromCreateUser()

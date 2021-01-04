@@ -55,10 +55,10 @@
 
             <div id="links_links">
                 <a id="change">Change Info</a>
-                <a>Reset password</a>
+                <a href="{% url 'password' 1 %}">Reset password</a>
                 <a>Customer Support</a>
                 <a href="{% url 'ranking' %}">View Ranking</a>
-                <a class="danger">Eliminate Account</a>
+                <a class="danger" href="{% url 'password' 2 %}">Eliminate Account</a>
                 <a id="report" class="danger">Report another account or organization</a>
             </div>
         </div>

@@ -101,7 +101,7 @@ class App extends React.Component {
                             'source': 'points',
                             'layout': {
                                 'icon-image': 'pointer',
-                                'icon-size': 0.12,
+                                'icon-size': 1,
 
                                 // get the title name from the source's "title" property
                                 'text-field': ['get', 'title'],
@@ -109,7 +109,7 @@ class App extends React.Component {
                                     'Open Sans Semibold',
                                     'Arial Unicode MS Bold'
                                 ],
-                                'text-offset': [0, 1.8],
+                                'text-offset': [0, 1.2],
                                 'text-anchor': 'top'
                             }
                         });
