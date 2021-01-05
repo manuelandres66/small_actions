@@ -62,7 +62,7 @@ def account(request):
     return render(request, 'login/account.html', ctx)
 
 @login_required(login_url='/account/login')
-def repassword(request, re):
+def repassword(request, re): 
     form = FormPassword()
     error = ''
 

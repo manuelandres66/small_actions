@@ -12,40 +12,39 @@
     <body>
         <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
             <div id='info'>
-
-                    <div id="title_container">
-                        <h1>{{user.username}}</h1>
-                        {{form.username}}
-                        {{form.username.errors}}
-                        <span>{{error}}</span>
-                        <a href="{% url 'ranking' %}"><h2>#{{index}}</h2></a>
+                <div id="title_container">
+                    <h1>{{user.username}}</h1>
+                    {{form.username}}
+                    {{form.username.errors}}
+                    <span>{{error}}</span>
+                    <a href="{% url 'ranking' %}"><h2>#{{index}}</h2></a>
+                </div>
+                <div id="info_info">
+                    <div id="email_container">
+                        <h3>Email:</h3>
+                        <h4>{{user.email}}</h4>
+                        {{form.email}}
+                        {{form.email.errors}}
                     </div>
-                    <div id="info_info">
-                        <div id="email_container">
-                            <h3>Email:</h3>
-                            <h4>{{user.email}}</h4>
-                            {{form.email}}
-                            {{form.email.errors}}
-                        </div>
-                        <div>
-                            <h5 id="coordinates_title">Cordinates:</h5>
-                            <h5 id="cordiantes">
-                                <span id="latitude">{{user.latitude}}</span>
-                                {{form.latitude}} 
-                                <span>-</span> 
-                                <span id="longitude">{{user.longitude}}</span>
-                                {{form.longitude}}
-                            </h5>
-                            {{form.latitude.errors}}
-                            {{form.longitude.errors}}
-                            <p id="security"><i class="fas fa-lock"></i>Only you can see this</p>
-                        </div>
-                    </div>
-                    <img src="{% static 'login/images/account.png' %}" alt='person' id="person">
                     <div>
-                        <h6 id="where">Where you help:</h6>
-                        <div id="map"></div>
+                        <h5 id="coordinates_title">Cordinates:</h5>
+                        <h5 id="cordiantes">
+                            <span id="latitude">{{user.latitude}}</span>
+                            {{form.latitude}} 
+                            <span>-</span> 
+                            <span id="longitude">{{user.longitude}}</span>
+                            {{form.longitude}}
+                        </h5>
+                        {{form.latitude.errors}}
+                        {{form.longitude.errors}}
+                        <p id="security"><i class="fas fa-lock"></i>Only you can see this</p>
                     </div>
+                </div>
+                <img src="{% static 'login/images/account.png' %}" alt='person' id="person">
+                <div>
+                    <h6 id="where">Where you help:</h6>
+                    <div id="map"></div>
+                </div>
 
             </div>
             <div id="links">

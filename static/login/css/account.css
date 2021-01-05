@@ -140,3 +140,101 @@ h5 span  {
 .errorlist {
     position: absolute;
 }
+
+@media screen and (max-width: 1300px) {
+    #info {
+        display: block;
+        width: 96vw;
+        margin-left: 2vw;
+        margin-top: 3vh;
+    }
+
+    h1, h2 {
+        font-size: 35px;
+        display: block;
+        text-align: center;
+        float: none;
+        margin: 0;
+    }
+
+    h2 {
+        margin-top: 1.5vh;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    #info_info {
+        display: block;
+        width: 100%;
+    }
+
+    h3 {
+        margin-top: 3vh;
+    }
+
+    h3, h4, h5, #coordinates_title, #where {
+        font-size: 15px;
+    }
+
+    #security {
+        font-size: 10px;
+    }
+
+    #person {
+        display: none;
+    }
+
+    #map {
+        width: 100%;
+        height: 30vh;
+    }
+
+    #links {
+        display: block;
+        width: 96vw;
+        margin-left: 2vw;
+        margin-top: 5vh;
+    }
+
+    #account_photo, #account_prede {
+        width: 40vw;
+        height: 40vw;
+        margin-left: 28vw;
+    }
+
+    #links_links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 5vh;
+    }
+
+    #links_links a  {
+        font-size: 15px;
+        width: 50%;
+    }
+
+    #links_links #report {
+        font-size: 12px;
+    }
+
+    #id_username {
+        width: 94vw;
+        font-size: 35px;
+        text-align: center;
+    }
+
+    #id_email {
+        font-size: 15px;
+        width: 88vw;
+        padding: 0.5vh 2vw;
+    }
+
+    #id_latitude, #id_longitude  {
+        width: 34.75vw;
+        font-size: 15px;
+        padding: 0.5vh 2vw;
+    }
+}

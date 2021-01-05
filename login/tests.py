@@ -39,7 +39,7 @@ class UserTest(TestCase):
         user.set_password('hola12345')
         user.save()
 
-        c = Client()
+        c = Client() 
         login = c.login(username="PEPE", password="hola1234") #Not Old Password
         self.assertFalse(login)
 
@@ -61,6 +61,45 @@ class UserTest(TestCase):
         response = c.post(reverse('account'), {'username' : 'PEPE2', 'email' : 'manuel.andres66.mab@gmail.com', 'latitude' : -78.458, 'longitude' : 14.587})
         self.assertFalse(c.login(username="PEPE", password="hola1234")) #Not old Username
         self.assertTrue(c.login(username="PEPE2", password="hola1234")) #New username
+
+    def test_reset_and_eliminate(self):
+        c = Client()
+        c.login(username="PEPE", password="hola1234")
+        user = User.objects.get(username='PEPE')
+        user.can_change = False
+        user.save()
+        
+        #Incorrect
+        response = c.post(reverse('password', kwargs={'re' : 1}), {'password' : 'hola123'}) # Incorret
+        self.assertEqual(response.status_code, 200)
+
+        response_reset = c.get(reverse('reset_password'))
+        self.assertEqual(response_reset.status_code, 302) #Not allow
+
+        response_eliminate = c.get(reverse('eliminate'))
+        self.assertEqual(response_eliminate.status_code, 302) #Not allow
+
+        #Correct
+        response = c.post(reverse('password', kwargs={'re' : 1}), {'password' : 'hola1234'}) # Correct
+        self.assertEqual(response.status_code, 302)
+
+        response_reset = c.get(reverse('reset_password'))
+        self.assertEqual(response_reset.status_code, 200) #Allow
+        
+        response_eliminate = c.get(reverse('eliminate'))
+        self.assertEqual(response_eliminate.status_code, 200) #Allow
+
+        response_reset = c.post(reverse('reset_password'), {'password' : 'hola12345', 'repeat_password' : 'hola12345'})
+        login = c.login(username="PEPE", password="hola12345")
+        self.assertTrue(login) #Changed Password
+
+        response = c.post(reverse('password', kwargs={'re' : 2}), {'password' : 'hola12345'}) #Re put password
+        response_eliminate = c.post(reverse('eliminate'), {'answer': 'yes'})
+        self.assertEqual(response_eliminate.status_code, 302)
+
+        query = User.objects.filter(username='PEPE')
+        self.assertEqual(len(query), 0)
+
 
 class ApiTest(TestCase):
     def setUp(self):
