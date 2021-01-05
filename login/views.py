@@ -3,12 +3,17 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from django.core.mail import send_mail
+from django.conf import settings
 
-from .forms import FormLogin, FromCreateUser, ChangeUser, FormPassword, ResetPassword
+from .forms import FormLogin, FromCreateUser, ChangeUser, FormPassword, ResetPassword, FormForgot
 from .models import User
 
 import json
 import random
+import string
+from datetime import timedelta
 # Create your views here.
 
 def entry(request):
@@ -186,3 +191,58 @@ def ranking_api(request):
 
     else:
         return JsonResponse({'error' : 'please provide start and end'}, status=400)
+
+
+def forgot_password(request):
+    form = FormForgot()
+    succes = False
+    if request.method == 'POST':
+        form = FormForgot(request.POST)
+        if form.is_valid():
+            results = User.objects.filter(email=form.cleaned_data['email'])
+            if len(results) > 0:
+                #Configure for url
+                user = results[0]
+                print(user.email)
+                user.date_forgot = timezone.now() + timedelta(minutes=15)
+                letters = string.ascii_letters
+                user.random_string = ''.join(random.choice(letters) for i in range(20))
+                user.save()
+                
+                #Send Email
+                send_mail('Forgot password?',
+                f"Please enter this url: {reverse('emailink', kwargs={'random_string' : user.random_string})}",
+                settings.EMAIL_HOST_USER,
+                [user.email])
+
+        succes = True #For not telling if a email exist, always succes no matter the email
+
+    return render(request, 'login/forgot.html', {'form' : form, 'succes' : succes})
+
+def email_link(request, random_string):
+    users = User.objects.filter(random_string=random_string) #Check if user
+    if len(users) > 0:
+        user = users[0]
+        if timezone.now() <= user.date_forgot: #Chek if link is not expired
+            form = ResetPassword()
+            error = ''
+
+            if request.method == 'POST':
+                form = ResetPassword(request.POST)
+                if form.is_valid():
+                    if form.cleaned_data['password'] == form.cleaned_data['repeat_password']:
+                        user.set_password(form.cleaned_data['password'])
+                        letters = string.ascii_letters
+                        user.random_string = ''.join(random.choice(letters) for i in range(20)) #Change random string for secure
+                        user.save()
+
+                        return redirect(reverse('account'))
+                    else:
+                        error = "Passwords don't match"
+
+            return render(request, 'login/reset_password.html', {'form' : form, 'error' : error})
+
+    return redirect(reverse('account'))
+
+
+

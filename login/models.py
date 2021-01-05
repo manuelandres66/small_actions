@@ -10,3 +10,5 @@ class User(AbstractUser):
     longitude = models.DecimalField(max_digits=7, decimal_places=4, null=True, blank=True)
     visited = models.ManyToManyField(Help, related_name="persons_visited", null=True, blank=True)
     can_change = models.BooleanField(null=True, blank=True)
+    date_forgot = models.DateTimeField(auto_now_add=True)
+    random_string = models.CharField(max_length=20, blank=True, null=True, unique=True)

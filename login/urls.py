@@ -7,6 +7,8 @@ urlpatterns = [
     path('logout', views.out, name="logout"),
     path('register', views.register, name="register"),
     path('ranking', views.ranking, name="ranking"),
+    path('forgot', views.forgot_password, name='forgot'),
+    path('forgot/email/<str:random_string>', views.email_link, name='emailink'),
 
     path('password/<int:re>', views.repassword, name='password'),
     path('password/reset/', views.reset_password, name='reset_password'),

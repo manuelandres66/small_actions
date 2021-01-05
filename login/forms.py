@@ -33,10 +33,11 @@ class ChangeUser(forms.ModelForm):
         model = User
         fields = ('email', 'latitude', 'longitude', 'photo')
 
-    
-
 class FormPassword(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
+
+class FormForgot(forms.Form):
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder':'Email'}))
 
 class ResetPassword(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'New Password'}))
