@@ -55,7 +55,7 @@ class apitest(TestCase):
         self.assertEqual(data['points'], [
             {
                 'name' : "Cole",
-                'cordinates' : ['-77.2760', '1.2150'],
+                'cordinates' : ['-77.276000', '1.215000'],
                 'category' : "Cole",
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
@@ -64,7 +64,7 @@ class apitest(TestCase):
             },
             {
                 'name' : "Exito",
-                'cordinates' : ['-77.2790', '1.2150'],
+                'cordinates' : ['-77.279000', '1.215000'],
                 'category' : "Exito",
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",

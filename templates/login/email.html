@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>Email Forgot Password</title>
+        <style>
+            * {
+                font-family: 'Sora', sans-serif;
+            }
+
+            body {
+                width: 50vw;
+            }
+
+            h2 {
+                color: #ff3a3a;
+                font-size: 30px;
+                height: 50px;
+                border-bottom: 2px solid #ff3a3a;
+            }
+
+            h1 {
+                font-size: 40px;
+                text-align: center;
+                margin-top: 5vh;
+            }
+
+            a button {
+                width: 50%;
+                margin-left: 21%;
+                font-size: 25px;
+                background-color: #ff3a3a;
+                color: #fff;
+                padding: 0.5vh 2%;
+                margin-top: 4vh;
+                border: none;
+                border-radius: 25px;
+            }
+
+            #frist {
+                margin-top: 15vh;
+            }
+
+            p {
+                font-size: 10px;
+                width: 90vw;
+                margin-left: 5vw;
+                margin-bottom: 1vh;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>Small Actions</h2>
+        </div>
+        <div>
+            <h1>Forgot Password?</h1>
+            <a href="{{link}}"><button>Recover password</button></a>
+            <p id="frist">Or visit this link: <a href="{{link}}">{{link}}</a></p>
+            <p>This link exprires in 15 minutes, if ypu create a new link this will no loger work</p>
+        </div>
+    </body>  
+</html>

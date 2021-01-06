@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
+from django.template.loader import render_to_string
 
 from .forms import FormLogin, FromCreateUser, ChangeUser, FormPassword, ResetPassword, FormForgot
 from .models import User
@@ -210,10 +211,15 @@ def forgot_password(request):
                 user.save()
                 
                 #Send Email
+                link = 'http://127.0.0.1:8000' + reverse('emailink', kwargs={'random_string' : user.random_string})
+                html_message = render_to_string('login/email.html', {'link': link})
+
                 send_mail('Forgot password?',
-                f"Please enter this url: {reverse('emailink', kwargs={'random_string' : user.random_string})}",
+                f"Please enter to this url: {link}",
                 settings.EMAIL_HOST_USER,
-                [user.email])
+                [user.email],
+                html_message=html_message,
+                fail_silently=False)
 
         succes = True #For not telling if a email exist, always succes no matter the email
 
@@ -235,7 +241,6 @@ def email_link(request, random_string):
                         letters = string.ascii_letters
                         user.random_string = ''.join(random.choice(letters) for i in range(20)) #Change random string for secure
                         user.save()
-
                         return redirect(reverse('account'))
                     else:
                         error = "Passwords don't match"

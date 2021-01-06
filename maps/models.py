@@ -19,8 +19,8 @@ class HelpPhoto(models.Model):
 
 class Help(models.Model):
     uuid = ShortUUIDField()
-    latitude = models.DecimalField(max_digits=6, decimal_places=4)
-    longitude = models.DecimalField(max_digits=7, decimal_places=4)
+    latitude = models.DecimalField(max_digits=8, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
     name = models.CharField(max_length=20)
     short_description = models.TextField(max_length=900)
     recomedations = models.TextField(max_length=900)

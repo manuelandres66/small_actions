@@ -27,7 +27,7 @@ class htmltest(TestCase):
 
 class UserTest(TestCase):
     def setUp(self):
-        self.pepe = User.objects.create_user(username="PEPE", password="hola1234")
+        self.pepe = User.objects.create_user(username="PEPE", password="hola1234", email='pepeemail@gmail.com')
 
     def test_login(self):
         c = Client()
@@ -62,6 +62,23 @@ class UserTest(TestCase):
         self.assertFalse(c.login(username="PEPE", password="hola1234")) #Not old Username
         self.assertTrue(c.login(username="PEPE2", password="hola1234")) #New username
 
+    def test_email(self):
+        c = Client()
+        response = c.post(reverse('forgot'), {'email' : 'pepeemail@gmail.com'}) #Forgot password
+        self.assertEqual(response.status_code, 200)
+
+        #Changing password
+        user = User.objects.get(username='PEPE')
+        response = c.post(reverse('emailink', kwargs={'random_string' : user.random_string}), {'password' : 'hola123456', 'repeat_password' : 'hola1234'}) #Not ok
+        self.assertEqual(response.status_code, 200)
+        esponse = c.post(reverse('emailink', kwargs={'random_string' : user.random_string}), {'password' : 'hola123456', 'repeat_password' : 'hola123456'}) #Ok
+        self.assertEqual(response.status_code, 200) #For some reason it give me 200 and not 302 I dont know why
+
+        log = c.login(username="PEPE", password="hola1234") #Not old
+        self.assertFalse(log)
+        log = c.login(username="PEPE", password="hola123456") #New
+        self.assertTrue(log)
+    
     def test_reset_and_eliminate(self):
         c = Client()
         c.login(username="PEPE", password="hola1234")
