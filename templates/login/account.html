@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+{% extends 'maps/nav.html' %}
 {% load static %}
-<html lang="en">
-    <head>
+  
+    {% block head %}
         <title>Account: {{user.username}}</title>
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
 
         <link href="{% static 'login/css/account.css' %}" rel="stylesheet">
-    </head>
-    {% include 'maps/nav.html' %}
-    <body>
+    {% endblock %}
+     
+    {% block content %}
         <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
             <div id='info'>
                 <div id="title_container">
@@ -69,5 +69,5 @@
             </div>
         </form>
         <script src="{% static 'login/javascript/account.js' %}"></script>
-    </body>
-</html>
+    {% endblock %}
+  

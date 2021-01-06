@@ -1,50 +1,56 @@
-
+<!DOCTYPE html>
 {% load static %}
-<head>
-    <script src="https://kit.fontawesome.com/7c5129238c.js" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+    <head>
+        <script src="https://kit.fontawesome.com/7c5129238c.js" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
-    <link rel="stylesheet" href="{% static 'maps/css/nav.css' %}">
-</head>
-<body>
-    <header id="all_bar">
-        <div id="superior">
-            <img src="{% static 'maps/images/logo.svg' %}" id="principal_logo" alt="logo">
-            <div id="rigth_superior">
-                {% if request.user.is_authenticated %}
-                    <h6>{{request.user.points}} Points</h6>
+        <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
+        <link rel="stylesheet" href="{% static 'maps/css/nav.css' %}">
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <header id="all_bar">
+            <div id="superior">
+                <img src="{% static 'maps/images/logo.svg' %}" id="principal_logo" alt="logo">
+                <div id="rigth_superior">
+                    {% if request.user.is_authenticated %}
+                        <h6>{{request.user.points}} Points</h6>
+                        
+
+                        {% if request.user.photo %}
+                            <a href="{% url 'account' %}"><img src="{{request.user.photo.url}}" alt="account" id="porfile_photo_nav"></a>
+                        {% else %}
+                            <a href="{% url 'account' %}"><img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account"></a>
+                        {% endif %}
                     
-
-                    {% if request.user.photo %}
-                        <a href="{% url 'account' %}"><img src="{{request.user.photo.url}}" alt="account" id="porfile_photo_nav"></a>
                     {% else %}
-                        <a href="{% url 'account' %}"><img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account"></a>
+                        <a href="{% url 'login' %}"><img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account"></a>
                     {% endif %}
-                
-                {% else %}
-                    <a href="{% url 'login' %}"><img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account"></a>
-                {% endif %}
 
-                <i class="fas fa-bars" id="bars"></i>
+                    <i class="fas fa-bars" id="bars"></i>
+                </div>
             </div>
-        </div>
-        <div id="inferior">
-            <nav>
-                <a href="/">Home</a>
-                <a href="/">Organizations</a>
-                <a href="{% url 'SerchPoints' %}">Search Help Points</a>
-                <a href="/">Become an Organization</a>
-                <a href="/">Categories</a>
-                <a href="{% url 'donate' %}">Donate</a>
+            <div id="inferior">
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/">Organizations</a>
+                    <a href="{% url 'SerchPoints' %}">Search Help Points</a>
+                    <a href="/">Become an Organization</a>
+                    <a href="/">Categories</a>
+                    <a href="{% url 'donate' %}">Donate</a>
 
-                {% if request.user.is_authenticated %}
-                <a href="{% url 'logout' %}">Logout</a>
-                {% else %}
-                <a href="{% url 'login' %}">Login</a>
-                {% endif %}
-            </nav>
-        </div>
-        <script src="{% static 'maps/javascript/nav.js' %}"></script>
-    </header>
-</body>
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                </nav>
+            </div>
+            <script src="{% static 'maps/javascript/nav.js' %}"></script>
+        </header>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

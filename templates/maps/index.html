@@ -1,22 +1,21 @@
-<!DOCTYPE html>
+{% extends 'maps/nav.html' %}
 {% load static %}
-<html lang="en">
-    <head>
-        <title>Small Actions</title>
-        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  
+{% block head %}
+    <title>Small Actions</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-        <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-        <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
 
-        <link href="{% static 'maps/css/index.css' %}" rel="stylesheet">
-    </head>
-    {% include 'maps/nav.html' %}
-    <body>
-        <div id="map"></div> 
-        <div id="react"></div>
-        {% csrf_token %}
-        <script src="{% static 'maps/javascript/reactIndex.js' %}" type="text/babel"></script>
-    </body>
-</html>
+    <link href="{% static 'maps/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+    
+{% block content %}
+    <div id="map"></div> 
+    <div id="react"></div>
+    {% csrf_token %}
+    <script src="{% static 'maps/javascript/reactIndex.js' %}" type="text/babel"></script>
+{% endblock %}

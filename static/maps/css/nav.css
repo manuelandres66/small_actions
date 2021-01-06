@@ -7,6 +7,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
 
+html {
+    transition: color 300ms, backgroud-color 300ms;
+}
+
+html[theme='dark-mode'] {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+html[theme='dark-mode'] img{
+    filter: invert(1) hue-rotate(180deg);
+}
+
 #all_bar {
     margin-top: 1vh;
 }

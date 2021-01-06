@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+{% extends 'maps/nav.html' %}
 {% load static %}
-<html lang="en">
-    <head>
+  
+    {% block head %}
         <title>Go to {{point.name}}</title>
 
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
@@ -15,9 +15,9 @@
         />
 
         <link href="{% static 'maps/css/go.css' %}" rel="stylesheet">
-    </head>
-    {% include 'maps/nav.html' %}
-    <body>
+    {% endblock %}
+     
+    {% block content %}
         <h1>We are very happy that you go to {{point.name}}</h1>
 
         <div style="display: none;">
@@ -64,5 +64,5 @@
 
 
         <script src="{% static 'maps/javascript/go.js' %}"></script>
-    </body>
-</html>
+    {% endblock %}
+  

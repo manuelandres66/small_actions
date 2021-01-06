@@ -1,36 +1,35 @@
-<!DOCTYPE html>
+{% extends 'maps/nav.html' %}
 {% load static %}
-<html lang="en">
-    <head>
-        <title>Login | Small Actions</title>
-        <link href="{% static 'login/css/login.css' %}" rel="stylesheet">
-    </head>
-    {% include 'maps/nav.html' %}
-    <body>
-        <div id="for_animation">
-            <div id="sigin">
-                <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="logo">
-                <h1>Sign in</h1>
-                <span>{{error}}</span>
-                <form method="POST">  {% csrf_token %}
-                    <div class="field">
-                        <i class="fas fa-user-circle"></i>
-                        {{form.username}}
-                        <span>{{form.username.errors}}</span>
-                    </div>
-                    <div class="field">
-                        <i class="fas fa-lock"></i>
-                        {{form.password}}
-                        <span>{{form.password.errors}}</span>
-                    </div>
-                    <input type="hidden" value="{{request.GET.next}}" name="next">
-                    <input type="submit" value="Log In" id="submit">
-                </form>
-            </div>
-            <div id="links">
-                <a href="{% url 'forgot' %}">Forgot Password?</a>
-                <a id="register" href="{% url 'register'%}">REGISTER HERE</a>
-            </div>
+  
+{% block head %}
+    <title>Login | Small Actions</title>
+    <link href="{% static 'login/css/login.css' %}" rel="stylesheet">
+{% endblock %}
+    
+{% block content %}
+    <div id="for_animation">
+        <div id="sigin">
+            <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="logo">
+            <h1>Sign in</h1>
+            <span>{{error}}</span>
+            <form method="POST">  {% csrf_token %}
+                <div class="field">
+                    <i class="fas fa-user-circle"></i>
+                    {{form.username}}
+                    <span>{{form.username.errors}}</span>
+                </div>
+                <div class="field">
+                    <i class="fas fa-lock"></i>
+                    {{form.password}}
+                    <span>{{form.password.errors}}</span>
+                </div>
+                <input type="hidden" value="{{request.GET.next}}" name="next">
+                <input type="submit" value="Log In" id="submit">
+            </form>
         </div>
-    </body>
-</html>
+        <div id="links">
+            <a href="{% url 'forgot' %}">Forgot Password?</a>
+            <a id="register" href="{% url 'register'%}">REGISTER HERE</a>
+        </div>
+    </div>
+{% endblock %}

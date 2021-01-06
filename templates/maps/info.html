@@ -1,58 +1,57 @@
-<!DOCTYPE html>
+{% extends 'maps/nav.html' %}
 
 {% load static %}
-<html lang="en">
-    <head>
-        <title>{{point.name}} | Small Actions</title>
-        <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-        <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+  
+{% block head %}
+    <title>{{point.name}} | Small Actions</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
 
-        <link href="{% static 'maps/css/info.css' %}" rel="stylesheet">
-    </head>
-    {% include 'maps/nav.html' %}
-    <body>
-        <div id="grid_all">
-            <div id="all_info">
-                <h1>{{point.name}}</h1>
-                <div id="map_container">
-                    <span id="longitude">{{point.longitude}}</span>
-                    <span id="latitude">{{point.latitude}}</span>
-                    <div id="map"></div>
-                    <p>{{point.short_description}}</p>
-                </div>
-                <div id="go">
-                    <a href="{% url 'go' point.uuid %}">
-                        <i class="fas fa-circle"></i>
-                        <h4>Go there!</h4>
-                    </a>
-                    <h4 id="category">{{point.category}}</h4>
-                </div>
-                <div id="recomedations">
-                    <p>{{point.recomedations}}</p>
-                </div>
+    <link href="{% static 'maps/css/info.css' %}" rel="stylesheet">
+{% endblock %}
+    
+{% block content %}
+    <div id="grid_all">
+        <div id="all_info">
+            <h1>{{point.name}}</h1>
+            <div id="map_container">
+                <span id="longitude">{{point.longitude}}</span>
+                <span id="latitude">{{point.latitude}}</span>
+                <div id="map"></div>
+                <p>{{point.short_description}}</p>
             </div>
-            <div id="organization_info">
-                <h3>{{point.organization.name}}</h3>
-                <div>
-                    <i class="fas fa-circle" id="frist"></i>
-                    <img src="{{point.organization.circular_icon.url}}">
-                </div>
-                <div id="org_info">   
-                    <p id="org_descrp">{{point.organization.short_description}}</p>
-                    <p id="org_quote">“{{point.organization.quote}}”</p>
-                </div>
-
+            <div id="go">
+                <a href="{% url 'go' point.uuid %}">
+                    <i class="fas fa-circle"></i>
+                    <h4>Go there!</h4>
+                </a>
+                <h4 id="category">{{point.category}}</h4>
+            </div>
+            <div id="recomedations">
+                <p>{{point.recomedations}}</p>
             </div>
         </div>
-        <div id="images">
-            {% for photo in point.photos.all %}
-                <img src="{{photo.photo.url}}" class="slice" alt="slice">
-            {% endfor %}
-            {% for photo in point.photos.all %}
-                <img src="{{photo.photo.url}}" class="slice" alt="slice">
-            {% endfor %}
+        <div id="organization_info">
+            <h3>{{point.organization.name}}</h3>
+            <div>
+                <i class="fas fa-circle" id="frist"></i>
+                <img src="{{point.organization.circular_icon.url}}">
+            </div>
+            <div id="org_info">   
+                <p id="org_descrp">{{point.organization.short_description}}</p>
+                <p id="org_quote">“{{point.organization.quote}}”</p>
+            </div>
+
         </div>
-        <script src="{% static 'maps/javascript/singleMap.js' %}"></script>
-        <script src="{% static 'maps/javascript/slicer.js' %}"></script>
-    </body>
-</html>
+    </div>
+    <div id="images">
+        {% for photo in point.photos.all %}
+            <img src="{{photo.photo.url}}" class="slice" alt="slice">
+        {% endfor %}
+        {% for photo in point.photos.all %}
+            <img src="{{photo.photo.url}}" class="slice" alt="slice">
+        {% endfor %}
+    </div>
+    <script src="{% static 'maps/javascript/singleMap.js' %}"></script>
+    <script src="{% static 'maps/javascript/slicer.js' %}"></script>
+{% endblock %}

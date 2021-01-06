@@ -1,43 +1,42 @@
-<!DOCTYPE html>
+{% extends 'maps/nav.html' %}
 {% load static %}
-<html lang="en">
-    <head>
-        <title>Ranking Points</title>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link href="{% static 'login/css/ranking.css' %}" rel="stylesheet">
-    </head>
-    {% include 'maps/nav.html' %}
-    <body>
-        <div>
-            <h1>Ranking: People with more Points</h1>
-            <div id='superior_grid'>
-                <div id='frist_place'>
-                    <i class="fas fa-medal"></i>
-                    <h2>{{frist.0.username}}</h2>
-                    <span>{{frist.0.points}} Points</span>
-                </div>
-                <div id='second_place' class="other_place">
-                    <i class="fas fa-medal"></i>
-                    <h3>{{frist.1.username}}</h3>
-                    <span>{{frist.1.points}} Points</span>
-                </div>
-                <div id='third_place' class="other_place">
-                    <i class="fas fa-medal"></i>
-                    <h4>{{frist.2.username}}</h4>
-                    <span>{{frist.2.points}} Points</span>
-                </div>
+  
+{% block head %}
+    <title>Ranking Points</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="{% static 'login/css/ranking.css' %}" rel="stylesheet">
+{% endblock %}
+    
+{% block content %}
+    <div>
+        <h1>Ranking: People with more Points</h1>
+        <div id='superior_grid'>
+            <div id='frist_place'>
+                <i class="fas fa-medal"></i>
+                <h2>{{frist.0.username}}</h2>
+                <span>{{frist.0.points}} Points</span>
             </div>
-            {% csrf_token %}
-            <div id='mayor'>
-                <div id='headers'>
-                    <h4>Position</h4>
-                    <h4>Username</h4>
-                    <h4>Points</h4>
-                </div>
+            <div id='second_place' class="other_place">
+                <i class="fas fa-medal"></i>
+                <h3>{{frist.1.username}}</h3>
+                <span>{{frist.1.points}} Points</span>
             </div>
-            <span id="ranking" style="display: none;">{{ranking}}</span>
-            <span id="username" style="display: none;">{{request.user.username}}</span>
-            <script src="{% static 'login/javascript/ranking.js' %}"></script>
+            <div id='third_place' class="other_place">
+                <i class="fas fa-medal"></i>
+                <h4>{{frist.2.username}}</h4>
+                <span>{{frist.2.points}} Points</span>
+            </div>
         </div>
-    </body>
-</html>
+        {% csrf_token %}
+        <div id='mayor'>
+            <div id='headers'>
+                <h4>Position</h4>
+                <h4>Username</h4>
+                <h4>Points</h4>
+            </div>
+        </div>
+        <span id="ranking" style="display: none;">{{ranking}}</span>
+        <span id="username" style="display: none;">{{request.user.username}}</span>
+        <script src="{% static 'login/javascript/ranking.js' %}"></script>
+    </div>
+{% endblock %}
