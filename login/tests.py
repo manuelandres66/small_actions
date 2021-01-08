@@ -4,7 +4,6 @@ from django.contrib.auth import logout, authenticate, login
 from django.shortcuts import reverse
 # Create your tests here.
 from .models import User
-
 import json
 
 class htmltest(TestCase):
@@ -149,4 +148,3 @@ class ApiTest(TestCase):
                 'points' : 3
             }
         ])
-

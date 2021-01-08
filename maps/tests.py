@@ -109,3 +109,29 @@ class apitest(TestCase):
         new_points = User.objects.get(username=self.user.username).points
         self.assertEqual(new_points, 10)
 
+    def test_places(self):
+        user = User.objects.get(username='PEPE')
+
+        user.visited.add(self.example)
+        user.visited.add(self.second_example)
+        user.save()
+
+        c = Client()
+        c.login(username="PEPE", password="hola1234")
+        response = c.get(reverse('Apiplaces'))
+        data = json.loads(response.content)
+        self.assertEqual(data, {'places' : [
+            {
+                'name' : 'Cole',
+                'latitude' : '1.215000',
+                'longitude' : '-77.276000',
+                'url' : reverse('info', kwargs={'uuid' : self.example.uuid})
+            },
+            {
+                'name' : 'Exito',
+                'latitude' : '1.215000',
+                'longitude' : '-77.279000',
+                'url' : reverse('info', kwargs={'uuid' : self.second_example.uuid})
+            }
+        ]})
+

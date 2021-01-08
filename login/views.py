@@ -204,7 +204,7 @@ def forgot_password(request):
             if len(results) > 0:
                 #Configure for url
                 user = results[0]
-                print(user.email)
+
                 user.date_forgot = timezone.now() + timedelta(minutes=15)
                 letters = string.ascii_letters
                 user.random_string = ''.join(random.choice(letters) for i in range(20))
@@ -263,6 +263,6 @@ def api_places(request):
             'longitude' : place.longitude,
             'url' : reverse('info', kwargs={'uuid' : place.uuid})
         })
-    print(response)
+
     return JsonResponse(response, status=200)
     
