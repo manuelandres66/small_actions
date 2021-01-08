@@ -31,7 +31,7 @@ class ChangeUser(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'latitude', 'longitude', 'photo')
+        fields = ('email', 'latitude', 'longitude', 'photo', 'dark_mode')
 
 class FormPassword(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password'}))

@@ -5,6 +5,10 @@ h1 {
     margin-top: 3vh;
 }
 
+html[theme='dark-mode'] .place i {
+    filter: invert(1) hue-rotate(180deg);
+}
+
 #superior_grid {
     margin-top: 5vh;
     display: grid;
@@ -31,7 +35,7 @@ h1 {
 }
 
 #frist_place h2 {
-    font-size: 30px;
+    font-size: 30px; 
     display: inline-block;
     margin-left: 2vw;
     font-weight: 600;

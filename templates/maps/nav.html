@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static %}
+{% load static %} 
 <html lang="en">
     <head>
         <script src="https://kit.fontawesome.com/7c5129238c.js" crossorigin="anonymous"></script>
@@ -52,5 +52,11 @@
         </header>
         {% block content %}
         {% endblock %}
+
+        {% if request.user.dark_mode %}
+        <script>
+            document.querySelector('html').setAttribute('theme', 'dark-mode')
+        </script>
+        {% endif %}
     </body>
 </html>
