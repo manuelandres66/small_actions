@@ -13,7 +13,7 @@ const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [longitude, latitude], // starting position
-    zoom: 10, // starting zoom
+    zoom: 3, // starting zoom
 });
 
 const track =  new mapboxgl.GeolocateControl({
@@ -26,6 +26,25 @@ const track =  new mapboxgl.GeolocateControl({
 map.addControl(new mapboxgl.NavigationControl());
 map.addControl(track, 'top-left');
 
+const parameters = {
+    closeOnClick: true,
+    closeButton: false,
+};
+
+fetch('/account/api/account')  
+.then(response => response.json())
+.then(data => {
+    data.places.forEach(place => {
+        console.log(place)
+        const popup = new mapboxgl.Popup(parameters).setHTML(`<h4>${place.name}</h4><a href="${place.url}">Visite Place</a>`);
+        new mapboxgl.Marker({
+            color: '#ff3a3a'
+        })
+        .setLngLat([place.longitude, place.latitude])
+        .setPopup(popup)
+        .addTo(map);
+    })
+});
 
 //Change to inputs
 
@@ -36,7 +55,6 @@ const email = document.querySelector('h4');
 const latitudeObject = document.getElementById('latitude');
 const longitudeObject = document.getElementById('longitude');
 let inArray = [title, email, latitudeObject, longitudeObject];
-console.log(inArray)
 const changeLink = document.querySelector('#change');
 
 const inputs = document.querySelectorAll('input');

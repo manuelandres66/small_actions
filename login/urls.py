@@ -15,4 +15,5 @@ urlpatterns = [
     path('password/eliminate', views.eliminate, name='eliminate'),
 
     path('api/ranking', views.ranking_api, name="RankingAPI"),
+    path('api/account', views.api_places, name='Apiplaces'),
 ] 

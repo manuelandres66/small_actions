@@ -249,5 +249,20 @@ def email_link(request, random_string):
 
     return redirect(reverse('account'))
 
-
-
+@login_required(login_url='/account/login')
+def api_places(request):
+    if request.method != "GET":
+        return JsonResponse({'error' : 'The request must be GET'}, status=400)
+    
+    user = User.objects.get(username=request.user.username)
+    response = {'places' : []}
+    for place in user.visited.all():
+        response['places'].append({
+            'name' : place.name,
+            'latitude' : place.latitude,
+            'longitude' : place.longitude,
+            'url' : reverse('info', kwargs={'uuid' : place.uuid})
+        })
+    print(response)
+    return JsonResponse(response, status=200)
+    
