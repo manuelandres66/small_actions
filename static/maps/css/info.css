@@ -280,6 +280,11 @@ span {
     }
 
     #images {
-        display: none;
+        margin: 0;
     }
+
+    .slice {
+        height: 20vh;
+    }
+
 }

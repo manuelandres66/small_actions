@@ -85,10 +85,10 @@ body {
 
 @keyframes fromLeft {
     from {
-        left: 10vw;
+        transform: translate(20vw);
     }
     to {
-        left: 0;
+        left: translate(0);;
     }
 }
  
@@ -116,23 +116,19 @@ body {
 
 @keyframes fromLeftImg {
     0% {
-        left: 20vw;
-        transform: rotate(180deg);
+        transform: translate(20vw) rotate(180deg);
     }
     100% {
-        left: 0;
-        transform: rotate(0);
+        transform: translate(0) rotate(0);
     }
 }
 
 @keyframes fromLeftImgResponsive {
     0% {
-        left: 50vw;
-        transform: rotate(180deg);
+        transform: translate(50vw) rotate(180deg);
     }
     100% {
-        left: 0;
-        transform: rotate(0);
+        transform: translate(0) rotate(0);
     }
 }
 
@@ -142,8 +138,7 @@ body {
     margin: auto;
     margin-left: 4vw;
     margin-top: 1.8vh;
-    position: relative;
-    left: 20vw;
+    transform: translate(20vw);
 
     animation-name: fromLeftImg;
     animation-duration: 2s;
@@ -229,7 +224,7 @@ body {
         width: 25.5vw;
         margin-left: 7vw;
         margin-top: 3.83vh;
-        left: 50vw;
+        transform: translate(50vw);
         animation-name: fromLeftImgResponsive;
     }
 }

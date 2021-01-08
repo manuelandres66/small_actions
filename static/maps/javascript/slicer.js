@@ -12,9 +12,9 @@ imgesSlice.forEach(image => {
 
 const moveLeft = () => {
     counter -= leftStep;
-    divImg.style.left = `${counter}vw`;
+    divImg.style.transform = `translate(${counter}vw)`; //Transform not left
 
-    if (counter <= -120) {
+    if (counter <= -120) { 
         counter = 0;
     };
 };

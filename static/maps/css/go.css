@@ -135,18 +135,17 @@ form span {
 /* Animations */
 @keyframes appear {
      0% {
-          left: 80vw;
+          transform: translate(80vw);
           opacity: 0;
      }
      100% {
-          left: 0;
+          transform: translate(0);
           opacity: 1;
      }
 }
 
-li {
-     left: 80vw;
-     
+#ol li {
+     transform: translate(80vw);
      animation-name: appear;
      animation-duration: 2s;
      animation-fill-mode: forwards;

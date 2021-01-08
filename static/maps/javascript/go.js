@@ -41,10 +41,19 @@ map.on('load', function () {
     //Si el usuario tiene cordenadas, las ponemos de origen
     if (userLat != '' & userLong != '') {
         userLat = parseFloat(userLat);
-        userLong = parseFloat(userLong);
+        userLong = parseFloat(userLong); 
         directions.setOrigin([userLong, userLat]);
     };
 })
+
+const track = new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+});
+
+map.addControl(track, 'top-right');
 
 map.addControl(directions, 'top-left');
 
