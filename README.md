@@ -41,3 +41,15 @@ I still don't have a domain, so you have to run `python manage.py runserver`
 Once run, the main app has a Mapbox map, when you click a (temporary fictional) place, the left react component changes and give you two buttons, the more info, and the view route buttons.
 
 **_Recommendation_: Search for a real place, the "Banco de Alimentos" a place in Madrid, Spain**
+
+* **The info page:**
+Shows all the info, recommendations, photos, and organization info of a place
+
+* **The route page:**
+In there you can enter a code and the instructions to get the code, if you're logged in and the code it's right, you will earn points. It also has a map with the directions to go there from your save location if you're logged in or allows you to choose a location.
+
+* **The Account page:**
+There you can see and modify your account, also see the ranking of points with all the other users.
+
+## Additional information
+I want to improve this page in the future and make it professional for a serious project so please don't share any information about this.
