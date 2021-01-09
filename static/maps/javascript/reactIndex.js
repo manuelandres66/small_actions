@@ -160,7 +160,7 @@ class App extends React.Component {
 
             <div id="button">
                 <a href={this.state.uuid}><button id="more_info">More Info</button></a>
-                <a href={this.state.url}><button id="view_rute">View Rute</button></a>
+                <a href={this.state.url}><button id="view_rute">View Route</button></a>
             </div>
         </div>
       );
