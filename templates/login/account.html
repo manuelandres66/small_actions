@@ -27,7 +27,7 @@
                         {{form.email.errors}}
                     </div>
                     <div>
-                        <h5 id="coordinates_title">Cordinates:</h5>
+                        <h5 id="coordinates_title">Coordenadas:</h5>
                         <h5 id="cordiantes">
                             <span id="latitude">{{user.latitude}}</span>
                             {{form.latitude}} 
@@ -37,12 +37,12 @@
                         </h5>
                         {{form.latitude.errors}}
                         {{form.longitude.errors}}
-                        <p id="security"><i class="fas fa-lock"></i>Only you can see this</p>
+                        <p id="security"><i class="fas fa-lock"></i>Solo tu puedes ver esto</p>
                     </div>
                 </div>
                 <img src="{% static 'login/images/account.png' %}" alt='person' id="person">
                 <div>
-                    <h6 id="where">Where you help:</h6>
+                    <h6 id="where">Donde ayudaste:</h6>
                     <div id="map"></div>
                 </div>
 
@@ -59,12 +59,12 @@
                 </div>
 
                 <div id="links_links">
-                    <a id="change">Change Info</a>
-                    <a href="{% url 'password' 1 %}">Reset password</a>
-                    <a>Customer Support</a>
-                    <a href="{% url 'ranking' %}">View Ranking</a>
-                    <a class="danger" href="{% url 'password' 2 %}">Eliminate Account</a>
-                    <a id="report" class="danger">Report another account or organization</a>
+                    <a id="change">Cambiar Info.</a>
+                    <a href="{% url 'password' 1 %}">Cambiar Contraseña</a>
+                    <a>Atención al cliente</a>
+                    <a href="{% url 'ranking' %}">Ver Ranking</a>
+                    <a class="danger" href="{% url 'password' 2 %}">Eliminar Cuenta</a>
+                    <a id="report" class="danger">Reportar otra cuenta u organización</a>
                 </div>
             </div>
         </form>

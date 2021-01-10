@@ -4,10 +4,10 @@ class App extends React.Component {
     constructor (props){
         super(props)
         this.state = {
-            name: "Welcome to Small Actions!",
-            type: 'Help Web',
+            name: "¡Bienvenido a Small Actions!",
+            type: 'Web de ayuda',
             organization: 'Small Actions',
-            description: "Lorem ipsum dolor sit amet consectetur adipiscing, elit aenean nisl litora donec, blandit sociosqu venenatis ad sollicitudin. Congue nunc non diam morbi posuere, venenatis torquent quis conubia. Rutrum blandit felis praesent cubilia euismod tortor cras, non massa duis proin fusce lacus metus, ultricies primis varius urna penatibus iaculis. Scelerisque ornare iaculis molestie vehicula nec morbi ultricies dictumst, sagittis velit sodales facilisis orci enim primis tortor vestibulum, penatibus litora cum conubia tellus platea ullamcorper. Dapibus inceptos lectus nulla vitae ligula lacinia interdum sem quisque dictum faucibus, tempor eleifend nam phasellus conubia enim mauris ut morbi praesent. Volutpat aliquam nibh conubia turpis quam primis fames, montes iaculis sollicitudin nisl magna accumsan, pellentesque gravida aptent vestibulum nisi lectus. Parturient lectus fringilla inceptos tellu.",
+            description: "Bienvenido a Small Actions una página web sobre ayudar a los demás, para iniciar, da click en un sitio en el mapa de tu izquierda, esta sección cambiará con la información del lugar, y los botones de abajo te llevarán a páginas con más información o con la ruta para visitar el lugar. Por favor haz una cuenta antes de nada para guardar tu progreso. ¡Ayuda a los demás y gana puntos!",
             url: "#",
             uuid: "#"
         };
@@ -53,10 +53,7 @@ class App extends React.Component {
             //Fullscreen
             map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
 
-            const parameters = {
-                closeOnClick: true,
-                closeButton: false,
-            };
+
 
             // Agregando puntos
 
@@ -81,6 +78,13 @@ class App extends React.Component {
             });
 
             map.on('load', () => {
+                 //Change Lenguage
+                map.setLayoutProperty('country-label', 'text-field', [
+                    'get',
+                    "name_es"
+                ]);
+
+                //Points
                 map.loadImage(
                     '/static/maps/images/point.png',
                     (error, image) => {
@@ -147,8 +151,8 @@ class App extends React.Component {
                 <h1>{this.state.name}</h1>
                 <div id="grid_info">
                     <div className="info_grid">
-                        <h6>Type:</h6>
-                        <h6>Organization:</h6>
+                        <h6>Categoria:</h6>
+                        <h6>Organización:</h6>
                     </div>
                     <div className="info_grid" id="info_type">
                         <h6>{this.state.type}</h6>
@@ -159,8 +163,8 @@ class App extends React.Component {
             </div>
 
             <div id="button">
-                <a href={this.state.uuid}><button id="more_info">More Info</button></a>
-                <a href={this.state.url}><button id="view_rute">View Route</button></a>
+                <a href={this.state.uuid}><button id="more_info">Información</button></a>
+                <a href={this.state.url}><button id="view_rute">Ver Ruta</button></a>
             </div>
         </div>
       );

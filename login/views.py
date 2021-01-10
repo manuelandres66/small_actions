@@ -33,7 +33,7 @@ def entry(request):
                     return redirect(request.POST['next'])
                 return redirect(reverse('index'))
             else:
-                error = "The username and password you entered don't match"
+                error = "El usuario o contraseña son incorrectos"
 
     return render(request, 'login/login.html', {'form' : form, 'error' : error})
 
@@ -82,7 +82,7 @@ def repassword(request, re):
                 user.save()
                 return redirect(reverse('eliminate' if re == 2 else 'reset_password'))
             else:
-                error = "It's not your password"
+                error = "No coincide con tu contraseña"
 
     return render(request, 'login/repassword.html', {'form' : form, 'error' : error})
 
@@ -103,7 +103,7 @@ def reset_password(request):
 
                     return redirect(reverse('account'))
                 else:
-                    error = "Passwords don't match"
+                    error = "Las contraseñas no coinciden"
 
         return render(request, 'login/reset_password.html', {'form' : form, 'error' : error})
     else:
@@ -149,7 +149,7 @@ def register(request):
     
                 return redirect(reverse('login'))
             else:
-                error = "Passwords don't match"
+                error = "Las contraseñas no coinciden"
 
     return render(request, 'login/register.html', {'form' : form, 'error':error})
 
@@ -214,8 +214,8 @@ def forgot_password(request):
                 link = 'http://127.0.0.1:8000' + reverse('emailink', kwargs={'random_string' : user.random_string})
                 html_message = render_to_string('login/email.html', {'link': link})
 
-                send_mail('Forgot password?',
-                f"Please enter to this url: {link}",
+                send_mail('¿Olvidaste tu contraseña?',
+                f"Por favor ingresa a este link: {link}",
                 settings.EMAIL_HOST_USER,
                 [user.email],
                 html_message=html_message,
@@ -243,7 +243,7 @@ def email_link(request, random_string):
                         user.save()
                         return redirect(reverse('account'))
                     else:
-                        error = "Passwords don't match"
+                        error = "Las contraseñas no coinciden"
 
             return render(request, 'login/reset_password.html', {'form' : form, 'error' : error})
 

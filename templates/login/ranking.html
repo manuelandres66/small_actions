@@ -2,14 +2,14 @@
 {% load static %}
   
 {% block head %}
-    <title>Ranking Points</title>
+    <title>Ranking de Puntos</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="{% static 'login/css/ranking.css' %}" rel="stylesheet">
 {% endblock %}
     
 {% block content %}
     <div>
-        <h1>Ranking: People with more Points</h1>
+        <h1>Ranking: Personas con más Puntos</h1>
         <div id='superior_grid'>
             <div id='frist_place' class="place">
                 <i class="fas fa-medal"></i>
@@ -30,9 +30,9 @@
         {% csrf_token %}
         <div id='mayor'>
             <div id='headers'>
-                <h4>Position</h4>
-                <h4>Username</h4>
-                <h4>Points</h4>
+                <h4>Posición</h4>
+                <h4>Usuario</h4>
+                <h4>Puntos</h4>
             </div>
         </div>
         <span id="ranking" style="display: none;">{{ranking}}</span>

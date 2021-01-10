@@ -57,9 +57,9 @@ def go(request, uuid):
 
                     return redirect('/') #Redirect
                 else:
-                    code_error = 'Invalid Code'
+                    code_error = 'Codigo Invalido'
         else:
-            login_error = 'You are not authenticated, please log in'
+            login_error = 'No estás autenticado, por favor inicia sesión'
 
     ctx = {'point' : help_point, 'form' : form, 'login_error' : login_error, 'error' : code_error}
     return render(request, 'maps/go.html', ctx)

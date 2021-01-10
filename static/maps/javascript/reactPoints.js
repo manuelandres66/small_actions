@@ -47,7 +47,7 @@ class App extends React.Component {
         return (
             <div>
                 <div id="searchBar">
-                    <input type="text" id="search" onChange={this.search} autoComplete="off" placeholder="Search Help Points"/>
+                    <input type="text" id="search" onChange={this.search} autoComplete="off" placeholder="Buscar Lugares"/>
                     <div id="search_container">
                         <i className="fas fa-search" id="search"></i>
                     </div>

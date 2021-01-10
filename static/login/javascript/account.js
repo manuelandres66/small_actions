@@ -36,7 +36,8 @@ fetch('/account/api/account')
 .then(data => {
     data.places.forEach(place => {
         console.log(place)
-        const popup = new mapboxgl.Popup(parameters).setHTML(`<h4>${place.name}</h4><a href="${place.url}">Visite Place</a>`);
+        const popup = new mapboxgl.Popup(parameters).setHTML(`<h4>${place.name}</h4>
+        <a href="${place.url}">Visitar el lugar</a>`);
         new mapboxgl.Marker({
             color: '#ff3a3a'
         })
@@ -63,7 +64,7 @@ inputs.forEach(input => input.style.display = 'none');
 changeLink.addEventListener('click', () => {
     if (countClick % 2 == 0) {
         //Change link iner html
-        changeLink.innerHTML = 'Submit Changes';
+        changeLink.innerHTML = 'Guardar Cambios';
         for (let i = 1; i < inputs.length - 1; i++) {
             inputs[i].setAttribute('value', inArray[i-1].innerHTML);
         };

@@ -1,7 +1,7 @@
 {% extends 'maps/nav.html' %}
 
 {% block head %}
-    <title>Forgot Password</title>
+    <title>Recuperar Cuenta</title>
     <style>
         h1 {
             text-align: center;
@@ -58,15 +58,15 @@
      
 {% block content %}
     <div>
-        <h1>Enter your email:</h1>
+        <h1>Ingresa tu email:</h1>
         <form method="POST"> {% csrf_token %}
             {{form.email}}
             {{form.email.errors}}
             <input type="submit" value="Send Email">
         </form>
         {% if succes %}
-            <p>The Email was sent <i class="fas fa-check"></i></p>
-            <a href="{% url 'login' %}" id="return">Return login</a>
+            <p>El correo fue enviado <i class="fas fa-check"></i></p>
+            <a href="{% url 'login' %}" id="return">Volver a ingresar</a>
         {% endif %}
     </div>
 {% endblock %}

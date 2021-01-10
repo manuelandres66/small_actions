@@ -220,10 +220,11 @@ form span {
 
      #recomendations p {
           font-size: 12px;
-          width: 60vw;
+          width: 50vw;
      }
 
      #recomendations i {
-          font-size: 112px;
+          font-size: 150px;
+          margin-top: 15px;
      }
 }

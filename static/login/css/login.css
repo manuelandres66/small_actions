@@ -76,7 +76,7 @@ span {
 #links {
     margin-left: 36.5vw;
     width: 27vw;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     margin-top: 2vh;
 }
@@ -177,15 +177,9 @@ body {
          margin-left: 10vw;
          width: 80vw;
          margin-bottom: 5vh;
+         font-size: 12px;
     }
 
-    #links a {
-        font-size: 15px;
-    }
-
-    #register {
-        margin-top: 1vh;
-    }
 
     span {
         font-size: 10px;

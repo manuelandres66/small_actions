@@ -18,7 +18,7 @@
     {% endblock %}
      
     {% block content %}
-        <h1>We are very happy that you go to {{point.name}}</h1>
+        <h1>¡Estamos muy contentos de que visites {{point.name}}!</h1>
 
         <div style="display: none;">
             <span id="latitude">{{point.latitude}}</span>
@@ -31,13 +31,13 @@
             <div id="map"></div>
 
             <div id='code'>
-                <h2>How to get Points</h2>
+                <h2>Como conseguir puntos</h2>
                 <ol id="ol">
-                    <li id='first_li'> Go to {{point.name}} <i class="fas fa-map-signs"></i></li>
-                    <li id='second_li'> Help Each Other <i class="fas fa-hands-helping"></i></li>
-                    <li id='third_li'> Ask for a code <i class="fas fa-file-alt" id='last_icon'></i></li>
+                    <li id='first_li'> Ve a {{point.name}}<i class="fas fa-map-signs"></i></li>
+                    <li id='second_li'> Ayuda a los demás<i class="fas fa-hands-helping"></i></li>
+                    <li id='third_li'> Pide un código<i class="fas fa-file-alt" id='last_icon'></i></li>
                 </ol>  
-                <h3>4. Enter the code</h3>
+                <h3>4. Ingresa el código</h3>
                         
                 <form action="" method="POST"> {% csrf_token %} 
                     {{form.first}}
@@ -53,10 +53,10 @@
         
             <div id='recomendations'>
                 <p>
-                    If you are not logged, please do it to get the points, and also to automatically get the origin marker.  
-                    Considers that you go there to help, not to get points.  
-                    The organization can ban you from the web if you don’t obey the rules of the site or 
-                    go there with another intention more than help, please be nice.
+                    Si no haz ingresado, por favor hazlo para poder ganar puntos así como para poder obtener automáticamente el origen de la ruta. 
+                    Considera que vas ahí para ayuda no a obtener puntos. 
+                    La organización puede reportarte y quitarte la cuenta si no obedeces las reglas del lugar o 
+                    si vas con otras intenciones distintas a ayudar, por favor, se amable.
                 </p>
                 <i class="fas fa-route"></i>
             </div>

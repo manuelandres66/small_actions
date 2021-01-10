@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Eliminate: {{request.user}}</title>
+        <title>Eliminar: {{request.user}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             * {
@@ -47,15 +47,15 @@
         </style>
     </head>
     <body>
-        <h1>Are you sure you want to eliminate {{request.user}} account?</h1>
+        <h1>¿Estás seguro que quiere eliminar la cuenta {{request.user}}?</h1>
         <form method="POST"> {% csrf_token %}
             <input type="hidden" value="yes" name="answer">
-            <input type="submit" value="Yes, I'm Sure" id="sure">
+            <input type="submit" value="Sí, estoy seguro" id="sure">
         </form>
         <form method="POST"> {% csrf_token %}
             <input type="hidden" value="no" name="answer">
-            <input type="submit" value="No, I'm not">
+            <input type="submit" value="No, no lo estoy">
         </form>
-        <p>If you say yes, your account will no longer exist, your points, ranking, and personal info like email, username, coordinates, and Help points will be eliminated, and you will not be able to recreate the account.</p>
+        <p>Si dices que si, tu cuenta no existirá más, tus puntos, ranking, e información personal como email, usuario, coordenadas, y lugar donde ayudaste serán eliminados y no podrás recuperar tu cuenta jamás.</p>
     </body>
 </html>
