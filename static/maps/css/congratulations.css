@@ -1,0 +1,214 @@
+#content {
+    margin-top: 8vh;
+    margin-left: 23vw;
+    width: 54vw;
+}
+
+@keyframes font {
+    0% {
+        font-size: 70px;
+    }
+
+    20% {
+        font-size: 70px;
+    }
+
+    30% {
+        font-size: 80px;
+    }
+
+    40% {
+        font-size: 70px;
+    }
+}
+
+h1 {
+    text-align: center;
+    color: #00bb2d;
+    font-size: 70px;
+    font-weight: 700;
+    animation-name: font;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+h2 {
+    text-align: center;
+    color: #00bb2d;
+    font-size: 50px;
+    font-weight: 500;
+    margin-top: 8vh;
+}
+
+@keyframes upgrade {
+    0% {
+        transform: translate(0);
+    }
+
+    40% {
+        transform: translate(0);
+    }
+
+    50% {
+        transform: translate(0, -1vh);
+    }
+
+    60% {
+        transform: translate(0, -0.5vh);
+    }
+
+    70% {
+        transform: translate(0, -1vh);
+    }
+
+    80% {
+        transform: translate(0);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+
+}
+
+h2 i {
+    margin-left: 1vw;
+    animation-name: upgrade;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+#content div {
+    margin-top: 4vh;
+}
+
+h3, h4 {
+    display: inline-block;
+    font-size: 40px;
+    color: #00bb2d;
+    font-weight: 500;
+}
+
+@keyframes rotate {
+    30% {
+        transform: rotate(0) scale(1,1);
+    }
+
+    35% {
+        transform: rotate(0) scale(1.5, 1.5);
+    }
+
+    40% {
+        transform: rotate(0) scale(1, 1);
+    }
+
+    80% {
+        transform: rotate(420deg) scale(1, 1);
+    }
+
+    95% {
+        transform: rotate(360deg) scale(1,1);
+    }
+    95.00001% {
+        transform: rotate(0) scale(1,1);
+    }
+
+}
+
+h3 i {
+    margin-left: 1vw;
+    animation-name: rotate;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+h4 {
+    float: right;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1,1);
+    }
+
+    35% {
+        transform: scale(1,1);
+    }
+
+    40% {
+        transform: scale(1.5,1.5);
+    }
+
+    45% {
+        transform: scale(1,1);
+    }
+
+    50% {
+        transform: scale(1.5,1.5);
+    }
+
+    55% {
+        transform: scale(1,1);
+    }
+}
+
+h4 i {
+    margin-left: 1vw;
+    animation-name: scale;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+button {
+    cursor: pointer;
+    width: 100%;
+    margin-top: 8vh;
+    font-size: 35px;
+    color: #ffffff;
+    background-color: #ff3a3a;
+    border: none;
+    border-radius: 50px;
+    padding: 0.5vh 0;
+}
+
+@media screen and (max-width: 1190px) {
+    #content {
+        margin-left: 2vw;
+        width: 94vw;
+        margin-top: 15vh;
+    }
+
+    @keyframes font {
+        0% {
+            font-size: 30px;
+        }
+    
+        20% {
+            font-size: 30px;
+        }
+    
+        30% {
+            font-size: 40px;
+        }
+    
+        40% {
+            font-size: 30px;
+        }
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 25px;
+    }
+
+    h3, h4 {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 25px;
+    }
+}

@@ -48,14 +48,17 @@ def go(request, uuid):
                     
                     help_point.temporal_code = f"{first}-{second}-{third}".upper()
                     help_point.save()
+                    old_ranking = request.user.get_ranking()
 
                     #Get Points
                     current_user = User.objects.get(username=request.user.username)
                     current_user.points += help_point.points_for_completed
                     current_user.visited.add(help_point)
                     current_user.save()
+                    new_ranking = current_user.get_ranking()
+                    print(old_ranking, new_ranking)
 
-                    return redirect('/') #Redirect
+                    return redirect(reverse('congratulations') + f'?i={old_ranking - new_ranking}&p={help_point.points_for_completed}') #Redirect
                 else:
                     code_error = 'Codigo Invalido'
         else:
@@ -63,6 +66,11 @@ def go(request, uuid):
 
     ctx = {'point' : help_point, 'form' : form, 'login_error' : login_error, 'error' : code_error}
     return render(request, 'maps/go.html', ctx)
+
+def congratulations(request):
+    improve = request.GET['i']
+    points = request.GET['p']
+    return render(request, 'maps/congratulations.html', {'ranking' : improve, 'points' : points})
 
 #API
 def all_helps(request):

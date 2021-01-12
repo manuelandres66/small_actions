@@ -1,0 +1,20 @@
+{% extends 'maps/nav.html' %}
+{% load static %}
+
+{% block head %}
+    <title>¡Felicitaciones!</title>
+    <link href="{% static 'maps/css/congratulations.css' %}" rel="stylesheet">
+{% endblock %}
+    
+{% block content %}
+    <div id="content">
+        <h1>¡Felicitaciones!</h1>
+        <h2>+{{points}} Puntos<i class="fas fa-angle-double-up"></i></h2>
+        <div>
+            <h3>+{{ranking}} Puesto(s) <i class="fas fa-trophy"></i></h3>
+            <h4>¡Ayudaste! <i class="fas fa-hands-helping"></i></h4>
+        </div>
+        <a href="{% url 'account' %}"><button>Ir a tu cuenta</button></a>
+        
+    </div>
+{% endblock %}
