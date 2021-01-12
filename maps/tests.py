@@ -24,6 +24,11 @@ class htmltest(TestCase):
         response = c.get(reverse('SerchPoints'))
         self.assertEqual(response.status_code, 200)
 
+    def test_cong(self):
+        c = Client()
+        response = c.get(reverse('congratulations'), {'p' : 150, 'i' : 45})
+        self.assertEqual(response.status_code, 200)
+
 class apitest(TestCase):
 
     maxDiff = None
