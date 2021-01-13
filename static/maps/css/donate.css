@@ -1,0 +1,99 @@
+#title h1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    margin-top: 1vh;
+}
+
+#title h2 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#title img {
+    width: 7.5vw;
+    margin-left: 46.25vw;
+    margin-top: 5vh;
+}
+
+#grid {
+    margin-top: 6vh;
+    width: 70vw;
+    margin-left: 15vw;
+    display: grid;
+    grid-template-columns: 30% 50% 20%;
+    grid-template-rows: repeat(6, 5.5vh);
+    row-gap: 1.5vh;
+}
+
+h3, h4, #plataform {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.cost {
+    grid-column: 1;
+}
+
+.cost h5 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.cost h6 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #9f9f9f;
+    margin-top: 0.2vh;
+}
+
+#grid p {
+    font-size: 20px;
+    font-weight: 400;
+    width: 90%;
+    text-align: justify;
+}
+
+#grid a {
+    font-size: 25px;
+    color: #ff3a3a;
+    font-weight: 500;
+}
+
+#button_container {
+    margin-top: 9.5vh;
+    width: 70vw;
+    margin-left: 15vw;
+    margin-bottom: 5vh;
+}
+
+#button_container div {
+    width: 28vw;
+    display: inline-block;
+}
+
+#button_container div h4 {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+#button_container div p {
+    width: 26vw;
+    text-align: justify;
+    margin-top: 2vh;
+}
+
+#button_container button {
+    height: 8vh;
+    width: 40vw;
+    float: right;
+    font-size: 45px;
+    color: #fff;
+    background-color: #ff3a3a;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 4vh;
+}
