@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -128,9 +129,22 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+
 #Email
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'small.actions.pasword@gmail.com'
 EMAIL_HOST_PASSWORD = 'mamaCaro123'
 EMAIL_USE_TLS = True
+
+#AWS
+AWS_ACCESS_KEY_ID = 'AKIAVSVFXOEBAWSDYI7Z'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'small-actions'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_REGION_NAME = 'us-east-2'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
