@@ -14,6 +14,7 @@
     font-size: 40px;
     font-weight: 500;
     margin-top: 1vh;
+
     animation-name: appear;
     animation-duration: 1s;
 }
@@ -23,6 +24,7 @@
     font-size: 30px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.5);
+
     animation-name: appear;
     animation-duration: 1s;
 }
@@ -40,8 +42,10 @@
 
 #title img {
     width: 7.5vw;
+    height: auto;
     margin-left: 46.25vw;
     margin-top: 5vh;
+
     animation-name: img;
     animation-duration: 2s;
 }
@@ -74,6 +78,7 @@ h3, h4, #plataform {
 
 .cost {
     grid-column: 1; 
+
     transform: translate(-10vw);
     opacity: 0;
     animation-name: cost;
@@ -178,4 +183,75 @@ h3, h4, #plataform {
     border-radius: 50px;
     cursor: pointer;
     margin-top: 4vh;
+}
+
+@media screen and (max-width:1340px) {
+    #title img{
+        width: 18vw;
+        margin-left: 41vw;
+        margin-top: 4vh;
+    }
+
+    #title h1 {
+        font-size: 22px;
+    }
+
+    #title h2 {
+        font-size: 15px;
+    }
+
+    #grid {
+        margin-top: 4vh;
+        width: 90vw;
+        margin-left: 5vw;
+        grid-template-rows: repeat(6, 7vh);
+    }
+
+    
+    h3, h4, #plataform {
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    #plataform {
+        position: relative;
+        right: 5vw;
+    }
+
+    .cost h5, .cost h6 {
+        font-size: 12px;
+    }
+
+    #grid p {
+        font-size: 9px;
+        width: 95%;
+    }
+
+    #grid a {
+        font-size: 12px;
+        text-align: right;
+    }
+
+    #button_container {
+        width: 90vw;
+        margin-left: 5vw;
+    }
+
+    #button_container div {
+        width: 50%;
+    }
+
+    #button_container div h4 {
+        font-size: 15px;
+    }
+
+    #button_container div p {
+        font-size: 9px;
+        width: 90%;
+    }
+
+    #button_container button {
+        font-size: 15px;
+        margin-top: 7vh;
+    }
 }
