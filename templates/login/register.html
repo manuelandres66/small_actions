@@ -55,5 +55,19 @@
 
             <input type="submit" value="Registrarse">
         </form>
+        <script>
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                console.log('Not suported geolocation');
+            }
+
+            function showPosition(position) {
+                const latitude = document.querySelector('#id_latitude');
+                const longitude = document.querySelector('#id_longitude');
+                latitude.value = position.coords.latitude.toFixed(6);
+                longitude.value = position.coords.longitude.toFixed(6);
+            }
+        </script>
     </div>
 {% endblock %}
