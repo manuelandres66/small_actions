@@ -35,7 +35,6 @@ fetch('/account/api/account')
 .then(response => response.json())
 .then(data => {
     data.places.forEach(place => {
-        console.log(place)
         const popup = new mapboxgl.Popup(parameters).setHTML(`<h4>${place.name}</h4>
         <a href="${place.url}">Visitar el lugar</a>`);
         new mapboxgl.Marker({
@@ -78,3 +77,41 @@ changeLink.addEventListener('click', () => {
 
     countClick++;
 })
+
+
+//Dark mode
+const darkContainer = document.querySelector('#dark_mode');
+const darkCircle = document.querySelector('#dark_circle');
+let translateLigth = '0.2vw';
+let translateDark = '-2.6vw';
+
+const mediaQuery = window.matchMedia('(max-width: 1300px)');
+if (mediaQuery.matches) {
+    translateLigth = '-8vw, -0.3vh';
+    translateDark = '7vw, -0.3vh'
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    let htmlContainer = document.querySelector('html');
+    let counter = 0;
+
+    console.log(htmlContainer.getAttribute('theme'))
+    if (htmlContainer.getAttribute('theme') == 'dark-mode') {
+        darkCircle.style.transform = `translate(${translateLigth})`; 
+        counter = 1;
+    };
+
+    darkContainer.addEventListener('click', () => {
+        if (counter % 2 == 0) {
+            htmlContainer.setAttribute('theme', 'dark-mode');
+            darkCircle.style.transform = `translate(${translateLigth})`;
+            fetch('/account/api/dark'); 
+        } else {
+            htmlContainer.setAttribute('theme', '');
+            darkCircle.style.transform = `translate(${translateDark})`; 
+            fetch('/account/api/dark'); 
+        };
+        counter++;
+    });
+});
+

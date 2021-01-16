@@ -6,7 +6,7 @@
 }
 
 html {
-    transition: color 300ms, backgroud-color 300ms;
+    transition: color 1s;
 }
 
 html[theme='dark-mode'] {

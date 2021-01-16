@@ -68,6 +68,13 @@ def account(request):
     return render(request, 'login/account.html', ctx)
 
 @login_required(login_url='/account/login')
+def dark_mode(request):
+    user = User.objects.get(username=request.user)
+    user.dark_mode = not user.dark_mode
+    user.save()
+    return redirect(reverse('account'))
+
+@login_required(login_url='/account/login')
 def repassword(request, re): 
     form = FormPassword()
     error = ''

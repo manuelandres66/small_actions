@@ -18,6 +18,11 @@
                     {{form.username.errors}}
                     <span>{{error}}</span>
                     <a href="{% url 'ranking' %}"><h2>#{{index}}</h2></a>
+                    <div id="dark_mode">
+                        <i class="far fa-moon"></i>
+                        <i class="fas fa-circle" id="dark_circle"></i>
+                        <i class="far fa-sun" id="sun"></i>
+                    </div>
                 </div>
                 <div id="info_info">
                     <div id="email_container">

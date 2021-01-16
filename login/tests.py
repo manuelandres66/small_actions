@@ -33,6 +33,17 @@ class UserTest(TestCase):
         login = c.login(username="PEPE", password="hola1234")
         self.assertTrue(login)
 
+    def test_darkmode(self):
+        user = User.objects.get(username='PEPE')
+        self.assertFalse(user.dark_mode)
+
+        c = Client()
+        c.login(username="PEPE", password="hola1234")
+        c.get(reverse('dark'))
+
+        user = User.objects.get(username='PEPE')
+        self.assertTrue(user.dark_mode)
+
     def test_change_password(self):
         user = User.objects.get(username="PEPE")
         user.set_password('hola12345')

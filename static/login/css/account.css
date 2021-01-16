@@ -21,6 +21,7 @@ input {
     padding-left: 1vw;
     padding-top: 0.2vh;
     padding-bottom: 0.2vh;
+    width: 30vw;
 }
 
 h1, h2 {
@@ -33,6 +34,30 @@ h2 {
     float: right;
     margin-right: 10vw;
     color: #ff3a3a;
+}
+
+#dark_mode {
+    background-color: #ff3a3a;
+    color: #fff;
+    font-size: 40px;
+    padding: 0.1vh 1vw;
+    border-radius: 50px;
+    float: right;
+    margin-right: 7vw;
+    margin-top: 0.5vh;
+    cursor: pointer;
+}
+
+#dark_circle {
+    position: absolute;
+    font-size: 50px;
+    transform: translate(-2.6vw);
+    transition: transform 0.5s ease;
+}
+
+#sun {
+    margin-right: 0.5vw;
+    margin-left: 0.5vw;
 }
 
 #id_email {
@@ -147,6 +172,27 @@ h5 span  {
         width: 96vw;
         margin-left: 2vw;
         margin-top: 3vh;
+    }
+
+    #dark_mode {
+        display: block;
+        float: none;
+        margin-top: 3vh;
+        width: 20vw;
+        margin-left: 32vw;
+        font-size: 20px;
+        padding: 0.5vh 5vw;
+    }
+
+    #dark_circle {
+        font-size: 30px;
+        position: absolute;
+        transform: translate(7vw, -0.3vh);
+    }
+
+    #sun {
+        margin-left: 7.5vw;
+        margin-right: 0;
     }
 
     h1, h2 {
