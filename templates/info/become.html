@@ -3,6 +3,7 @@
 
 {% block head %}
     <title>Volverte una organización</title>
+    <link href="{% static 'info/css/become.css' %}" rel="stylesheet">
 {% endblock %}
      
 {% block content %}
@@ -10,14 +11,14 @@
         <h1>Volverte una</h1>
         <h2>Organización</h2>
     </div>
-    <div>
-        <h3><i class="fas fa-check-circle"></i> Consigue Aportantes</h3>
-        <h4><i class="fas fa-check-circle"></i> Publicítate Gratis</h4>
-        <h5><i class="fas fa-check-circle"></i> Encuentra personas</h5>
+    <div id="benef_container">
+        <h3 class="benef"><i class="fas fa-check-circle"></i> Consigue Aportantes</h3>
+        <h4 class="benef"><i class="fas fa-check-circle"></i> Publicítate Gratis</h4>
+        <h5 class="benef"><i class="fas fa-check-circle"></i> Encuentra personas</h5>
     </div>
-    <div>
+    <div id='info_img_container'>
         <img src="{% static 'info/images/fuerza.jpg' %}" alt="fuerza">
-        <div>
+        <div id="crecer">
             <h5>Haz Crecer Tu Organización</h5>
             <p>
                 Small Actions te brinda una oportunidad única de llegar a más personas a través de nuestra de nuestra plataforma. 
@@ -25,8 +26,7 @@
                 Haz realidad tus sueños de ayudar desde un enfoque virtual.
             </p>
         </div>
-        <img src="{% static 'info/images/manos.jpg' %}" alt="manos">
-        <div>
+        <div id='agrega'>
             <h6>Agrega Todos los Puntos de Ayuda</h6>
             <p>
                 Agrega todos los lugares donde necesitas personas ayudando, ya sean sitios de donación de todo tipo 
@@ -35,15 +35,16 @@
                 (Social, ambiental, comunitario, cultural, deportivo, educativo, internacional, de protección civil, sanitario, etc)
             </p>
         </div>
+        <img src="{% static 'info/images/manos.jpg' %}" alt="manos" id="agrega_img">
     </div>
-    <div>
-        <form>
-            <h6>¿Preparado para ser una organización?</h6>
+    <div id='form'>
+        <form enctype="multipart/form-data" method="POST"> {% csrf_token %}
+            <h6 id="preparado">¿Preparado para ser una organización?</h6>
             <div>
                 {{form.name}}
                 {{form.name.errors}}
             </div>
-            <div>
+            <div class="rigth_input">
                 {{form.contact_name}}
                 <i class="fas fa-question-circle"></i>
                 {{form.contact_name.errors}}
@@ -52,32 +53,32 @@
                 {{form.phone_number}}
                 {{form.phone_number.errors}}
             </div>
-            <div>
+            <div class="rigth_input">
                 {{form.contact_phone_number}}
                 <i class="fas fa-question-circle"></i>
                 {{form.contact_phone_number.errors}}
             </div>
-            <div>
+            <div id="short_description">
                 {{form.short_description}}
                 {{form.short_description.errors}}
             </div>
-            <div>
+            <div id="quote">
                 {{form.quote}}
                 <i class="fas fa-question-circle"></i>
                 {{form.quote.errors}}
             </div>
-            <div>
+            <div class="no_backgroud">
                 <label>Logo <i class="fas fa-question-circle"></i></label>
                 {{form.image}}
                 {{form.quote.image}}
             </div>
-            <div>
+            <div class="rigth_input no_backgroud">
                 <label>Logo Circular <i class="fas fa-question-circle"></i></label>
                 {{form.image}}
                 {{form.quote.image}}
             </div>
-            <input type="submit" value="Enviar">
-            <h6>{{message}}</h6>
+            <input type="submit" value="Enviar" id="enviar">
+            <h6 id="message">{{message}}</h6>
         </form>
     </div>
 {% endblock %}

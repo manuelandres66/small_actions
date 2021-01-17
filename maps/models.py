@@ -7,7 +7,7 @@ from shortuuidfield import ShortUUIDField
 class Organization(models.Model):
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
 
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
     contact_name = models.CharField(max_length=30, blank=True)
@@ -17,6 +17,8 @@ class Organization(models.Model):
     circular_icon = models.ImageField(upload_to="organizations/circle", blank=True, null=True)
     short_description = models.TextField(max_length=300)
     quote = models.CharField(max_length=60) 
+
+    user = models.OneToOneField('login.User', blank=True, null=True, on_delete=models.PROTECT)
     
     def __str__(self):
         return f"{self.name}"
