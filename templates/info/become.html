@@ -1,0 +1,83 @@
+{% extends 'maps/nav.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Volverte una organización</title>
+{% endblock %}
+     
+{% block content %}
+    <div>
+        <h1>Volverte una</h1>
+        <h2>Organización</h2>
+    </div>
+    <div>
+        <h3><i class="fas fa-check-circle"></i> Consigue Aportantes</h3>
+        <h4><i class="fas fa-check-circle"></i> Publicítate Gratis</h4>
+        <h5><i class="fas fa-check-circle"></i> Encuentra personas</h5>
+    </div>
+    <div>
+        <img src="{% static 'info/images/fuerza.jpg' %}" alt="fuerza">
+        <div>
+            <h5>Haz Crecer Tu Organización</h5>
+            <p>
+                Small Actions te brinda una oportunidad única de llegar a más personas a través de nuestra de nuestra plataforma. 
+                Sin costo alguno, te brindamos la posibilidad de administrar todos los lugares en donde quieras que las personas ayuden. 
+                Haz realidad tus sueños de ayudar desde un enfoque virtual.
+            </p>
+        </div>
+        <img src="{% static 'info/images/manos.jpg' %}" alt="manos">
+        <div>
+            <h6>Agrega Todos los Puntos de Ayuda</h6>
+            <p>
+                Agrega todos los lugares donde necesitas personas ayudando, ya sean sitios de donación de todo tipo 
+                (agua, ropa, alimentos, concentrado, dinero, útiles escolares, sangre, juguetes, elementos médicos, etc) 
+                o lugares para voluntarios, tanto temporales como para afiliación prolongada. Los voluntariados tambien pueden ser de cualquier tipo. 
+                (Social, ambiental, comunitario, cultural, deportivo, educativo, internacional, de protección civil, sanitario, etc)
+            </p>
+        </div>
+    </div>
+    <div>
+        <form>
+            <h6>¿Preparado para ser una organización?</h6>
+            <div>
+                {{form.name}}
+                {{form.name.errors}}
+            </div>
+            <div>
+                {{form.contact_name}}
+                <i class="fas fa-question-circle"></i>
+                {{form.contact_name.errors}}
+            </div>
+            <div>
+                {{form.phone_number}}
+                {{form.phone_number.errors}}
+            </div>
+            <div>
+                {{form.contact_phone_number}}
+                <i class="fas fa-question-circle"></i>
+                {{form.contact_phone_number.errors}}
+            </div>
+            <div>
+                {{form.short_description}}
+                {{form.short_description.errors}}
+            </div>
+            <div>
+                {{form.quote}}
+                <i class="fas fa-question-circle"></i>
+                {{form.quote.errors}}
+            </div>
+            <div>
+                <label>Logo <i class="fas fa-question-circle"></i></label>
+                {{form.image}}
+                {{form.quote.image}}
+            </div>
+            <div>
+                <label>Logo Circular <i class="fas fa-question-circle"></i></label>
+                {{form.image}}
+                {{form.quote.image}}
+            </div>
+            <input type="submit" value="Enviar">
+            <h6>{{message}}</h6>
+        </form>
+    </div>
+{% endblock %}
