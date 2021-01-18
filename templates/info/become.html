@@ -46,7 +46,13 @@
             </div>
             <div class="rigth_input">
                 {{form.contact_name}}
-                <i class="fas fa-question-circle"></i>
+                <i class="fas fa-question-circle" id="check_name"></i>
+                <div id="info_name" class="infos">
+                    <p>
+                        El nombre de la persona que tiene como cargo las comunicaciones. 
+                        Por ejemplo, Small Actions tendría en este campo a "Manuel Rosero"
+                    </p>
+                </div>
                 {{form.contact_name.errors}}
             </div>
             <div>
@@ -55,7 +61,14 @@
             </div>
             <div class="rigth_input">
                 {{form.contact_phone_number}}
-                <i class="fas fa-question-circle"></i>
+                <i class="fas fa-question-circle" id='check_phone'></i>
+                <div id="info_phone" class="infos">
+                    <p>
+                        El teléfono <b>personal</b> de la persona de las comunicaciones.
+                        Es decir, un número que no se desea que sea visible como de la empresa.
+                        Considera que mediante este número nos comunicaremos con usted.
+                    </p>
+                </div>
                 {{form.contact_phone_number.errors}}
             </div>
             <div id="short_description">
@@ -64,21 +77,46 @@
             </div>
             <div id="quote">
                 {{form.quote}}
-                <i class="fas fa-question-circle"></i>
+                <i class="fas fa-question-circle" id='check_quote'></i>
+                <div id="info_quote" class="infos">
+                    <p>
+                        La mayoría de fundaciones y empresas tienen una pequeña frase que describe tu objetivo, 
+                        en Small Actions tenemos: “Pequeñas Grandes Acciones”. 
+                        Asegúrate de escribirlo <b>sin comillas</b>.
+                    </p>
+                </div>
                 {{form.quote.errors}}
             </div>
             <div class="no_backgroud">
-                <label>Logo <i class="fas fa-question-circle"></i></label>
+                <label>Logo </label>
+                <i class="fas fa-question-circle" id="check_logo"></i>
+                <div id="info_logo" class="infos">
+                    <img src="{% static 'maps/images/logo_small.png' %}">
+                    <p>
+                        Es el logo grande de tu organización, el logo completo, por lo general incluye el nombre de tu organización. 
+                    </p>
+                </div>
                 {{form.image}}
                 {{form.quote.image}}
             </div>
             <div class="rigth_input no_backgroud">
-                <label>Logo Circular <i class="fas fa-question-circle"></i></label>
+                <label>Logo Circular </label>
+                <i class="fas fa-question-circle" id="check_cir"></i>
+                <div id="info_cir" class="infos">
+                    <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}">
+                    <p>
+                        Es un logo más pequeño y circular, que solo posee el icono de tu empresa, si no lo tienes, 
+                        por favor intenta que <b>sus dimensiones sean cuadradas</b>. 
+                    </p>
+                </div>
                 {{form.image}}
                 {{form.quote.image}}
             </div>
             <input type="submit" value="Enviar" id="enviar">
             <h6 id="message">{{message}}</h6>
         </form>
+    </div>
+    <div id='infos'>
+
     </div>
 {% endblock %}

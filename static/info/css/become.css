@@ -182,6 +182,7 @@ h2 {
     font-size: 30px;
     position: relative;
     top: 3px;
+    cursor: pointer;
 }
 
 #form form div {
@@ -222,6 +223,7 @@ h2 {
     font-size: 25px;
     font-weight: 300;
     padding: 1vh 1vw;
+    z-index: 1;
 }
 
 #form #quote {
@@ -268,4 +270,49 @@ h2 {
     margin-top: 2vh;
     font-size: 40px;
     color: #ff3a3a;
+}
+
+#form .infos {
+    width: 20vw;
+    height: auto;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 10px;
+    padding: 1vw;
+    background-color: #fff;
+    z-index: 10;
+    position: absolute;
+}
+
+#form .infos img {
+    width: 15vw;
+    height: 5vh;
+    object-fit: contain;
+}
+
+#form #info_name {
+    top: 123vh;
+    right: 2vw;
+    display: none;
+}
+
+#form #info_phone {
+    top: 130vh;
+    right: 2vw;
+    display: none;
+}
+
+#form #info_quote {
+    top: 154vh;
+    right: 2vw;
+    display: none;
+}
+
+#form #info_logo, #form #info_cir {
+    display: none;
+}
+
+#check_name:hover + #info_name, #check_phone:hover + #info_phone, 
+#check_quote:hover + #info_quote, #check_logo:hover + #info_logo,
+#check_cir:hover + #info_cir  {
+    display: block;
 }
