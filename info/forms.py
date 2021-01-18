@@ -11,6 +11,9 @@ class NewOrganization(forms.ModelForm):
         self.fields['contact_phone_number'].widget.attrs.update({'placeholder': 'Teléfono de la persona acargo'})
         self.fields['short_description'].widget.attrs.update({'placeholder': 'Descripción de la organización'})
         self.fields['quote'].widget.attrs.update({'placeholder': 'Lema de la organización sin comillas'})
+
+        for field in self.fields.keys():
+            self.fields[field].required = True
     
     class Meta:
         model = Organization
