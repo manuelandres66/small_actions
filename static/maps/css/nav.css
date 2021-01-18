@@ -5,10 +5,6 @@
     font-family: 'Sora', sans-serif;
 }
 
-html {
-    transition: color 1s;
-}
-
 html[theme='dark-mode'] {
     filter: invert(1) hue-rotate(180deg);
     background-color: #fff;

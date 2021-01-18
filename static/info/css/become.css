@@ -2,6 +2,20 @@ body {
     overflow-x: hidden;
 }
 
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+h1, h2 {
+    animation-name: appear;
+    animation-duration: 1s;
+}
+
 h1 {
     font-size: 50px;
     font-weight: 300;
@@ -32,8 +46,49 @@ h2 {
     margin-right: .5vw;
 }
 
+@keyframes left {
+    from {
+        opacity: 0;
+        transform: translate(-20vw);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+.benef:nth-child(1) {
+    opacity: 0;
+    transform: translate(-20vw);
+
+    animation-name: left;
+    animation-duration: 1.5s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+} 
+
+
+@keyframes right {
+    from {
+        opacity: 0;
+        transform: translate(20vw);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+
 .benef:nth-child(3) {
     float: right;
+    opacity: 0;
+    transform: translate(20vw);
+
+    animation-name: right;
+    animation-duration: 1.5s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
 }
 
 .benef:nth-child(2) {
@@ -51,6 +106,16 @@ h2 {
     width: 36vw;
     height: 26vh;
     object-fit: cover;
+}
+
+#info_img_container img:nth-child(1) {
+    animation-name: left;
+    animation-duration: 1.5s;
+}
+
+#agrega_img {
+    animation-name: right;
+    animation-duration: 1.5s;
 }
 
 
@@ -93,7 +158,7 @@ h2 {
     margin-top: 1.5vh;
 }
 
-#agrega h6, #agrega p {
+#agrega h6, #agrega p { 
     color: #ff3a3a;
 }
 
