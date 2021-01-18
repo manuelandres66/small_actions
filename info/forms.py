@@ -14,7 +14,7 @@ class NewOrganization(forms.ModelForm):
 
         for field in self.fields.keys():
             self.fields[field].required = True
-    
+     
     class Meta:
         model = Organization
-        fields = '__all__'  
+        exclude = ('user',)

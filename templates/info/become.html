@@ -97,7 +97,7 @@
                     </p>
                 </div>
                 {{form.image}}
-                {{form.quote.image}}
+                {{form.image.errors}}
             </div>
             <div class="rigth_input no_backgroud">
                 <label>Logo Circular </label>
@@ -109,8 +109,8 @@
                         por favor intenta que <b>sus dimensiones sean cuadradas</b>. 
                     </p>
                 </div>
-                {{form.image}}
-                {{form.quote.image}}
+                {{form.circular_icon}}
+                {{form.circular_icon.errors}}
             </div>
             <input type="submit" value="Enviar" id="enviar">
             <h6 id="message">{{message}}</h6>
