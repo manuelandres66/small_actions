@@ -47,7 +47,7 @@ body {
     right: 5vw;
     background-color: #ff3a3a;
     height: 5.2vh;
-    bottom: 0.1vh;
+    bottom: 0.21vh;
     width: 4.93vw;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -110,13 +110,13 @@ body {
     width: 20vw;
     height: 27vh;
     border-radius: 32px;
-    margin-top: 5vh;
+    margin-top: 3vh;
 
 }
 
 @keyframes fromLeftImg {
     0% {
-        transform: translate(20vw) rotate(180deg);
+        transform: translate(20vw) rotate(180deg); 
     }
     100% {
         transform: translate(0) rotate(0);

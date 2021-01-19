@@ -12,8 +12,8 @@ body {
 }
 
 h1, h2 {
-    animation-name: appear;
-    animation-duration: 1s;
+    /* animation-name: appear;
+    animation-duration: 1s; */
 }
 
 h1 {
@@ -58,13 +58,13 @@ h2 {
 }
 
 .benef:nth-child(1) {
-    opacity: 0;
-    transform: translate(-20vw);
+    /* opacity: 0;
+    transform: translate(-20vw); */
 
-    animation-name: left;
+    /* animation-name: left;
     animation-duration: 1.5s;
     animation-delay: 1s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
 } 
 
 
@@ -82,13 +82,13 @@ h2 {
 
 .benef:nth-child(3) {
     float: right;
-    opacity: 0;
+    /* opacity: 0;
     transform: translate(20vw);
 
     animation-name: right;
     animation-duration: 1.5s;
     animation-delay: 1s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
 }
 
 .benef:nth-child(2) {
@@ -109,13 +109,13 @@ h2 {
 }
 
 #info_img_container img:nth-child(1) {
-    animation-name: left;
-    animation-duration: 1.5s;
+    /* animation-name: left;
+    animation-duration: 1.5s; */
 }
 
 #agrega_img {
-    animation-name: right;
-    animation-duration: 1.5s;
+    /* animation-name: right;
+    animation-duration: 1.5s; */
 }
 
 
@@ -224,6 +224,7 @@ h2 {
     font-weight: 300;
     padding: 1vh 1vw;
     z-index: 1;
+    resize: none;
 }
 
 #form #quote {
@@ -317,4 +318,163 @@ h2 {
 #check_quote:hover + #info_quote, #check_logo:hover + #info_logo,
 #check_cir:hover + #info_cir  {
     display: block;
+}
+
+
+@media screen and (max-width: 1590px) {
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 35px;
+    }
+
+    #benef_container {
+        margin-left: 20vw;
+        width: 60vw;
+        margin-top: 4vh;
+        height: auto;
+    }
+
+    .benef {
+        display: block;
+        width: 100%;
+        font-size: 15px;
+        margin-bottom: 2vh;
+    }
+
+    .benef i {
+        margin-right: 7vw;
+    }
+
+    .benef:nth-child(2) {
+        margin-left: 0;
+    }
+
+    .benef:nth-child(3) {
+        float: none;
+    }
+
+    #info_img_container {
+        display: block;
+        margin-top: 5vh;
+    }
+
+    #info_img_container img {
+        width: 100%;
+        height: 11vh;
+        display: block;
+    }
+
+    #info_img_container #crecer, #info_img_container #agrega {
+        width: 100%;
+        height: 22vh;
+    }
+
+    #crecer h5, #agrega h6 {
+        font-size: 20px;
+        margin-top: 2vh;
+    }
+
+    #agrega h6 {
+        font-size: 15px;
+    }
+
+    #crecer p, #agrega p {
+        font-size: 10px;
+        margin-top: 1vh;
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    #agrega p {
+        font-size: 9px;
+    }
+
+    #form {
+        width: 90%;
+        margin-left: 5%;
+        border-radius: 25px;
+        margin-bottom: 20vh;
+    }
+
+    #preparado {
+        font-size: 20px;
+        display: block;
+    }
+
+    #form form div, #form #short_description, #form #quote {
+        display: block;
+        width: 90%;
+        height: 28px;
+        margin-bottom: 12px;
+        margin-left: 5%;
+    }
+
+    #form #short_description {
+        height: 135px;
+    }
+
+    #form form div input, #form #quote input {
+        font-size: 12px;
+        margin-left: 4vw;
+        width: 70%;
+    }
+
+    #form textarea {
+        font-size: 12px;
+        width: 90%;
+        height: 77%;
+        padding: 4vw;
+    }
+
+    #form i {
+        font-size: 19px;
+        float: right;
+        margin-right: 4vw;
+    }
+
+    .rigth_input {
+        float: none;
+    }
+
+    #form .no_backgroud label {
+        font-size: 20px;
+        display: block;
+    }
+
+    #form #enviar {
+        width: 90%;
+        margin-left: 5%;
+        height: 28px;
+        font-size: 15px;
+    }
+
+    #form .infos {
+        width: 50%;
+        font-size: 10px;
+        padding: 4vw;
+    }
+
+    #form .infos img {
+        height: 40px;
+        width: 100%;
+    }
+
+    #form #info_name{
+        top: 132.5vh;
+    }
+
+    #form #info_phone {
+        top: 138vh;
+    }
+
+    #form #info_quote {
+        top: 167vh;
+    }
+
+    #message {
+        font-size: 15px;
+    }
 }
