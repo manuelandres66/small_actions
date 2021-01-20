@@ -20,8 +20,11 @@ html[theme='dark-mode'] img{
 
 #principal_logo {
     width: 27vw;
+    height: 6.5vh;
+    object-fit: contain;
+    object-position: left;
     margin-left: 2vw;
-}
+} 
 
 #rigth_superior {
     float: right;
@@ -40,7 +43,9 @@ html[theme='dark-mode'] img{
 
 #rigth_superior img {
     width: 3.7vw;
-    display: inline-block;
+    height: 3.7vw;
+    object-fit: cover;
+    display: inline-block; 
     margin-right: 2vw;
 }
 
@@ -86,6 +91,7 @@ html[theme='dark-mode'] img{
 
     #principal_logo {
         width: 57vw;
+        height: 6.5vh;
         margin-left: 2.5vw;
         margin-top: 2vh;
     }
@@ -102,6 +108,7 @@ html[theme='dark-mode'] img{
 
     #rigth_superior img {
         width: 6vw;
+        height: 6vw;
         margin: 0;
         margin-top: 1.5vh;
         margin-right: 8vw;
