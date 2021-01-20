@@ -3,8 +3,8 @@
 {% block head %}
     <title>Buscar Lugares | Small Actions</title>
 
-    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
     <link href="{% static 'maps/css/points.css' %}" rel="stylesheet">
@@ -25,6 +25,6 @@
     </div>
 
     {% csrf_token %}
-    <script src="{% static 'maps/javascript/reactPoints.js' %}" type="text/babel"></script>
+    <script src="{% static 'maps/javascript/reactPoints.js' %}" type="text/babel" ></script>
 {% endblock %}
   

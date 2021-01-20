@@ -5,7 +5,7 @@ from shortuuidfield import ShortUUIDField
 # Create your models here.
 
 class Organization(models.Model):
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="El numero de telefono debe tener el codigo del pais. Ej: +573023986488. 15 Digitos permitidos")
 
     name = models.CharField(max_length=20, unique=True)
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
@@ -18,7 +18,7 @@ class Organization(models.Model):
     short_description = models.TextField(max_length=300)
     quote = models.CharField(max_length=60) 
 
-    user = models.OneToOneField('login.User', blank=True, null=True, on_delete=models.PROTECT)
+    user = models.OneToOneField('login.User', blank=True, null=True, on_delete=models.PROTECT, related_name='organization')
     
     def __str__(self):
         return f"{self.name}"
