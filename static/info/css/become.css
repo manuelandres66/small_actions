@@ -454,7 +454,7 @@ h2 {
 
     #form .infos {
         width: 50%;
-        font-size: 10px;
+        font-size: 12px;
         padding: 4vw;
     }
 
@@ -464,15 +464,15 @@ h2 {
     }
 
     #form #info_name{
-        top: 146vh;
+        top: 141vh;
     }
 
     #form #info_phone {
-        top: 153vh;
+        top: 150vh;
     }
 
     #form #info_quote {
-        top: 185vh;
+        top: 180vh;
     }
 
     #message {

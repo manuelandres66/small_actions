@@ -5,6 +5,9 @@ from django.core.mail import send_mail
 from .forms import NewOrganization
 from maps.models import Organization
 # Create your views here.
+def search(request):
+    return render(request, 'info/search.html')
+
 def become(request):
     form = NewOrganization()
     message = ''

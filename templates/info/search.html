@@ -1,0 +1,22 @@
+{% extends 'maps/nav.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Organizations | Small Actions</title>
+    <link href="{% static 'info/css/search.css' %}" rel="stylesheet">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="grid_titles">
+        <div id="titles">
+            <h1>Organizaciones</h1>
+            <h2>Creadoras de ayudas</h2>
+        </div>
+        <div id="image"></div>
+    </div>
+    <div id="react"></div>
+    <script src="reactOrganizations.js" ></script>
+{% endblock %}
