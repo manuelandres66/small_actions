@@ -1,7 +1,10 @@
+body {
+    overflow-x: hidden;
+}
 
 #grid_titles {
     display: grid;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: 49.5% 50.5%;
 }
 
 #grid_titles div {
@@ -25,10 +28,11 @@
 
 #image {
     background-image:
-        linear-gradient(270deg, rgba(255,255,255,0.0) 50%, rgba(255,255,255,1) 95%),
+        linear-gradient(270deg, rgba(255,255,255,0.0) 40%, rgba(255,255,255,1) 95%),
         url('/static/info/images/organizations.jpg');
     background-size: cover;
     background-position: center;
+    border: none;
 } 
 
 
@@ -68,7 +72,7 @@ html[theme='dark-mode'] #image {
 #search_results {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 3vh;
     width: 98%;
 }
@@ -76,7 +80,9 @@ html[theme='dark-mode'] #image {
 .result {
     text-decoration: none;
     color: #fff;
-    margin-bottom: 1.5vh;
+    margin-bottom: 2.5vh;
+    flex-grow: 1;
+    width: 24.5%;
 }
 
 .result h4 {
@@ -100,9 +106,22 @@ html[theme='dark-mode'] #image {
     margin-left: 4%;
 }
 
+@keyframes slice{
+    form {
+        transform: translate(0);
+    }
+
+    to {
+        transform: translate(-200vw);
+    }
+}
+
 #photos {
     display: flex;
     margin-bottom: 5vh;
+    justify-content: space-between;
+    width: 400vw;
+    animation: slice 25s infinite linear;
 }
 
 #photos img {
@@ -110,5 +129,29 @@ html[theme='dark-mode'] #image {
     height: 21vh;
     margin-top: 2vh;
     object-fit: contain;
-    margin-right: 5vw;
+    margin-left: 5vw;
+    flex-grow: 1;
+}
+
+#last_info {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+#last_info div {
+    width: 70%;
+    margin-left: 15%;
+}
+
+#last_info div h4 , #last_info div h5 {
+    font-size: 35px;
+    text-align: center;
+}
+
+#last_info div p {
+    font-size: 20px;
+    font-weight: 300;
+    margin-top: 2vh;
 }
