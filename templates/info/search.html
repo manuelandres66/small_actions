@@ -1,0 +1,54 @@
+{% extends 'maps/nav.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Organizations | Small Actions</title>
+    <link href="{% static 'info/css/search.css' %}" rel="stylesheet">
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="grid_titles">
+        <div id="titles">
+            <h1>Organizaciones</h1>
+            <h2>Creadoras de ayudas</h2>
+        </div>
+        <div id="image"></div>
+    </div>
+    {% csrf_token %}
+    <div id="react"></div>
+    <script src="{% static 'info/javascript/reactOrganizations.js' %}" type='text/babel'></script>
+
+    <div id="org">
+        <h3>Organizaciones que trabajan con Small Actions</h3>
+        <div id="photos">
+            {% for photo in photos %}
+                <img src="{{photo.image.url}}">
+            {% endfor %}
+            {% for photo in photos %}
+                <img src="{{photo.image.url}}">
+            {% endfor %}
+        </div>
+    </div>
+    <div id="last_info">
+        <div>
+            <h4>¿Que son las Organizaciones?</h4>
+            <p>
+                Las organizaciones son fundaciones, gobiernos o empresas que participan de 
+                Small Actions colocando y administrando los lugares donde puedes ir a ayudar. 
+                Para volverte una organización debes ir a la sección “Volverte una organización” 
+                es completamente gratis, sin embargo, deberás pasar ciertos controles.
+            </p>
+        </div>
+        <div>
+            <h5>¿Cual es su rol en la página?</h5>
+            <p>Las organizaciones tienen distintos roles dentro de la página, mencionaremos solo algunos, 
+                pero están en constante cambio junto con las políticas de la página. 
+                Las organizaciones pueden y deben administrar su propio perfil y sus lugares, banear perfiles con justificación, 
+                sugerir cambios a la página, ser presentes tecnológicamente en su lugar y tener una buena atención al voluntario.</p>
+        </div>
+    </div>
+{% endblock %} 

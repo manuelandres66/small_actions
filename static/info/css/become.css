@@ -12,8 +12,8 @@ body {
 }
 
 h1, h2 {
-    /* animation-name: appear;
-    animation-duration: 1s; */
+    animation-name: appear;
+    animation-duration: 1s;
 }
 
 h1 {
@@ -58,13 +58,13 @@ h2 {
 }
 
 .benef:nth-child(1) {
-    /* opacity: 0;
-    transform: translate(-20vw); */
+    opacity: 0;
+    transform: translate(-20vw);
 
-    /* animation-name: left;
+    animation-name: left;
     animation-duration: 1.5s;
     animation-delay: 1s;
-    animation-fill-mode: forwards; */
+    animation-fill-mode: forwards;
 } 
 
 
@@ -82,13 +82,13 @@ h2 {
 
 .benef:nth-child(3) {
     float: right;
-    /* opacity: 0;
+    opacity: 0;
     transform: translate(20vw);
 
     animation-name: right;
     animation-duration: 1.5s;
     animation-delay: 1s;
-    animation-fill-mode: forwards; */
+    animation-fill-mode: forwards;
 }
 
 .benef:nth-child(2) {
@@ -109,13 +109,13 @@ h2 {
 }
 
 #info_img_container img:nth-child(1) {
-    /* animation-name: left;
-    animation-duration: 1.5s; */
+    animation-name: left;
+    animation-duration: 1.5s;
 }
 
 #agrega_img {
-    /* animation-name: right;
-    animation-duration: 1.5s; */
+    animation-name: right;
+    animation-duration: 1.5s;
 }
 
 
@@ -369,7 +369,11 @@ h2 {
 
     #info_img_container #crecer, #info_img_container #agrega {
         width: 100%;
-        height: 22vh;
+        height: 23.5vh;
+    }
+
+    #info_img_container #agrega {
+        height: 32vh;
     }
 
     #crecer h5, #agrega h6 {
@@ -382,15 +386,12 @@ h2 {
     }
 
     #crecer p, #agrega p {
-        font-size: 10px;
+        font-size: 12px;
         margin-top: 1vh;
         width: 90%;
         margin-left: 5%;
     }
 
-    #agrega p {
-        font-size: 9px;
-    }
 
     #form {
         width: 90%;
@@ -453,7 +454,7 @@ h2 {
 
     #form .infos {
         width: 50%;
-        font-size: 10px;
+        font-size: 12px;
         padding: 4vw;
     }
 
@@ -463,15 +464,15 @@ h2 {
     }
 
     #form #info_name{
-        top: 132.5vh;
+        top: 141vh;
     }
 
     #form #info_phone {
-        top: 138vh;
+        top: 150vh;
     }
 
     #form #info_quote {
-        top: 167vh;
+        top: 180vh;
     }
 
     #message {

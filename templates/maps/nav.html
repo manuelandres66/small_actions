@@ -13,6 +13,11 @@
         {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
+        <meta name="description" content="Bienvenido a Small Actions una página web sobre ayudar a los demás.">
+        <meta name="keywords" content="Small Actions, Small, Actions, ayuda, ayudar, mapa, puntos, fundaciones, organizaciones, fundacion, donar, ir, viajar, conducir">
+        <meta name="author" content="Manuel Rosero">
+        <meta name="copyright" content="Small Actions">
+        <meta name="robots" content="index, follow">
     </head>
     <body>
         <header id="all_bar">
@@ -39,7 +44,7 @@
             <div id="inferior">
                 <nav>
                     <a href="/">Página principal</a>
-                    <a href="/">Organizaciones</a>
+                    <a href="{% url 'searchOrganization' %}">Organizaciones</a>
                     <a href="{% url 'SerchPoints' %}">Buscar Lugares</a>
                     <a href="{% url 'become' %}">Volverte una organización</a>
                     <a href="/">Categorias</a>

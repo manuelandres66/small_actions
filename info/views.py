@@ -1,10 +1,42 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.db.models import Count
 
 from .forms import NewOrganization
 from maps.models import Organization
+
+import json
 # Create your views here.
+def search(request):
+    photos = Organization.objects.annotate(p_count=Count('help_points')).order_by('-p_count')[:8]
+    return render(request, 'info/search.html', {'photos' : photos})
+
+def api_search(request): 
+    if request.method != "POST":
+        return JsonResponse({'error' : 'The request must be POST'}, status=400)
+    data = json.loads(request.body)
+
+    if 'search' in data:
+        search = Organization.objects.filter(name__contains=data['search'])
+        search = search | Organization.objects.filter(short_description__contains=data['search'])
+        search = search | Organization.objects.filter(quote__contains=data['search'])
+
+        response = {'results' : []}
+        for organi in search[:10]:
+            response['results'].append({
+                'name': organi.name,
+                'number_points' : organi.get_points(),
+                'url' : '/'
+            })
+
+        return JsonResponse(response, status=200)
+        
+    else:
+         return JsonResponse({'error' : 'no search specified'}, status=400)
+
+
 def become(request):
     form = NewOrganization()
     message = ''

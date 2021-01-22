@@ -1,21 +1,28 @@
+#principal {
+    display: grid;
+    grid-template-columns: 64% 36%;
+    margin-top: 5vh;
+}
+
 #map {
     display: inline-block;
     margin-left: 2vw;
-    margin-top: 5vh;
     width: 62vw;
     height: 75vh;
-
+    grid-column: 1;
 }
 
 #react {
-    display: inline-block;
+    grid-column: 2;
 }
 
 #info_point {
-    display: inline-block;
+    display: grid;
     width: 30vw;
+    height: 75vh;
     margin-right: 2vw;
     margin-left: 3.5vw;
+    grid-template-rows: 82% 18%;
 }
 
 #info_point h1 {
@@ -75,19 +82,20 @@
 }
 
 #non_button {
-    position: absolute;
-    top: 0;
-    margin-top: 17.4vh;
+    grid-row: 1;
 }
 
 #button {
-    position: relative;
-    bottom: 2vh;
+    grid-row: 2;
 }
 
 @media screen and (max-width: 1300px) {
     #non_button {
         position: static;
+    }
+
+    #principal {
+        display: block;
     }
 
     #map {
@@ -99,6 +107,7 @@
 
     #react{
         display: block;
+        float: none;
         width: 90vw;
         height: 22vh;
         margin: 0;
@@ -106,6 +115,7 @@
     }
 
     #info_point {
+        display: block;
         margin: 0;
         position: static;
         width: 100%;
@@ -132,7 +142,7 @@
     }
 
     #info_point p {
-        font-size: 10px;
+        font-size: 12px;
     }
 
     #more_info, #view_rute {
@@ -140,7 +150,7 @@
         margin: 0;
         width: 40vw;
     }
-
+ 
     #view_rute {
         float: right;
     } 
