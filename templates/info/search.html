@@ -5,9 +5,8 @@
     <title>Organizations | Small Actions</title>
     <link href="{% static 'info/css/search.css' %}" rel="stylesheet">
 
-    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
 {% endblock %}
 
 {% block content %}
@@ -20,7 +19,7 @@
     </div>
     {% csrf_token %}
     <div id="react"></div>
-    <script src="{% static 'info/javascript/reactOrganizations.js' %}" type='text/babel'></script>
+    <script src="{% static 'info/javascript/reactOrganizations.js' %}"></script>
 
     <div id="org">
         <h3>Organizaciones que trabajan con Small Actions</h3>
