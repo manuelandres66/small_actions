@@ -23,6 +23,10 @@ class Organization(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    def get_points(self):
+        return len(self.help_points.all())
+
+
 class HelpPhoto(models.Model):
     photo = models.ImageField(upload_to="help", blank=True, null=True)
 

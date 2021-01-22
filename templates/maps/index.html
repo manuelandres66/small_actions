@@ -13,8 +13,10 @@
 {% endblock %}
     
 {% block content %}
-    <div id="map"></div> 
-    <div id="react"></div>
+    <div id="principal">
+        <div id="map"></div> 
+        <div id="react"></div>
+    </div>
     {% csrf_token %}
     <script src="{% static 'maps/javascript/reactIndex.js' %}"></script>
 {% endblock %}

@@ -1,10 +1,10 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 const Result = props => {
-  return /*#__PURE__*/React.createElement("a", {
+  return React.createElement("a", {
     href: props.url,
     className: "result"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, props.name), /*#__PURE__*/React.createElement("h6", null, props.organization)));
+  }, React.createElement("div", null, React.createElement("h4", null, props.name), React.createElement("h6", null, props.organization)));
 };
 
 class App extends React.Component {
@@ -47,23 +47,23 @@ class App extends React.Component {
   }
 
   render() {
-    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    return React.createElement("div", null, React.createElement("div", {
       id: "searchBar"
-    }, /*#__PURE__*/React.createElement("input", {
+    }, React.createElement("input", {
       type: "text",
       id: "search",
       onChange: this.search,
       autoComplete: "off",
       placeholder: "Buscar Lugares"
-    }), /*#__PURE__*/React.createElement("div", {
+    }), React.createElement("div", {
       id: "search_container"
-    }, /*#__PURE__*/React.createElement("i", {
+    }, React.createElement("i", {
       className: "fas fa-search",
       id: "search"
-    }))), /*#__PURE__*/React.createElement("div", {
+    }))), React.createElement("div", {
       id: "results"
     }, this.state.results.map(result => {
-      return /*#__PURE__*/React.createElement(Result, {
+      return React.createElement(Result, {
         name: result.name,
         organization: result.organization,
         url: result.url,
@@ -75,4 +75,4 @@ class App extends React.Component {
 }
 
 ;
-ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('react'));
+ReactDOM.render( React.createElement(App, null), document.getElementById('react'));

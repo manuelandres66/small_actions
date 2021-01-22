@@ -116,26 +116,26 @@ class App extends React.Component {
   }
 
   render() {
-    return /*#__PURE__*/React.createElement("div", {
+    return React.createElement("div", {
       id: "info_point"
-    }, /*#__PURE__*/React.createElement("div", {
+    }, React.createElement("div", {
       id: "non_button"
-    }, /*#__PURE__*/React.createElement("h1", null, this.state.name), /*#__PURE__*/React.createElement("div", {
+    }, React.createElement("h1", null, this.state.name), React.createElement("div", {
       id: "grid_info"
-    }, /*#__PURE__*/React.createElement("div", {
+    }, React.createElement("div", {
       className: "info_grid"
-    }, /*#__PURE__*/React.createElement("h6", null, "Categoria:"), /*#__PURE__*/React.createElement("h6", null, "Organizaci\xF3n:")), /*#__PURE__*/React.createElement("div", {
+    }, React.createElement("h6", null, "Categoria:"), React.createElement("h6", null, "Organizaci\xF3n:")), React.createElement("div", {
       className: "info_grid",
       id: "info_type"
-    }, /*#__PURE__*/React.createElement("h6", null, this.state.type), /*#__PURE__*/React.createElement("h6", null, this.state.organization))), /*#__PURE__*/React.createElement("p", null, this.state.description)), /*#__PURE__*/React.createElement("div", {
+    }, React.createElement("h6", null, this.state.type), React.createElement("h6", null, this.state.organization))), React.createElement("p", null, this.state.description)), React.createElement("div", {
       id: "button"
-    }, /*#__PURE__*/React.createElement("a", {
+    }, React.createElement("a", {
       href: this.state.uuid
-    }, /*#__PURE__*/React.createElement("button", {
+    }, React.createElement("button", {
       id: "more_info"
-    }, "Informaci\xF3n")), /*#__PURE__*/React.createElement("a", {
+    }, "Informaci\xF3n")), React.createElement("a", {
       href: this.state.url
-    }, /*#__PURE__*/React.createElement("button", {
+    }, React.createElement("button", {
       id: "view_rute"
     }, "Ver Ruta"))));
   }
@@ -143,4 +143,4 @@ class App extends React.Component {
 }
 
 ;
-ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('react'));
+ReactDOM.render( React.createElement(App, null), document.getElementById('react'));

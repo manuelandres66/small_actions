@@ -36,8 +36,6 @@ class App extends React.Component {
                     this.setState({
                         results: data.results
                     });
-                    // console.log(data);
-                    console.log(this.state);
                 };
             })
         };

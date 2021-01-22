@@ -4,6 +4,7 @@
 {% block head %}
     <title>Organizations | Small Actions</title>
     <link href="{% static 'info/css/search.css' %}" rel="stylesheet">
+
     <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -17,6 +18,16 @@
         </div>
         <div id="image"></div>
     </div>
+    {% csrf_token %}
     <div id="react"></div>
-    <script src="reactOrganizations.js" ></script>
-{% endblock %}
+    <script src="{% static 'info/javascript/reactOrganizations.js' %}" type='text/babel'></script>
+
+    <div id="org">
+        <h3>Organizaciones que trabajan con Small Actions</h3>
+        <div id="photos">
+            {% for photo in photos %}
+                <img src="{{photo.image.url}}">
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %} 
