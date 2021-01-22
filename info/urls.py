@@ -5,5 +5,5 @@ urlpatterns = [
     path('organizations', views.search, name='searchOrganization'),
     path('become', views.become, name='become'),
 
-    path('api/organizations', views.api_search, name='apiSearch')
+    path('api/organizations', views.api_search, name='apiSearchOrg')
 ]

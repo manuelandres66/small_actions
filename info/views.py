@@ -13,7 +13,7 @@ def search(request):
     photos = Organization.objects.annotate(p_count=Count('help_points')).order_by('-p_count')[:8]
     return render(request, 'info/search.html', {'photos' : photos})
 
-def api_search(request):
+def api_search(request): 
     if request.method != "POST":
         return JsonResponse({'error' : 'The request must be POST'}, status=400)
     data = json.loads(request.body)
