@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %} 
+{% load cache %}
 <html lang="es">
     <head>
         <script src="https://kit.fontawesome.com/7c5129238c.js" crossorigin="anonymous"></script>
@@ -20,6 +21,7 @@
         <meta name="robots" content="index, follow">
     </head>
     <body>
+        {% cache 900 navbar %}
         <header id="all_bar">
             <div id="superior">
                 <img src="{% static 'maps/images/logo.svg' %}" id="principal_logo" alt="logo">
@@ -59,6 +61,9 @@
             </div>
             <script src="{% static 'maps/javascript/nav.js' %}"></script>
         </header>
+        {% endcache %}
+
+
         {% block content %}
         {% endblock %}
 
