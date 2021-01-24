@@ -155,3 +155,109 @@ html[theme='dark-mode'] #image {
     font-weight: 300;
     margin-top: 2vh;
 }
+
+@media screen and (max-width: 1024px) {
+    #grid_titles {
+        display: block;
+    }
+
+    #grid_titles div {
+        display: block;
+        height: auto;
+    }
+
+    #grid_titles #image {
+        display: none;
+    }
+
+    #grid_titles h1 {
+        font-size: 35px;
+        font-weight: 600;
+        margin-top: 4vh;
+    }
+
+    #grid_titles h2 {
+        font-size: 25px;
+        font-weight: 300;
+    }
+
+    #react {
+        margin-top: 5vh;
+        min-height: 288px;
+    }
+
+    #content input {
+        width: 86.5%;
+        height: 29px;
+        font-size: 15px;
+        padding: 1px 5.5vw;
+    }
+
+    #search_results {
+        margin-top: 16px;
+    }
+
+    .result {
+        width: 40vw;
+        margin-bottom: 8px;
+    }
+
+    .result h4 {
+        font-size: 15px;
+    }
+
+    .result h6 {
+        font-size: 12px;
+    }
+
+    .result:nth-child(even) {
+        text-align: right;
+    }
+
+    #org {
+        margin-top: 2.5vh;
+    }
+
+    #org h3 {
+        font-size: 20px;
+        text-align: center;
+        margin: 0;
+    }
+
+    @keyframes slice{
+        form {transform: translate(0);}
+        to {transform: translate(-264vw);}
+    }
+    
+
+    #photos {
+        margin-top: 3.5vh;
+        width: 528vw;
+    }
+
+    #photos img {
+        width: 30vw;
+        margin-left: 3vw;
+        height: 11vh;
+    }
+
+    #last_info {
+        display: block;
+        margin-top: 8vh;
+    }
+
+    #last_info div {
+        width: 85%;
+        margin-left: 7.5%;
+    }
+
+    #last_info div h4 , #last_info div h5 {
+        font-size: 20px;
+    }
+
+    #last_info div p {
+        font-size: 12px;
+        margin-bottom: 5vh;
+        margin-top: 1vh;
+    }
+}
