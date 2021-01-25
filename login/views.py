@@ -54,7 +54,6 @@ def account(request):
     user = User.objects.get(username=request.user)
     index = list(User.objects.order_by('-points')).index(user) + 1
     form = ChangeUser()
-    print(cache.get('navbar'))
 
     if request.method == "POST":
         form = ChangeUser(request.POST, request.FILES)

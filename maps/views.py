@@ -56,7 +56,6 @@ def go(request, uuid):
                     current_user.visited.add(help_point)
                     current_user.save()
                     new_ranking = current_user.get_ranking()
-                    print(old_ranking, new_ranking)
 
                     return redirect(reverse('congratulations') + f'?i={old_ranking - new_ranking}&p={help_point.points_for_completed}') #Redirect
                 else:
