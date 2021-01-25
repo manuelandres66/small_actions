@@ -24,7 +24,7 @@ def api_search(request):
         search = search | Organization.objects.filter(quote__contains=data['search'])
 
         response = {'results' : []}
-        for organi in search[:10]:
+        for organi in search[:8]:
             response['results'].append({
                 'name': organi.name,
                 'number_points' : organi.get_points(),

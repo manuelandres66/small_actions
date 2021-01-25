@@ -210,7 +210,7 @@ span {
     }
 
     #map_container p {
-        font-size: 11px;
+        font-size: 12px;
         display: block;
         width: 100%;
         margin: 0;
@@ -237,7 +237,7 @@ span {
     }
 
     #recomedations p {
-        font-size: 10px;
+        font-size: 12px;
     }
 
     #organization_info {
@@ -271,7 +271,7 @@ span {
     }
 
     #org_descrp {
-        font-size: 11px;
+        font-size: 12px;
         display: block;
     }
 
@@ -285,6 +285,7 @@ span {
 
     .slice {
         height: 20vh;
+        width: 30vw;
     }
 
 }

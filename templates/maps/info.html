@@ -1,6 +1,7 @@
 {% extends 'maps/nav.html' %}
 
 {% load static %}
+{% load cache %}
   
 {% block head %}
     <title>{{point.name}} | Small Actions</title>
@@ -35,7 +36,7 @@
             <h3>{{point.organization.name}}</h3>
             <div>
                 <i class="fas fa-circle" id="frist"></i>
-                <img src="{{point.organization.circular_icon.url}}">
+                <img src="{{point.organization.circular_icon.url}}" alt="circular_icon">
             </div>
             <div id="org_info">   
                 <p id="org_descrp">{{point.organization.short_description}}</p>
@@ -44,6 +45,8 @@
 
         </div>
     </div>
+
+    {% cache 500 infoimg %}
     <div id="images">
         {% for photo in point.photos.all %}
             <img src="{{photo.photo.url}}" class="slice" alt="slice">
@@ -52,6 +55,8 @@
             <img src="{{photo.photo.url}}" class="slice" alt="slice">
         {% endfor %}
     </div>
+    {% endcache %}
+
     <script src="{% static 'maps/javascript/singleMap.js' %}"></script>
     <script src="{% static 'maps/javascript/slicer.js' %}"></script>
 {% endblock %}

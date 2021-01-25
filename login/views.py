@@ -7,6 +7,8 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 
 from .forms import FormLogin, FromCreateUser, ChangeUser, FormPassword, ResetPassword, FormForgot
 from .models import User
@@ -29,6 +31,9 @@ def entry(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                #Cleand Nav Cache
+                cache.delete(make_template_fragment_key('navbar'))
+
                 if 'next' in request.POST and request.POST['next'] != '':
                     return redirect(request.POST['next'])
                 return redirect(reverse('index'))
@@ -39,6 +44,9 @@ def entry(request):
 
 def out(request):
     logout(request)
+    #Cleand Nav Cache
+    cache.delete(make_template_fragment_key('navbar'))
+
     return redirect(reverse('index'))
 
 @login_required(login_url='/account/login')
