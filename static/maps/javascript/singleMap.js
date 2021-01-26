@@ -3,7 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFudWVsMTJhdm8iLCJhIjoiY2tneWE3eWFhMGZjdjJ4b
 
 let longitude = document.querySelector('#longitude').innerHTML.replace(',', '.');
 let latitude = document.querySelector('#latitude').innerHTML.replace(',', '.');
-console.log(longitude, latitude)
+
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',

@@ -364,6 +364,38 @@ span {
 
     #comments {
         margin-top: 30vh;
+
+    }
+
+    #for_flex {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: space-between;
+    }
+
+    #id_comment {
+        width: 85%;
+        font-size: 15px;
+    }
+
+    .comment {
+        margin-top: 4vh;
+        flex-grow: 1;
+        display: block;
+    }
+
+    .comment_comment div {
+        width: 120%;
+    }
+
+    .comment_comment h6, .comment_comment h5 {
+        font-size: 13px;
+    }
+
+    .comment_comment p {
+        font-size: 12px;
+        width: 120%;
     }
 
 }
