@@ -50,8 +50,11 @@ class Results extends React.Component {
       type: "text",
       autoComplete: "off",
       placeholder: "Buscar Organizaciones",
-      onChange: this.search
-    }), React.createElement("div", {
+      onChange: this.search,
+      id: "serach_bar"
+    }), React.createElement("label", {
+      htmlFor: "serach_bar"
+    }, "Search"), React.createElement("div", {
       id: "search_results"
     }, this.state.results.map(result => {
       return React.createElement(Result, {
