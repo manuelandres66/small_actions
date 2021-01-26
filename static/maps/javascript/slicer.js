@@ -60,3 +60,9 @@ window.addEventListener('load', () => {
     }, 50);
 
 });
+
+//Send Icon
+
+document.querySelector('#send_icon').addEventListener('click', () => {
+    document.querySelector('form').submit();
+});

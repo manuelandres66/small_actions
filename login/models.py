@@ -15,7 +15,5 @@ class User(AbstractUser):
     date_forgot = models.DateTimeField(auto_now_add=True)
     random_string = models.CharField(max_length=20, blank=True, null=True, unique=True)
 
-
-
     def get_ranking(self):
         return list(User.objects.all().order_by('-points')).index(User.objects.get(username=self.username))

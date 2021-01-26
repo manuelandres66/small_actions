@@ -5,7 +5,10 @@ from . import models
 class HelpAdmin(admin.ModelAdmin):
     filter_horizontal = ("photos", "comments")
 
+class CommentAdmin(admin.ModelAdmin):
+    filter_horizontal = ("responses", )
+
 admin.site.register(models.Help, HelpAdmin)
 admin.site.register(models.Organization)
 admin.site.register(models.HelpPhoto)
-admin.site.register(models.Comment)
+admin.site.register(models.Comment, CommentAdmin)

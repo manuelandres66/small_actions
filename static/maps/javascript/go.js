@@ -1,10 +1,10 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFudWVsMTJhdm8iLCJhIjoiY2tneWE3eWFhMGZjdjJ4bjUxaXR0cTBnNSJ9.c5ue5ns5clGrxZoG6WiEsw';
 
-const lat = parseFloat(document.querySelector('#latitude').innerHTML);
-const long = parseFloat(document.querySelector('#longitude').innerHTML);
+const lat = parseFloat(document.querySelector('#latitude').innerHTML.replace(',', '.'));
+const long = parseFloat(document.querySelector('#longitude').innerHTML.replace(',', '.'));
 
-let userLat = document.querySelector('#user_latitude').innerHTML;
-let userLong = document.querySelector('#user_longitude').innerHTML;
+let userLat = document.querySelector('#user_latitude').innerHTML.replace(',', '.');
+let userLong = document.querySelector('#user_longitude').innerHTML.replace(',', '.');
 
 
 var map = new mapboxgl.Map({

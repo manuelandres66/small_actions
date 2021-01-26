@@ -33,6 +33,8 @@ class HelpPhoto(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey('login.User', on_delete=models.CASCADE, related_name='comments')
     comment = models.CharField(max_length=250)
+    responses = models.ManyToManyField('self', blank=True)
+    date = models.DateTimeField(auto_now_add=True)
 
 class Help(models.Model):
     uuid = ShortUUIDField()
