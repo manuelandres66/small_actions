@@ -29,7 +29,7 @@
         </div>
         <div id="links">
             <a href="{% url 'forgot' %}">¿Olvidaste tu contraseña?</a>
-            <a id="register" href="{% url 'register'%}">REGISTRATE</a>
+            <a id="register" href="{% url 'register'%}?next={{request.GET.next}}">REGISTRATE</a>
         </div>
     </div>
 {% endblock %}

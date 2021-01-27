@@ -161,7 +161,11 @@ def register(request):
                 group = Group.objects.get(name='Client')
                 new_user.groups.add(group)
                 new_user.save()
-    
+                
+                if 'next' in request.POST:
+                    next_f = request.POST['next']
+                    return redirect(reverse('login') + f'?next={next_f}')
+
                 return redirect(reverse('login'))
             else:
                 error = "Las contraseñas no coinciden"
