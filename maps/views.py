@@ -15,7 +15,7 @@ def index(request):
     return render(request, 'maps/index.html')
 
 
-def donate(request):
+def donate(request): 
     return render(request, 'maps/donate.html')
 
 def info_point(request, uuid):
