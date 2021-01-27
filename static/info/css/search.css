@@ -2,6 +2,10 @@ body {
     overflow-x: hidden;
 }
 
+label {
+    display: none;
+}
+
 #grid_titles {
     display: grid;
     grid-template-columns: 49.5% 50.5%;

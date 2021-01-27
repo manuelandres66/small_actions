@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFudWVsMTJhdm8iLCJhIjoiY2tneWE3eWFhMGZjdjJ4bjUxaXR0cTBnNSJ9.c5ue5ns5clGrxZoG6WiEsw';
 
-let longitude = document.querySelector('#longitude').innerHTML;
-let latitude = document.querySelector('#latitude').innerHTML;
+let longitude = document.querySelector('#longitude').innerHTML.replace(',', '.');
+let latitude = document.querySelector('#latitude').innerHTML.replace(',', '.');
 
 if (longitude == 'None' || latitude == 'None') {
     longitude = -78;

@@ -11,6 +11,7 @@
         <h1>Crear Cuenta</h1>
         <span>{{error}}</span>
         <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            <input type="hidden" value="{{request.GET.next}}" name="next">
             <div id="grid">
                 <div class="input_container">
                     <i class="fas fa-user-circle"></i>
@@ -55,6 +56,7 @@
 
             <input type="submit" value="Registrarse">
         </form>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
         <script>
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);

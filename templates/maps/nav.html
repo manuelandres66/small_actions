@@ -24,16 +24,16 @@
         {% cache 900 navbar %}
         <header id="all_bar">
             <div id="superior">
-                <img src="{% static 'maps/images/logo.svg' %}" id="principal_logo" alt="logo">
+                <img src="{% static 'maps/images/logo.svg' %}" id="principal_logo" alt="logo" width="500" height="65">
                 <div id="rigth_superior">
                     {% if request.user.is_authenticated %}
                         <h6>{{request.user.points}} Puntos</h6>
                         
 
                         {% if request.user.photo %}
-                            <a href="{% url 'account' %}"><img src="{{request.user.photo.url}}" alt="account" id="porfile_photo_nav"></a>
+                            <a href="{% url 'account' %}"><img src="{{request.user.photo.url}}" alt="account" id="porfile_photo_nav" width="70" height="70"></a>
                         {% else %}
-                            <a href="{% url 'account' %}"><img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account"></a>
+                            <a href="{% url 'account' %}"><img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account" width="70" height="70"></a>
                         {% endif %}
                     
                     {% else %}

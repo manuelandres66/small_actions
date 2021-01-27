@@ -179,7 +179,81 @@ span {
     height: 35vh;
     width: 30vw;
     object-fit: cover;
-    
+}
+
+#comments {
+    margin-top: 50vh;
+    width: 90vw;
+    margin-left: 5vw;
+    margin-bottom: 5vh;
+}
+
+.comment {
+    display: flex;
+    margin-top: 2.5vh;
+}
+
+.comment img {
+    border-radius: 50px;
+    width: 7vh;
+    height: 7vh;
+    object-fit: cover;
+    display: inline-block;
+}
+
+.comment_comment {
+    display: inline-block;
+    margin-left: 3vw;
+    height: 7vh;
+    width: 60vw;
+}
+
+.comment_comment div {
+    width: 12vw;
+}
+
+.comment_comment h6, .comment_comment h5  {
+    font-size: 15px;
+    display: inline-block;
+}
+
+.comment_comment h5 {
+    font-weight: 300;
+    margin-left: 0.5vw;
+    opacity: 0.7;
+    float: right;
+}
+
+.comment_comment p {
+    margin-top: 0.5vh;
+    text-align: justify;
+}
+
+.response {
+    margin-left: 15vw;
+    display: none;
+}
+
+#id_comment {
+    width: 90%;
+    margin-bottom: 5vh;
+    border: none;
+    border-bottom: 2px solid #000;
+    font-size: 18px;
+    padding-bottom: 1vh;
+    padding-left: 1vw;
+
+    transition: border 0.2s;
+}
+
+#id_comment:hover {
+    border-bottom: 2px solid #ff3a3a;
+}
+
+#send_icon {
+    font-size: 22px;
+    margin-left: 1vw;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1300px) {
@@ -286,6 +360,42 @@ span {
     .slice {
         height: 20vh;
         width: 30vw;
+    }
+
+    #comments {
+        margin-top: 30vh;
+
+    }
+
+    #for_flex {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: space-between;
+    }
+
+    #id_comment {
+        width: 85%;
+        font-size: 15px;
+    }
+
+    .comment {
+        margin-top: 4vh;
+        flex-grow: 1;
+        display: block;
+    }
+
+    .comment_comment div {
+        width: 120%;
+    }
+
+    .comment_comment h6, .comment_comment h5 {
+        font-size: 13px;
+    }
+
+    .comment_comment p {
+        font-size: 12px;
+        width: 120%;
     }
 
 }

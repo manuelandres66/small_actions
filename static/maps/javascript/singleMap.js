@@ -1,7 +1,8 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFudWVsMTJhdm8iLCJhIjoiY2tneWE3eWFhMGZjdjJ4bjUxaXR0cTBnNSJ9.c5ue5ns5clGrxZoG6WiEsw';
+ 
 
-const longitude = document.querySelector('#longitude').innerHTML;
-const latitude = document.querySelector('#latitude').innerHTML;
+let longitude = document.querySelector('#longitude').innerHTML.replace(',', '.');
+let latitude = document.querySelector('#latitude').innerHTML.replace(',', '.');
 
 const map = new mapboxgl.Map({
     container: 'map',
@@ -9,6 +10,7 @@ const map = new mapboxgl.Map({
     center: [longitude, latitude], // starting position
     zoom: 13, // starting zoom
 });
+
 
 map.addControl(new mapboxgl.NavigationControl());
 

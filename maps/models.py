@@ -30,6 +30,12 @@ class Organization(models.Model):
 class HelpPhoto(models.Model):
     photo = models.ImageField(upload_to="help", blank=True, null=True)
 
+class Comment(models.Model):
+    user = models.ForeignKey('login.User', on_delete=models.CASCADE, related_name='comments')
+    comment = models.CharField(max_length=250)
+    responses = models.ManyToManyField('self', blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
 class Help(models.Model):
     uuid = ShortUUIDField()
     latitude = models.DecimalField(max_digits=8, decimal_places=6)
@@ -42,6 +48,7 @@ class Help(models.Model):
     photos = models.ManyToManyField(HelpPhoto)
     temporal_code = models.CharField(max_length=11)
     points_for_completed = models.PositiveIntegerField(default=10)
+    comments = models.ManyToManyField(Comment)
 
 
     def __str__(self):

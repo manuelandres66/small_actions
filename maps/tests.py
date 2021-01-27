@@ -119,6 +119,16 @@ class apitest(TestCase):
         new_points = User.objects.get(username=self.user.username).points
         self.assertEqual(new_points, 10)
 
+    def test_comment(self):
+        c = Client()
+        c.login(username="PEPE", password="hola1234")
+        response = c.post(reverse('info', kwargs={'uuid' : self.example.uuid}), {'comment' : 'este sitio es genial'})
+
+        help_point = models.Help.objects.get(uuid=self.example.uuid)
+        number_comments = len(help_point.comments.all())
+        self.assertEqual(number_comments, 1)
+
+
     def test_places(self):
         user = User.objects.get(username='PEPE')
 

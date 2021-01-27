@@ -2,8 +2,8 @@ from django.shortcuts import render, reverse, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from .models import Help
-from .forms import FromCode
+from .models import Help, Comment
+from .forms import FromCode, CommentForm
 from login.models import User
 
 import json
@@ -15,12 +15,27 @@ def index(request):
     return render(request, 'maps/index.html')
 
 
-def donate(request):
+def donate(request): 
     return render(request, 'maps/donate.html')
 
 def info_point(request, uuid):
     help_point = Help.objects.get(uuid=uuid)
-    ctx = {'point' : help_point}
+    comments = help_point.comments.all().order_by('-date')
+    form = CommentForm()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = Comment.objects.create(
+                comment= form.cleaned_data['comment'],
+                user= request.user
+            )
+            help_point.comments.add(new_comment)
+            help_point.save()
+            return redirect(reverse('info', kwargs={'uuid' : uuid}))
+
+
+    ctx = {'point' : help_point, 'comments' : comments, 'form' : form}
     return render(request, 'maps/info.html', ctx)
 
 def points(request):

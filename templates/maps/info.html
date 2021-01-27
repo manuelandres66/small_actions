@@ -49,14 +49,52 @@
     {% cache 500 infoimg %}
     <div id="images">
         {% for photo in point.photos.all %}
-            <img src="{{photo.photo.url}}" class="slice" alt="slice">
+            <img src="{{photo.photo.url}}" class="slice" alt="slice" width="1920" height="400">
         {% endfor %}
         {% for photo in point.photos.all %}
-            <img src="{{photo.photo.url}}" class="slice" alt="slice">
+            <img src="{{photo.photo.url}}" class="slice" alt="slice" width="1920" height="400">
         {% endfor %}
-    </div>
+    </div> 
     {% endcache %}
 
-    <script src="{% static 'maps/javascript/singleMap.js' %}"></script>
+    <div id="comments">
+        {% if request.user.is_authenticated %}
+            <form method="POST"> {% csrf_token %}
+                {{form.comment}}
+                <i class="far fa-paper-plane" id="send_icon"></i>
+                {{form.comment.errors}}
+            </form>
+        {% endif %}
+
+        <div id="for_flex">
+            {% for comment in comments %}
+            <div class="comment">
+                {% if comment.user.photo %}
+                    <img src="{{comment.user.photo.url}}" alt="{{comment.user.username}}" width="300" height="300">
+                {% else %}
+                    <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="{{comment.user.username}}" width="300" height="300"> 
+                {% endif %}
+    
+                <div class="comment_comment">
+                    <div>
+                        <h6>{{comment.user.username}}</h6>
+                        <h5>{{comment.date | date:"d/m/Y"}}</h5>
+                    </div>
+                    <p>{{comment.comment}}</p>
+                </div>
+    
+    
+                <!-- {% for response in comment.responses.all %}
+                    <div class="response">
+                        <h6>{{response.user.username}}</h6>
+                        <p>{{response.comment}}</p>
+                    </div>
+                {% endfor %} -->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
     <script src="{% static 'maps/javascript/slicer.js' %}"></script>
+    <script src="{% static 'maps/javascript/singleMap.js' %}"></script>
 {% endblock %}

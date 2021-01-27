@@ -44,7 +44,8 @@ class Results extends React.Component {
     render() {
         return (
             <div id='content'>
-                <input type='text' autoComplete="off" placeholder="Buscar Organizaciones" onChange={this.search}/>
+                <input type='text' autoComplete="off" placeholder="Buscar Organizaciones" onChange={this.search} id="serach_bar"/>
+                <label htmlFor="serach_bar">Search</label>
                 <div id='search_results'>
                     {this.state.results.map(result => {
                         return <Result name={result.name} places={result.number_points} url={result.url} key={result.name}/>
