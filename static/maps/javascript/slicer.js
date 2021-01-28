@@ -62,7 +62,10 @@ window.addEventListener('load', () => {
 });
 
 //Send Icon
+const icon = document.querySelector('#send_icon');
 
-document.querySelector('#send_icon').addEventListener('click', () => {
-    document.querySelector('form').submit();
-});
+if (icon != null ) {
+    icon.addEventListener('click', () => {
+        document.querySelector('form').submit();
+    });
+}
