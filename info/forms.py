@@ -1,5 +1,5 @@
 from django import forms
-from maps.models import Organization
+from .models import Organization
 
 class NewOrganization(forms.ModelForm):
 

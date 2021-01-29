@@ -1,0 +1,56 @@
+#title img {
+    width: 40vw;
+    height: 15vh;
+    object-fit: contain;
+    margin-left: 25vw;
+    position: relative;
+    bottom: 4vh;
+}
+
+#title {
+    width: 90%;
+    height: 20vh;
+    margin-left: 5%;
+    margin-top: 5vh;
+    z-index: 10;
+
+    background: #f18f8f25;
+    box-shadow: 0 8px 32px 0 rgba(82, 4, 4, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px; 
+}
+
+#title div {
+    background: #f18f8f25;
+    box-shadow: 0 8px 32px 0 rgba(82, 4, 4, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px; 
+}
+
+#title #small_rectangle {
+    width: 3vw;
+    height: 3vw;
+    position: relative;
+    bottom: 3vh;
+    margin-left: 7vw;
+}
+
+#title #circle_small {
+    width: 2.5vw;
+    height: 2.5vw;
+    border-radius: 50%;
+    position: relative;
+    right: 2vw;
+    margin-top: 1vh;
+} 
+
+#title #big_rectangle {
+    width: 7vw;
+    height: 7vw;
+    float: right;
+    position: relative;
+    bottom: 13vh;
+    right: 5vw;
+}

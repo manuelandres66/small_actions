@@ -32,7 +32,7 @@
                 <p>{{point.recomedations}}</p>
             </div>
         </div>
-        <div id="organization_info">
+        <div id="organization_info"><a href="{% url 'org' point.id %}">
             <h3>{{point.organization.name}}</h3>
             <div>
                 <i class="fas fa-circle" id="frist"></i>
@@ -43,7 +43,7 @@
                 <p id="org_quote">“{{point.organization.quote}}”</p>
             </div>
 
-        </div>
+        </a></div>
     </div>
 
     {% cache 500 infoimg %}

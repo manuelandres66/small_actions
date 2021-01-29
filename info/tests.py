@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.shortcuts import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from maps.models import Organization
+from .models import Organization
 from .forms import NewOrganization
 
 import json

@@ -1,14 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.conf import settings
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.db.models import Count
 
 from .forms import NewOrganization
-from maps.models import Organization
+from .models import Organization
 
 import json
 # Create your views here.
+def organization(request, pk):
+    org = Organization.objects.get(pk=pk)
+    return render(request, 'info/org.html', {'org' : org})
+
 def search(request):
     photos = Organization.objects.annotate(p_count=Count('help_points')).order_by('-p_count')[:8]
     return render(request, 'info/search.html', {'photos' : photos})
@@ -28,7 +32,7 @@ def api_search(request):
             response['results'].append({
                 'name': organi.name,
                 'number_points' : organi.get_points(),
-                'url' : '/'
+                'url' : reverse('org', kwargs={'pk' : organi.id})
             })
 
         return JsonResponse(response, status=200)

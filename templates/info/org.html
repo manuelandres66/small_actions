@@ -1,0 +1,23 @@
+{% extends 'maps/nav.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Organización: {{org.name}}</title>
+    <link href="{% static 'info/css/org.css' %}" rel="stylesheet">
+{% endblock %}
+     
+{% block content %}
+    <div id="title">
+        <div id="small_rectangle"></div>
+        <img src="{{org.image.url}}" alt="logo" width="960" height="90">
+        <div id="circle_small"></div>
+        <div id="big_rectangle"></div>
+    </div>
+    <div>
+        <div>
+            <div></div>
+            <i class="fab fa-whatsapp"></i>
+            <h3>{{org}}</h3>
+        </div>
+    </div>
+{% endblock %}
