@@ -6,5 +6,6 @@ urlpatterns = [
     path('become', views.become, name='become'),
     path('organization/<int:pk>', views.organization, name='org'),
 
-    path('api/organizations', views.api_search, name='apiSearchOrg')
+    path('api/organizations', views.api_search, name='apiSearchOrg'),
+    path('api/orgpoints', views.api_org, name='apiHelpOrg')
 ]

@@ -16,7 +16,7 @@ def index(request):
 
 
 def donate(request): 
-    return render(request, 'maps/donate.html')
+    return render(request, 'maps/donate.html') 
 
 def info_point(request, uuid):
     help_point = Help.objects.get(uuid=uuid)

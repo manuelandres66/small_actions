@@ -32,7 +32,7 @@
                 <p>{{point.recomedations}}</p>
             </div>
         </div>
-        <div id="organization_info"><a href="{% url 'org' point.id %}">
+        <div id="organization_info"><a href="{% url 'org' point.organization.id %}">
             <h3>{{point.organization.name}}</h3>
             <div>
                 <i class="fas fa-circle" id="frist"></i>
