@@ -17,8 +17,8 @@ class Comment(models.Model):
 
 class Help(models.Model):
     uuid = ShortUUIDField()
-    latitude = models.DecimalField(max_digits=8, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=10, decimal_places=8)
+    longitude = models.DecimalField(max_digits=11, decimal_places=8)
     name = models.CharField(max_length=20)
     short_description = models.TextField(max_length=900)
     recomedations = models.TextField(max_length=900)
@@ -27,7 +27,7 @@ class Help(models.Model):
     photos = models.ManyToManyField(HelpPhoto)
     temporal_code = models.CharField(max_length=11)
     points_for_completed = models.PositiveIntegerField(default=10)
-    comments = models.ManyToManyField(Comment)
+    comments = models.ManyToManyField(Comment, blank=True)
 
 
     def __str__(self):

@@ -5,8 +5,8 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser): 
     points = models.PositiveIntegerField(default=0)
     photo = models.ImageField(upload_to="people", null=True, blank=True)
-    latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, blank=True)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    latitude = models.DecimalField(max_digits=10, decimal_places=8, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=11, decimal_places=8, null=True, blank=True)
     visited = models.ManyToManyField('maps.Help', related_name="persons_visited", null=True, blank=True)
     can_change = models.BooleanField(null=True, blank=True) #Security
     dark_mode = models.BooleanField(default=False)
