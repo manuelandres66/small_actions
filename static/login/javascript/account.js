@@ -46,6 +46,8 @@ fetch('/account/api/account')
     })
 });
 
+
+
 //Change to inputs
 
 let countClick = 0;
@@ -54,7 +56,7 @@ const title = document.querySelector('h1');
 const email = document.querySelector('h4');
 const latitudeObject = document.getElementById('latitude');
 const longitudeObject = document.getElementById('longitude');
-let inArray = [title, email, latitudeObject, longitudeObject];
+let inArray = [title, email, latitudeObject, longitudeObject]; 
 const changeLink = document.querySelector('#change');
 
 const inputs = document.querySelectorAll('input');
@@ -65,7 +67,7 @@ changeLink.addEventListener('click', () => {
         //Change link iner html
         changeLink.innerHTML = 'Guardar Cambios';
         for (let i = 1; i < inputs.length - 1; i++) {
-            inputs[i].setAttribute('value', inArray[i-1].innerHTML);
+            inputs[i].setAttribute('value', inArray[i-1].innerHTML.replace(',', '.'));
         };
 
         inArray.forEach(title => title.style.display = 'none');
@@ -77,6 +79,8 @@ changeLink.addEventListener('click', () => {
 
     countClick++;
 })
+
+
 
 
 //Dark mode

@@ -1,0 +1,191 @@
+#title img {
+    width: 40vw;
+    height: 15vh;
+    object-fit: contain;
+    margin-left: 25vw;
+    position: relative;
+    bottom: 4vh;
+}
+
+#title {
+    width: 90%;
+    height: 20vh;
+    margin-left: 5%;
+    margin-top: 5vh;
+    z-index: 10;
+
+    background: #f18f8f25;
+    box-shadow: 0 8px 32px 0 rgba(82, 4, 4, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px; 
+}
+
+#title div {
+    background: #f18f8f25;
+    box-shadow: 0 8px 32px 0 rgba(82, 4, 4, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px; 
+}
+
+#title #small_rectangle {
+    width: 3vw;
+    height: 3vw;
+    position: relative;
+    bottom: 3vh; 
+    margin-left: 7vw;
+}
+
+#title #circle_small {
+    width: 2.5vw;
+    height: 2.5vw;
+    border-radius: 50%;
+    position: relative;
+    right: 2vw;
+    margin-top: 1vh;
+} 
+
+#title #big_rectangle {
+    width: 7vw;
+    height: 7vw;
+    float: right;
+    position: relative;
+    bottom: 13vh;
+    right: 5vw;
+}
+
+#for_flex {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-left: 10%;
+
+    margin-top: 13vh;
+    position: relative;
+}
+
+.flex_info a {
+    color: #000;
+    text-decoration: none;
+}
+
+.flex_info i{
+    display: block;
+    font-size: 5vh;
+    text-align: center;
+}
+
+.flex_info h5, .flex_info h4, .flex_info h3 {
+    font-size: 15px;
+    font-weight: 300;
+    padding-top: 1.5vh;
+    text-align: center;
+}
+
+.glass_info {
+    background: #f18f8f25;
+    box-shadow: 0 8px 32px 0 rgba(82, 4, 4, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+}
+
+#what_glass {
+    width: 2vw;
+    height: 2vw;
+    position: relative;
+    left: 1vw;
+    z-index: 10;
+}
+
+.flex_info:nth-child(1) i, .flex_info:nth-child(1) h3{
+    position: relative;
+    bottom: 1.5vw;
+    z-index: 1;
+}
+
+#email_glass {
+    width: 1.5vw;
+    height: 1.5vw;
+    float: right;
+    position: relative;
+    top: 3vh;
+    right: 42%;
+    border-radius: 50%;
+}
+
+#place_glass {
+    width: 1.8vw;
+    height: 1.8vw;
+    float: right;
+    position: relative;
+    right: 30%;
+    z-index: 10;
+}
+
+.flex_info:nth-child(3) i,  .flex_info:nth-child(3) h3 {
+    position: relative;
+    top: 1vh;
+    z-index: 1;
+}
+
+#description {
+    margin-top: 2.5vh;
+    width: 80vw;
+    margin-left: 10vw;
+    display: flex;
+    align-items: center;
+}
+
+#description img {
+    width: 7.5vw;
+    height: 7.5vw;
+    margin-right: 2.5vw;
+}
+
+#description p {
+    width: 70vw;
+    text-align: justify;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+#circular_glass {
+    background: #f18f8f25;
+    box-shadow: 0 8px 32px 0 rgba(82, 4, 4, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+
+    width: 4vw;
+    height: 4vw;
+    border-radius: 50%;
+    position: relative;
+    bottom: 6vh;
+    left: 14vw;
+}
+
+#quote {
+    text-align: center;
+    font-size: 40px;
+    letter-spacing: 20px;
+    position: relative;
+    bottom: 1vh;
+}
+
+#map {
+    width: 85vw;
+    height: 50vh;
+    margin: 7vh 7.5vw;
+}
+
+.maps_links {
+    font-size: 15px;
+    font-weight: 200;
+}
+
+.maps_title {
+    font-size: 20px;
+    font-weight: 600;
+}

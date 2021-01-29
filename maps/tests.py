@@ -65,7 +65,7 @@ class apitest(TestCase):
         self.assertEqual(data['points'], [
             {
                 'name' : "Cole",
-                'cordinates' : ['-77.276000', '1.215000'],
+                'cordinates' : ['-77.27600000', '1.21500000'],
                 'category' : "Cole",
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
@@ -74,7 +74,7 @@ class apitest(TestCase):
             },
             {
                 'name' : "Exito",
-                'cordinates' : ['-77.279000', '1.215000'],
+                'cordinates' : ['-77.27900000', '1.21500000'],
                 'category' : "Exito",
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
@@ -143,14 +143,14 @@ class apitest(TestCase):
         self.assertEqual(data, {'places' : [
             {
                 'name' : 'Cole',
-                'latitude' : '1.215000',
-                'longitude' : '-77.276000',
+                'latitude' : '1.21500000',
+                'longitude' : '-77.27600000',
                 'url' : reverse('info', kwargs={'uuid' : self.example.uuid})
             },
             {
                 'name' : 'Exito',
-                'latitude' : '1.215000',
-                'longitude' : '-77.279000',
+                'latitude' : '1.21500000',
+                'longitude' : '-77.27900000',
                 'url' : reverse('info', kwargs={'uuid' : self.second_example.uuid})
             }
         ]})

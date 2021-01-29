@@ -118,6 +118,11 @@ span {
     margin-left: 3vw;
     margin-top: 4vh;
     grid-column: 2;
+    text-decoration: none;
+}
+
+#organization_info a {
+    text-decoration: none;
 }
 
 #organization_info h3 {
@@ -126,6 +131,7 @@ span {
     margin-top: 3vh;
     text-align: center;
     font-weight: 600;
+    text-decoration: none;
 }
 
 #organization_info img {
@@ -135,12 +141,14 @@ span {
     object-position: center;
     margin-left: 6.5vw;
     margin-top: 4vh;
+    text-decoration: none;
 }
 
 #organization_info i {
     position: absolute;
     color: #fff;
     font-size: 20px;
+    text-decoration: none;
 }
 
 #org_descrp {
