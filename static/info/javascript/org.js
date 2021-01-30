@@ -7,7 +7,7 @@ fetch('/info/api/orgpoints', {
         'Content-Type': 'application/json',
         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
     },
-    body: JSON.stringify({'id': '1'})
+    body: JSON.stringify({'id': document.querySelector('#org_id').innerHTML})
 })
 .then(response => response.json())
 .then(data => {
@@ -100,7 +100,7 @@ fetch('/info/api/orgpoints', {
         }
          
         new mapboxgl.Popup()
-        .setLngLat(coordinates)
+        .setLngLat(coordinates) 
         .setHTML(`<h1 class='maps_title'>${title}<h1>
         <a href='${uuid}' class='maps_links'>Mas Info</a>
         <a href='${rute}' class='maps_links'>Ir ahi!</a>`)

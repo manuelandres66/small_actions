@@ -177,7 +177,7 @@
 #map {
     width: 85vw;
     height: 50vh;
-    margin: 7vh 7.5vw;
+    margin: 7vh 0 0 7.5vw;
 }
 
 .maps_links {
@@ -188,4 +188,20 @@
 .maps_title {
     font-size: 20px;
     font-weight: 600;
+}
+
+#map_glass {
+    width: 10vw;
+    height: 10vw;
+    float: right;
+
+    background: #f18f8f25;
+    box-shadow: 0 8px 32px 0 rgba(82, 4, 4, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+
+    position: relative;
+    bottom: 15vh;
+    right: 4vw;
 }
