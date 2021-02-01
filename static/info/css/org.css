@@ -172,7 +172,7 @@
     letter-spacing: 20px;
     position: relative;
     bottom: 1vh;
-}
+} 
 
 #map {
     width: 85vw;
@@ -204,4 +204,97 @@
     position: relative;
     bottom: 15vh;
     right: 4vw;
+
+    z-index: 10;
+}
+
+@media screen and (max-width: 1300px) {
+    #title img {
+        height: 10vh;
+        width: 70vw;
+        margin-left: 10vw;
+        margin-top: 2.5vh;
+    }
+
+    #title {
+        height: 15vh;
+    }
+
+    #title #small_rectangle {
+        width: 7vw;
+        height: 7vw;
+        bottom: 2vh;
+    }
+
+    #title #circle_small {
+        width: 5vw;
+        height: 5vw;
+    }
+
+    #title #big_rectangle {
+        width: 12vw;
+        height: 12vw;
+        bottom: 9vh;
+    }
+
+    #for_flex {
+        flex-direction: column;
+        margin-top: 7vh;
+    }
+
+    .flex_info {
+        margin-bottom: 7vh;
+    }
+
+    .flex_info h5, .flex_info h4, .flex_info h3 {
+        font-size: 14px;
+    }
+
+    .flex_info i {
+        font-size: 35px;
+    }
+
+    .glass_info {
+        display: none;
+    }
+
+    #description {
+        display: block;
+        width: 90vw;
+        margin-left: 5vw;
+    }
+
+    #description img {
+        height: 50vw;
+        width: 50vw;
+        margin-left: 20vw;
+    }
+
+    #description p {
+        width: 100%;
+        font-size: 14px;
+        margin-top: 2vh;
+    }
+
+    #circular_glass {
+        width: 15vw;
+        height: 15vw;
+        position: absolute;
+        left: 60vw;
+        top: 116vh;
+    }
+
+    #quote {
+        font-size: 20px;
+        letter-spacing: 10px;
+        width: 90vw;
+        margin-left: 5vw;
+        margin-top: 5vh;
+    }
+
+    #map_glass {
+        width: 30vw;
+        height: 30vw;
+        bottom: 13vh;
+    }
 }
