@@ -58,6 +58,7 @@ def account(request):
     if request.method == "POST":
         form = ChangeUser(request.POST, request.FILES)
         if form.is_valid():
+            cache.delete(make_template_fragment_key('navbar')) #Cleand Nav Cache
             user.username =  form.cleaned_data['username']
             user.email =     form.cleaned_data['email']
             user.latitude =  form.cleaned_data['latitude']

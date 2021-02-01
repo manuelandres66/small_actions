@@ -1,6 +1,8 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 
 from .models import Help, Comment
 from .forms import FromCode, CommentForm
@@ -72,6 +74,9 @@ def go(request, uuid):
                     current_user.save()
                     new_ranking = current_user.get_ranking()
 
+                    #Cleand Cache
+                    cache.delete(make_template_fragment_key('navbar'))
+
                     return redirect(reverse('congratulations') + f'?i={old_ranking - new_ranking}&p={help_point.points_for_completed}') #Redirect
                 else:
                     code_error = 'Codigo Invalido'
@@ -118,8 +123,8 @@ def all_helps(request):
             latitude_avarage = request.user.latitude
             longitude_avarage = request.user.longitude
         elif len(all_helps) > 0:
-            latitude_avarage = float("{0:.6f}".format(latitude_sum / len(all_helps)))
-            longitude_avarage = float("{0:.6f}".format(longitude_sum / len(all_helps)))
+            latitude_avarage = float("{0:.8f}".format(latitude_sum / len(all_helps)))
+            longitude_avarage = float("{0:.8f}".format(longitude_sum / len(all_helps)))
         else:
             latitude_avarage, longitude_avarage = -78, 0
 
