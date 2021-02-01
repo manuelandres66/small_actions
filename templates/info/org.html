@@ -51,7 +51,7 @@
     <div id="map"></div>
     <div id="map_glass"></div>
 
-    <span id="org_id">{{org.id}}</span>
+    <span id="org_id" style="display: none;">{{org.id}}</span>
     {% csrf_token %}
     <script src="{% static 'info/javascript/org.js' %}"></script>
 {% endblock %} 

@@ -1,6 +1,8 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 
 from .models import Help, Comment
 from .forms import FromCode, CommentForm
@@ -71,6 +73,9 @@ def go(request, uuid):
                     current_user.visited.add(help_point)
                     current_user.save()
                     new_ranking = current_user.get_ranking()
+
+                    #Cleand Cache
+                    cache.delete(make_template_fragment_key('navbar'))
 
                     return redirect(reverse('congratulations') + f'?i={old_ranking - new_ranking}&p={help_point.points_for_completed}') #Redirect
                 else:
