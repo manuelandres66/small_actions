@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.db.models import Count
+from django.views.decorators.cache import cache_page
 
 from .forms import NewOrganization
 from .models import Organization
@@ -11,6 +12,11 @@ from maps.models import Help
 
 import json
 # Create your views here. 
+
+def choose_category(request):
+    return render(request, 'info/choose.html')
+
+@cache_page(60 * 30)
 def organization(request, pk):
     org = Organization.objects.get(pk=pk)
     places = len(org.help_points.all())

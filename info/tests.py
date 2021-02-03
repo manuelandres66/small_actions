@@ -19,6 +19,11 @@ class InfoTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
+    def test_choose(self):
+        c = Client()
+        response = c.get(reverse('choose'))
+        self.assertEqual(response.status_code, 200)
+
 
 class OrgTest(TestCase):
 

@@ -49,7 +49,7 @@
                     <a href="{% url 'searchOrganization' %}">Organizaciones</a>
                     <a href="{% url 'SerchPoints' %}">Buscar Lugares</a>
                     <a href="{% url 'become' %}">Volverte una organización</a>
-                    <a href="/">Categorias</a>
+                    <a href="{% url 'choose' %}">Categorias</a>
                     <a href="{% url 'donate' %}">Donar</a>
 
                     {% if request.user.is_authenticated %}

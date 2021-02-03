@@ -23,6 +23,11 @@ class Help(models.Model):
     short_description = models.TextField(max_length=900)
     recomedations = models.TextField(max_length=900)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="help_points")
+    styles = [
+        ('D', 'Donar'),
+        ('V', 'Voluntariado')
+    ]
+    style = models.CharField(max_length=1, choices=styles, default='D')
     category = models.CharField(max_length=11)
     photos = models.ManyToManyField(HelpPhoto)
     temporal_code = models.CharField(max_length=11)
