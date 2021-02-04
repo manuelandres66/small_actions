@@ -41,7 +41,7 @@ class Help(models.Model):
     categories = [
         #Donar
         ('DAl', 'Alimentos'),
-        ('DBb', 'Atículos para Bebés'),
+        ('DBb', 'Artículos para Bebés'),
         ('DRp', 'Ropa'),
         ('DCn', 'Cocina'),
         ('DCl', 'Colchones y Frazadas'),
@@ -121,9 +121,9 @@ class Help(models.Model):
         ('DOtPelo', 'Cabello'),
         ('DotOtro', 'Otro Otro')
     ]
-    sub_category = MultiSelectField(choices=categories,
+    sub_category = MultiSelectField(choices=sub_categories,
                                 max_choices=6,
-                                max_length=7)
+                                max_length=32)
 
 
 
