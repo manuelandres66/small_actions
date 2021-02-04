@@ -2,6 +2,7 @@ from django.db import models
 from login.models import User
 from django.core.validators import RegexValidator
 
+
 # Create your models here.
 
 class Organization(models.Model):
