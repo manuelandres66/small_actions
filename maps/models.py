@@ -63,7 +63,6 @@ class Help(models.Model):
         ('VIn', 'Indigencia'),
         ('VRs', 'Reinserción Social'),
         ('VPr', 'Profesional'),
-        ('VAm', 'Medio Ambiente'),
         ('VOt', 'Otros Voluntariados')
 
     ] 
@@ -119,7 +118,52 @@ class Help(models.Model):
         ('DOtCstr', 'Material de Construccion'),
         ('DOtPint', 'Pintura'),
         ('DOtPelo', 'Cabello'),
-        ('DotOtro', 'Otro Otro')
+        ('DotOtro', 'Otro Otro'),
+
+        #Voluntariado
+
+        #Ninos
+        ('VNiNino', 'Niños'),
+        ('VNiAdol', 'Adolecentes'),
+        ('VniEmba', 'Embarazadas'),
+        #Adultos Mayores
+        ('VAdAdAd', 'Personas Mayores'),
+        #Familia
+        ('VFaAsSo', 'Asistencia Social'),
+        ('VFVivi', 'Vivienda'),
+        #Comedores
+        ('VCoNino', 'Con Niños'),
+        ('VCoAdul', 'Con Adultos'),
+        #Educacion
+        ('VEdApoy', 'Apoyo Escolar'),
+        ('VEdTall', 'Talleres'),
+        ('VEdCurs', 'Cursos'),
+        #Salud
+        ('VSlAdic', 'Adicciones'),
+        ('VSlEnfe', 'Enfermedades'),
+        ('VSlOtro', 'Otro Salud'),
+        #Discapacidad
+        ('VDsNino', 'Niños Discapacitados'),
+        ('VDsAdul', 'Adultos Discapacitados'),
+        #Indigenica
+        ('VInInIn', 'Indigencia'),
+        #Reinserecion
+        ('VRsCarc', 'Carceles'),
+        ('VRsOtro', 'Otros Centros'),
+        #Profesonal
+        ('VPrAdmi', 'Administracion'),
+        ('VPrComu', 'Comunicacion'),
+        ('VPrDere', 'Derecho'),
+        ('VPrDise', 'Diseño'),
+        ('VPrDoce', 'Docencia'),
+        ('VPrMedi', 'Medicos'),
+        ('VPrPsic', 'Psicologia'),
+        ('VPrTecn', 'Tecnologia'),
+        ('VPrCoci', 'Cocinero'),
+        #Otros
+        ('VOtAnim', 'Animales'),
+        ('VotAmbi', 'Medio Ambiente'),
+        ('VOtOtro', 'Otros Voluntariados')
     ]
     sub_category = MultiSelectField(choices=sub_categories,
                                 max_choices=6,

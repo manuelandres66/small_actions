@@ -34,19 +34,20 @@
 
 #grid_info {
     margin-top: 2.5vh;
-    display: grid;
-    grid-template-columns: repeat(2, 15vw);
-    grid-template-rows: 5vh, 7vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.info_grid h6 {
+#grid_info h6 {
     font-family: 'Sora', sans-serif;
     font-size: 30px;
     font-weight: 600;
     margin-bottom: 1vh;
+    width: 50%;
 }
 
-#info_type h6 {
+#grid_info h6:nth-child(even) {
     font-weight: 300;
     text-align: right;
 }

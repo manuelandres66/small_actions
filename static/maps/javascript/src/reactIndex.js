@@ -148,14 +148,10 @@ class App extends React.Component {
             <div id="non_button">
                 <h1>{this.state.name}</h1>
                 <div id="grid_info">
-                    <div className="info_grid">
-                        <h6>Categoria:</h6>
-                        <h6>Organización:</h6>
-                    </div>
-                    <div className="info_grid" id="info_type">
-                        <h6>{this.state.type}</h6>
-                        <h6>{this.state.organization}</h6>
-                    </div>
+                    <h6>Categoria:</h6>
+                    <h6>{this.state.type}</h6>
+                    <h6>Organización:</h6>
+                    <h6>{this.state.organization}</h6>
                 </div>
                 <p>{this.state.description}</p>
             </div>
