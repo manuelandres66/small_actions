@@ -53,8 +53,8 @@ class Help(models.Model):
         ('V', 'Voluntariado')
     ]
     mayor_category = models.CharField(max_length=1, choices=mayor_categories, default='D')
-    category = models.ForeignKey(Category, on_delete=models.RESTRICT)
-    sub_category = models.ManyToManyField(SubCategory)
+    category = models.ForeignKey(Category, on_delete=models.RESTRICT, related_name='helps')
+    sub_category = models.ManyToManyField(SubCategory, related_name='helps')
 
     def __str__(self):
         return f"{self.organization}: {self.name}"

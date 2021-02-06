@@ -9,7 +9,7 @@ from django.db.models import Q
 from .forms import NewOrganization
 from .models import Organization
 
-from maps.models import Help
+from maps.models import Help, SubCategory, Category
 
 import json
 # Create your views here. 
@@ -26,20 +26,23 @@ def api_category(request):
     data = request.GET
     
     if 'category' in data :
-        categories = Help.objects.filter(mayor_category=data['category']).values('category').distinct() #Return Unique Categories
-
-        response = {
-            data['category'] : {}
-        }
+        mayor_category = data['category']
+        categories = Category.objects.filter(code__startswith = mayor_category) #Return Categories Start Width D
+        response = {mayor_category: {}}
 
         for category in categories:
-            sub_categories = Help.objects.filter(category=category['category']) #Get Unique Sub Categories
-            response[data['category']][category['category']] = {}
+            response[mayor_category][category.code] = {}
+            sub_categories = SubCategory.objects.filter(code__startswith = category.code)
 
             for sub_category in sub_categories:
-                print(sub_category)
-                
-
+                response[mayor_category][category.code][sub_category.code] = []
+                for help_o in sub_category.helps.all():
+                    response[mayor_category][category.code][sub_category.code].append({
+                        'name' : help_o.name,
+                        'cordinates' : [help_o.longitude, help_o.latitude],
+                        'rute' : reverse('go', kwargs={'uuid' : help_o.uuid}),
+                        'uuid' : reverse('info', kwargs={'uuid' : help_o.uuid})
+                    })
 
         return JsonResponse(response)
 

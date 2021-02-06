@@ -4,7 +4,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 from .models import Organization
 from .forms import NewOrganization
-from maps.models import Help
+from maps.models import Help, Category, SubCategory
 
 import json
 # Create your tests here.
@@ -21,13 +21,17 @@ class InfoTest(TestCase):
 
     def test_choose(self):
         c = Client()
-        response = c.get(reverse('choose'))
+        response = c.get(reverse('choose')) 
         self.assertEqual(response.status_code, 200)
 
 
 class OrgTest(TestCase):
 
     def setUp(self):
+        sub_cate = SubCategory.objects.create(code='FFFfff', name='Ficcion Sub Categry')
+        cate = Category.objects.create(code='FFF', name='Ficcion')
+        cate.sub_categories.add(sub_cate)
+
         uploaded = SimpleUploadedFile('test.gif', small_gif, content_type='image/gif')
         new_org = Organization.objects.create(name="Manuels Organization", 
                 short_description="Lorem ipsum dolor sit amet consectetur adipiscing elit placerat",
@@ -35,14 +39,16 @@ class OrgTest(TestCase):
                 circular_icon = uploaded,
                 image = uploaded)
 
-        Organization.objects.create(name="Manuels test Organization", 
+        second_org = Organization.objects.create(name="Manuels test Organization", 
                 short_description="Lorem ipsum dolor sit amet consectetur adipiscing elit placerat",
                 quote="Hello My Friends",
                 circular_icon = uploaded,
                 image = uploaded)
 
+
         self.help = Help.objects.create(name="Cole", latitude=1.215, longitude=-77.276, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
-        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing..", organization=new_org, category="Cole", temporal_code='AAD-458-JJU')
+        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing..", organization=new_org, category=cate, temporal_code='AAD-458-JJU')
+        self.help.sub_category.add(sub_cate)
 
     def test_orgs(self):
         c = Client()

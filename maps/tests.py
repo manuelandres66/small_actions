@@ -41,17 +41,25 @@ class apitest(TestCase):
     def setUp(self):
         uploaded = SimpleUploadedFile('test.gif', small_gif, content_type='image/gif')
 
+        sub_cate = models.SubCategory.objects.create(code='FFFfff', name='Ficcion Sub Categry')
+        cate = models.Category.objects.create(code='FFF', name='Cole')
+        cate.sub_categories.add(sub_cate)
+
+        uploaded = SimpleUploadedFile('test.gif', small_gif, content_type='image/gif')
         new_organization = models.Organization.objects.create(name="Manuels Organization", 
-                        short_description="Lorem ipsum dolor sit amet consectetur adipiscing elit placerat",
-                        quote="Hello My Friends",
-                        circular_icon = uploaded,
-                        image = uploaded)
+                short_description="Lorem ipsum dolor sit amet consectetur adipiscing elit placerat",
+                quote="Hello My Friends",
+                circular_icon = uploaded,
+                image = uploaded)
 
         A1 = models.Help.objects.create(name="Cole", latitude=1.215, longitude=-77.276, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
-        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing..", organization=new_organization, category="Cole", temporal_code='AAD-458-JJU')
+        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing..", organization=new_organization, temporal_code='AAD-458-JJU', category=cate)
 
         A2 = models.Help.objects.create(name="Exito", latitude=1.215, longitude=-77.279, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
-        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing.", organization=new_organization, category="Exito", temporal_code='AAC-458-JJU')
+        recomedations="Lorem ipsum dolor sit amet consectetur adipiscing.", organization=new_organization, temporal_code='AAC-458-JJU', category=cate)
+
+        A1.sub_category.add(sub_cate)
+        A2.sub_category.add(sub_cate)
 
         self.example = A1
         self.second_example = A2
@@ -75,7 +83,7 @@ class apitest(TestCase):
             {
                 'name' : "Exito",
                 'cordinates' : ['-77.27900000', '1.21500000'],
-                'category' : "Exito",
+                'category' : "Cole",
                 'organization' : "Manuels Organization",
                 'description' : "Lorem ipsum dolor sit amet consectetur adipiscing.",
                 'rute' : reverse('go', kwargs={'uuid' : self.second_example.uuid}),
