@@ -138,7 +138,8 @@
     #info_point p {
         width: 100%;
     }
-    .info_grid h6 {
+    
+    #grid_info h6 {
         font-size: 15px;
     }
 
