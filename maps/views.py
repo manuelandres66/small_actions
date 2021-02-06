@@ -107,7 +107,7 @@ def all_helps(request):
             point = {
                 'name' : single.name,
                 'cordinates' : [single.longitude, single.latitude],
-                'category' : single.get_category_display(),
+                'category' : single.category.name,
                 'organization' : single.organization.name,
                 'description' : single.short_description,
                 'rute' : reverse('go', kwargs={'uuid' : single.uuid}),

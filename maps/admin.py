@@ -3,7 +3,7 @@ from . import models
 # Register your models here.
 
 class HelpAdmin(admin.ModelAdmin):
-    filter_horizontal = ("photos", "comments")
+    filter_horizontal = ("photos", "comments", "sub_category")
 
 class CommentAdmin(admin.ModelAdmin):
     filter_horizontal = ("responses", )
