@@ -11,3 +11,4 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(models.Help, HelpAdmin)
 admin.site.register(models.HelpPhoto)
 admin.site.register(models.Comment, CommentAdmin)
+admin.site.register(models.SubCategory)

@@ -18,8 +18,8 @@
         </div>
     </div>
     <script>
-        document.querySelector('.category:nth-child(1)').addEventListener('click', () => {window.location.href = "{% url 'index' %}";})
-        document.querySelector('.category:nth-child(2)').addEventListener('click', () => {window.location.href = "{% url 'index' %}";})
+        document.querySelector('.category:nth-child(1)').addEventListener('click', () => {window.location.href = "{% url 'category' 'donate' %}";})
+        document.querySelector('.category:nth-child(2)').addEventListener('click', () => {window.location.href = "{% url 'category' 'voluntary' %}";})
     </script>
 {% endblock %}
     

@@ -1,6 +1,5 @@
 from django.db import models
 from shortuuidfield import ShortUUIDField
-from multiselectfield import MultiSelectField
 
 from info.models import Organization
 from login.models import User
@@ -15,6 +14,13 @@ class Comment(models.Model):
     comment = models.CharField(max_length=250) 
     responses = models.ManyToManyField('self', blank=True)
     date = models.DateTimeField(auto_now_add=True)
+
+class SubCategory(models.Model):
+    code = models.CharField(max_length=7, unique=True)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.code} ({self.name})"
     
 
 class Help(models.Model):
@@ -67,107 +73,7 @@ class Help(models.Model):
 
     ] 
     category = models.CharField(max_length=3, choices=categories, default='DAl')
-    sub_categories = [
-        #Donar
-
-        #Alimentos
-        ('DLchPol', 'Leche en Polvo'),
-        ('DLchEnt', 'Leche Entera'),
-        ('DAlNoPe', 'No perecederos'),
-        ('DAlPere', 'Perecederos'),
-        #Para bebes
-        ('DBbPana', 'Pañales'),
-        ('DBbOtro', 'Otros (Cunas, etc)'),
-        #Ropa
-        ('DRpNino', 'Para Niños'),
-        ('DRpJove', 'Para Jóvenes'),
-        ('DRpAdul', 'Para Adultos'),
-        #Cocina
-        ('DCnArti', 'Artículos de Cocina'),
-        ('DCnElec', 'Electrodomésticos'),
-        #Colchones y Frazadas
-        ('DClColc', 'Colchones'),
-        ('DClFraz', 'Frazadas'),
-        ('DClSaba', 'Sábanas'),
-        #Muebles
-        ('DMuBiAr', 'Bibliotecas y Armarios'),
-        ('DMuCaCt', 'Camas y Catres'),
-        ('DMuMeSi', 'Mesas y Sillas'),
-        ('DMuOtro', 'Otros Muebles'),
-        #Tecnologia
-        ('DTcCamr', 'Camaras de fotos/videos'),
-        ('DTcComp', 'Computadoras'),
-        ('DTcImpr', 'Impresoras'),
-        ('DTcOtro', 'Otra Tecnologia'),
-        #Recracion
-        ('DRcDepo', 'Articulos Deportivos'),
-        ('DRcMusi', "Instrumentos Musicales"),
-        ('DRcJugt', 'Juguetes'),
-        ('DRcArte', 'Material Artisticos'),
-        #Libros,
-        ('DLbEscl', "Escolares"),
-        ('DLbInft', 'Infantiles'),
-        ('DLbOtro', 'Otros Libros'),
-        #Salud
-        ('DSlMedi', 'Medicamentos'),
-        ('DSlPrim', 'Primeros Auxilios'),
-        ('DSlSang', 'Sangre'),
-        ('DSlOtro', 'Otros Equipos Medicos'),
-        #Otros
-        ('DOtLimp', 'Limpieza'),
-        ('DOtCstr', 'Material de Construccion'),
-        ('DOtPint', 'Pintura'),
-        ('DOtPelo', 'Cabello'),
-        ('DotOtro', 'Otro Otro'),
-
-        #Voluntariado
-
-        #Ninos
-        ('VNiNino', 'Niños'),
-        ('VNiAdol', 'Adolecentes'),
-        ('VniEmba', 'Embarazadas'),
-        #Adultos Mayores
-        ('VAdAdAd', 'Personas Mayores'),
-        #Familia
-        ('VFaAsSo', 'Asistencia Social'),
-        ('VFVivi', 'Vivienda'),
-        #Comedores
-        ('VCoNino', 'Con Niños'),
-        ('VCoAdul', 'Con Adultos'),
-        #Educacion
-        ('VEdApoy', 'Apoyo Escolar'),
-        ('VEdTall', 'Talleres'),
-        ('VEdCurs', 'Cursos'),
-        #Salud
-        ('VSlAdic', 'Adicciones'),
-        ('VSlEnfe', 'Enfermedades'),
-        ('VSlOtro', 'Otro Salud'),
-        #Discapacidad
-        ('VDsNino', 'Niños Discapacitados'),
-        ('VDsAdul', 'Adultos Discapacitados'),
-        #Indigenica
-        ('VInInIn', 'Indigencia'),
-        #Reinserecion
-        ('VRsCarc', 'Carceles'),
-        ('VRsOtro', 'Otros Centros'),
-        #Profesonal
-        ('VPrAdmi', 'Administracion'),
-        ('VPrComu', 'Comunicacion'),
-        ('VPrDere', 'Derecho'),
-        ('VPrDise', 'Diseño'),
-        ('VPrDoce', 'Docencia'),
-        ('VPrMedi', 'Medicos'),
-        ('VPrPsic', 'Psicologia'),
-        ('VPrTecn', 'Tecnologia'),
-        ('VPrCoci', 'Cocinero'),
-        #Otros
-        ('VOtAnim', 'Animales'),
-        ('VotAmbi', 'Medio Ambiente'),
-        ('VOtOtro', 'Otros Voluntariados')
-    ]
-    sub_category = MultiSelectField(choices=sub_categories,
-                                max_choices=6,
-                                max_length=32)
+    sub_category = models.ManyToManyField(SubCategory)
 
 
 

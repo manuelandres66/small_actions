@@ -1,9 +1,10 @@
 from django.shortcuts import render, reverse
 from django.conf import settings
 from django.core.mail import send_mail
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.db.models import Count
 from django.views.decorators.cache import cache_page
+from django.db.models import Q
 
 from .forms import NewOrganization
 from .models import Organization
@@ -12,6 +13,38 @@ from maps.models import Help
 
 import json
 # Create your views here. 
+
+def category(request, category):
+    donate = True if category == 'donate' else False
+    return render(request, 'info/category.html', {'donate' : donate})
+
+def api_category(request):
+    # if request.method != "POST":
+    #     return JsonResponse({'error' : 'The request must be POST'}, status=400)
+
+    # data = json.loads(request.body)
+    data = request.GET
+    
+    if 'category' in data :
+        categories = Help.objects.filter(mayor_category=data['category']).values('category').distinct() #Return Unique Categories
+
+        response = {
+            data['category'] : {}
+        }
+
+        for category in categories:
+            sub_categories = Help.objects.filter(category=category['category']).values('sub_category').distinct() #Get Unique Sub Categories
+            response[data['category']][category['category']] = {}
+
+            for sub_category in sub_categories:
+                pass
+                
+
+
+        return JsonResponse(response)
+
+    else:
+        return JsonResponse({'error' : 'You have to put an category'}, status=400)
 
 def choose_category(request):
     return render(request, 'info/choose.html')
@@ -58,6 +91,9 @@ def api_org(request):
         }
 
         return JsonResponse(response, status=200)
+    
+    else:
+        return JsonResponse({'error' : 'You have to put an ID'}, status=400)
 
 
 def search(request):
