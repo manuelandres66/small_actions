@@ -15,9 +15,18 @@ class Comment(models.Model):
     responses = models.ManyToManyField('self', blank=True)
     date = models.DateTimeField(auto_now_add=True)
 
+
 class SubCategory(models.Model):
     code = models.CharField(max_length=7, unique=True)
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.code} ({self.name})"
+
+class Category(models.Model):
+    code = models.CharField(max_length=3, unique=True)
+    name = models.CharField(max_length=50)
+    sub_categories = models.ManyToManyField(SubCategory, blank=True)
 
     def __str__(self):
         return f"{self.code} ({self.name})"
@@ -44,38 +53,8 @@ class Help(models.Model):
         ('V', 'Voluntariado')
     ]
     mayor_category = models.CharField(max_length=1, choices=mayor_categories, default='D')
-    categories = [
-        #Donar
-        ('DAl', 'Alimentos'),
-        ('DBb', 'Artículos para Bebés'),
-        ('DRp', 'Ropa'),
-        ('DCn', 'Cocina'),
-        ('DCl', 'Colchones y Frazadas'),
-        ('DMu', 'Muebles'),
-        ('DTc', 'Tecnología'),
-        ('DRc', 'Recreación'),
-        ('DLb', 'Libros'),
-        ('DSl', 'Salud'),
-        ('DOt', 'Otros'),
-
-        #Voluntariado
-        ('VNi', 'Ayuda con Niños'),
-        ('VAd', 'Adultos Mayores'),
-        ('VFa', 'Familia'),
-        ('VCo', 'Comedores'),
-        ('VEd', 'Educacion'),
-        ('VSl', 'Salud'),
-        ('VDs', 'Personas con Discapacidad'),
-        ('VIn', 'Indigencia'),
-        ('VRs', 'Reinserción Social'),
-        ('VPr', 'Profesional'),
-        ('VOt', 'Otros Voluntariados')
-
-    ] 
-    category = models.CharField(max_length=3, choices=categories, default='DAl')
+    category = models.ManyToManyField(Category)
     sub_category = models.ManyToManyField(SubCategory)
-
-
 
     def __str__(self):
         return f"{self.organization}: {self.name}"

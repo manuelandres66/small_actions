@@ -33,11 +33,11 @@ def api_category(request):
         }
 
         for category in categories:
-            sub_categories = Help.objects.filter(category=category['category']).values('sub_category').distinct() #Get Unique Sub Categories
+            sub_categories = Help.objects.filter(category=category['category']) #Get Unique Sub Categories
             response[data['category']][category['category']] = {}
 
             for sub_category in sub_categories:
-                pass
+                print(sub_category)
                 
 
 
