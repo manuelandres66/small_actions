@@ -44,7 +44,7 @@ class App extends React.Component {
           'type': 'Feature',
           'geometry': {
             'type': 'Point',
-            'coordinates': point.cordinates
+            'coordinates': point.coordinates
           },
           'properties': {
             'title': point.name,

@@ -28,9 +28,11 @@ class InfoTest(TestCase):
 class OrgTest(TestCase):
 
     def setUp(self):
-        sub_cate = SubCategory.objects.create(code='FFFfff', name='Ficcion Sub Categry')
-        cate = Category.objects.create(code='FFF', name='Ficcion')
+        sub_cate = SubCategory.objects.create(code='DFfFrit', name='Ficcion Sub Categry')
+        second_sub_cate = SubCategory.objects.create(code='DFfSecn', name='Second Sub Cate')
+        cate = Category.objects.create(code='DFf', name='Ficcion')
         cate.sub_categories.add(sub_cate)
+        cate.sub_categories.add(second_sub_cate)
 
         uploaded = SimpleUploadedFile('test.gif', small_gif, content_type='image/gif')
         new_org = Organization.objects.create(name="Manuels Organization", 
@@ -85,10 +87,31 @@ class OrgTest(TestCase):
 
         self.assertEqual(data['points'], [{
             'name' : 'Cole',
-            'cordinates' : ['-77.27600000','1.21500000'],
+            'coordinates' : ['-77.27600000','1.21500000'],
             'rute' : reverse('go', kwargs={'uuid' : self.help.uuid}),
             'uuid' : reverse('info', kwargs={'uuid' : self.help.uuid})
         }])
+
+    def test_category(self):
+        c = Client()
+        response = c.get(reverse('category', kwargs={'category' : 'donate'}))
+        self.assertEqual(response.status_code, 200)
+
+    def test_apicategory(self):
+        c = Client()
+        response = c.post(reverse('apiCategory'), {'category' : 'D'}, content_type="application/json")
+        data = json.loads(response.content)
+
+        self.assertEqual(data, {'D' : {'DFf' : {
+            'DFfFrit' : [{
+                'name' : 'Cole',
+                'coordinates' : ['-77.27600000','1.21500000'],
+                'rute' : reverse('go', kwargs={'uuid' : self.help.uuid}),
+                'uuid' : reverse('info', kwargs={'uuid' : self.help.uuid})
+            }],
+            'DFfSecn' : []
+        }}})
+
 
 
 

@@ -19,13 +19,12 @@ def category(request, category):
     return render(request, 'info/category.html', {'donate' : donate})
 
 def api_category(request):
-    # if request.method != "POST":
-    #     return JsonResponse({'error' : 'The request must be POST'}, status=400)
+    if request.method != "POST":
+        return JsonResponse({'error' : 'The request must be POST'}, status=400)
 
-    # data = json.loads(request.body)
-    data = request.GET
+    data = json.loads(request.body)
     
-    if 'category' in data :
+    if 'category' in data:
         mayor_category = data['category']
         categories = Category.objects.filter(code__startswith = mayor_category) #Return Categories Start Width D
         response = {mayor_category: {}}
@@ -39,7 +38,7 @@ def api_category(request):
                 for help_o in sub_category.helps.all():
                     response[mayor_category][category.code][sub_category.code].append({
                         'name' : help_o.name,
-                        'cordinates' : [help_o.longitude, help_o.latitude],
+                        'coordinates' : [help_o.longitude, help_o.latitude],
                         'rute' : reverse('go', kwargs={'uuid' : help_o.uuid}),
                         'uuid' : reverse('info', kwargs={'uuid' : help_o.uuid})
                     })
@@ -71,7 +70,7 @@ def api_org(request):
         for single in all_helps:
             point = {
                 'name' : single.name,
-                'cordinates' : [single.longitude, single.latitude],
+                'coordinates' : [single.longitude, single.latitude],
                 'rute' : reverse('go', kwargs={'uuid' : single.uuid}),
                 'uuid' : reverse('info', kwargs={'uuid' : single.uuid})
             }
