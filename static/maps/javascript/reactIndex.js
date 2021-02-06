@@ -44,7 +44,7 @@ class App extends React.Component {
           'type': 'Feature',
           'geometry': {
             'type': 'Point',
-            'coordinates': point.cordinates
+            'coordinates': point.coordinates
           },
           'properties': {
             'title': point.name,
@@ -116,26 +116,21 @@ class App extends React.Component {
   }
 
   render() {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       id: "info_point"
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       id: "non_button"
-    }, React.createElement("h1", null, this.state.name), React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("h1", null, this.state.name), /*#__PURE__*/React.createElement("div", {
       id: "grid_info"
-    }, React.createElement("div", {
-      className: "info_grid"
-    }, React.createElement("h6", null, "Categoria:"), React.createElement("h6", null, "Organizaci\xF3n:")), React.createElement("div", {
-      className: "info_grid",
-      id: "info_type"
-    }, React.createElement("h6", null, this.state.type), React.createElement("h6", null, this.state.organization))), React.createElement("p", null, this.state.description)), React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("h6", null, "Categoria:"), /*#__PURE__*/React.createElement("h6", null, this.state.type), /*#__PURE__*/React.createElement("h6", null, "Organizaci\xF3n:"), /*#__PURE__*/React.createElement("h6", null, this.state.organization)), /*#__PURE__*/React.createElement("p", null, this.state.description)), /*#__PURE__*/React.createElement("div", {
       id: "button"
-    }, React.createElement("a", {
+    }, /*#__PURE__*/React.createElement("a", {
       href: this.state.uuid
-    }, React.createElement("button", {
+    }, /*#__PURE__*/React.createElement("button", {
       id: "more_info"
-    }, "Informaci\xF3n")), React.createElement("a", {
+    }, "Informaci\xF3n")), /*#__PURE__*/React.createElement("a", {
       href: this.state.url
-    }, React.createElement("button", {
+    }, /*#__PURE__*/React.createElement("button", {
       id: "view_rute"
     }, "Ver Ruta"))));
   }
@@ -143,4 +138,4 @@ class App extends React.Component {
 }
 
 ;
-ReactDOM.render( React.createElement(App, null), document.getElementById('react'));
+ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('react'));

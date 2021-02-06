@@ -1,16 +1,57 @@
 from django.shortcuts import render, reverse
 from django.conf import settings
 from django.core.mail import send_mail
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.db.models import Count
+from django.views.decorators.cache import cache_page
+from django.db.models import Q
 
 from .forms import NewOrganization
 from .models import Organization
 
-from maps.models import Help
+from maps.models import Help, SubCategory, Category
 
 import json
 # Create your views here. 
+
+def category(request, category):
+    donate = True if category == 'donate' else False
+    return render(request, 'info/category.html', {'donate' : donate})
+
+def api_category(request):
+    if request.method != "POST":
+        return JsonResponse({'error' : 'The request must be POST'}, status=400)
+
+    data = json.loads(request.body)
+    
+    if 'category' in data:
+        mayor_category = data['category']
+        categories = Category.objects.filter(code__startswith = mayor_category) #Return Categories Start Width D
+        response = {mayor_category: {}}
+
+        for category in categories:
+            response[mayor_category][category.code] = {}
+            sub_categories = SubCategory.objects.filter(code__startswith = category.code)
+
+            for sub_category in sub_categories:
+                response[mayor_category][category.code][sub_category.code] = []
+                for help_o in sub_category.helps.all():
+                    response[mayor_category][category.code][sub_category.code].append({
+                        'name' : help_o.name,
+                        'coordinates' : [help_o.longitude, help_o.latitude],
+                        'rute' : reverse('go', kwargs={'uuid' : help_o.uuid}),
+                        'uuid' : reverse('info', kwargs={'uuid' : help_o.uuid})
+                    })
+
+        return JsonResponse(response)
+
+    else:
+        return JsonResponse({'error' : 'You have to put an category'}, status=400)
+
+def choose_category(request):
+    return render(request, 'info/choose.html')
+
+@cache_page(60 * 30)
 def organization(request, pk):
     org = Organization.objects.get(pk=pk)
     places = len(org.help_points.all())
@@ -29,7 +70,7 @@ def api_org(request):
         for single in all_helps:
             point = {
                 'name' : single.name,
-                'cordinates' : [single.longitude, single.latitude],
+                'coordinates' : [single.longitude, single.latitude],
                 'rute' : reverse('go', kwargs={'uuid' : single.uuid}),
                 'uuid' : reverse('info', kwargs={'uuid' : single.uuid})
             }
@@ -52,6 +93,9 @@ def api_org(request):
         }
 
         return JsonResponse(response, status=200)
+    
+    else:
+        return JsonResponse({'error' : 'You have to put an ID'}, status=400)
 
 
 def search(request):

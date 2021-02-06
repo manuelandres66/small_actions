@@ -103,11 +103,11 @@ def all_helps(request):
         latitude_sum = 0
         longitude_sum = 0
 
-        for single in all_helps:
+        for single in all_helps: 
             point = {
                 'name' : single.name,
-                'cordinates' : [single.longitude, single.latitude],
-                'category' : single.category,
+                'coordinates' : [single.longitude, single.latitude],
+                'category' : single.category.name,
                 'organization' : single.organization.name,
                 'description' : single.short_description,
                 'rute' : reverse('go', kwargs={'uuid' : single.uuid}),

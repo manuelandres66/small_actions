@@ -15,6 +15,23 @@ class Comment(models.Model):
     responses = models.ManyToManyField('self', blank=True)
     date = models.DateTimeField(auto_now_add=True)
 
+
+class SubCategory(models.Model):
+    code = models.CharField(max_length=7, unique=True)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.code} ({self.name})"
+
+class Category(models.Model):
+    code = models.CharField(max_length=3, unique=True)
+    name = models.CharField(max_length=50)
+    sub_categories = models.ManyToManyField(SubCategory, blank=True)
+
+    def __str__(self):
+        return f"{self.code} ({self.name})"
+    
+
 class Help(models.Model):
     uuid = ShortUUIDField()
     latitude = models.DecimalField(max_digits=10, decimal_places=8)
@@ -23,12 +40,21 @@ class Help(models.Model):
     short_description = models.TextField(max_length=900)
     recomedations = models.TextField(max_length=900)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="help_points")
-    category = models.CharField(max_length=11)
+
     photos = models.ManyToManyField(HelpPhoto)
     temporal_code = models.CharField(max_length=11)
     points_for_completed = models.PositiveIntegerField(default=10)
     comments = models.ManyToManyField(Comment, blank=True)
 
+
+    #Categories
+    mayor_categories = [
+        ('D', 'Donar'),
+        ('V', 'Voluntariado')
+    ]
+    mayor_category = models.CharField(max_length=1, choices=mayor_categories, default='D')
+    category = models.ForeignKey(Category, on_delete=models.RESTRICT, related_name='helps')
+    sub_category = models.ManyToManyField(SubCategory, related_name='helps')
 
     def __str__(self):
         return f"{self.organization}: {self.name}"
