@@ -101,7 +101,7 @@ fetch('/info/api/orgpoints', {
          
         new mapboxgl.Popup()
         .setLngLat(coordinates) 
-        .setHTML(`<h1 class='maps_title'>${title}<h1>
+        .setHTML(`<h1 class='maps_title'>${title}</h1>
         <a href='${uuid}' class='maps_links'>Mas Info</a>
         <a href='${rute}' class='maps_links'>Ir ahi!</a>`)
         .addTo(map);

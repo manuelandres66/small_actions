@@ -25,8 +25,7 @@ fetch('/info/api/category', {
     const map = new mapboxgl.Map(mapConfig); 
     map.addControl(new mapboxgl.NavigationControl());
 
-    const colors = ['#000BF0', '#1BF030', '#FCF000', '#FF6B00', '#FF1D00', '#FF00CA', '#B400FE', '#F2D378', '#FBA375', '#E575AC', '#A978FC', //Color for diferents Categories
-                    '#61ACF2', '#9EC737', '#FFF59E', '#FFA900', '#A19F55', '#5E432E', '#AA998B', '#A73264', '#A41D19', '#711411', '#91BED4']
+    const colors = ['#0011A8', '#F5BF00', '#7300A8', '#FAD0A8', '#F500C2', '#33F500', '#FF1900', '#00F5F3', '#FF5F01', '#AFACAD', '#A80E00']
     
     map.on('load', () => {
         map.setLayoutProperty('country-label', 'text-field', ['get', "name_es"]);  //Changing Lenguage
@@ -119,15 +118,15 @@ fetch('/info/api/category', {
 
             all_sub_inputs.forEach(input => {
                 if (input_cate.checked) {
-                    map.setLayoutProperty(input.getAttribute('value'), 'visibility', 'visible');
+                    map.setLayoutProperty(input.getAttribute('value'), 'visibility', 'visible'); //Make the layer visible
                     input.checked = true;
                 } else {
-                    map.setLayoutProperty(input.getAttribute('value'), 'visibility', 'none');
+                    map.setLayoutProperty(input.getAttribute('value'), 'visibility', 'none'); // Make the layer invisible
                     input.checked = false;
                 }
             });
         });
-        
+
         for (const sub_category in data[mayor_category][category]) {
 
             map.on('click', sub_category, function (e) { // Pop up on Click
@@ -146,7 +145,7 @@ fetch('/info/api/category', {
                  
                 new mapboxgl.Popup()
                 .setLngLat(coordinates) 
-                .setHTML(`<h1 class='maps_title'>${title}<h1>
+                .setHTML(`<h1 class='maps_title'>${title}</h1>
                 <a href='${uuid}' class='maps_links'>Mas Info</a>
                 <a href='${rute}' class='maps_links'>Ir ahi!</a>`)
                 .addTo(map);
@@ -165,4 +164,23 @@ fetch('/info/api/category', {
         };
     };
 
+});
+
+
+//Display SubCategories
+
+const icon_category = document.querySelectorAll('.for_down');
+icon_category.forEach(category => {
+    category.addEventListener('click', () => {
+        const id_parent = category.parentNode.parentNode; //Geting id of the parent div
+        const sub_category = document.querySelector(`#${id_parent.getAttribute('id')} .sub_categories`);
+        if (id_parent.getAttribute('data-click') == 'click') {
+            sub_category.style.display = 'none';
+            id_parent.setAttribute('data-click', '');
+        } else {
+            sub_category.style.display = 'block';
+            id_parent.setAttribute('data-click', 'click');
+        };
+
+    });
 });
