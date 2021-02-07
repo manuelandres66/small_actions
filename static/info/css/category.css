@@ -26,4 +26,122 @@
     height: 55vh;
     margin-left: 5vw;
     margin-top: 7vh;
+} 
+
+#map h1 {
+    font-size: 15px;
+}
+
+#categories {
+    height: 50vh;
+    width: 15vw;
+    margin-left: 7vw;
+    margin-top: 8.7vh;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    border-radius: 10px;
+    padding-top: 1vh;
+}
+
+.category {
+    margin-top: 1vh;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+
+    width: 90%;
+    margin-left: 5%;
+}
+
+.info h5 {
+    width: 10vw;
+    text-align: left;
+    font-size: 14px;
+}
+
+html[theme="dark-mode"] .false_check, html[theme="dark-mode"] .false_subcheck {
+    background-color: #000;
+}
+
+.false_check {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.check_cate {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.check_cate:checked ~ .false_check {
+    background-color: #ff3a3a;
+}
+
+.info i {
+    cursor: pointer;
+}
+
+.sub_categories {
+    display: none;
+    padding-bottom: 1vh;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.category[data-click='click'] .sub_categories{
+    animation: appear 1s;
+}
+
+.sub_categories > div {
+    margin-top: 1vh;
+    width: 80%;
+    margin-left: 10%;
+
+    display: flex;
+}
+
+.sub_categories div h6 {
+    font-size: 13px;
+    margin-left: 1vw;
+}
+
+.check_sub, .false_subcheck {
+    width: 13px;
+    height: 13px;
+}
+
+.check_sub {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.false_subcheck  {
+    background-color: #fff;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.check_sub:checked ~ .false_subcheck {
+    background-color: #ff3a3a;
 }

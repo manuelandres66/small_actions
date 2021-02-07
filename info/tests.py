@@ -102,7 +102,7 @@ class OrgTest(TestCase):
         response = c.post(reverse('apiCategory'), {'category' : 'D'}, content_type="application/json")
         data = json.loads(response.content)
 
-        self.assertEqual(data, {'D' : {'DFf' : {
+        self.assertEqual(data['D'], {'DFf' : {
             'DFfFrit' : [{
                 'name' : 'Cole',
                 'coordinates' : ['-77.27600000','1.21500000'],
@@ -110,7 +110,7 @@ class OrgTest(TestCase):
                 'uuid' : reverse('info', kwargs={'uuid' : self.help.uuid})
             }],
             'DFfSecn' : []
-        }}})
+        }})
 
 
 

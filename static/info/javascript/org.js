@@ -101,20 +101,20 @@ fetch('/info/api/orgpoints', {
          
         new mapboxgl.Popup()
         .setLngLat(coordinates) 
-        .setHTML(`<h1 class='maps_title'>${title}<h1>
+        .setHTML(`<h1 class='maps_title'>${title}</h1>
         <a href='${uuid}' class='maps_links'>Mas Info</a>
         <a href='${rute}' class='maps_links'>Ir ahi!</a>`)
         .addTo(map);
     });
          
     // Change the cursor to a pointer when the mouse is over the places layer.
-    map.on('mouseenter', 'places', function () {
+    map.on('mouseenter', 'points', function () {
         map.getCanvas().style.cursor = 'pointer';
     });
         
     // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'places', function () {
-    map.getCanvas().style.cursor = '';
+    map.on('mouseleave', 'points', function () {
+        map.getCanvas().style.cursor = '';
     });
         
 
