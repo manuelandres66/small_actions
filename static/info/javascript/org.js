@@ -108,13 +108,13 @@ fetch('/info/api/orgpoints', {
     });
          
     // Change the cursor to a pointer when the mouse is over the places layer.
-    map.on('mouseenter', 'places', function () {
+    map.on('mouseenter', 'points', function () {
         map.getCanvas().style.cursor = 'pointer';
     });
         
     // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'places', function () {
-    map.getCanvas().style.cursor = '';
+    map.on('mouseleave', 'points', function () {
+        map.getCanvas().style.cursor = '';
     });
         
 

@@ -86,6 +86,14 @@ class App extends React.Component {
             }
           });
         });
+      }); // Change the cursor to a pointer when the mouse is over the places layer.
+
+      map.on('mouseenter', 'points', function () {
+        map.getCanvas().style.cursor = 'pointer';
+      }); // Change it back to a pointer when it leaves.
+
+      map.on('mouseleave', 'points', function () {
+        map.getCanvas().style.cursor = '';
       });
       map.on('click', 'points', e => {
         let properties = e.features[0].properties;

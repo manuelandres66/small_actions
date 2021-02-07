@@ -16,12 +16,29 @@
             <i class="fas fa-hand-holding-medical"></i> 
         {% else %} 
             <i class="fas fa-people-carry"></i>
-        {% endif %}
+        {% endif %} 
         <div>
             <h1>Ayudar {% if donate %} con {% else %} como {% endif %}</h1>
             <h2>{% if donate %} Donaciones {% else %} Voluntario {% endif %}</h2>
         </div>
     </div>
+    <div id="categories">
+        {% for category in categories %}
+        <div id="{{category.code}}" class="category">
+            <input type="checkbox" value="{{category.code}}" class="check_cate">
+            <h5>{{category.name}}</h5>
+            <div class="sub_categories">
+                {% for sub_category in category.sub_categories.all %}
+                <div id="{{sub_category.code}}">
+                    <input type="checkbox" value="{{sub_category.code}}" class="check_sub">
+                    <h6>{{sub_category.name}}</h6>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     <div id="map"></div>
+    {% csrf_token %}
     <script src="{% static 'info/javascript/category.js' %}"></script>
 {% endblock %}

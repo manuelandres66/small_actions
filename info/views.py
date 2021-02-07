@@ -16,7 +16,8 @@ import json
 
 def category(request, category):
     donate = True if category == 'donate' else False
-    return render(request, 'info/category.html', {'donate' : donate})
+    categories = Category.objects.filter(code__startswith= 'D' if donate else 'V')
+    return render(request, 'info/category.html', {'donate' : donate, 'categories' : categories})
 
 def api_category(request):
     if request.method != "POST":
@@ -27,7 +28,20 @@ def api_category(request):
     if 'category' in data:
         mayor_category = data['category']
         categories = Category.objects.filter(code__startswith = mayor_category) #Return Categories Start Width D
-        response = {mayor_category: {}}
+
+        if request.user.is_authenticated and request.user.latitude != None and request.user.longitude != None:
+            latitude, longitude = request.user.latitude, request.user.longitude
+            zoom = 14
+        else:
+            latitude, longitude = 0, 0
+            zoom = 1
+            
+        response = {
+            mayor_category: {},
+            'latitude' : latitude,
+            'longitude' : longitude,
+            'zoom' : zoom
+        }
 
         for category in categories:
             response[mayor_category][category.code] = {}
