@@ -95,10 +95,23 @@ fetch('/info/api/category', {
                     //To Hidde or View Layers
                     const input_sub = document.querySelector(`input[value='${sub_category}']`);
                     input_sub.addEventListener('change', () => {
+                        const idParent = input_sub.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+                        const check_cate_parent = document.querySelector(`#${idParent} .check_cate`);
+
                         if (input_sub.checked) {
                             map.setLayoutProperty(sub_category, 'visibility', 'visible');
+                            //Make the category check checked if all sub checks are checked
+                            const all_checks = document.querySelectorAll(`#${idParent} .check_sub`);
+                            const checks_checked = document.querySelectorAll(`#${idParent} .check_sub:checked`);
+
+                            if (all_checks.length == checks_checked.length) {
+                                check_cate_parent.checked = true;
+                            }
+
                         } else {
                             map.setLayoutProperty(sub_category, 'visibility', 'none');
+                            //Make the Category Unchecked after some subcategory is unclick
+                            check_cate_parent.checked = false; 
                         }
                     })
         
