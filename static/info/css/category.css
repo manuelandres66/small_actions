@@ -64,6 +64,10 @@
     font-size: 14px;
 }
 
+html[theme="dark-mode"] .false_check, html[theme="dark-mode"] .false_subcheck {
+    background-color: #000;
+}
+
 .false_check {
     display: inline-block;
     width: 16px;

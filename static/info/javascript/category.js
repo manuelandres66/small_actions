@@ -187,12 +187,16 @@ icon_category.forEach(category => {
     category.addEventListener('click', () => {
         const id_parent = category.parentNode.parentNode; //Geting id of the parent div
         const sub_category = document.querySelector(`#${id_parent.getAttribute('id')} .sub_categories`);
+        const icon_cate = document.querySelector(`#${id_parent.getAttribute('id')} .for_down`); //Change the Icon to point down to up
+
         if (id_parent.getAttribute('data-click') == 'click') {
             sub_category.style.display = 'none';
             id_parent.setAttribute('data-click', '');
+            icon_cate.setAttribute('class', 'fas fa-chevron-down for_down');
         } else {
             sub_category.style.display = 'block';
             id_parent.setAttribute('data-click', 'click');
+            icon_cate.setAttribute('class', 'fas fa-chevron-up for_down');
         };
 
     });
