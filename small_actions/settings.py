@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'maps',
     'login',
     'info',
+    'control',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
