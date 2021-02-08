@@ -9,7 +9,11 @@ const set_category_check = (category, set) => { //Function to Check Category
     if (set) {
         false_check.style.backgroundColor = false_check.getAttribute('data-color');
     } else {
-        false_check.style.backgroundColor = '#fff';
+        if (document.querySelector('html[theme="dark-mode"]') != undefined) {
+            false_check.style.backgroundColor = '#000';
+        } else {
+            false_check.style.backgroundColor = '#fff';
+        }
     }
 
 }
