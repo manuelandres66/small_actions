@@ -8,8 +8,8 @@ class Report(models.Model):
     user_that_report = models.ForeignKey(User, on_delete=models.CASCADE)
 
     organization_or_user_options = [
-        ('U', 'User'),
-        ('O', 'Organization')
+        ('U', 'Usuario'),
+        ('O', 'Organización')
     ]
     organization_or_user = models.CharField(max_length=1, choices=organization_or_user_options)
     name_of_reported = models.CharField(max_length=64)
