@@ -141,3 +141,37 @@ html[theme="dark-mode"] .false_check, html[theme="dark-mode"] .false_subcheck {
 .check_sub:checked ~ .false_subcheck, .check_cate:checked ~ .false_check {
     background-color: #ff3a3a;
 }
+
+@media screen and (max-width: 1030px) {
+
+    #titles h1 {
+        font-size: 25px;
+    }
+
+    #titles h2 {
+        font-size: 35px;
+    }
+
+    #titles i {
+        font-size: 62px;
+    }
+
+    #categories {
+        width: 90%;
+        margin-left: 5%;
+        margin-bottom: 10vh;
+        margin-top: 0;
+        height: auto;
+        top: 100vh;
+        background-color: rgba(178, 177, 177, 0.25);
+        padding-bottom: 1vh;
+    }
+
+    .info h5 {
+        width: 78%;
+    }
+
+    .sub_categories div h6 {
+        margin-left: 3vw;
+    }
+}
