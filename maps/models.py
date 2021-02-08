@@ -26,6 +26,7 @@ class SubCategory(models.Model):
 class Category(models.Model):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=50)
+    color = models.CharField(max_length=7, default='#FFFFFF')
     sub_categories = models.ManyToManyField(SubCategory, blank=True)
 
     def __str__(self):

@@ -85,10 +85,6 @@ html[theme="dark-mode"] .false_check, html[theme="dark-mode"] .false_subcheck {
     opacity: 0;
 }
 
-.check_cate:checked ~ .false_check {
-    background-color: #ff3a3a;
-}
-
 .info i {
     cursor: pointer;
 }
@@ -142,6 +138,6 @@ html[theme="dark-mode"] .false_check, html[theme="dark-mode"] .false_subcheck {
     cursor: pointer;
 }
 
-.check_sub:checked ~ .false_subcheck {
+.check_sub:checked ~ .false_subcheck, .check_cate:checked ~ .false_check {
     background-color: #ff3a3a;
 }

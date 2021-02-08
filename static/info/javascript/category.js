@@ -1,6 +1,28 @@
 
 const title = document.querySelector('h2').innerHTML.replace(/\s/g, '');
 const mayor_category = (title == 'Donaciones') ? 'D' : 'V';
+const colors = ['#0011A8', '#F5BF00', '#7300A8', '#FAD0A8', '#F500C2', '#33F500', '#FF1900', '#00F5F3', '#FF5F01', '#AFACAD', '#A80E00']
+
+const set_category_check = (category, set) => { //Function to Check Category
+    let false_check =  document.querySelector(`#${category.getAttribute('value')} .info .false_check`);
+
+    if (set) {
+        false_check.style.backgroundColor = false_check.getAttribute('data-color');
+    } else {
+        false_check.style.backgroundColor = '#fff';
+    }
+
+}
+
+const set_sub_cate_check = (subcate, set) => {
+    const false_check =  document.querySelector(`#${subcate.parentNode.parentNode.getAttribute('id')} .false_subcheck`);
+
+    if (set) {
+        false_check.style.backgroundColor = false_check.getAttribute('data-color');
+    } else {
+        false_check.style.backgroundColor = '#fff';
+    }
+}
 
 fetch('/info/api/category', {
     method: 'POST',
@@ -25,7 +47,6 @@ fetch('/info/api/category', {
     const map = new mapboxgl.Map(mapConfig); 
     map.addControl(new mapboxgl.NavigationControl());
 
-    const colors = ['#0011A8', '#F5BF00', '#7300A8', '#FAD0A8', '#F500C2', '#33F500', '#FF1900', '#00F5F3', '#FF5F01', '#AFACAD', '#A80E00']
     
     map.on('load', () => {
         map.setLayoutProperty('country-label', 'text-field', ['get', "name_es"]);  //Changing Lenguage
@@ -105,13 +126,19 @@ fetch('/info/api/category', {
                             const checks_checked = document.querySelectorAll(`#${idParent} .check_sub:checked`);
 
                             if (all_checks.length == checks_checked.length) {
+                                set_category_check(check_cate_parent, true);
                                 check_cate_parent.checked = true;
                             }
+
+                            set_sub_cate_check(input_sub, true); //On checked Change color to category color
 
                         } else {
                             map.setLayoutProperty(sub_category, 'visibility', 'none');
                             //Make the Category Unchecked after some subcategory is unclick
                             check_cate_parent.checked = false; 
+                            set_category_check(check_cate_parent, false);
+
+                            set_sub_cate_check(input_sub, false);
                         }
                     })
         
@@ -128,14 +155,22 @@ fetch('/info/api/category', {
         const input_cate = document.querySelector(`input[value="${category}"]`); // If Catgeory is checked all subcategories will be checked
         input_cate.addEventListener('change', () => {
             const all_sub_inputs = document.querySelectorAll(`#${category} .check_sub`); //Get All Inputs of SubCategories in the Category Div
+            
+            if (input_cate.checked) {
+                set_category_check(input_cate, true);
+            } else {
+                set_category_check(input_cate, false);
+            };
 
             all_sub_inputs.forEach(input => {
                 if (input_cate.checked) {
                     map.setLayoutProperty(input.getAttribute('value'), 'visibility', 'visible'); //Make the layer visible
                     input.checked = true;
+                    set_sub_cate_check(input, true); //On checked Background color of the category.
                 } else {
                     map.setLayoutProperty(input.getAttribute('value'), 'visibility', 'none'); // Make the layer invisible
                     input.checked = false;
+                    set_sub_cate_check(input, false);
                 }
             });
         });
