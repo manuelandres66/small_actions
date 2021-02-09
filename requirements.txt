@@ -3,4 +3,4 @@ Pillow
 django-shortuuidfield
 django-storages
 boto3
-multiselectfield
+django-multiselectfield
