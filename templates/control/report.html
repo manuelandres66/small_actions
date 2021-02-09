@@ -1,0 +1,117 @@
+{% extends 'maps/nav.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Reportar otra cuenta u organización</title>
+    <style>
+        #titles {
+            display: flex;
+            justify-content: center;
+            margin-top: 6vh;
+        }
+
+        h1 {
+            margin: 0 2vw;
+            font-size: 40px;
+        }
+
+        i {
+            font-size: 40px;
+            color: #ff3a3a;
+        }
+
+        form {
+            width: 50%;
+            margin-left: 25%;
+            margin-top: 8vh;
+        }
+
+        form div {
+            margin-bottom: 3vh;
+        }
+
+        label {
+            display: block;
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            font-size: 15px;
+            margin-top: 1vh;
+            border: 1px solid rgb(192, 192, 192);
+            padding: 2px 10px;
+            border-radius: 5px;
+        }
+
+        input[type='submit'] {
+            background-color: #ff3a3a;
+            height: 4vh;
+            font-size: 20px;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #message {
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+            color: #2c660a;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 1300px) {
+            h1, i {
+                font-size: 17px;
+            }
+
+            form {
+                width: 80%;
+                margin-left: 10%;
+            }
+
+            label {
+                font-size: 15px;
+            }
+
+            input[type='submit'] {
+                margin-bottom: 5vh;
+            }
+        }
+        
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="titles">
+        <i class="fas fa-flag"></i>
+        <h1>Reportar Cuenta u Organización</h1>
+        <i class="fas fa-flag"></i>
+    </div>
+    <form method="POST"> {% csrf_token %}
+        <div>
+            <label for="id_organization_or_user">Organización o Usuario</label>
+            {{form.organization_or_user}}
+            {{form.organization_or_user.erros}}
+        </div>
+        <div>
+            <label for="id_name_of_reported">Nombre del/los reportado(s)</label>
+            {{form.name_of_reported}}
+            {{form.name_of_reported.erros}}
+        </div>
+        <div>
+            <label for="id_category_of_problem">Categoria del problema</label>
+            {{form.category_of_problem}}
+            {{form.category_of_problem.erros}}
+        </div>
+        <div>
+            <label for="id_decription_of_the_problem">Descripción del problema</label>
+            {{form.decription_of_the_problem}}
+            {{form.decription_of_the_problem.erros}}
+        </div>
+        <input type="submit">
+        <h6 id="message">{{message}}</h6>
+    </form>
+{% endblock %}

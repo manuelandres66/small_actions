@@ -11,7 +11,7 @@
 {% endblock %}
      
 {% block content %}
-    <div id="titles">
+    <div id="titles"> 
         {% if donate %} 
             <i class="fas fa-hand-holding-medical"></i> 
         {% else %} 
@@ -28,7 +28,7 @@
             <div class="info">
                 <div>
                     <input type="checkbox" value="{{category.code}}" class="check_cate">
-                    <div class="false_check"></div>
+                    <div class="false_check" data-color="{{category.color}}"></div>
                 </div>
                 <h5>{{category.name}}</h5>
                 <i class="fas fa-chevron-down for_down"></i>    
@@ -39,7 +39,7 @@
                 <div id="{{sub_category.code}}">
                     <div>
                         <input type="checkbox" value="{{sub_category.code}}" class="check_sub">
-                        <div class="false_subcheck"></div>
+                        <div class="false_subcheck" data-color="{{category.color}}"></div>
                     </div>
                     <h6>{{sub_category.name}}</h6>
                 </div>
