@@ -54,7 +54,7 @@
             cursor: pointer;
         }
 
-        h6 {
+        #message {
             margin-top: 2vh;
             margin-bottom: 2vh;
             color: #2c660a;
@@ -112,6 +112,6 @@
             {{form.decription_of_the_problem.erros}}
         </div>
         <input type="submit">
-        <h6>{{message}}</h6>
+        <h6 id="message">{{message}}</h6>
     </form>
 {% endblock %}

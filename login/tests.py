@@ -9,7 +9,7 @@ import json
 class htmltest(TestCase):
     def test_login(self):
         c = Client()
-        response = c.get(reverse('login'))
+        response = c.get(reverse('login')) 
         self.assertEqual(response.status_code, 200)
 
     def test_logout(self):
