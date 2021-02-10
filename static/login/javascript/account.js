@@ -134,8 +134,12 @@ progress.forEach(progre => {
     } else {
         const total_data = progre.getAttribute('data-quantity');
         const relation = ((parseFloat(data_related) / parseFloat(total_data)) * 100).toFixed(2);
-        progre.style.width = `${relation}%`;
         
+        if (relation >= 100) {
+            parent.setAttribute('class', 'bar completed');
+        };
+
+        progre.style.width = `${relation}%`;
         parent.childNodes[3].innerHTML = `${data_related}/${total_data}` //Show current progress
 
     };
