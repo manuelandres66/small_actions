@@ -73,6 +73,86 @@
                 </div>
             </div>
         </form>
+        <div id="achiv">
+            <div class="category">
+                <h6>Consigue 1.000 Puntos</h6>
+                <div class="bar">
+                    <div class="progress" data-type="p" data-quantity="1000"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+            <div class="category">
+                <h6>Visitar 10 Lugares</h6>
+                <div class="bar">
+                    <div class="progress" data-type="l" data-quantity="10"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+            <div class="category">
+                <h6>Visitar 5 Voluntariados</h6>
+                <div class="bar">
+                    <div class="progress" data-type="v" data-quantity="5"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+            <div class="category">
+                <h6 >Visitar 5 Donaciones</h6>
+                <div class="bar">
+                    <div class="progress" data-type="d" data-quantity="5"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+            <div class="category">
+                <h6>Realizar 50 Comentarios</h6>
+                <div class="bar">
+                    <div class="progress" data-type="c" data-quantity="50"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+            <div class="category">
+                <h6>Pon una foto de perfil</h6>
+                <div class="bar">
+                    <div class="progress" data-type="pr"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+            <div class="category">
+                <h6>Consigue 5.000 Puntos</h6>
+                <div class="bar">
+                    <div class="progress" data-type="p" data-quantity="5000"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+            <div class="category">
+                <h6>Visitar 50 Lugares</h6>
+                <div class="bar">
+                    <div class="progress" data-type="l" data-quantity="50"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+            <div class="category">
+                <h6>Visitar 25 Voluntariados</h6>
+                <div class="bar">
+                    <div class="progress" data-type="v" data-quantity="25"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+            <div class="category">
+                <h6>Visitar 25 Donaciones</h6>
+                <div class="bar">
+                    <div class="progress" data-type="d" data-quantity="25"></div>
+                    <h6 class="number_progress"></h6>
+                </div>
+            </div>
+        </div>
+        <div id="info-bars" style="display: none;">
+            <span id="p">{{user.points}}</span>
+            <span id="l">{{user.visited.all | length }}</span>
+            <span id="v">{{volunteer}}</span>
+            <span id="d">{{donate}}</span>
+            <span id="c">{{comments}}</span>
+            <span id="pr">{{user.photo}}</span>
+        </div>
         <script src="{% static 'login/javascript/account.js' %}"></script>
     {% endblock %}
   
