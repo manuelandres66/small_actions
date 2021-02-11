@@ -1,0 +1,33 @@
+{% extends 'maps/nav.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Cuenta de {{user.username}}</title>
+    <link href="{% static 'login/css/another.css' %}" rel="stylesheet">
+{% endblock %}
+     
+{% block content %}
+    <div id="title_div">
+        {% if user.photo %}
+        <img src="{{user.photo.url}}" alt="account" id="title_photo" width="70" height="70">
+        {% else %}
+        <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="account" width="70" height="70">
+        {% endif %}
+
+        <h1>{{user.username}}</h1>
+    </div>
+    <div id="infos">
+        <div id="frist_info">
+            <i class="fas fa-trophy"></i>
+            <h2>#{{place}} en el mundo</h2>
+        </div>
+        <div>
+            <i class="fas fa-user-plus"></i>
+            <h3>{{user.points}} puntos</h3>
+        </div>
+        <div id="last_info">
+            <i class="fas fa-user-plus"></i>
+            <h4>{{user.visited.all | length }} lugares visitados</h4>
+        </div>
+    </div>
+{% endblock %}

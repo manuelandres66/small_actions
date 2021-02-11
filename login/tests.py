@@ -44,6 +44,11 @@ class UserTest(TestCase):
         user = User.objects.get(username='PEPE')
         self.assertTrue(user.dark_mode)
 
+    def test_another(self)
+        c = Client()
+        response = c.get(reverse('another', args={'username' : self.pepe.username }))
+        self.assertEqual(response.status_code, 200)
+
     def test_change_password(self):
         user = User.objects.get(username="PEPE")
         user.set_password('hola12345')

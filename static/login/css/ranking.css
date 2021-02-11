@@ -71,6 +71,11 @@ html[theme='dark-mode'] .place i {
     color: #B1560F;
 }
 
+h2 a, h3 a, h4 a {
+    text-decoration: none;
+    color: #000;
+}
+
 
 .other_place h3, .other_place h4 {
     display: inline-block;
@@ -133,6 +138,11 @@ html[theme='dark-mode'] .place i {
     padding-left: 3vw;
     font-family: 'Roboto', 'Sora', sans-serif;
 } 
+
+.column h6 a {
+    text-decoration: none;
+    color: #000;
+}
 
 #headers h4:nth-child(2) {
     padding-left: 3vw;

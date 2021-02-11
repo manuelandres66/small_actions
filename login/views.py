@@ -291,4 +291,9 @@ def api_places(request):
         })
 
     return JsonResponse(response, status=200)
+
+def another_account(request, username):
+    user = User.objects.get(username=username)
+    place = user.get_ranking() + 1
+    return render(request, 'login/another.html', {'user' : user, 'place' : place})
     
