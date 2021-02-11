@@ -163,6 +163,7 @@
     width: 7.5vw;
     height: 7.5vw;
     margin-right: 2.5vw;
+    object-fit: contain;
 
     animation: circular 2s;
 }
