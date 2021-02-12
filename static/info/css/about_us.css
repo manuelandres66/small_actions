@@ -1,0 +1,231 @@
+#titles img {
+    height: 23vh;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(50%);
+    position: absolute;
+    z-index: -1;
+}
+
+#title {
+    height: 23vh;
+}
+
+#title h1, #title h2 {
+    text-align: center;
+    color: #fff;
+}
+
+#title h1 {
+    font-size: 60px;
+    padding-top: 3.5vh;
+}
+
+#title h2 {
+    font-size: 40px;
+    font-weight: 300;
+    margin-top: 0.3vh;
+}
+
+.mayor_div {
+    width: 92%;
+    margin-left: 4%;
+    margin-top: 5vh;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.principal {
+    width: 38vw;
+}
+
+.principal h3, .principal h4, .principal h5, .principal h6 {
+    text-align: center;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.principal p {
+    text-align: justify;
+    margin-top: 1.3vh;
+    font-size: 18px;
+    margin-bottom: 1vh;
+}
+
+#map {
+    height: 49vh;
+    width: 38vw;
+}
+
+button {
+    border: none;
+    height: 6vh;
+    border-radius: 50px;
+    font-size: 30px;
+    color: #fff;
+    background-color: #ff3a3a;
+    margin-top: 2vh;
+    cursor: pointer;
+}
+
+.single_button button {
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons a {
+    width: 40%;
+}
+
+.buttons a button {
+    width: 100%;
+}
+
+.word span {
+    font-family: "Sora", sans-serif;
+    font-weight: 900;
+    font-size: 70px;
+    line-height: 1.5;
+    display: inline-block;
+    color: #fff;
+
+    animation: move 3s ease-in-out infinite;
+}
+
+@keyframes move {
+    0% {
+        transform: translate(-30%, 0);
+    }
+    50% {
+        text-shadow: 0 25px 50px rgba(0, 0, 0, 0.75);
+    }
+    100% {
+        transform: translate(30%, 0);
+    }
+}
+
+#frist_word span:nth-child(2) {
+    animation-delay: 0.5s;
+}
+#frist_word span:nth-child(3) {
+    animation-delay: 1s;
+}
+#frist_word span:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+
+#second_word span:nth-child(2) {
+    animation-delay: 0.5s;
+}
+#second_word span:nth-child(3) {
+    animation-delay: 1s;
+}
+#second_word span:nth-child(4) {
+    animation-delay: 1.5s;
+}
+#second_word span:nth-child(5) {
+    animation-delay: 2s;
+}
+#second_word span:nth-child(6) {
+    animation-delay: 2.5s;
+}
+#second_word span:nth-child(7) {
+    animation-delay: 3s;
+}
+#second_word span:nth-child(8) {
+    animation-delay: 3.5s;
+}
+
+
+#third_word span:nth-child(2) {
+    animation-delay: 0.5s;
+}
+#third_word span:nth-child(3) {
+    animation-delay: 1s;
+}
+#third_word span:nth-child(4) {
+    animation-delay: 1.5s;
+}
+#third_word span:nth-child(5) {
+    animation-delay: 2s;
+}
+#third_word span:nth-child(6) {
+    animation-delay: 2.5s;
+}
+#third_word span:nth-child(7) {
+    animation-delay: 3s;
+}
+#third_word span:nth-child(8) {
+    animation-delay: 3.5s;
+}
+
+.container {
+    margin: 4vh 9vw;
+    width: 20vw;
+    height: 17vh;
+    position: relative;
+    perspective: 1000px;
+}
+
+#carousel{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotation 30s infinite linear;
+}
+
+#carousel:hover{
+    animation-play-state: paused;
+}
+
+#carousel figure{
+    display: block;
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    left: 10px;
+    top: 10px;
+    background: #fff;
+    overflow: hidden;
+    border: solid 0.5px black;
+    border-radius: 10px;
+}
+
+#carousel figure:nth-child(1){  transform: rotateY(0deg) translateZ(350px);}
+#carousel figure:nth-child(2) { transform: rotateY(72deg) translateZ(350px);}
+#carousel figure:nth-child(3) { transform: rotateY(144deg) translateZ(350px);}
+#carousel figure:nth-child(4) { transform: rotateY(216deg) translateZ(350px);}
+#carousel figure:nth-child(5) { transform: rotateY(288deg) translateZ(350px);}
+
+.container img {
+    cursor: pointer;
+    transition: all .5s ease;
+    object-fit: contain;
+    height: 100%;
+    width: 100%
+}
+
+.container img:hover{
+    transform: scale(1.2,1.2);
+}
+
+@keyframes rotation{
+  from{
+        transform: rotateY(0deg);
+  }
+  to{
+        transform: rotateY(360deg);
+  }
+}
+
+#last {
+    margin-bottom: 10vh;
+}

@@ -14,6 +14,12 @@ from maps.models import Help, SubCategory, Category
 import json
 # Create your views here. 
 
+def about_us(request):
+    places = str(len(Help.objects.all()))
+    place_str = [num for num in places]
+    photos = Organization.objects.annotate(p_count=Count('help_points')).order_by('-p_count')[:5]
+    return render(request, 'info/about_us.html', {'places' : place_str, 'photos' : photos})
+
 def category(request, category):
     donate = True if category == 'donate' else False
     categories = Category.objects.filter(code__startswith= 'D' if donate else 'V')

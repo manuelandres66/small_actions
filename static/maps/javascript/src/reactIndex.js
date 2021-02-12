@@ -6,8 +6,8 @@ class App extends React.Component {
             type: 'Web de ayuda',
             organization: 'Small Actions',
             description: "Bienvenido a Small Actions una página web sobre ayudar a los demás, para iniciar, da click en un sitio en el mapa de tu izquierda, esta sección cambiará con la información del lugar, y los botones de abajo te llevarán a páginas con más información o con la ruta para visitar el lugar. Por favor haz una cuenta antes de nada para guardar tu progreso. ¡Ayuda a los demás y gana puntos!.",
-            url: "#",
-            uuid: "#"
+            url: "/info/about_us",
+            uuid: "/info/about_us"
         };
         this.newMap()
     }

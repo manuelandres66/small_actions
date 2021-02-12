@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('organizations', views.search, name='searchOrganization'),
     path('become', views.become, name='become'),
+    path('about_us', views.about_us, name="aboutus"),
     path('organization/<int:pk>', views.organization, name='org'),
     path('categories/', views.choose_category, name='choose'),
     path('categories/<str:category>', views.category, name='category'),
