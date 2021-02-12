@@ -1,3 +1,12 @@
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 #title img {
     width: 40vw;
     height: 15vh;
@@ -5,8 +14,10 @@
     margin-left: 25vw;
     position: relative;
     bottom: 4vh;
-}
 
+    animation: appear 4s;
+}
+ 
 #title {
     width: 90%;
     height: 20vh;
@@ -138,10 +149,22 @@
     align-items: center;
 }
 
+@keyframes circular {
+    0% {
+        transform: translate(-70vw) rotate(-360deg);
+    }
+
+    100% {
+        transform: translate(0) rotate(0);
+    }
+}
+
 #description img {
     width: 7.5vw;
     height: 7.5vw;
     margin-right: 2.5vw;
+
+    animation: circular 2s;
 }
 
 #description p {
@@ -164,6 +187,20 @@
     position: relative;
     bottom: 6vh;
     left: 14vw;
+
+    transform: translate(-100vw);
+    animation: circular 2s 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes quote {
+    0% {
+        transform: translate(50vw);
+    }
+
+    100% {
+        transform: translate(0);
+    }
 }
 
 #quote {
@@ -172,6 +209,8 @@
     letter-spacing: 20px;
     position: relative;
     bottom: 1vh;
+
+    animation: quote 2s;
 } 
 
 #map {

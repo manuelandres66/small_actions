@@ -59,7 +59,7 @@
 
     <div id="comments">
         {% if request.user.is_authenticated %}
-            <form method="POST"> {% csrf_token %}
+            <form method="POST" action="{% url 'info' point.uuid %}#comments"> {% csrf_token %}
                 {{form.comment}}
                 <i class="far fa-paper-plane" id="send_icon"></i>
                 {{form.comment.errors}}
@@ -70,9 +70,9 @@
             {% for comment in comments %}
             <div class="comment">
                 {% if comment.user.photo %}
-                    <img src="{{comment.user.photo.url}}" alt="{{comment.user.username}}" width="300" height="300">
+                    <a href="{% url 'another' comment.user.username %}"><img src="{{comment.user.photo.url}}" alt="{{comment.user.username}}" width="300" height="300"></a>
                 {% else %}
-                    <img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="{{comment.user.username}}" width="300" height="300"> 
+                    <a href="{% url 'another' comment.user.username %}"><img src="{% static 'maps/images/logo_small_icon_only_inverted.png' %}" alt="{{comment.user.username}}" width="300" height="300"></a> 
                 {% endif %}
     
                 <div class="comment_comment">

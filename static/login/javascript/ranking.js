@@ -19,7 +19,7 @@ const petiton = (start, end) => {
                 
                 let newDiv = document.createElement("div");
                 newDiv.innerHTML = `<h5>${position.ranking}</h5>
-                <h6>${position.username}</h6>
+                <h6><a href="/account/another/${position.username}">${position.username}</a></h6>
                 <span>${position.points}</span>`;
                 
                 newDiv.setAttribute('class', 'column');

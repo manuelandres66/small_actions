@@ -44,6 +44,11 @@ class UserTest(TestCase):
         user = User.objects.get(username='PEPE')
         self.assertTrue(user.dark_mode)
 
+    def test_another(self):
+        c = Client()
+        response = c.get(f'/account/another/{self.pepe.username}')
+        self.assertEqual(response.status_code, 200)
+
     def test_change_password(self):
         user = User.objects.get(username="PEPE")
         user.set_password('hola12345')
@@ -55,12 +60,6 @@ class UserTest(TestCase):
 
         login = c.login(username="PEPE", password="hola12345")
         self.assertTrue(login)
-
-    def test_ranking_new(self):
-        c = Client()
-        c.login(username="PEPE", password="hola1234")
-        response = c.get(reverse('ranking'))
-        self.assertEqual(response.status_code, 200)
 
     def test_account(self):
         c = Client()
@@ -136,6 +135,12 @@ class ApiTest(TestCase):
         User.objects.create_user(username="PEPE4", password="hola1234", points=3)
         User.objects.create_user(username="PEPE5", password="hola1234", points=4)
         User.objects.create_user(username="PEPE6", password="hola1234", points=5)
+
+    def test_ranking_new(self):
+        c = Client()
+        c.login(username="PEPE", password="hola1234")
+        response = c.get(reverse('ranking'))
+        self.assertEqual(response.status_code, 200)
 
     def test_api(self):
         c = Client()

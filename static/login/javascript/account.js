@@ -119,3 +119,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Achivments
+
+const progress = document.querySelectorAll('.progress');
+progress.forEach(progre => {
+    const type = progre.getAttribute('data-type');
+    const data_related = document.querySelector(`#${type}`).innerHTML;
+    const parent = progre.parentNode;
+
+    if (type == 'pr') {
+        if (data_related != '') {
+            parent.setAttribute('class', 'bar completed');
+        }
+    } else {
+        const total_data = progre.getAttribute('data-quantity');
+        const relation = ((parseFloat(data_related) / parseFloat(total_data)) * 100).toFixed(2);
+        
+        if (relation >= 100) {
+            parent.setAttribute('class', 'bar completed');
+        };
+
+        progre.style.width = `${relation}%`;
+        parent.childNodes[3].innerHTML = `${data_related}/${total_data}` //Show current progress
+
+    };
+
+})

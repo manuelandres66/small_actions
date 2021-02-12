@@ -2,16 +2,31 @@
     display: flex;
     margin-top: 6vh;
     justify-content: center;
+} 
+
+@keyframes fromR {
+    0% {
+        transform: translate(70vw);
+    }
+    100% {
+        transform: translate(0);
+    }
 }
 
 #titles h1 {
     font-size: 35px;
     font-weight: 300;
+    transform: translate(70vw);
+
+    animation: fromR 2s 1s;
+    animation-fill-mode: forwards;
 }
 
 #titles h2 {
     font-size: 60px;
     font-weight: 600;
+
+    animation: fromR 2s;
 } 
 
 #titles i {

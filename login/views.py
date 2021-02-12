@@ -73,7 +73,13 @@ def account(request):
 
             return redirect(reverse('account'))
 
-    ctx = {'user' : user, 'index' : index, 'form' : form}
+    #Achivments
+    volunteer = len(user.visited.filter(mayor_category='V'))
+    donate = len(user.visited.filter(mayor_category='D'))
+    comments = len(user.comments.all())
+
+    ctx = {'user' : user, 'index' : index, 'form' : form, 'volunteer' : volunteer, \
+        'donate' : donate, 'comments' : comments}
     return render(request, 'login/account.html', ctx)
 
 @login_required(login_url='/account/login')
@@ -285,4 +291,9 @@ def api_places(request):
         })
 
     return JsonResponse(response, status=200)
+
+def another_account(request, username):
+    user = User.objects.get(username=username)
+    place = user.get_ranking() + 1
+    return render(request, 'login/another.html', {'user' : user, 'place' : place})
     

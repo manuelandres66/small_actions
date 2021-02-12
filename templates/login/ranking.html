@@ -13,17 +13,17 @@
         <div id='superior_grid'>
             <div id='frist_place' class="place">
                 <i class="fas fa-medal"></i>
-                <h2>{{frist.0.username}}</h2>
+                <h2><a href="{% url 'another' frist.0.username%}">{{frist.0.username}}</a></h2>
                 <span>{{frist.0.points}} Points</span>
             </div>
             <div id='second_place' class="other_place place">
                 <i class="fas fa-medal"></i>
-                <h3>{{frist.1.username}}</h3>
+                <h3><a href="{% url 'another' frist.1.username%}">{{frist.1.username}}</a></h3>
                 <span>{{frist.1.points}} Points</span>
             </div>
             <div id='third_place' class="other_place place">
                 <i class="fas fa-medal"></i>
-                <h4>{{frist.2.username}}</h4>
+                <h4><a href="{% url 'another' frist.2.username%}">{{frist.2.username}}</a></h4>
                 <span>{{frist.2.points}} Points</span>
             </div>
         </div>
