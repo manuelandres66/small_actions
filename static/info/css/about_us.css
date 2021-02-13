@@ -8,6 +8,10 @@
     z-index: -1;
 }
 
+html[theme='dark-mode'] #titles img {
+    filter: invert(1) hue-rotate(180deg);
+}
+
 #title {
     height: 23vh;
 }
@@ -15,6 +19,10 @@
 #title h1, #title h2 {
     text-align: center;
     color: #fff;
+}
+
+html[theme='dark-mode'] #title h1, html[theme='dark-mode'] #title h2 {
+    color: #000;
 }
 
 #title h1 {
@@ -237,8 +245,10 @@
     background-size: cover;
     display: flex;
     flex-wrap: wrap;
+}
 
-
+html[theme='dark-mode'] #change_images {
+    filter: invert(1) hue-rotate(180deg);
 }
 
 .block {
