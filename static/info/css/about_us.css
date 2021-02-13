@@ -59,7 +59,7 @@
     width: 38vw;
 }
 
-button {
+.principal button {
     border: none;
     height: 6vh;
     border-radius: 50px;
@@ -233,7 +233,6 @@ button {
 #change_images {
     width: 40vw;
     height: 25vh;
-    background: no-repeat top center;
     background-image: url('/static/info/images/donate.jpg');
     background-size: cover;
     display: flex;
@@ -318,3 +317,115 @@ button {
     }
 }
 
+@media screen and (max-width: 1340px) {
+    .mayor_div {
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .principal {
+        width: 100%;
+        order: 1;
+    }
+
+    #titles img, #title {
+        height: 25vh;
+    }
+
+    #title h1 {
+        font-size: 35px;
+    }
+
+    #title h2 {
+        font-size: 30px;
+    }
+
+    .principal h3, .principal h4, .principal h5, .principal h6 {
+        font-size: 25px;
+        padding-top: 7vh;
+    }
+
+    .principal p {
+        font-size: 15px;
+    }
+
+    #map {
+        height: 50vh;
+        width: 100%;
+        margin-top: 7vh;
+    }
+
+    .principal button {
+        font-size: 15px;
+    }
+
+    .word span {
+        font-size: 40px;
+    }
+
+    .word:nth-child(1) {
+        margin-top: 7vh;
+    }
+
+    .container {
+        width: 100%;
+        margin: 0;
+        perspective: 500vw;
+
+        margin-top: 7vh;
+    }
+
+    #carousel figure {
+        width: 70%;
+    }
+
+    #carousel figure:nth-child(1){  transform: rotateY(0deg) translateZ(200px);}
+    #carousel figure:nth-child(2) { transform: rotateY(72deg) translateZ(200px);}
+    #carousel figure:nth-child(3) { transform: rotateY(144deg) translateZ(200px);}
+    #carousel figure:nth-child(4) { transform: rotateY(216deg) translateZ(200px);}
+    #carousel figure:nth-child(5) { transform: rotateY(288deg) translateZ(200px);}
+
+    #change_images {
+        width: 100%;
+        height: 25vh;
+        margin-top: 7vh;
+    }
+
+    .block {
+        width: 25%;
+        height: 12.5vh;
+        background-size: 92vw;
+
+        position: relative;
+        right: 1px;
+    }
+
+    .block:nth-child(2) {
+        background-position-x: -100%;
+        animation-delay: 0.1s;
+    }
+    .block:nth-child(3) {
+        background-position-x: -200%;
+        animation-delay: 0.2s;
+    }
+    .block:nth-child(4) {
+        background-position-x: -300%;
+        animation-delay: 0.3s;
+    }
+    .block:nth-child(5) {
+        background-position-y: -12.5vh;
+        animation-delay: 0.1s;
+    }
+    .block:nth-child(6) {
+        background-position: -100% -12.5vh;
+        animation-delay: 0.2s;
+    }
+    .block:nth-child(7) {
+        background-position: -200% -12.5vh;
+        animation-delay: 0.3s;
+    }
+    .block:nth-child(8) {
+        background-position: -300% -12.5vh;
+        animation-delay: 0.4s;
+    }
+}
