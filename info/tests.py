@@ -112,6 +112,11 @@ class OrgTest(TestCase):
             'DFfSecn' : []
         }})
 
+    def test_about_us(self):
+        c = Client()
+        response = c.get(reverse('aboutus'))
+        self.assertEqual(response.status_code, 200)
+
 
 
 
