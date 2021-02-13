@@ -20,7 +20,7 @@ const popup = new mapboxgl.Popup({
     closeOnClick: true,
     closeButton: false,
 
-}).setHTML(`<h3>Torre Eifel</h3> 
+}).setHTML(`<h3>Torre Eiffel</h3> 
 <a href="/">Ver Mapa</a> 
 <a href="/points/"/points/>Buscar Lugares</a>`);
 

@@ -96,7 +96,7 @@
             </div>
         </div>
     </div>
-    <div class="mayor_div" id="last">
+    <div class="mayor_div">
         <div class="principal">
             <h6>¿Qué son las organizaciones?</h6>
             <p>
@@ -115,6 +115,30 @@
                 {% for photo in photos %}
                     <figure><img src="{{photo.image.url}}" alt="org" width="500" height="300"></figure>
                 {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="mayor_div" id="last">
+        <div id="change_images">
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+        </div>
+        <div class="principal">
+            <h6>¿Qué son las categorías?</h6>
+            <p>
+                Las categorías son una forma de diferenciar unos lugares de otros por el tipo de ayuda que necesiten. 
+                Se dividen en dos grandes grupos, donaciones y voluntariado, cada una de las mismas tiene un mapa en donde 
+                puedes ocultar o mostrar las categorías que quieras ver dando click al menú a la derecha, o en la parte de abajo en celulares. 
+            </p>
+            <div class="buttons">
+                <a href="{% url 'category' 'donate' %}"><button>Donaciones</button></a>
+                <a href="{% url 'category' 'voluntary' %}"><button>Voluntariado</button></a>
             </div>
         </div>
     </div>
