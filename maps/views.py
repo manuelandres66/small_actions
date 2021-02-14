@@ -95,7 +95,6 @@ def go(request, uuid):
                         else:
                             extra_points = round((distance / 20) * 125)
 
-                    print(extra_points)
                     current_user.points += help_point.points_for_completed + extra_points
                     current_user.visited.add(help_point)
                     current_user.save()
