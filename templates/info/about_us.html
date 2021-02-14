@@ -1,0 +1,146 @@
+{% extends 'maps/nav.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Sobre Nostros, Sobre Ayudar</title>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
+    <link href="{% static 'info/css/about_us.css' %}" rel="stylesheet">
+{% endblock %}
+     
+{% block content %}
+    <div id="titles">
+        <img src="{% static 'info/images/fuerza.jpg' %}" alt="pricipal" width="1920" height="247">
+        <div id="title">
+            <h1>Sobre Nostros</h1>
+            <h2>Sobre Ayudar</h2>
+        </div>
+    </div>
+    <div class="mayor_div">
+        <div class="principal">
+            <h3>¿Qué es Small Actions?</h3>
+            <p>
+                Small Actions es una plataforma online que permite a las personas encontrar lugares donde ayudar, donar o hacer voluntariado. 
+                Si vas a algún lugar, e ingresas el código, ¡Ganarás puntos!. Además, te permite buscar por categorías u organizaciones que 
+                lugares quieres visitar.
+            </p>
+        </div>
+        <div class="principal">
+            <h4>¿Cómo ayudo?</h4>
+            <p>
+                Tienes que dirigirte a un lugar que escojas en el mapa de la página principal. Dandole a “Ver Ruta” te aparecera un mapa con la ruta para ir al lugar, ve a el. 
+                Una vez ahí sigue las indicaciones de la organización para ayudar, cuando finalices te darán un código que podrás ingresar. 
+            </p>
+        </div>
+    </div>
+    <div class="mayor_div">
+        <div class="principal">
+            <h5>¿Cómo usar el mapa?</h5>
+            <p>
+                Tienes un ejemplo, con el puedes arrastrar con el click derecho presionado para moverte alrededor del mapa o con un dedo si estas en celular, 
+                para acercar y alejar tienes una herramienta en la parte izquierda, sin embargo también puedes usar la rueda del centro o utilizando dos dedos 
+                y acercándose y alejándose en el caso del celular.
+            </p>
+            <p>
+                Los sitios en Small Actions se encuentran de dos formas, la primera es la forma en la que aparecen en la página principal en donde si le das click 
+                a un marcador la parte de la derecha cambia con la info que necesitas, y la segunda que aparece en el resto de sitios es que cuando le das click 
+                sale un pop-up con el título y con las opciones de ver información o ir ahí.
+            </p>
+            <p>
+                Para utilizar tu ubicación puedes darle click en el símbolo de la ubicación que se puede encontrar debajo del de zoom o en la parte superior izquierda 
+                del mapa. Sin embargo, si estás registrado el mapa automáticamente aparecerá donde tienes registrada tu ubicación.
+            </p>
+            <a href="{% url 'index' %}" class="single_button"><button>Usar el Mapa</button></a>
+        </div>
+        <div id="map"></div>
+    </div>
+    <div class="mayor_div">
+        <div>
+            <div class="word" id="frist_word">
+                {% for place in places %}
+                <span>{{place}}</span>
+                {% endfor %}
+            </div>
+            <div class="word" id="second_word">
+                <span>L</span>
+                <span>U</span>
+                <span>G</span>
+                <span>A</span>
+                <span>R</span>
+                <span>E</span>
+                <span>S</span>
+            </div>
+            <div class="word" id="third_word">
+                <span>A</span>
+                <span>C</span>
+                <span>T</span>
+                <span>I</span>
+                <span>V</span>
+                <span>O</span>
+                <span>S</span>
+            </div>
+        </div>
+        <div class="principal">
+            <h5>¿Qué son los lugares?</h5>
+            <p>
+                Los lugares son sitios físicos a los que puedes acudir para ayudar. Puedes buscarlos o puedes visitar el mapa e ir explorando cuales están cercanos a donde vives. 
+                La idea de Small Actions es facilitarte estos lugares de modo que sea motivante y facil llegar a ellos. Hay dos páginas que muestran los puntos. La primera es de 
+                información, que trae fotos, descripciones, recomendaciones, comentarios e información de la organización que lo creo.  Y la segunda, que encuentras dando 
+                click en “Ir ahi”, te da la ruta hacia una ubicación que especifiques, y te da el lugar donde puedes ingresar el código para ganar puntos.
+            </p>
+            <div class="buttons">
+                <a href="{% url 'SerchPoints' %}"><button>Buscar</button></a>
+                <a href="{% url 'index' %}"><button>Ver Mapa</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="mayor_div">
+        <div class="principal">
+            <h6>¿Qué son las organizaciones?</h6>
+            <p>
+                Las organizaciones son fundaciones, gobiernos, empresas entre otros organismos que necesitan ayuda de algún tipo. 
+                Estas tienen acceso a poner sus puntos de ayuda de manera gratuita, a los cuales puedes visitar. Son las encargadas además de guiar a 
+                los que vayan a ayudar, recibiendo sus donaciones o guiandolos en el voluntariado. 
+                Cuando finalices la ayuda te darán el código para que ingreses en la página.
+            </p>
+            <div class="buttons">
+                <a href="{% url 'searchOrganization' %}"><button>Buscar</button></a>
+                <a href="{% url 'become' %}"><button>Volverte una</button></a>
+            </div>
+        </div>
+        <div class="container">
+            <div id="carousel">
+                {% for photo in photos %}
+                    <figure><img src="{{photo.image.url}}" alt="org" width="500" height="300"></figure>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="mayor_div" id="last">
+        <div id="change_images">
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+        </div>
+        <div class="principal">
+            <h6>¿Qué son las categorías?</h6>
+            <p>
+                Las categorías son una forma de diferenciar unos lugares de otros por el tipo de ayuda que necesiten. 
+                Se dividen en dos grandes grupos, donaciones y voluntariado, cada una de las mismas tiene un mapa en donde 
+                puedes ocultar o mostrar las categorías que quieras ver dando click al menú a la derecha, o en la parte de abajo en celulares. 
+            </p>
+            <div class="buttons">
+                <a href="{% url 'category' 'donate' %}"><button>Donaciones</button></a>
+                <a href="{% url 'category' 'voluntary' %}"><button>Voluntariado</button></a>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'info/javascript/about_us.js' %}"></script>
+{% endblock %}

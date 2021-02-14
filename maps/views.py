@@ -1,3 +1,4 @@
+import math
 from django.shortcuts import render, reverse, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -11,6 +12,7 @@ from login.models import User
 import json
 import random
 import string
+from math import radians, cos, sin, asin, sqrt
 # Create your views here.
 
 def index(request):
@@ -43,6 +45,20 @@ def info_point(request, uuid):
 def points(request):
     return render(request, 'maps/points.html')
 
+def calculate_distance(lat1, lat2, lon1, lon2): 
+    lon1, lon2 = radians(lon1), radians(lon2) 
+    lat1, lat2 = radians(lat1), radians(lat2) 
+       
+    # Haversine formula  
+    dlon = lon2 - lon1  
+    dlat = lat2 - lat1 
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+  
+    c = 2 * asin(sqrt(a))  
+    r = 6371
+       
+    return round(c * r, 2)
+
 
 def go(request, uuid):
     help_point = Help.objects.get(uuid=uuid)
@@ -69,7 +85,17 @@ def go(request, uuid):
 
                     #Get Points
                     current_user = User.objects.get(username=request.user.username)
-                    current_user.points += help_point.points_for_completed
+                    extra_points = 0
+                    if request.user.longitude != None and request.user.latitude != None:
+                        distance = calculate_distance(help_point.latitude, request.user.latitude,
+                        help_point.longitude, request.user.longitude)
+
+                        if distance > 20:
+                            extra_points = 150
+                        else:
+                            extra_points = round((distance / 20) * 125)
+
+                    current_user.points += help_point.points_for_completed + extra_points
                     current_user.visited.add(help_point)
                     current_user.save()
                     new_ranking = current_user.get_ranking()
@@ -77,7 +103,7 @@ def go(request, uuid):
                     #Cleand Cache
                     cache.delete(make_template_fragment_key('navbar'))
 
-                    return redirect(reverse('congratulations') + f'?i={old_ranking - new_ranking}&p={help_point.points_for_completed}') #Redirect
+                    return redirect(reverse('congratulations') + f'?i={old_ranking - new_ranking}&p={help_point.points_for_completed + extra_points}') #Redirect
                 else:
                     code_error = 'Codigo Invalido'
         else:
