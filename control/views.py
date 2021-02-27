@@ -1,12 +1,43 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import JsonResponse
 
 from .froms import ReportForm
 from .models import Report
+from .decorators import allowed
+
+from login.models import User
 
 # Create your views here.
+
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def index(request):
+    return render(request, 'control/index.html')
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def places(request):
+    if request.method != 'GET':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+
+    user = User.objects.get(username=request.user.username)
+    organization = user.organization
+
+    response = {'places' : []}
+    for place in organization.help_points.all().order_by('data_created'):
+        response['places'].append({
+            'name' : place.name,
+            'image' : place.photos.all()[0].photo.url,
+            'url' : reverse('info', kwargs={'uuid' : place.uuid}),
+            'uuid' : place.uuid,
+            'hover' : False
+        })
+
+    return JsonResponse(response, status=200)
 
 @login_required(login_url='/account/login')
 def report_form(request):
