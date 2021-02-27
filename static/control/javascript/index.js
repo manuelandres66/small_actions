@@ -1,16 +1,16 @@
 
 const Place = (props) => {
     return (
-        <div>
-            <div onMouseEnter={() => props.to_hover(true, props.uuid)} onMouseLeave={() => props.to_hover(false, props.uuid)}>
+        <div className="place">
+            <div onClick={() => props.to_hover(props.uuid)}>
                 <img src={props.image} />
                 <h5>{props.name}</h5>
             </div>
-            <div>
+            <div className="conf">
                 { props.hover ? <div>
-                    <i class="fas fa-eye"></i>
-                    <i class="fas fa-edit"></i>
-                    <i class="fas fa-trash"></i>
+                    <i className="fas fa-eye" onClick={() => window.location.href = props.url}></i>
+                    <i className="fas fa-edit"></i>
+                    <i className="fas fa-trash"></i>
                 </div> : null }
             </div>
         </div>
@@ -34,11 +34,13 @@ class Principal extends React.Component {
         this.setState({'places' : data.places});
     }
 
-    changeHover = (to, uuid) => {
+    changeHover = (uuid) => {
         const index = this.state.places.findIndex(item => item.uuid === uuid);
         let places = [...this.state.places];
         let place = {...places[index]};
-        place.hover = to;
+        places.forEach(place => place.hover = false);
+
+        place.hover = !place.hover;
         places[index] = place;
 
         this.setState({'places' : places});
@@ -56,7 +58,7 @@ class Principal extends React.Component {
                     </nav>
                 </div>
                 <div>
-                    <div>
+                    <div id="places">
                         {this.state.places.map(place => {
                             return <Place name={place.name} image={place.image} url={place.url} hover={place.hover} to_hover={this.changeHover} uuid={place.uuid} key={place.uuid}/>
                         })}
