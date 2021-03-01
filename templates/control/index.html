@@ -17,8 +17,8 @@
         <meta name="robots" content="noindex" />
     </head>
     <body>
-        <span id="image_url"></span>
         <div id="react"></div>
+        {% csrf_token %}
         <script src="{% static 'control/javascript/index.js' %}" type="text/babel"></script>
     </body>
 </html>

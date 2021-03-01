@@ -9,7 +9,9 @@ from .models import Report
 from .decorators import allowed
 
 from login.models import User
+from maps.models import Help
 
+import json
 # Create your views here.
 
 
@@ -38,6 +40,21 @@ def places(request):
         })
 
     return JsonResponse(response, status=200)
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def delete_place(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+        
+    data = json.loads(request.body)
+
+    if 'uuid' in data and data['uuid'] != '':
+        Help.objects.get(uuid=data['uuid']).delete()
+        return JsonResponse({'message' : 'sucecess'}, status=200)
+
+    return JsonResponse({'error' : 'no data specified'}, status=400)
+
 
 @login_required(login_url='/account/login')
 def report_form(request):

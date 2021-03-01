@@ -5,7 +5,7 @@ def allowed(allowed_roles=[]):
         def wrapper_func(request, *args, **kwargs):
 
             group = None
-            if request.user.groups.exists():
+            if request.user.groups.exists() and len(request.user.groups.all()) > 1:
                 group = request.user.groups.all()[1].name
             
             if group in allowed_roles:
