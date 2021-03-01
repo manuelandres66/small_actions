@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
 
-from .froms import ReportForm
+from .froms import ReportForm, CreatePlace
 from .models import Report
 from .decorators import allowed
 
@@ -13,7 +13,6 @@ from maps.models import Help
 
 import json
 # Create your views here.
-
 
 @login_required(login_url='/account/login')
 @allowed(allowed_roles=['Organization'])
@@ -54,7 +53,6 @@ def delete_place(request):
         return JsonResponse({'message' : 'sucecess'}, status=200)
 
     return JsonResponse({'error' : 'no data specified'}, status=400)
-
 
 @login_required(login_url='/account/login')
 def report_form(request):
