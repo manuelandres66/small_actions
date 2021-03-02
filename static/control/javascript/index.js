@@ -38,8 +38,16 @@ class Principal extends React.Component {
             'places' : [],
             'popupSee' : false,
             'popup' : null,
-            'see' : 'places'
+            'see' : 'places',
+            'form' : {
+                'mayor_category' : 'D',
+                'category' : 10,
+                'sub_category' : 71,
+                'photos' : [],
+            },
+            'formError' : null
         };
+        this.fileInput = [React.createRef(), React.createRef(), React.createRef(), React.createRef()];
         this.getPlaces();
     }
 
@@ -100,11 +108,78 @@ class Principal extends React.Component {
         'popupSee' : true})
     }
 
+    setValueForm = (event) => { //Set value to state, in order to submit later
+        let data = {...this.state.form};
+        data[event.target.name] = event.target.value;
+        this.setState({'form' : data});
+    }
+
+    newPlaceSubmit = async (event) => {
+        event.preventDefault();
+        let photoIds = []; //To save the ids of the uploaded photos
+
+        const fileFields = document.querySelectorAll("#newPlace input[type='file']");
+
+        for (let i = 0; i < fileFields.length; i++) { //Upload every new photo
+            const file = fileFields[i].files[0];
+            const formPhoto = new FormData();
+            formPhoto.append('photo', file);
+            formPhoto.append("csrfmiddlewaretoken", document.querySelector('[name=csrfmiddlewaretoken]').value) // I hate this
+
+            const for_data = await fetch('/control/api/uploadphoto', {
+                method: 'POST',
+                body: formPhoto
+            });
+            const data = await for_data.json();
+            photoIds.push(data.id);
+        };
+
+        const dataSubmit = {...this.state.form};
+        dataSubmit.photos = photoIds; // Put the photo id
+    }
+
+    dontShowCategories = (event) => {
+        const mayor_category = event.target.value === 'D' ? 'V' : 'D'; //Return the contrary
+        let categories = document.querySelectorAll('#id_category option');
+        categories.forEach(category => {
+            if (category.textContent[0] == mayor_category) {
+                category.setAttribute('hidden', '');
+            } else {
+                category.removeAttribute('hidden');
+            };
+        });
+    }
+
+    dontShowSubCategories = (event) => {
+        const category = document.querySelector(`#id_category option[value="${event.target.value}"]`).textContent.slice(0,3); //Get the code of the category (like DAl)
+        let sub_categories = document.querySelectorAll('#id_sub_category option');
+        sub_categories.forEach(sub_category => {
+            if (sub_category.textContent.slice(0, 3) == category) {
+                sub_category.removeAttribute('hidden');
+            } else {
+                sub_category.setAttribute('hidden', '');
+            };
+        });
+    }
+
+    showMap = () => {
+        mapboxgl.accessToken = 'pk.eyJ1IjoibWFudWVsMTJhdm8iLCJhIjoiY2tneWE3eWFhMGZjdjJ4bjUxaXR0cTBnNSJ9.c5ue5ns5clGrxZoG6WiEsw';
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [0, 0], // starting position
+            zoom: 1, // starting zoom
+        });
+
+    }
+
     render() {
         let see = null;
+
         if (this.state.see === "places") {
             see = (<div>
-                <div id="add" onClick={() => this.setSeeTo('new')}>Añadir Nuevo <i class="fas fa-plus"></i></div>
+                <div id="add" onClick={() => this.setSeeTo('new')}>Añadir Nuevo <i className="fas fa-plus"></i></div>
                 <div>
                     <div id="places">
                         {this.state.places.map(place => {
@@ -118,26 +193,28 @@ class Principal extends React.Component {
         } else if (this.state.see === "new") {
             see = (<div>
                 <h1>Crear un nuevo lugar</h1>
-                <form>
-                    <label for="id_name">Nombre:</label>
-                    <input type="text" name="name" maxlength="20" required="" id="id_name"></input>
-                    <label for="id_short_description">Descripción:</label>
-                    <textarea name="short_description" cols="40" rows="10" maxlength="900" required="" id="id_short_description"></textarea>
-                    <label for="id_recomedations">Recomendaciones:</label>
-                    <textarea name="recomedations" cols="40" rows="10" maxlength="900" required="" id="id_recomedations"></textarea>
+                <form onSubmit={this.newPlaceSubmit} id='newPlace'>
+                    <label htmlFor="id_name">Nombre:</label>
+                    <input type="text" name="name" maxLength="20" required id="id_name" onChange={this.setValueForm}></input>
+                    <label htmlFor="id_short_description">Descripción:</label>
+                    <textarea name="short_description" cols="40" rows="10" maxLength="900" required id="id_short_description" onChange={this.setValueForm}></textarea>
+                    <label htmlFor="id_recomedations">Recomendaciones:</label>
+                    <textarea name="recomedations" cols="40" rows="10" maxLength="900" required id="id_recomedations" onChange={this.setValueForm}></textarea>
+
                     <label>Fotos:</label>
-                    <input type="file" name="photo1" accept="image/*" id="id_photo"></input>
-                    <input type="file" name="photo2" accept="image/*" id="id_photo"></input>
-                    <input type="file" name="photo3" accept="image/*" id="id_photo"></input>
-                    <input type="file" name="photo4" accept="image/*" id="id_photo"></input>
-                    <label for="id_mayor_category">Categoria Principal:</label>
-                    <select name="mayor_category" id="id_mayor_category">
-                        <option value="D" selected="">Donar</option>
+                    <input type="file" name="photo1" accept="image/*" id="id_photo" ref={this.fileInput[0]} required />
+                    <input type="file" name="photo2" accept="image/*" id="id_photo" ref={this.fileInput[1]} required />
+                    <input type="file" name="photo3" accept="image/*" id="id_photo" ref={this.fileInput[2]} required />
+                    <input type="file" name="photo4" accept="image/*" id="id_photo" ref={this.fileInput[3]} required />
+
+                    <label htmlFor="id_mayor_category">Categoria Principal:</label>
+                    <select name="mayor_category" id="id_mayor_category" required onChange={(event) => {this.setValueForm(event); this.dontShowCategories(event);}}>
+                        <option value="D">Donar</option>
                         <option value="V">Voluntariado</option>
                     </select>
-                    <label for="id_category">Categoria:</label>
-                    <select name="category" required="" id="id_category">
-                        <option value="" selected="">---------</option>
+                    <label htmlFor="id_category">Categoria:</label>
+                    <select name="category" required id="id_category" onChange={(event) => {this.setValueForm(event); this.dontShowSubCategories(event);}}>
+                        <option value="">---------</option>
                         <option value="10">DAl (Alimentos)</option>
                         <option value="11">DBb (Artículos para Bebés)</option>
                         <option value="12">DRp (Ropa)</option>
@@ -161,8 +238,8 @@ class Principal extends React.Component {
                         <option value="30">VPr (Profesional)</option>
                         <option value="31">VOt (Otros Voluntariados)</option>
                     </select>
-                    <label for="id_sub_category">Subcategorias:</label>
-                    <select name="sub_category" required="" id="id_sub_category" multiple>
+                    <label htmlFor="id_sub_category">Subcategorias:</label>
+                    <select name="sub_category" required id="id_sub_category" onChange={this.setValueForm}>
                         <option value="71">DAlPolv (Leche en Polvo)</option>
                         <option value="72">DAlEnte (Leche Entera)</option>
                         <option value="73">DAlNoPe (No perecederos)</option>
@@ -236,10 +313,15 @@ class Principal extends React.Component {
                         <option value="142">DAlAgua (Agua)</option>
                     </select>
                     <input type="submit"></input>
+                    <h6>{this.state.formError}</h6>
                 </form>
-            </div>)
-        };
+                <h2>Donde esta ubicado?</h2>
+                <h4>Haz click en donde esta ubicado</h4>
+                <div id="map"></div>
+            </div>);
 
+            this.showMap();
+        };
 
         return (
             <div>
