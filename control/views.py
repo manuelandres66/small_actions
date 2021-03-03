@@ -51,7 +51,10 @@ def delete_place(request):
     data = json.loads(request.body)
 
     if 'uuid' in data and data['uuid'] != '':
-        Help.objects.get(uuid=data['uuid']).delete()
+        help_to_delete = Help.objects.get(uuid=data['uuid'])
+        for photo in help_to_delete.photos.all():
+            photo.delete()
+        help_to_delete.delete()
         return JsonResponse({'message' : 'sucecess'}, status=200)
 
     return JsonResponse({'error' : 'no data specified'}, status=400)
