@@ -12,6 +12,8 @@ from login.models import User
 from maps.models import Help, HelpPhoto
 
 import json
+import random
+import string
 # Create your views here.
 
 @login_required(login_url='/account/login')
@@ -29,7 +31,7 @@ def places(request):
     organization = user.organization
 
     response = {'places' : []}
-    for place in organization.help_points.all().order_by('data_created'):
+    for place in organization.help_points.all().order_by('-data_created'):
         response['places'].append({
             'name' : place.name,
             'image' : place.photos.all()[0].photo.url,
@@ -67,7 +69,7 @@ def upload_image(request):
         )
         return JsonResponse({'id' : new_photo.id}, status=200)
 
-    return JsonResponse({'error' : 'Invalid Form'}, status=400)
+    return JsonResponse({'error' : 'Invalid Photo Form'}, status=400)
 
 
 @login_required(login_url='/account/login')
@@ -77,25 +79,37 @@ def upload_place(request):
         return JsonResponse({'error' : 'Invalid request'}, status=400)
 
     user = User.objects.get(username=request.user.username)
-
-    form = CreatePlace(request.POST)
+    form = CreatePlace(data=request.POST)
     if form.is_valid():
         mayor = form.cleaned_data['mayor_category']
         points_for_completed = 150 if mayor == 'D' else 200 #If volunteer 200 points, if donation 150
 
-        Help.objects.create(
+        #Temporal random code
+        letters = string.ascii_uppercase
+        first = ''.join(random.choice(letters) for i in range(3))
+        second = random.randint(111, 999)
+        third = ''.join(random.choice(letters) for i in range(3))
+
+        new_photo = Help.objects.create(
             latitude =              form.cleaned_data['latitude'],
             longitude =             form.cleaned_data['longitude'],
             name =                  form.cleaned_data['name'],
             short_description =     form.cleaned_data['short_description'],
             recomedations =         form.cleaned_data['recomedations'],
             organization =          user.organization,
-            photo =                 form.cleaned_data['photo'],
             points_for_completed=   points_for_completed,
             mayor_category =        mayor,
             category =              form.cleaned_data['category'],
-            sub_category =          form.cleaned_data['sub_category']
+            temporal_code =         f"{first}-{second}-{third}".upper()    
         )
+
+        for photo in form.cleaned_data['photos']:
+            new_photo.photos.add(photo)
+
+        for sub_cate in form.cleaned_data['sub_category']:
+            new_photo.sub_category.add(sub_cate)
+
+        new_photo.save()
 
         return JsonResponse({'message' : 'All ok'}, status=200)
 

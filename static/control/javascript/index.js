@@ -43,7 +43,8 @@ class Principal extends React.Component {
                 'mayor_category' : 'D',
                 'category' : 10,
                 'sub_category' : 71,
-                'photos' : [],
+                'latitude' : 0,
+                'longitude' : 0
             },
             'formError' : null
         };
@@ -114,28 +115,65 @@ class Principal extends React.Component {
         this.setState({'form' : data});
     }
 
-    newPlaceSubmit = async (event) => {
+    newPlaceSubmit = async (event) => { //More large ecuation, sorry dude
         event.preventDefault();
         let photoIds = []; //To save the ids of the uploaded photos
+        const dataSubmit = {...this.state.form};
 
-        const fileFields = document.querySelectorAll("#newPlace input[type='file']");
-
-        for (let i = 0; i < fileFields.length; i++) { //Upload every new photo
-            const file = fileFields[i].files[0];
-            const formPhoto = new FormData();
-            formPhoto.append('photo', file);
-            formPhoto.append("csrfmiddlewaretoken", document.querySelector('[name=csrfmiddlewaretoken]').value) // I hate this
-
-            const for_data = await fetch('/control/api/uploadphoto', {
-                method: 'POST',
-                body: formPhoto
-            });
-            const data = await for_data.json();
-            photoIds.push(data.id);
+        //Doing Checks
+        let checked = true;
+        if (dataSubmit.latitude === 0 & dataSubmit.longitude === 0) { //Not coordinates entered
+            checked = false;
+            this.setState({'formError' : 'Se nececita poner unas coordenadas'});
         };
 
-        const dataSubmit = {...this.state.form};
-        dataSubmit.photos = photoIds; // Put the photo id
+        if (checked) {
+            const fileFields = document.querySelectorAll("#newPlace input[type='file']");
+
+            for (let i = 0; i < fileFields.length; i++) { //Upload every new photo
+                const file = fileFields[i].files[0];
+                const formPhoto = new FormData();
+                formPhoto.append('photo', file);
+                formPhoto.append("csrfmiddlewaretoken", document.querySelector('[name=csrfmiddlewaretoken]').value) // I hate this
+
+                const for_data = await fetch('/control/api/uploadphoto', {
+                    method: 'POST',
+                    body: formPhoto
+                });
+                const data = await for_data.json();
+
+                if (data.error !== undefined) {
+                    this.setState({'formError': data.error});
+                } else {
+                    photoIds.push(data.id);
+                };
+            };
+
+            let formPlace = new FormData();
+            formPlace.append("csrfmiddlewaretoken", document.querySelector('[name=csrfmiddlewaretoken]').value) // I hate this
+
+            for (const key in dataSubmit) { //Append all the info
+                formPlace.append(key, dataSubmit[key]);
+            };
+
+            photoIds.forEach(photo => {
+                formPlace.append('photos', photo); //All the photos send like the same "photos"
+            });
+
+            const for_data = await fetch('/control/api/uploadplace', {
+                method: 'POST',
+                body: formPlace
+            });
+            const data = await for_data.json();
+            
+            if (data.error !== undefined) { //If error show error
+                this.setState({'formError': data.error});
+            } else {
+                this.getPlaces(); //Get the new place
+                this.setState({'formError': null, 'see' : 'places'}); //No error message and see place
+            };
+        }
+        
     }
 
     dontShowCategories = (event) => {
@@ -162,14 +200,35 @@ class Principal extends React.Component {
         });
     }
 
-    showMap = () => {
+    showMap = (event) => {
+        event.preventDefault();
+        document.querySelector('#showhideMap').style.display = 'none';
+
         mapboxgl.accessToken = 'pk.eyJ1IjoibWFudWVsMTJhdm8iLCJhIjoiY2tneWE3eWFhMGZjdjJ4bjUxaXR0cTBnNSJ9.c5ue5ns5clGrxZoG6WiEsw';
 
         const map = new mapboxgl.Map({
-            container: 'map',
+            container: 'map', //No exist yet I really dont know hot to solve this
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [0, 0], // starting position
             zoom: 1, // starting zoom
+        });
+
+        var marker = new mapboxgl.Marker({}); //Only to not get error
+
+        map.on('click', (e) => {
+            marker.remove(); //Delete current marker
+
+            const coordinates = e.lngLat.wrap();
+            marker = new mapboxgl.Marker()
+            .setLngLat([coordinates.lng, coordinates.lat])
+            .addTo(map);
+
+            //Add to info state
+            let formInfo = {...this.state.form};
+            formInfo.latitude = coordinates.lat.toFixed(8);
+            formInfo.longitude = coordinates.lng.toFixed(8);
+
+            this.setState({'form' : formInfo});
         });
 
     }
@@ -192,7 +251,7 @@ class Principal extends React.Component {
 
         } else if (this.state.see === "new") {
             see = (<div>
-                <h1>Crear un nuevo lugar</h1>
+                <h1 id="createTitle">Crear un nuevo lugar</h1>
                 <form onSubmit={this.newPlaceSubmit} id='newPlace'>
                     <label htmlFor="id_name">Nombre:</label>
                     <input type="text" name="name" maxLength="20" required id="id_name" onChange={this.setValueForm}></input>
@@ -214,7 +273,6 @@ class Principal extends React.Component {
                     </select>
                     <label htmlFor="id_category">Categoria:</label>
                     <select name="category" required id="id_category" onChange={(event) => {this.setValueForm(event); this.dontShowSubCategories(event);}}>
-                        <option value="">---------</option>
                         <option value="10">DAl (Alimentos)</option>
                         <option value="11">DBb (Artículos para Bebés)</option>
                         <option value="12">DRp (Ropa)</option>
@@ -226,17 +284,17 @@ class Principal extends React.Component {
                         <option value="18">DLb (Libros)</option>
                         <option value="19">DSl (Salud)</option>
                         <option value="20">DOt (Otros)</option>
-                        <option value="21">VNi (Ayuda con Niños)</option>
-                        <option value="22">VAd (Adultos Mayores)</option>
-                        <option value="23">VFa (Familia)</option>
-                        <option value="24">VCo (Comedores)</option>
-                        <option value="25">VEd (Educación)</option>
-                        <option value="26">VSl (Salud)</option>
-                        <option value="27">VDs (Personas con Discapacidad)</option>
-                        <option value="28">VIn (Indigencia)</option>
-                        <option value="29">VRs (Reinserción Social)</option>
-                        <option value="30">VPr (Profesional)</option>
-                        <option value="31">VOt (Otros Voluntariados)</option>
+                        <option value="21" hidden>VNi (Ayuda con Niños)</option>
+                        <option value="22" hidden>VAd (Adultos Mayores)</option>
+                        <option value="23" hidden>VFa (Familia)</option>
+                        <option value="24" hidden>VCo (Comedores)</option>
+                        <option value="25" hidden>VEd (Educación)</option>
+                        <option value="26" hidden>VSl (Salud)</option>
+                        <option value="27" hidden>VDs (Personas con Discapacidad)</option>
+                        <option value="28" hidden>VIn (Indigencia)</option>
+                        <option value="29" hidden>VRs (Reinserción Social)</option>
+                        <option value="30" hidden>VPr (Profesional)</option>
+                        <option value="31" hidden>VOt (Otros Voluntariados)</option>
                     </select>
                     <label htmlFor="id_sub_category">Subcategorias:</label>
                     <select name="sub_category" required id="id_sub_category" onChange={this.setValueForm}>
@@ -244,83 +302,84 @@ class Principal extends React.Component {
                         <option value="72">DAlEnte (Leche Entera)</option>
                         <option value="73">DAlNoPe (No perecederos)</option>
                         <option value="74">DAlPere (Perecederos)</option>
-                        <option value="75">DBbPana (Pañales)</option>
-                        <option value="76">DBbOtro (Otros (Cunas, etc))</option>
-                        <option value="77">DRpNino (Para Niños)</option>
-                        <option value="78">DRpJove (Para Jóvenes)</option>
-                        <option value="79">DRpAdul (Para Adultos)</option>
-                        <option value="80">DCnArti (Artículos de Cocina)</option>
-                        <option value="81">DCnElec (Electrodomésticos)</option>
-                        <option value="82">DClColc (Colchones)</option>
-                        <option value="83">DClFraz (Frazadas)</option>
-                        <option value="84">DClSaba (Sábanas)</option>
-                        <option value="85">DMuBiAr (Bibliotecas y Armarios)</option>
-                        <option value="86">DMuCaCt (Camas y Catres)</option>
-                        <option value="87">DMuMeSi (Mesas y Sillas)</option>
-                        <option value="88">DMuOtro (Otros Muebles)</option>
-                        <option value="89">DTcCamr (Cámara de fotos/videos)</option>
-                        <option value="90">DTcComp (Computadoras)</option>
-                        <option value="91">DTcImpr (Impresoras)</option>
-                        <option value="92">DTcOtro (Otra Tecnología)</option>
-                        <option value="93">DRcDepo (Artículos Deportivos)</option>
-                        <option value="94">DRcMusi (Instrumentos Musicales)</option>
-                        <option value="95">DRcJugt (Juguetes)</option>
-                        <option value="96">DRcArte (Material Artístico)</option>
-                        <option value="97">DLbEscl (Escolares)</option>
-                        <option value="98">DLbInft (Infantiles)</option>
-                        <option value="99">DLbOtro (Otros Libros)</option>
-                        <option value="100">DSlMedi (Medicamentos)</option>
-                        <option value="101">DSlPrim (Primeros Auxilios)</option>
-                        <option value="102">DSlSang (Sangre)</option>
-                        <option value="103">DSlOtro (Otros Equipos Médicos)</option>
-                        <option value="104">DOtLimp (Limpieza)</option>
-                        <option value="105">DOtCstr (Material de Construcción)</option>
-                        <option value="106">DOtPint (Pintura)</option>
-                        <option value="107">DOtPelo (Cabello)</option>
-                        <option value="108">DOtOtro (Otro Otro)</option>
-                        <option value="109">VNiNino (Niños)</option>
-                        <option value="110">VNiAdol (Adolescentes)</option>
-                        <option value="111">VNiEmba (Embarazadas)</option>
-                        <option value="112">VAdAdAd (Personas Mayores)</option>
-                        <option value="113">VFaAsSo (Asistencia Social)</option>
-                        <option value="114">VFaVivi (Vivienda)</option>
-                        <option value="115">VCoNino (Con Niños)</option>
-                        <option value="116">VCoAdul (Con Adultos)</option>
-                        <option value="117">VEdApoy (Apoyo Escolar)</option>
-                        <option value="118">VEdTall (Talleres)</option>
-                        <option value="119">VEdCurs (Cursos)</option>
-                        <option value="120">VSlAdic (Adicciones)</option>
-                        <option value="121">VSlEnfe (Enfermedades)</option>
-                        <option value="122">VSlOtro (Otro Salud)</option>
-                        <option value="123">VDsNino (Niños Discapacitados)</option>
-                        <option value="124">VDsAdul (Adultos Discapacitados)</option>
-                        <option value="125">VInInIn (Indigencia)</option>
-                        <option value="126">VRsCarc (Cárceles)</option>
-                        <option value="127">VRsOtro (Otros Centros)</option>
-                        <option value="128">VPrAdmi (Administración)</option>
-                        <option value="129">VPrComu (Comunicación)</option>
-                        <option value="130">VPrDere (Derecho)</option>
-                        <option value="131">VPrDise (Diseño)</option>
-                        <option value="132">VPrDoce (Docencia)</option>
-                        <option value="133">VPrMedi (Médicos)</option>
-                        <option value="134">VPrPsic (Psicología)</option>
-                        <option value="135">VPrTecn (Tecnología)</option>
-                        <option value="136">VPrCoci (Cocinero)</option>
-                        <option value="137">VOtAnim (Animales)</option>
-                        <option value="138">VOtAmbi (Medio Ambiente)</option>
-                        <option value="139">VOtOtro (Otros Voluntariados)</option>
-                        <option value="141">DOtDine (Dinero)</option>
-                        <option value="142">DAlAgua (Agua)</option>
+                        <option value="75" hidden >DBbPana (Pañales)</option>
+                        <option value="76" hidden >DBbOtro (Otros (Cunas, etc))</option>
+                        <option value="77" hidden >DRpNino (Para Niños)</option>
+                        <option value="78" hidden >DRpJove (Para Jóvenes)</option>
+                        <option value="79" hidden >DRpAdul (Para Adultos)</option>
+                        <option value="80" hidden >DCnArti (Artículos de Cocina)</option>
+                        <option value="81" hidden >DCnElec (Electrodomésticos)</option>
+                        <option value="82" hidden >DClColc (Colchones)</option>
+                        <option value="83" hidden >DClFraz (Frazadas)</option>
+                        <option value="84" hidden >DClSaba (Sábanas)</option>
+                        <option value="85" hidden >DMuBiAr (Bibliotecas y Armarios)</option>
+                        <option value="86" hidden >DMuCaCt (Camas y Catres)</option>
+                        <option value="87" hidden >DMuMeSi (Mesas y Sillas)</option>
+                        <option value="88" hidden >DMuOtro (Otros Muebles)</option>
+                        <option value="89" hidden >DTcCamr (Cámara de fotos/videos)</option>
+                        <option value="90" hidden >DTcComp (Computadoras)</option>
+                        <option value="91" hidden >DTcImpr (Impresoras)</option>
+                        <option value="92" hidden >DTcOtro (Otra Tecnología)</option>
+                        <option value="93" hidden >DRcDepo (Artículos Deportivos)</option>
+                        <option value="94" hidden >DRcMusi (Instrumentos Musicales)</option>
+                        <option value="95" hidden >DRcJugt (Juguetes)</option>
+                        <option value="96" hidden >DRcArte (Material Artístico)</option>
+                        <option value="97" hidden >DLbEscl (Escolares)</option>
+                        <option value="98" hidden >DLbInft (Infantiles)</option>
+                        <option value="99" hidden >DLbOtro (Otros Libros)</option>
+                        <option value="100" hidden >DSlMedi (Medicamentos)</option>
+                        <option value="101" hidden >DSlPrim (Primeros Auxilios)</option>
+                        <option value="102" hidden >DSlSang (Sangre)</option>
+                        <option value="103" hidden >DSlOtro (Otros Equipos Médicos)</option>
+                        <option value="104" hidden >DOtLimp (Limpieza)</option>
+                        <option value="105" hidden >DOtCstr (Material de Construcción)</option>
+                        <option value="106" hidden >DOtPint (Pintura)</option>
+                        <option value="107" hidden >DOtPelo (Cabello)</option>
+                        <option value="108" hidden >DOtOtro (Otro Otro)</option>
+                        <option value="109" hidden >VNiNino (Niños)</option>
+                        <option value="110" hidden >VNiAdol (Adolescentes)</option>
+                        <option value="111" hidden >VNiEmba (Embarazadas)</option>
+                        <option value="112" hidden >VAdAdAd (Personas Mayores)</option>
+                        <option value="113" hidden >VFaAsSo (Asistencia Social)</option>
+                        <option value="114" hidden >VFaVivi (Vivienda)</option>
+                        <option value="115" hidden >VCoNino (Con Niños)</option>
+                        <option value="116" hidden >VCoAdul (Con Adultos)</option>
+                        <option value="117" hidden >VEdApoy (Apoyo Escolar)</option>
+                        <option value="118" hidden >VEdTall (Talleres)</option>
+                        <option value="119" hidden >VEdCurs (Cursos)</option>
+                        <option value="120" hidden >VSlAdic (Adicciones)</option>
+                        <option value="121" hidden >VSlEnfe (Enfermedades)</option>
+                        <option value="122" hidden >VSlOtro (Otro Salud)</option>
+                        <option value="123" hidden >VDsNino (Niños Discapacitados)</option>
+                        <option value="124" hidden >VDsAdul (Adultos Discapacitados)</option>
+                        <option value="125" hidden >VInInIn (Indigencia)</option>
+                        <option value="126" hidden >VRsCarc (Cárceles)</option>
+                        <option value="127" hidden >VRsOtro (Otros Centros)</option>
+                        <option value="128" hidden >VPrAdmi (Administración)</option>
+                        <option value="129" hidden >VPrComu (Comunicación)</option>
+                        <option value="130" hidden >VPrDere (Derecho)</option>
+                        <option value="131" hidden >VPrDise (Diseño)</option>
+                        <option value="132" hidden >VPrDoce (Docencia)</option>
+                        <option value="133" hidden >VPrMedi (Médicos)</option>
+                        <option value="134" hidden >VPrPsic (Psicología)</option>
+                        <option value="135" hidden >VPrTecn (Tecnología)</option>
+                        <option value="136" hidden >VPrCoci (Cocinero)</option>
+                        <option value="137" hidden >VOtAnim (Animales)</option>
+                        <option value="138" hidden >VOtAmbi (Medio Ambiente)</option>
+                        <option value="139" hidden >VOtOtro (Otros Voluntariados)</option>
+                        <option value="141" hidden >DOtDine (Dinero)</option>
+                        <option value="142" hidden >DAlAgua (Agua)</option>
                     </select>
+
+                    <h2>Donde esta ubicado?</h2>
+                    <h4>Haz click en donde esta ubicado</h4>
+                    <button onClick={this.showMap} id="showhideMap">Mostrar el Mapa</button>
+                    <div id="map"></div>
+
                     <input type="submit"></input>
                     <h6>{this.state.formError}</h6>
                 </form>
-                <h2>Donde esta ubicado?</h2>
-                <h4>Haz click en donde esta ubicado</h4>
-                <div id="map"></div>
             </div>);
-
-            this.showMap();
         };
 
         return (
