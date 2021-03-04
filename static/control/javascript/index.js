@@ -16,7 +16,6 @@ class Principal extends React.Component {
             },
             'formError' : null
         };
-        this.fileInput = [React.createRef(), React.createRef(), React.createRef(), React.createRef()];
         this.getPlaces();
     }
 
@@ -43,7 +42,11 @@ class Principal extends React.Component {
         this.setState({'places' : places});
     }
 
-    setNoPopup = () => {
+    setNoPopup = (interval=null) => {
+        if (interval != null) {
+            clearInterval(interval);
+        };
+
         this.setState({'popupSee' : false});
     }
 
@@ -77,13 +80,39 @@ class Principal extends React.Component {
         'popupSee' : true})
     }
 
+    getCode = async (intervalCode, name, uuid) => {
+        const for_data = await fetch('/control/api/code', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken' : document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify({'uuid' : uuid})
+        });
+        const data = await for_data.json();
+        if (data.code != undefined) {
+            this.setState({'popup' : 
+            <div id='popupParent'>
+                <PopupCode name={name} uuid={uuid} see={() => this.setNoPopup(intervalCode)} code={data.code}/>
+                <div id="background"></div>
+            </div>,
+    
+            'popupSee' : true});
+        }
+    }
+
+    showCode = (name, uuid) => {
+        var intervalCode = setInterval(() => this.getCode(intervalCode, name, uuid), 2000); //Renew Code
+        this.getCode(intervalCode, name, uuid); //For not wait 2 seconds
+    }
+
     setValueForm = (event) => { //Set value to state, in order to submit later
         let data = {...this.state.form};
         data[event.target.name] = event.target.value;
         this.setState({'form' : data});
     }
 
-    newPlaceSubmit = async (event) => { //More large ecuation, sorry dude
+    newPlaceSubmit = async (event) => { //Most large function, sorry dude
         event.preventDefault();
         let photoIds = []; //To save the ids of the uploaded photos
         const dataSubmit = {...this.state.form};
@@ -95,25 +124,36 @@ class Principal extends React.Component {
             this.setState({'formError' : 'Se nececita poner unas coordenadas'});
         };
 
+        //Categories checks
+        const categoryContent = document.querySelector(`#id_category option[value="${dataSubmit.category}"]`).textContent;
+        const subContent = document.querySelector(`#id_sub_category option[value="${dataSubmit.sub_category}"]`).textContent;
+        if (dataSubmit.mayor_category != categoryContent[0] || categoryContent.slice(0,3) != subContent.slice(0,3)) {
+            checked = false;
+            this.setState({'formError' : 'Categorias Incorrectas'});
+        }
+
+
         if (checked) {
             const fileFields = document.querySelectorAll("#newPlace input[type='file']");
 
             for (let i = 0; i < fileFields.length; i++) { //Upload every new photo
                 const file = fileFields[i].files[0];
-                const formPhoto = new FormData();
-                formPhoto.append('photo', file);
-                formPhoto.append("csrfmiddlewaretoken", document.querySelector('[name=csrfmiddlewaretoken]').value) // I hate this
-
-                const for_data = await fetch('/control/api/uploadphoto', {
-                    method: 'POST',
-                    body: formPhoto
-                });
-                const data = await for_data.json();
-
-                if (data.error !== undefined) {
-                    this.setState({'formError': data.error});
-                } else {
-                    photoIds.push(data.id);
+                if (file != undefined) {
+                    const formPhoto = new FormData();
+                    formPhoto.append('photo', file);
+                    formPhoto.append("csrfmiddlewaretoken", document.querySelector('[name=csrfmiddlewaretoken]').value) // I hate this
+    
+                    const for_data = await fetch('/control/api/uploadphoto', {
+                        method: 'POST',
+                        body: formPhoto
+                    });
+                    const data = await for_data.json();
+    
+                    if (data.error !== undefined) {
+                        this.setState({'formError': data.error});
+                    } else {
+                        photoIds.push(data.id);
+                    };
                 };
             };
 
@@ -181,6 +221,14 @@ class Principal extends React.Component {
             zoom: 1, // starting zoom
         });
 
+        map.addControl( //Add search bar
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl,
+                marker: false
+            })
+        );
+
         var marker = new mapboxgl.Marker({}); //Only to not get error
 
         map.on('click', (e) => {
@@ -211,7 +259,7 @@ class Principal extends React.Component {
                     <div id="places">
                         {this.state.places.map(place => {
                             return <Place name={place.name} image={place.image} url={place.url} hover={place.hover} to_hover={this.changeHover} 
-                            delete={this.deletePlace} uuid={place.uuid} key={place.uuid}/>
+                            delete={this.deletePlace} uuid={place.uuid} forCode={this.showCode} key={place.uuid}/>
                         })}
                     </div>
                 </div>

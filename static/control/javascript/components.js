@@ -10,7 +10,7 @@ const Place = (props) => {
                     <i className="fas fa-eye" onClick={() => window.open(props.url, '_blank')} />
                     <i className="fas fa-edit"/>
                     <i className="fas fa-chart-line"></i>
-                    <i className="fas fa-barcode" />
+                    <i className="fas fa-barcode" onClick={() => props.forCode(props.name, props.uuid)} />
                     <i className="fas fa-trash" onClick={() => props.delete(props.name, props.uuid)}/>
                 </div> : null }
             </div>
@@ -28,6 +28,19 @@ const PopupDelete = (props) => {
     )
 };
 
+const PopupCode = (props) => {
+    return (
+        <div id="popupCode">
+            <h5>Codigo de: {props.name}</h5>
+            <h1>{props.code}</h1>
+            <div>
+
+            </div>
+            <button onClick={props.see} >Okey</button>
+        </div>
+    )
+}
+
 const FormPlaces = (props) => {
     return (
         <div>
@@ -35,46 +48,55 @@ const FormPlaces = (props) => {
                 <label htmlFor="id_name">Nombre:</label>
                 <input type="text" name="name" maxLength="20" required id="id_name" onChange={props.setValue}></input>
                 <label htmlFor="id_short_description">Descripción:</label>
-                <textarea name="short_description" cols="40" rows="10" maxLength="900" required id="id_short_description" onChange={props.setValue}></textarea>
+                <textarea name="short_description" maxLength="900" required id="id_short_description" onChange={props.setValue}></textarea>
                 <label htmlFor="id_recomedations">Recomendaciones:</label>
-                <textarea name="recomedations" cols="40" rows="10" maxLength="900" required id="id_recomedations" onChange={props.setValue}></textarea>
+                <textarea name="recomedations" maxLength="900" required id="id_recomedations" onChange={props.setValue}></textarea>
 
                 <label>Fotos:</label>
-                <input type="file" name="photo1" accept="image/*" id="id_photo" required />
-                <input type="file" name="photo2" accept="image/*" id="id_photo" required />
-                <input type="file" name="photo3" accept="image/*" id="id_photo" required />
-                <input type="file" name="photo4" accept="image/*" id="id_photo" required />
+                <div id="photos">
+                    <input type="file" name="photo1" accept="image/*" id="id_photo" required/>
+                    <input type="file" name="photo2" accept="image/*" id="id_photo" />
+                    <input type="file" name="photo3" accept="image/*" id="id_photo" />
+                    <input type="file" name="photo4" accept="image/*" id="id_photo" />
+                </div>
 
-                <label htmlFor="id_mayor_category">Categoria Principal:</label>
-                <select name="mayor_category" id="id_mayor_category" required onChange={(event) => {props.setValue(event); props.dontShowCate(event);}}>
-                    <option value="D">Donar</option>
-                    <option value="V">Voluntariado</option>
-                </select>
-                <label htmlFor="id_category">Categoria:</label>
-                <select name="category" required id="id_category" onChange={(event) => {props.setValue(event); props.dontShowSub(event);}}>
-                    <option value="10">DAl (Alimentos)</option>
-                    <option value="11">DBb (Artículos para Bebés)</option>
-                    <option value="12">DRp (Ropa)</option>
-                    <option value="13">DCn (Cocina)</option>
-                    <option value="14">DCl (Colchones y Frazadas)</option>
-                    <option value="15">DMu (Muebles)</option>
-                    <option value="16">DTc (Tecnología)</option>
-                    <option value="17">DRc (Recreación)</option>
-                    <option value="18">DLb (Libros)</option>
-                    <option value="19">DSl (Salud)</option>
-                    <option value="20">DOt (Otros)</option>
-                    <option value="21" hidden>VNi (Ayuda con Niños)</option>
-                    <option value="22" hidden>VAd (Adultos Mayores)</option>
-                    <option value="23" hidden>VFa (Familia)</option>
-                    <option value="24" hidden>VCo (Comedores)</option>
-                    <option value="25" hidden>VEd (Educación)</option>
-                    <option value="26" hidden>VSl (Salud)</option>
-                    <option value="27" hidden>VDs (Personas con Discapacidad)</option>
-                    <option value="28" hidden>VIn (Indigencia)</option>
-                    <option value="29" hidden>VRs (Reinserción Social)</option>
-                    <option value="30" hidden>VPr (Profesional)</option>
-                    <option value="31" hidden>VOt (Otros Voluntariados)</option>
-                </select>
+                <div id="selectCategory">
+                    <div>
+                        <label htmlFor="id_mayor_category">Categoria Principal:</label>
+                        <select name="mayor_category" id="id_mayor_category" required onChange={(event) => {props.setValue(event); props.dontShowCate(event);}}>
+                            <option value="D">Donar</option>
+                            <option value="V">Voluntariado</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="id_category">Categoria:</label>
+                        <select name="category" required id="id_category" onChange={(event) => {props.setValue(event); props.dontShowSub(event);}}>
+                            <option value="10">DAl (Alimentos)</option>
+                            <option value="11">DBb (Artículos para Bebés)</option>
+                            <option value="12">DRp (Ropa)</option>
+                            <option value="13">DCn (Cocina)</option>
+                            <option value="14">DCl (Colchones y Frazadas)</option>
+                            <option value="15">DMu (Muebles)</option>
+                            <option value="16">DTc (Tecnología)</option>
+                            <option value="17">DRc (Recreación)</option>
+                            <option value="18">DLb (Libros)</option>
+                            <option value="19">DSl (Salud)</option>
+                            <option value="20">DOt (Otros)</option>
+                            <option value="21" hidden>VNi (Ayuda con Niños)</option>
+                            <option value="22" hidden>VAd (Adultos Mayores)</option>
+                            <option value="23" hidden>VFa (Familia)</option>
+                            <option value="24" hidden>VCo (Comedores)</option>
+                            <option value="25" hidden>VEd (Educación)</option>
+                            <option value="26" hidden>VSl (Salud)</option>
+                            <option value="27" hidden>VDs (Personas con Discapacidad)</option>
+                            <option value="28" hidden>VIn (Indigencia)</option>
+                            <option value="29" hidden>VRs (Reinserción Social)</option>
+                            <option value="30" hidden>VPr (Profesional)</option>
+                            <option value="31" hidden>VOt (Otros Voluntariados)</option>
+                        </select>
+                    </div>
+                </div>
+
                 <label htmlFor="id_sub_category">Subcategorias:</label>
                 <select name="sub_category" required id="id_sub_category" onChange={props.setValue}>
                     <option value="71">DAlPolv (Leche en Polvo)</option>
@@ -151,11 +173,10 @@ const FormPlaces = (props) => {
                 </select>
 
                 <h2>Donde esta ubicado?</h2>
-                <h4>Haz click en donde esta ubicado</h4>
                 <button onClick={props.showMap} id="showhideMap">Mostrar el Mapa</button>
                 <div id="map"></div>
 
-                <input type="submit"></input>
+                <input type="submit" value="Enviar"></input>
                 <h6>{props.error}</h6>
             </form>
         </div>

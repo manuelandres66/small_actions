@@ -75,7 +75,7 @@ body {
     height: 500%;
 }
 
-#popupDelete {
+#popupDelete, #popupCode {
     background-color: #fff;
     position: sticky;
     width: 50vw;
@@ -160,4 +160,67 @@ body {
 
 #newPlace label, input {
     display: block;
+}
+
+#newPlace label {
+    font-size: 25px;
+    color: #fff;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+}
+
+#newPlace input, #newPlace textarea, #newPlace select {
+    width: 100%;
+    border: none;
+    border-radius: 30px;
+    font-size: 20px;
+    outline: none;
+    padding: 0.5vh 1vw;
+}
+
+#newPlace #map input {
+    padding: 6px 35px;
+}
+
+#newPlace textarea {
+    height: 20vh;
+    padding-top: 1.5vh;
+    resize: none;
+}
+
+#photos, #selectCategory {
+    display: flex;
+    justify-content: space-between;
+}
+
+#newPlace #selectCategory div {
+    width: 40%;
+}
+
+#newPlace h2 {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+}
+
+#newPlace h4 {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#newPlace input[type="submit"] {
+    background-color: #ff3a3a;
+    color: #fff;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+#newPlace h6 {
+    font-size: 35px;
+    color: #fff;
 }

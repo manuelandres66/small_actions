@@ -23,6 +23,20 @@ def index(request):
 
 @login_required(login_url='/account/login')
 @allowed(allowed_roles=['Organization'])
+def get_code(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+
+    data = json.loads(request.body)
+    if 'uuid' in data:
+        code = Help.objects.get(uuid=data['uuid']).temporal_code
+        return JsonResponse({'code' : code}, status=200)
+
+    return JsonResponse({'error' : 'No uuid especified'}, status=400)
+    
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
 def places(request):
     if request.method != 'GET':
         return JsonResponse({'error' : 'Invalid request'}, status=400)
