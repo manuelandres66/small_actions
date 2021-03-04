@@ -31,10 +31,28 @@ const PopupDelete = (props) => {
 const PopupCode = (props) => {
     return (
         <div id="popupCode">
-            <h5>Codigo de: {props.name}</h5>
+            <h5>Codigo de {props.name}</h5>
             <h1>{props.code}</h1>
             <div>
-
+                <i className="fas fa-info-circle"></i>
+                Cambia 2 segundos despues de ser ingresado   
+            </div>
+            <div id="notifications">
+                {props.notifications.map(notify => {
+                    return (
+                        <div key={notify.id} className="notify">
+                            <div>
+                                <img src={notify.photo} alt="userPhoto" />
+                                <h5>{notify.username}</h5>
+                            </div>
+                            <div>
+                                <i className="fas fa-check-circle" onClick={() => props.discard(notify.id, true)}></i>
+                                <i className="fas fa-times-circle" onClick={() => props.discard(notify.id, false)}></i>
+                                <i className="fas fa-ban"></i>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
             <button onClick={props.see} >Okey</button>
         </div>
@@ -183,3 +201,18 @@ const FormPlaces = (props) => {
     )
 }
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

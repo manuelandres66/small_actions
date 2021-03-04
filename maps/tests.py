@@ -4,6 +4,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.shortcuts import reverse
 from . import models
 from login.models import User
+from control.models import Notification
 
 import json
 import pathlib
@@ -126,6 +127,8 @@ class apitest(TestCase):
 
         new_points = User.objects.get(username=self.user.username).points
         self.assertEqual(new_points, 10)
+
+        self.assertEqual(len(Notification.objects.all()), 1)
 
     def test_comment(self):
         c = Client()

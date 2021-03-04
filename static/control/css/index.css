@@ -86,6 +86,11 @@ body {
     border-radius: 40px;
 }
 
+#popupCode {
+    height: 80vh;
+    top: 10vh;
+}
+
 #background {
     z-index: 5;
     background-color: rgba(0, 0, 0, 0.5);
@@ -223,4 +228,14 @@ body {
 #newPlace h6 {
     font-size: 35px;
     color: #fff;
+}
+
+#notifications {
+    overflow: auto;
+}
+
+.notify img {
+    width: 10vw;
+    height: 10vw;
+    object-fit: cover;
 }

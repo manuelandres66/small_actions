@@ -8,6 +8,7 @@ from django.core.cache.utils import make_template_fragment_key
 from .models import Help, Comment
 from .forms import FromCode, CommentForm
 from login.models import User
+from control.models import Notification
 
 import json
 import random
@@ -102,6 +103,13 @@ def go(request, uuid):
 
                     #Cleand Cache
                     cache.delete(make_template_fragment_key('navbar'))
+
+                    #Create a notification
+                    Notification.objects.create(
+                        user= current_user,
+                        help_point= help_point,
+                        points_earned= help_point.points_for_completed + extra_points
+                    )
 
                     return redirect(reverse('congratulations') + f'?i={old_ranking - new_ranking}&p={help_point.points_for_completed + extra_points}') #Redirect
                 else:

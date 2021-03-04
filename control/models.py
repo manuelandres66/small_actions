@@ -36,4 +36,7 @@ class Report(models.Model):
 class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     help_point = models.ForeignKey(Help, on_delete=models.CASCADE)
-    aproved = models.BooleanField()
+    discarted = models.BooleanField(default=False) #To discard the notification
+    points_earned = models.PositiveIntegerField()
+    aproved = models.BooleanField(default=False) #Aproved or not the person, to later stadistics
+    date = models.DateTimeField(auto_now_add=True)

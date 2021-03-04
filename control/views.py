@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import JsonResponse
 
 from .froms import ReportForm, CreatePlace, CreatePhoto
-from .models import Report
+from .models import Report, Notification
 from .decorators import allowed
 
 from login.models import User
@@ -29,10 +29,45 @@ def get_code(request):
 
     data = json.loads(request.body)
     if 'uuid' in data:
-        code = Help.objects.get(uuid=data['uuid']).temporal_code
-        return JsonResponse({'code' : code}, status=200)
+        place = Help.objects.get(uuid=data['uuid'])
+
+        notifications = Notification.objects.filter(help_point=place, discarted=False)
+        notification_list = []
+
+        for notification in notifications:
+            photo_url = notification.user.photo.url if notification.user.photo != '' else '/static/maps/images/logo_small_icon_only_inverted.png' #Check user have photo
+
+            notification_list.append({
+                'id' : notification.id,
+                'username' : notification.user.username,
+                'photo' : photo_url
+            })
+
+        return JsonResponse({'code' : place.temporal_code, 'notifications' : notification_list}, status=200)
 
     return JsonResponse({'error' : 'No uuid especified'}, status=400)
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def check_notification(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+
+    data = json.loads(request.body)
+    if 'id' in data and 'aproved' in data:
+
+        notify = Notification.objects.get(id=data['id'])
+        if data['aproved'] == False:
+            notify.user.points = notify.user.points - notify.points_earned #Rest the points earned
+            notify.user.save()
+
+        notify.discarted = True
+        notify.aproved = data['aproved']
+        notify.save()
+
+        return JsonResponse({'message' : 'ok'}, status=200)
+
+    return JsonResponse({'error' : 'No id or aproved especified'}, status=400)
     
 
 @login_required(login_url='/account/login')
@@ -157,7 +192,5 @@ def report_form(request):
             )
 
             message = 'Reporte Registrado'
-
-
 
     return render(request, 'control/report.html', {'form' : ReportForm, 'message' : message})

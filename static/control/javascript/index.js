@@ -53,10 +53,9 @@ class Principal extends React.Component {
     deleteToServer = async (uuid) => {
         const for_data = await fetch('/control/api/delete', {
             method: 'POST',
-            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken' : document.querySelector('[name=csrfmiddlewaretoken]').value
+                'X-CSRFToken' : getCookie('csrftoken')
             },
             body: JSON.stringify({'uuid' : uuid})
         });
@@ -80,20 +79,33 @@ class Principal extends React.Component {
         'popupSee' : true})
     }
 
+    discardNotify = async (id, aproved) => {
+        await fetch('/control/api/checknotify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken' : getCookie('csrftoken')
+            },
+            body: JSON.stringify({'id' : id, 'aproved' : aproved})
+        });
+    }
+
     getCode = async (intervalCode, name, uuid) => {
         const for_data = await fetch('/control/api/code', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken' : document.querySelector('[name=csrfmiddlewaretoken]').value
+                'X-CSRFToken' : getCookie('csrftoken')
             },
             body: JSON.stringify({'uuid' : uuid})
         });
         const data = await for_data.json();
+
         if (data.code != undefined) {
             this.setState({'popup' : 
             <div id='popupParent'>
-                <PopupCode name={name} uuid={uuid} see={() => this.setNoPopup(intervalCode)} code={data.code}/>
+                <PopupCode name={name} uuid={uuid} see={() => this.setNoPopup(intervalCode)} code={data.code} 
+                notifications={data.notifications} discard={this.discardNotify}/>
                 <div id="background"></div>
             </div>,
     
@@ -141,7 +153,7 @@ class Principal extends React.Component {
                 if (file != undefined) {
                     const formPhoto = new FormData();
                     formPhoto.append('photo', file);
-                    formPhoto.append("csrfmiddlewaretoken", document.querySelector('[name=csrfmiddlewaretoken]').value) // I hate this
+                    formPhoto.append("csrfmiddlewaretoken", getCookie('csrftoken')) // I hate this
     
                     const for_data = await fetch('/control/api/uploadphoto', {
                         method: 'POST',
@@ -158,7 +170,7 @@ class Principal extends React.Component {
             };
 
             let formPlace = new FormData();
-            formPlace.append("csrfmiddlewaretoken", document.querySelector('[name=csrfmiddlewaretoken]').value) // I hate this
+            formPlace.append("csrfmiddlewaretoken", getCookie('csrftoken')) // I hate this
 
             for (const key in dataSubmit) { //Append all the info
                 formPlace.append(key, dataSubmit[key]);
