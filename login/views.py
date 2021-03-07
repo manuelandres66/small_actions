@@ -244,8 +244,7 @@ def forgot_password(request):
                 f"Por favor ingresa a este link: {link}",
                 settings.EMAIL_HOST_USER,
                 [user.email],
-                html_message=html_message,
-                fail_silently=False)
+                html_message=html_message)
 
         succes = True #For not telling if a email exist, always succes no matter the email
 

@@ -10,5 +10,6 @@ urlpatterns = [
     path('api/uploadplace', views.upload_place, name='apiUploadPlace'),
     path('api/code', views.get_code, name='apiCode'),
     path('api/checknotify', views.check_notification, name='apiCheckNotify'),
+    path('api/ban', views.ban, name="apiBan"),
     path('report/', views.report_form, name='report')
 ]

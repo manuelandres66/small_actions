@@ -27,7 +27,7 @@ class Principal extends React.Component {
     }
 
     setSeeTo = (to) => {
-        this.setState({'see' : to})
+        to == 'new' ? this.setState({'see' : to}, this.showMap) : this.setState({'see' : to}); //Callback if showMap is needed
     }
 
     changeHover = (uuid) => {
@@ -79,6 +79,17 @@ class Principal extends React.Component {
         'popupSee' : true})
     }
 
+    ban = async (notificationId) => {
+        await fetch('/control/api/ban', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken' : getCookie('csrftoken')
+            },
+            body: JSON.stringify({'id' : notificationId})
+        });
+    }
+
     discardNotify = async (id, aproved) => {
         await fetch('/control/api/checknotify', {
             method: 'POST',
@@ -105,7 +116,7 @@ class Principal extends React.Component {
             this.setState({'popup' : 
             <div id='popupParent'>
                 <PopupCode name={name} uuid={uuid} see={() => this.setNoPopup(intervalCode)} code={data.code} 
-                notifications={data.notifications} discard={this.discardNotify}/>
+                notifications={data.notifications} discard={this.discardNotify} ban={this.ban}/>
                 <div id="background"></div>
             </div>,
     
@@ -220,10 +231,7 @@ class Principal extends React.Component {
         });
     }
 
-    showMap = (event) => {
-        event.preventDefault();
-        document.querySelector('#showhideMap').style.display = 'none';
-
+    showMap = () => {
         mapboxgl.accessToken = 'pk.eyJ1IjoibWFudWVsMTJhdm8iLCJhIjoiY2tneWE3eWFhMGZjdjJ4bjUxaXR0cTBnNSJ9.c5ue5ns5clGrxZoG6WiEsw';
 
         const map = new mapboxgl.Map({
@@ -281,7 +289,7 @@ class Principal extends React.Component {
             see = (<div>
                 <h1 id="createTitle">Crear un nuevo lugar</h1>
                 <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
-                dontShowSub={this.dontShowSubCategories} showMap={this.showMap} error={this.state.formError}/>
+                dontShowSub={this.dontShowSubCategories} error={this.state.formError}/>
             </div>);
         };
 

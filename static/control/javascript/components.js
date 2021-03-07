@@ -48,7 +48,7 @@ const PopupCode = (props) => {
                             <div>
                                 <i className="fas fa-check-circle" onClick={() => props.discard(notify.id, true)}></i>
                                 <i className="fas fa-times-circle" onClick={() => props.discard(notify.id, false)}></i>
-                                <i className="fas fa-ban"></i>
+                                <i className="fas fa-ban" onClick={() => props.ban(notify.id)}></i>
                             </div>
                         </div>
                     )
@@ -191,7 +191,6 @@ const FormPlaces = (props) => {
                 </select>
 
                 <h2>Donde esta ubicado?</h2>
-                <button onClick={props.showMap} id="showhideMap">Mostrar el Mapa</button>
                 <div id="map"></div>
 
                 <input type="submit" value="Enviar"></input>

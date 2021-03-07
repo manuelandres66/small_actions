@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
+from django.core.mail import send_mail
+from django.conf import settings
 
 from .froms import ReportForm, CreatePlace, CreatePhoto
 from .models import Report, Notification
@@ -68,6 +70,35 @@ def check_notification(request):
         return JsonResponse({'message' : 'ok'}, status=200)
 
     return JsonResponse({'error' : 'No id or aproved especified'}, status=400)
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def ban(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+
+    data = json.loads(request.body)
+    if 'id' in data:
+        notify = Notification.objects.get(id=data['id'])
+        notify.user.points = notify.user.points - notify.points_earned #Rest the points earned in case the account is recuperated
+        notify.user.is_active = False #Ban User
+        notify.user.save()
+
+        send_mail('Tu cuenta fue baneada de Small Actions',
+            f"""Tu cuenta {notify.user.username} fue baneada por {notify.help_point.organization.name}.
+            Si crees que se trata de un error comunicate a https://api.whatsapp.com/send?phone=573023986488""",
+            settings.EMAIL_HOST_USER,
+            [notify.user.email]
+        ) #Send email to notify the ban
+
+        notify.discarted = True
+        notify.aproved = False
+        notify.save()
+
+        return JsonResponse({'message' : f'{notify.user.username} has been banned'}, status=200)
+
+    return JsonResponse({'error' : 'No id aproved especified'}, status=400)
+
     
 
 @login_required(login_url='/account/login')
