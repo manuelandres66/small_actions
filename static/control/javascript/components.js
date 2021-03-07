@@ -31,9 +31,10 @@ const PopupDelete = (props) => {
 const PopupCode = (props) => {
     return (
         <div id="popupCode">
+            <i className="far fa-times-circle" id="closePop" onClick={props.see}></i>
             <h5>Codigo de {props.name}</h5>
             <h1>{props.code}</h1>
-            <div>
+            <div id="popUpInfo">
                 <i className="fas fa-info-circle"></i>
                 Cambia 2 segundos despues de ser ingresado   
             </div>
@@ -41,20 +42,15 @@ const PopupCode = (props) => {
                 {props.notifications.map(notify => {
                     return (
                         <div key={notify.id} className="notify">
-                            <div>
-                                <img src={notify.photo} alt="userPhoto" />
-                                <h5>{notify.username}</h5>
-                            </div>
-                            <div>
-                                <i className="fas fa-check-circle" onClick={() => props.discard(notify.id, true)}></i>
-                                <i className="fas fa-times-circle" onClick={() => props.discard(notify.id, false)}></i>
-                                <i className="fas fa-ban" onClick={() => props.ban(notify.id)}></i>
-                            </div>
+                            <img src={notify.photo} alt="userPhoto" />
+                            <h5>{notify.username}</h5>
+                            <i className="fas fa-check-circle" id='aproved' onClick={() => props.discard(notify.id, true)}></i>
+                            <i className="fas fa-times-circle" id="rejected" onClick={() => props.discard(notify.id, false)}></i>
+                            <i className="fas fa-ban" onClick={() => props.ban(notify.id)}></i>
                         </div>
                     )
                 })}
             </div>
-            <button onClick={props.see} >Okey</button>
         </div>
     )
 }

@@ -234,8 +234,73 @@ body {
     overflow: auto;
 }
 
+#popupCode > h5 {
+    text-align: center;
+    font-size: 35px;
+    padding-top: 5vh;
+    font-weight: 400;
+}
+
+#popupCode h1 {
+    font-size: 100px;
+    text-align: center;
+    margin-top: 2vh;
+    font-weight: 900;
+}
+
+#closePop {
+    display: block;
+    width: 100%;
+    font-size: 30px;
+    text-align: right;
+    position: relative;
+    right: 1.5vw;
+    top: 2vh;
+}
+
+#popUpInfo {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 2vh;
+}
+
+#popUpInfo i {
+    padding-right: 0.5vw;
+    cursor: pointer;
+}
+
+.notify {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 3vh;
+}
+
 .notify img {
-    width: 10vw;
-    height: 10vw;
+    width: 5vw;
+    height: 5vw;
     object-fit: cover;
+    border-radius: 50%;
+}
+
+.notify h5 {
+    flex-grow: 4;
+    font-size: 30px;
+    padding-left: 2vw;
+}
+
+.notify i {
+    flex-grow: 1;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#aproved {
+    color: rgb(25, 150, 8);
+}
+
+#rejected {
+    color: #df0909;
 }
