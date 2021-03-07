@@ -61,6 +61,7 @@ def check_notification(request):
         notify = Notification.objects.get(id=data['id'])
         if data['aproved'] == False:
             notify.user.points = notify.user.points - notify.points_earned #Rest the points earned
+            notify.user.visited.remove(notify.help_point) #Delete visited place
             notify.user.save()
 
         notify.discarted = True
@@ -81,6 +82,7 @@ def ban(request):
     if 'id' in data:
         notify = Notification.objects.get(id=data['id'])
         notify.user.points = notify.user.points - notify.points_earned #Rest the points earned in case the account is recuperated
+        notify.user.visited.remove(notify.help_point) #Delete visited place
         notify.user.is_active = False #Ban User
         notify.user.save()
 

@@ -3,6 +3,7 @@ class Principal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            'staticPlaces' : [],
             'places' : [],
             'popupSee' : false,
             'popup' : null,
@@ -23,7 +24,7 @@ class Principal extends React.Component {
         const for_data = await fetch('/control/api/places');
         const data = await for_data.json();
 
-        this.setState({'places' : data.places});
+        this.setState({'places' : data.places, 'staticPlaces' : data.places});
     }
 
     setSeeTo = (to) => {
@@ -269,12 +270,25 @@ class Principal extends React.Component {
 
     }
 
+    searchPlace = (e) => {
+        e.preventDefault();
+        const search = e.target.value.toLowerCase(); //Lower case to not differ bewtween capital and normal letters
+
+        const staticPlaces = [...this.state.staticPlaces];
+        const newPlaces = staticPlaces.filter(place => place.name.toLowerCase().includes(search)); //Show places that have the substring, same reason to lowercase
+
+        this.setState({'places' : newPlaces});
+    }
+
     render() {
         let see = null;
 
         if (this.state.see === "places") {
             see = (<div>
-                <div id="add" onClick={() => this.setSeeTo('new')}>Añadir Nuevo <i className="fas fa-plus"></i></div>
+                <div id="superiorInfo">
+                    <input type="text" placeholder="Buscar" onChange={this.searchPlace} id="searchBar"/>
+                    <div id="add" onClick={() => this.setSeeTo('new')}>Añadir Nuevo <i className="fas fa-plus"></i></div>
+                </div>
                 <div>
                     <div id="places">
                         {this.state.places.map(place => {
