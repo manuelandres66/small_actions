@@ -68,13 +68,13 @@ const FormPlaces = (props) => {
 
                 <label>Fotos:</label>
                 <div id="photos">
-                    <span>{props.photos[0]}</span>
+                    <a href={'/control/photo?id=' + props.photos[0]} target="_blank">{props.photos[0]}</a>
                     <input type="file" name="photo1" accept="image/*" id="id_photo" />
-                    <span>{props.photos[1]}</span>
+                    <a href={'/control/photo?id=' + props.photos[1]} target="_blank">{props.photos[1]}</a>
                     <input type="file" name="photo2" accept="image/*" id="id_photo" />
-                    <span>{props.photos[2]}</span>
+                    <a href={'/control/photo?id=' + props.photos[2]} target="_blank">{props.photos[2]}</a>
                     <input type="file" name="photo3" accept="image/*" id="id_photo" />
-                    <span>{props.photos[3]}</span>
+                    <a href={'/control/photo?id=' + props.photos[3]} target="_blank">{props.photos[3]}</a>
                     <input type="file" name="photo4" accept="image/*" id="id_photo" />
                 </div>
 

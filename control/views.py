@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
-from django.http import JsonResponse, response
+from django.http import JsonResponse, HttpResponse
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -22,6 +22,12 @@ import string
 @allowed(allowed_roles=['Organization'])
 def index(request):
     return render(request, 'control/index.html')
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def show_photo(request):
+    photo = HelpPhoto.objects.get(id=request.GET['id'])
+    return HttpResponse(f'<img src="{photo.photo.url}">')
 
 @login_required(login_url='/account/login')
 @allowed(allowed_roles=['Organization'])
