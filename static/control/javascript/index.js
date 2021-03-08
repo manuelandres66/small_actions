@@ -15,7 +15,8 @@ class Principal extends React.Component {
                 'latitude' : 0,
                 'longitude' : 0
             },
-            'formError' : null
+            'formError' : null,
+            'forPhotos' : [],
         };
         this.getPlaces();
     }
@@ -136,9 +137,8 @@ class Principal extends React.Component {
         this.setState({'form' : data});
     }
 
-    newPlaceSubmit = async (event) => { //Most large function, sorry dude
+    newPlaceSubmit = async (event, photoIds, edit) => { //Most large function, sorry dude
         event.preventDefault();
-        let photoIds = []; //To save the ids of the uploaded photos
         const dataSubmit = {...this.state.form};
 
         //Doing Checks
@@ -156,6 +156,12 @@ class Principal extends React.Component {
             this.setState({'formError' : 'Categorias Incorrectas'});
         }
 
+        //Check one photo
+        if (photoIds.every(v => v === null)) { //All ids are null
+            checked = false;
+            this.setState({'formError' : 'Envia una por lo menos una foto'});
+        }
+
 
         if (checked) {
             const fileFields = document.querySelectorAll("#newPlace input[type='file']");
@@ -163,6 +169,19 @@ class Principal extends React.Component {
             for (let i = 0; i < fileFields.length; i++) { //Upload every new photo
                 const file = fileFields[i].files[0];
                 if (file != undefined) {
+
+                    //Delete previus photo
+                    if (edit) {
+                        await fetch('/control/api/deletephoto', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken' : getCookie('csrftoken')
+                            },
+                            body: JSON.stringify({'id' : photoIds[i]})
+                        });
+                    };
+                    
                     const formPhoto = new FormData();
                     formPhoto.append('photo', file);
                     formPhoto.append("csrfmiddlewaretoken", getCookie('csrftoken')) // I hate this
@@ -176,7 +195,7 @@ class Principal extends React.Component {
                     if (data.error !== undefined) {
                         this.setState({'formError': data.error});
                     } else {
-                        photoIds.push(data.id);
+                        photoIds[i] = data.id;
                     };
                 };
             };
@@ -189,10 +208,14 @@ class Principal extends React.Component {
             };
 
             photoIds.forEach(photo => {
-                formPlace.append('photos', photo); //All the photos send like the same "photos"
+                if (photo != null) {
+                    formPlace.append('photos', photo); //All the photos send like the same "photos"
+                }
             });
 
-            const for_data = await fetch('/control/api/uploadplace', {
+            const directionToUpload = edit ? '/control/api/editplace' : '/control/api/uploadplace';
+
+            const for_data = await fetch(directionToUpload, {
                 method: 'POST',
                 body: formPlace
             });
@@ -202,7 +225,13 @@ class Principal extends React.Component {
                 this.setState({'formError': data.error});
             } else {
                 this.getPlaces(); //Get the new place
-                this.setState({'formError': null, 'see' : 'places'}); //No error message and see place
+                this.setState({'formError': null, 'see' : 'places', 'form' : {
+                    'mayor_category' : 'D',
+                    'category' : 10,
+                    'sub_category' : 71,
+                    'latitude' : 0,
+                    'longitude' : 0
+                }}); //No error message, no see place, reset form
             };
         }
         
@@ -232,7 +261,7 @@ class Principal extends React.Component {
         });
     }
 
-    showMap = () => {
+    showMap = (latitude=null, longitude=null) => {
         mapboxgl.accessToken = 'pk.eyJ1IjoibWFudWVsMTJhdm8iLCJhIjoiY2tneWE3eWFhMGZjdjJ4bjUxaXR0cTBnNSJ9.c5ue5ns5clGrxZoG6WiEsw';
 
         const map = new mapboxgl.Map({
@@ -249,8 +278,16 @@ class Principal extends React.Component {
                 marker: false
             })
         );
+        
+        if (latitude != null & longitude != null) { //For edit place
+            var marker = new mapboxgl.Marker({})
+            .setLngLat([longitude, latitude]) 
+            .addTo(map);
 
-        var marker = new mapboxgl.Marker({}); //Only to not get error
+        } else {
+            var marker = new mapboxgl.Marker({}); //Only to not get error
+        }
+
 
         map.on('click', (e) => {
             marker.remove(); //Delete current marker
@@ -280,6 +317,21 @@ class Principal extends React.Component {
         this.setState({'places' : newPlaces});
     }
 
+    setToEdit = async (uuid) => {
+        const for_data = await fetch('/control/api/edit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken' : getCookie('csrftoken')
+            },
+            body: JSON.stringify({'uuid' : uuid})
+        });
+        const data = await for_data.json();
+        
+        this.setState({'form' : data.form, 'forPhotos' : data.photosId, 'see' : 'edit'}, () => this.showMap(data.form.latitude, data.form.longitude)); //Set map with the coordinates
+
+    }
+
     render() {
         let see = null;
 
@@ -293,7 +345,7 @@ class Principal extends React.Component {
                     <div id="places">
                         {this.state.places.map(place => {
                             return <Place name={place.name} image={place.image} url={place.url} hover={place.hover} to_hover={this.changeHover} 
-                            delete={this.deletePlace} uuid={place.uuid} forCode={this.showCode} key={place.uuid}/>
+                            delete={this.deletePlace} uuid={place.uuid} forCode={this.showCode} toEdit={this.setToEdit} key={place.uuid}/>
                         })}
                     </div>
                 </div>
@@ -303,7 +355,15 @@ class Principal extends React.Component {
             see = (<div>
                 <h1 id="createTitle">Crear un nuevo lugar</h1>
                 <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
-                dontShowSub={this.dontShowSubCategories} error={this.state.formError}/>
+                dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={{}} edit={false} photos={[null, null, null, null]}/>
+            </div>);
+
+        } else if (this.state.see == "edit") {
+            see = (<div>
+                <h1 id="createTitle">Editar Lugar</h1>
+                <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
+                dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={this.state.form} edit={true}
+                photos={this.state.forPhotos} />
             </div>);
         };
 

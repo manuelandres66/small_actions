@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
@@ -17,6 +17,7 @@ import json
 import random
 import string
 from datetime import timedelta
+
 # Create your views here.
 
 def entry(request):

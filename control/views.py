@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import JsonResponse, response
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -22,6 +22,35 @@ import string
 @allowed(allowed_roles=['Organization'])
 def index(request):
     return render(request, 'control/index.html')
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def to_edit(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+
+    data = json.loads(request.body)
+    if 'uuid' in data:
+        place = Help.objects.get(uuid=data['uuid'])
+        palce_info = {
+            'organization' : place.organization.id,
+            'latitude' : place.latitude,
+            'longitude' : place.longitude,
+            'mayor_category' : place.mayor_category,
+            'category' : place.category.id,
+            'sub_category' : place.sub_category.all()[0].id,
+            #Util data
+            'name' : place.name,
+            'short_description' : place.short_description,
+            'recomedations' : place.recomedations,
+            'uuid' : place.uuid
+        }
+
+        photos_id = [photo.id for photo in place.photos.all()]
+        return JsonResponse({'form' : palce_info, 'photosId' : photos_id}, status=200)
+
+    
+    return JsonResponse({'error' : 'No uuid especified'}, status=400)
 
 @login_required(login_url='/account/login')
 @allowed(allowed_roles=['Organization'])
@@ -101,8 +130,6 @@ def ban(request):
 
     return JsonResponse({'error' : 'No id aproved especified'}, status=400)
 
-    
-
 @login_required(login_url='/account/login')
 @allowed(allowed_roles=['Organization'])
 def places(request):
@@ -156,6 +183,18 @@ def upload_image(request):
 
     return JsonResponse({'error' : 'Invalid Photo Form'}, status=400)
 
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def delete_image(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+    
+    data = json.loads(request.body)
+    if 'id' in data and data['id'] != None:
+        HelpPhoto.objects.get(id=data['id']).delete()
+    
+    return JsonResponse({'error' : 'No id or id null'}, status=400)
+
 
 @login_required(login_url='/account/login')
 @allowed(allowed_roles=['Organization'])
@@ -164,6 +203,7 @@ def upload_place(request):
         return JsonResponse({'error' : 'Invalid request'}, status=400)
 
     user = User.objects.get(username=request.user.username)
+
     form = CreatePlace(data=request.POST)
     if form.is_valid():
         mayor = form.cleaned_data['mayor_category']
@@ -175,7 +215,7 @@ def upload_place(request):
         second = random.randint(111, 999)
         third = ''.join(random.choice(letters) for i in range(3))
 
-        new_photo = Help.objects.create(
+        new_place = Help.objects.create(
             latitude =              form.cleaned_data['latitude'],
             longitude =             form.cleaned_data['longitude'],
             name =                  form.cleaned_data['name'],
@@ -189,17 +229,48 @@ def upload_place(request):
         )
 
         for photo in form.cleaned_data['photos']:
-            new_photo.photos.add(photo)
+            new_place.photos.add(photo)
 
         for sub_cate in form.cleaned_data['sub_category']:
-            new_photo.sub_category.add(sub_cate)
+            new_place.sub_category.add(sub_cate)
 
-        new_photo.save()
+        new_place.save()
 
         return JsonResponse({'message' : 'All ok'}, status=200)
 
     return JsonResponse({'error' : 'Invalid Form'}, status=400)
 
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def edit_place(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+
+    form = CreatePlace(data=request.POST)
+    if form.is_valid():
+        mayor = form.cleaned_data['mayor_category']
+        points_for_completed = 150 if mayor == 'D' else 200 #If volunteer 200 points, if donation 150
+
+        place = Help.objects.get(uuid=request.POST['uuid'])
+        place.latitude = form.cleaned_data['latitude']
+        place.longitude = form.cleaned_data['longitude']
+        place.name = form.cleaned_data['name']
+        place.short_description = form.cleaned_data['short_description']
+        place.recomedations = form.cleaned_data['recomedations']
+        place.mayor_category = mayor
+        place.points_for_completed = points_for_completed
+        place.category = form.cleaned_data['category']
+
+        for photo in form.cleaned_data['photos']:
+            place.photos.add(photo)
+
+        for sub_cate in form.cleaned_data['sub_category']:
+            place.sub_category.add(sub_cate)
+
+        place.save()
+        return JsonResponse({'message' : 'All ok'}, status=200)
+
+    return JsonResponse({'error' : 'Invalid Form'}, status=400)
 
 
 @login_required(login_url='/account/login')

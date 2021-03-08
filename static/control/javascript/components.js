@@ -8,7 +8,7 @@ const Place = (props) => {
             <div className="conf">
                 { props.hover ? <div>
                     <i className="fas fa-eye" onClick={() => window.open(props.url, '_blank')} />
-                    <i className="fas fa-edit"/>
+                    <i className="fas fa-edit" onClick={() => props.toEdit(props.uuid)}/>
                     <i className="fas fa-chart-line"></i>
                     <i className="fas fa-barcode" onClick={() => props.forCode(props.name, props.uuid)} />
                     <i className="fas fa-trash" onClick={() => props.delete(props.name, props.uuid)}/>
@@ -58,33 +58,37 @@ const PopupCode = (props) => {
 const FormPlaces = (props) => {
     return (
         <div>
-            <form onSubmit={props.submit} id='newPlace'>
+            <form onSubmit={(event) => props.submit(event, props.photos, props.edit)} id='newPlace'>
                 <label htmlFor="id_name">Nombre:</label>
-                <input type="text" name="name" maxLength="20" required id="id_name" onChange={props.setValue}></input>
+                <input type="text" name="name" maxLength="20" required id="id_name" onChange={props.setValue} value={props.default.name}></input>
                 <label htmlFor="id_short_description">Descripción:</label>
-                <textarea name="short_description" maxLength="900" required id="id_short_description" onChange={props.setValue}></textarea>
+                <textarea name="short_description" maxLength="900" required id="id_short_description" onChange={props.setValue} value={props.default.short_description}></textarea>
                 <label htmlFor="id_recomedations">Recomendaciones:</label>
-                <textarea name="recomedations" maxLength="900" required id="id_recomedations" onChange={props.setValue}></textarea>
+                <textarea name="recomedations" maxLength="900" required id="id_recomedations" onChange={props.setValue} value={props.default.recomedations}></textarea>
 
                 <label>Fotos:</label>
                 <div id="photos">
-                    <input type="file" name="photo1" accept="image/*" id="id_photo" required/>
+                    <span>{props.photos[0]}</span>
+                    <input type="file" name="photo1" accept="image/*" id="id_photo" />
+                    <span>{props.photos[1]}</span>
                     <input type="file" name="photo2" accept="image/*" id="id_photo" />
+                    <span>{props.photos[2]}</span>
                     <input type="file" name="photo3" accept="image/*" id="id_photo" />
+                    <span>{props.photos[3]}</span>
                     <input type="file" name="photo4" accept="image/*" id="id_photo" />
                 </div>
 
                 <div id="selectCategory">
                     <div>
                         <label htmlFor="id_mayor_category">Categoria Principal:</label>
-                        <select name="mayor_category" id="id_mayor_category" required onChange={(event) => {props.setValue(event); props.dontShowCate(event);}}>
+                        <select name="mayor_category" id="id_mayor_category" required defaultValue={props.default.mayor_category} onChange={(event) => {props.setValue(event); props.dontShowCate(event);}}>
                             <option value="D">Donar</option>
                             <option value="V">Voluntariado</option>
                         </select>
                     </div>
                     <div>
                         <label htmlFor="id_category">Categoria:</label>
-                        <select name="category" required id="id_category" onChange={(event) => {props.setValue(event); props.dontShowSub(event);}}>
+                        <select name="category" required id="id_category" defaultValue={props.default.category} onChange={(event) => {props.setValue(event); props.dontShowSub(event);}}>
                             <option value="10">DAl (Alimentos)</option>
                             <option value="11">DBb (Artículos para Bebés)</option>
                             <option value="12">DRp (Ropa)</option>
@@ -112,7 +116,7 @@ const FormPlaces = (props) => {
                 </div>
 
                 <label htmlFor="id_sub_category">Subcategorias:</label>
-                <select name="sub_category" required id="id_sub_category" onChange={props.setValue}>
+                <select name="sub_category" required id="id_sub_category" defaultValue={props.default.sub_category} onChange={props.setValue}>
                     <option value="71">DAlPolv (Leche en Polvo)</option>
                     <option value="72">DAlEnte (Leche Entera)</option>
                     <option value="73">DAlNoPe (No perecederos)</option>
@@ -195,7 +199,7 @@ const FormPlaces = (props) => {
         </div>
     )
 }
-
+ 
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {

@@ -1,7 +1,5 @@
-import math
 from django.shortcuts import render, reverse, redirect
-from django.http import JsonResponse, HttpResponse
-from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 
@@ -14,17 +12,20 @@ import json
 import random
 import string
 from math import radians, cos, sin, asin, sqrt
+
 # Create your views here.
 
 def index(request):
     return render(request, 'maps/index.html')
-
 
 def donate(request): 
     return render(request, 'maps/donate.html') 
 
 def info_point(request, uuid):
     help_point = Help.objects.get(uuid=uuid)
+    help_point.views += 1
+    help_point.save()
+
     comments = help_point.comments.all().order_by('-date')
     form = CommentForm()
 

@@ -11,7 +11,7 @@ class ReportForm(forms.ModelForm):
 class CreatePlace(forms.ModelForm):
     class Meta:
             model = Help
-            exclude = ('organization','temporal_code','points_for_completed','comments')
+            exclude = ('organization','temporal_code','points_for_completed','comments','views')
 
 class CreatePhoto(forms.ModelForm):
     class Meta:

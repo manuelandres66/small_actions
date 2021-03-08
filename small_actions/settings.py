@@ -137,8 +137,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #Email
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'small.actions.pasword@gmail.com'
-EMAIL_HOST_PASSWORD = 'mamaCaro123'
+EMAIL_HOST_USER = 'password@small-actions.com'
+EMAIL_HOST_PASSWORD = 'lol2Xd34'
 EMAIL_USE_TLS = True
 
 #AWS
