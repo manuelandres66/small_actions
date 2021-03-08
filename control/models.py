@@ -1,6 +1,7 @@
 from django.db import models
 
 from login.models import User
+from maps.models import Help
 
 # Create your models here.
 
@@ -31,3 +32,11 @@ class Report(models.Model):
 
     category_of_problem = models.CharField(max_length=4, choices=categories_options)
     decription_of_the_problem = models.TextField()
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    help_point = models.ForeignKey(Help, on_delete=models.CASCADE)
+    discarted = models.BooleanField(default=False) #To discard the notification
+    points_earned = models.PositiveIntegerField()
+    aproved = models.BooleanField(default=False) #Aproved or not the person, to later stadistics
+    date = models.DateTimeField(auto_now_add=True)

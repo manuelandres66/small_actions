@@ -1,29 +1,31 @@
-import math
 from django.shortcuts import render, reverse, redirect
-from django.http import JsonResponse, HttpResponse
-from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 
 from .models import Help, Comment
 from .forms import FromCode, CommentForm
 from login.models import User
+from control.models import Notification
 
 import json
 import random
 import string
 from math import radians, cos, sin, asin, sqrt
+
 # Create your views here.
 
 def index(request):
     return render(request, 'maps/index.html')
-
 
 def donate(request): 
     return render(request, 'maps/donate.html') 
 
 def info_point(request, uuid):
     help_point = Help.objects.get(uuid=uuid)
+    help_point.views += 1
+    help_point.save()
+
     comments = help_point.comments.all().order_by('-date')
     form = CommentForm()
 
@@ -102,6 +104,13 @@ def go(request, uuid):
 
                     #Cleand Cache
                     cache.delete(make_template_fragment_key('navbar'))
+
+                    #Create a notification
+                    Notification.objects.create(
+                        user= current_user,
+                        help_point= help_point,
+                        points_earned= help_point.points_for_completed + extra_points
+                    )
 
                     return redirect(reverse('congratulations') + f'?i={old_ranking - new_ranking}&p={help_point.points_for_completed + extra_points}') #Redirect
                 else:

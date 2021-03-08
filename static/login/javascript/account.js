@@ -133,10 +133,11 @@ progress.forEach(progre => {
         }
     } else {
         const total_data = progre.getAttribute('data-quantity');
-        const relation = ((parseFloat(data_related) / parseFloat(total_data)) * 100).toFixed(2);
+        let relation = ((parseFloat(data_related) / parseFloat(total_data)) * 100).toFixed(2);
         
         if (relation >= 100) {
             parent.setAttribute('class', 'bar completed');
+            relation = 100; // To avoid overlap
         };
 
         progre.style.width = `${relation}%`;

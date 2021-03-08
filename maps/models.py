@@ -41,6 +41,8 @@ class Help(models.Model):
     short_description = models.TextField(max_length=900)
     recomedations = models.TextField(max_length=900)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="help_points")
+    data_created = models.DateTimeField(auto_now_add=True)
+    views = models.PositiveIntegerField(default=0)
 
     photos = models.ManyToManyField(HelpPhoto)
     temporal_code = models.CharField(max_length=11)
