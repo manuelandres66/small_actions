@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/checknotify', views.check_notification, name='apiCheckNotify'),
     path('api/ban', views.ban, name="apiBan"),
     path('api/edit', views.to_edit, name="apiEdit"),
+    path('api/info', views.get_info, name="apiInfo"),
     path('report/', views.report_form, name='report'),
     path('photo', views.show_photo, name="showPhoto")
 ]

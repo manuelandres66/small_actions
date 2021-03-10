@@ -172,7 +172,7 @@ def delete_place(request):
         help_to_delete.delete()
         return JsonResponse({'message' : 'sucecess'}, status=200)
 
-    return JsonResponse({'error' : 'no data specified'}, status=400)
+    return JsonResponse({'error' : 'No data specified'}, status=400)
 
 @login_required(login_url='/account/login')
 @allowed(allowed_roles=['Organization'])
@@ -200,6 +200,32 @@ def delete_image(request):
         HelpPhoto.objects.get(id=data['id']).delete()
     
     return JsonResponse({'error' : 'No id or id null'}, status=400)
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def get_info(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+    
+    data = json.loads(request.body)
+    if 'uuid' in data:
+        place = Help.objects.get(uuid=data['uuid'])
+        notifications = Notification.objects.filter(help_point=place, aproved=True)
+
+        points = 0 #To sum points earnad
+        for notify in notifications:
+            points += notify.points_earned
+
+        response = {
+            'views' : place.views,
+            'visited' : len(place.persons_visited.all()),
+            'comments' : len(place.comments.all()),
+            'notifications' : len(Notification.objects.filter(help_point=place)), #Not aproved necessary
+            'pointsGenerated' : points
+        }
+        return JsonResponse(response, status=200)
+    
+    return JsonResponse({'error' : 'no data specified'}, status=400)
 
 
 @login_required(login_url='/account/login')

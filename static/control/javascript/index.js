@@ -303,7 +303,7 @@ class Principal extends React.Component {
             formInfo.longitude = coordinates.lng.toFixed(8);
 
             this.setState({'form' : formInfo});
-        });
+        }); 
 
     }
 
@@ -329,7 +329,26 @@ class Principal extends React.Component {
         const data = await for_data.json();
         
         this.setState({'form' : data.form, 'forPhotos' : data.photosId, 'see' : 'edit'}, () => this.showMap(data.form.latitude, data.form.longitude)); //Set map with the coordinates
+    }
 
+    showInfo = async (name, uuid) => {
+        const for_data = await fetch('/control/api/info', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken' : getCookie('csrftoken')
+            },
+            body: JSON.stringify({'uuid' : uuid})
+        });
+        const data = await for_data.json();
+
+        this.setState({'popup' : 
+        <div id='popupParent'>
+            <PopUpInfo see={this.setNoPopup} name={name} data={data}/>
+            <div id="background"></div>
+        </div>,
+
+        'popupSee' : true});
     }
 
     render() {
@@ -345,7 +364,7 @@ class Principal extends React.Component {
                     <div id="places">
                         {this.state.places.map(place => {
                             return <Place name={place.name} image={place.image} url={place.url} hover={place.hover} to_hover={this.changeHover} 
-                            delete={this.deletePlace} uuid={place.uuid} forCode={this.showCode} toEdit={this.setToEdit} key={place.uuid}/>
+                            delete={this.deletePlace} uuid={place.uuid} forCode={this.showCode} toEdit={this.setToEdit} showInfo={this.showInfo} key={place.uuid}/>
                         })}
                     </div>
                 </div>

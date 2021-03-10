@@ -9,7 +9,7 @@ const Place = (props) => {
                 { props.hover ? <div>
                     <i className="fas fa-eye" onClick={() => window.open(props.url, '_blank')} />
                     <i className="fas fa-edit" onClick={() => props.toEdit(props.uuid)}/>
-                    <i className="fas fa-chart-line"></i>
+                    <i className="fas fa-chart-line" onClick={() => props.showInfo(props.name, props.uuid)}></i>
                     <i className="fas fa-barcode" onClick={() => props.forCode(props.name, props.uuid)} />
                     <i className="fas fa-trash" onClick={() => props.delete(props.name, props.uuid)}/>
                 </div> : null }
@@ -20,7 +20,7 @@ const Place = (props) => {
 
 const PopupDelete = (props) => {
     return (
-        <div id="popupDelete">
+        <div id="popupDelete" className="popUp">
             <h3>¿Estas seguro que quieres eliminar {props.name}?</h3>
             <button id="buttonYes" onClick={() => props.delete(props.uuid)}>Si</button>
             <button id="buttonNo" onClick={props.see}>No</button>
@@ -28,9 +28,42 @@ const PopupDelete = (props) => {
     )
 };
 
+const PopUpInfo = (props) => {
+    return (
+        <div className="popUp" id="popInfo">
+            <i className="far fa-times-circle" id="closePop" onClick={props.see}></i>
+            <h1>Info de {props.name}</h1>
+            <div className="infoInfo" id='principalInfo'>
+                <div>
+                    <h3>{props.data.views}</h3>
+                    <h6><i className="far fa-eye"></i> Vistas</h6>
+                </div>
+                <div>
+                    <h3>{props.data.visited}</h3>
+                    <h6><i className="fas fa-map-marker-alt"></i> Visitas</h6>
+                </div>
+            </div>
+            <div className="infoInfo" id='secondInfo'>
+                <div>
+                    <h5>{props.data.comments}</h5>
+                    <h6><i className="far fa-comment"></i> Comentarios</h6>
+                </div>
+                <div>
+                    <h5>{props.data.pointsGenerated}</h5>
+                    <h6><i class="far fa-arrow-alt-circle-up"></i> Puntos Generados</h6>
+                </div>
+                <div>
+                    <h5>{props.data.notifications}</h5>
+                    <h6><i class="fas fa-exclamation-circle"></i> Notificaciones</h6>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 const PopupCode = (props) => {
     return (
-        <div id="popupCode">
+        <div id="popupCode" className="popUp">
             <i className="far fa-times-circle" id="closePop" onClick={props.see}></i>
             <h5>Codigo de {props.name}</h5>
             <h1>{props.code}</h1>

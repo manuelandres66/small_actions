@@ -76,7 +76,7 @@ body {
     height: 500%;
 }
 
-#popupDelete, #popupCode {
+.popUp {
     background-color: #fff;
     position: sticky;
     width: 50vw;
@@ -90,6 +90,11 @@ body {
 #popupCode {
     height: 80vh;
     top: 10vh;
+}
+
+#popInfo {
+    height: 60vh;
+    top: 20vh;
 }
 
 #background {
@@ -329,4 +334,50 @@ body {
 
 #rejected {
     color: #df0909;
+}
+
+#popInfo h1 {
+    font-size: 50px;
+    text-align: center;
+    padding-top: 3vh;
+}
+
+.infoInfo {
+    display: flex;
+}
+
+#principalInfo {
+    margin-top: 5vh;
+    justify-content: space-evenly;
+}
+
+#principalInfo div h3 {
+    font-size: 80px;
+    text-align: center;
+}
+
+#principalInfo div h6 {
+    font-size: 35px;
+}
+
+#principalInfo div h6 i, #secondInfo div h6 i {
+    padding-right: 1vw;
+    color: #ff3a3a;
+}
+
+#secondInfo {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    width: 90%;
+    margin-left: 5%;
+    justify-content: space-between;
+}
+
+#secondInfo div h5 {
+    font-size: 40px;
+    text-align: center;
+}
+
+#secondInfo div h6 {
+    font-size: 25px;
 }
