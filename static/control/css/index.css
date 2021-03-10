@@ -217,6 +217,11 @@ body {
     justify-content: space-between;
 }
 
+#photos a {
+    font-size: 15px;
+    color: #fff;
+}
+
 #newPlace #selectCategory div {
     width: 40%;
 }

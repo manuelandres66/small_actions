@@ -248,6 +248,20 @@
     z-index: 10;
 }
 
+#publications {
+    width: 85vw;
+    margin: 7vh 0 5vh 7.5vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#publications iframe {
+    width: 20%;
+    flex-basis: 20%;
+    margin-top: 2vh;
+}
+
 @media screen and (max-width: 1300px) {
     #title img {
         height: 10vh;
@@ -336,5 +350,10 @@
         width: 30vw;
         height: 30vw;
         bottom: 13vh;
+    }
+
+    #publications iframe {
+        width: 100%;
+        flex-basis: 100%;
     }
 }

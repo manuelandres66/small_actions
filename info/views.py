@@ -71,7 +71,7 @@ def api_category(request):
 def choose_category(request):
     return render(request, 'info/choose.html')
 
-@cache_page(60 * 30)
+# @cache_page(60 * 30)
 def organization(request, pk):
     org = Organization.objects.get(pk=pk)
     places = len(org.help_points.all())
