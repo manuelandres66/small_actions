@@ -361,8 +361,9 @@ body {
 }
 
 #principalInfo div h6 i, #secondInfo div h6 i {
-    padding-right: 1vw;
     color: #ff3a3a;
+    position: relative;
+    right: 0.5vw;
 }
 
 #secondInfo {

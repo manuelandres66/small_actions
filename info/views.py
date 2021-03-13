@@ -173,3 +173,6 @@ def become(request):
 
 
     return render(request, 'info/become.html', {'form' : form, 'message' : message})
+
+def terms(request):
+    return render(request, 'info/terms.html')

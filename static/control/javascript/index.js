@@ -354,37 +354,48 @@ class Principal extends React.Component {
     render() {
         let see = null;
 
-        if (this.state.see === "places") {
-            see = (<div>
-                <div id="superiorInfo">
-                    <input type="text" placeholder="Buscar" onChange={this.searchPlace} id="searchBar"/>
-                    <div id="add" onClick={() => this.setSeeTo('new')}>Añadir Nuevo <i className="fas fa-plus"></i></div>
-                </div>
-                <div>
-                    <div id="places">
-                        {this.state.places.map(place => {
-                            return <Place name={place.name} image={place.image} url={place.url} hover={place.hover} to_hover={this.changeHover} 
-                            delete={this.deletePlace} uuid={place.uuid} forCode={this.showCode} toEdit={this.setToEdit} showInfo={this.showInfo} key={place.uuid}/>
-                        })}
+        switch (this.state.see) {
+            case "places":
+                see = (<div>
+                    <div id="superiorInfo">
+                        <input type="text" placeholder="Buscar" onChange={this.searchPlace} id="searchBar"/>
+                        <div id="add" onClick={() => this.setSeeTo('new')}>Añadir Nuevo <i className="fas fa-plus"></i></div>
                     </div>
-                </div>
-                {this.state.popupSee ? this.state.popup : null}</div>);
+                    <div>
+                        <div id="places">
+                            {this.state.places.map(place => {
+                                return <Place name={place.name} image={place.image} url={place.url} hover={place.hover} to_hover={this.changeHover} 
+                                delete={this.deletePlace} uuid={place.uuid} forCode={this.showCode} toEdit={this.setToEdit} showInfo={this.showInfo} key={place.uuid}/>
+                            })}
+                        </div>
+                    </div>
+                    {this.state.popupSee ? this.state.popup : null}</div>);
+                break;
 
-        } else if (this.state.see === "new") {
-            see = (<div>
-                <h1 id="createTitle">Crear un nuevo lugar</h1>
-                <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
-                dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={{}} edit={false} photos={[null, null, null, null]}/>
-            </div>);
+            case "new":
+                see = (<div>
+                    <h1 id="createTitle">Crear un nuevo lugar</h1>
+                    <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
+                    dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={{}} edit={false} photos={[null, null, null, null]}/>
+                </div>);
+                break;
+            
+            case "edit":
+                see = (<div>
+                    <h1 id="createTitle">Editar Lugar</h1>
+                    <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
+                    dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={this.state.form} edit={true}
+                    photos={this.state.forPhotos} />
+                </div>);
+                break;
 
-        } else if (this.state.see == "edit") {
-            see = (<div>
-                <h1 id="createTitle">Editar Lugar</h1>
-                <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
-                dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={this.state.form} edit={true}
-                photos={this.state.forPhotos} />
-            </div>);
-        };
+            case "help":
+                see = (<div>
+                    <div>
+                        
+                    </div>
+                </div>)
+        }
 
         return (
             <div>
@@ -393,7 +404,7 @@ class Principal extends React.Component {
                     <nav>
                         <a onClick={() => this.setSeeTo('places')}>Lugares</a>
                         <a>Organización</a>
-                        <a>Ayuda</a>
+                        <a onClick={() => this.setSeeTo('help')}>Ayuda</a>
                     </nav>
                 </div>
                 {see}

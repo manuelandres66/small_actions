@@ -116,6 +116,12 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+#legal {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 2vh;
+}
+
 
 @media screen and (max-width: 1300px) {
     #all_for {

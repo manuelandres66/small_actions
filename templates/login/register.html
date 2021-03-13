@@ -56,7 +56,6 @@
 
             <input type="submit" value="Registrarse">
         </form>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
         <script>
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -72,4 +71,5 @@
             }
         </script>
     </div>
+    <p id="legal">Al registrarte aceptas los <a href="{% url 'terms' %}">Términos y Condiciones</a> y la <a href="{% url 'terms' %}#priv">Política de privacidad</a></p>
 {% endblock %}
