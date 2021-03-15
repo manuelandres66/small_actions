@@ -218,7 +218,7 @@ def get_info(request):
 
         response = {
             'views' : place.views,
-            'visited' : len(place.persons_visited.all()),
+            'visited' : len(notifications),
             'comments' : len(place.comments.all()),
             'notifications' : len(Notification.objects.filter(help_point=place)), #Not aproved necessary
             'pointsGenerated' : points

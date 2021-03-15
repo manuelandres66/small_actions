@@ -382,3 +382,60 @@ body {
 #secondInfo div h6 {
     font-size: 25px;
 }
+
+#clock {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    color: #fff;
+}
+
+#clock i {
+    font-size: 135px;
+    margin-right: 3vw;
+}
+
+#clock div h2 {
+    font-size: 25px;
+    font-weight: 300;
+    padding-top: 0.5vh;
+}
+
+#clock div h3 {
+    font-size: 80px;
+}
+
+.helpInfo {
+    width: 80vw;
+    margin-left: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6vh;
+}
+
+.helpInfo:nth-child(1) {
+    margin-top: 10vh;
+}
+
+.helpInfo i {
+    color: #fff;
+    font-size: 70px;
+    width: 10vw;
+    text-align: center;
+}
+
+.helpInfo div {
+    width: 70vw;
+}
+
+.helpInfo div h4 {
+    font-size: 25px;
+    color: #fff;
+}
+
+.helpInfo div p {
+    text-align: justify;
+    color: #fff;
+    padding-top: 1vh;
+}

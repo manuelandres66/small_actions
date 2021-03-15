@@ -232,6 +232,97 @@ const FormPlaces = (props) => {
         </div>
     )
 }
+
+//I really only do this fuction to not get long jsx-html code in the index.js
+const HelpView = (props) => {
+    return (
+        <div>
+            <div className="helpInfo">
+                <i className="fas fa-question"></i>
+                <div>
+                    <h4>Funcionamiento de la página</h4>
+                    <p>
+                        Al entrar te aparecerán todos los lugares que has registrado (si has registrado alguno) con su foto y su nombre, 
+                        para realizar acciones sobre un lugar tienes que darle click, y después elegir una de las opciones que se explicarán más adelante.
+                        También se te proporciona una barra de búsqueda por nombre, y un botón de agregar nuevo.
+                    </p>
+                </div>
+            </div>
+            <div className="helpInfo">
+                <div>
+                    <h4>Agregar Nuevo</h4>
+                    <p>
+                        Al darle click al botón en la página principal de dar más, se abrirá un formulario con toda la información requerida para agregar 
+                        el nuevo sitio. No es necesario agregar todas las fotos, pero si por lo menos una. Para agregar la ubicación da click en el mapa en 
+                        donde se encuentre el sitio, esto creará un marcador. La barra de busqueda del mapa solo te llevara a un lugar, pero no significa que 
+                        ese lugar esté marcado.
+                    </p>
+                </div>
+                <i className="fas fa-plus"></i>
+            </div>
+            <div className="helpInfo">
+                <i className="fas fa-eye"></i>
+                <div>
+                    <h4>Ver sitio</h4>
+                    <p>
+                        Al elegir esta opcion despues de darle click a un lugar, se abrirá la vista que tiene el usuario del sitio. Sin embargo, 
+                        <strong> recuerde que los cambios que realice puede no observarse hasta 15 minutos después</strong>.
+                    </p>
+                </div>
+            </div>
+            <div className="helpInfo">
+                <div>
+                    <h4>Editar sitio</h4>
+                    <p>
+                        En la opción editar, se cambia la vista a un formulario ya completado con la información pertinente, es igual que agregar uno nuevo
+                        pero la diferencia radica en las fotos. A la derecha de cada campo de fotos puede o no aparecer un número. Si es así, significa que 
+                        ya tiene una foto en ese campo y que si cambia ese campo la anterior foto va a desaparecer. Puede ver la foto que tiene dándole click
+                        a ese número. Si no existe dicho número, significa que no se ha agregado una foto en ese campo, y que al hacerlo no eliminará ninguna
+                        otra. 
+                    </p>
+                </div>
+                <i className="fas fa-edit"></i>
+            </div>
+            <div className="helpInfo">
+                <i className="fas fa-chart-line"></i>
+                <div>
+                    <h4>Estadísticas</h4>
+                    <p>
+                        Esta opción salta un pop-up el cual te da cierto datos sobre el lugar. Explicaremos cada uno a continuación. Las vistas, representan el
+                        número de veces que se ha abierto la página de información del sitio (la misma que aparece cuando le das a ver sitio). Las visitas representan
+                        el número de veces que personas han visitado tu sitio fisicamente, han ingresado el código y han sido aprobadas. Los comentarios, representan
+                        la cantidad de comentarios que hay en la pagina de informacion. Los puntos generados, representa la cantidad de puntos que suman en total todos
+                        los puntos ganados en cada visita. Y las notificaciones son el número de notificaciones que se han generado, tanto aprobadas como no aprobas, 
+                        incluso baneadas.
+                    </p>
+                </div>
+            </div>
+            <div className="helpInfo">
+                <div>
+                    <h4>Código</h4>
+                    <p>
+                        Esta opción da un pop-up que te muestra el código que le debes dar a quienes visiten tu sitio, de esta manera ellos ganan puntos y registran su actividad.
+                        Cuando un usuario ingrese correctamente el codigo, te aparecera una notificacion con su nombre y su foto de perfil. Usted tiene tres opciones. Aprobarlo,
+                        lo cual le dará los puntos sin ningún problema. Denegarlo, lo cual le restara los puntos ganados (este cambio se puede ver 15 min después). O banearlo, lo
+                        cual además de restarle los puntos le inhabilita la cuenta. <strong>Tenga en cuenta que usted solo puede negar o banear con un motivo claro de visita inadecuada. </strong>
+                        Podemos restringir su cuenta si no cumple con esto.
+                    </p>
+                </div>
+                <i className="fas fa-chart-line"></i>
+            </div>
+            <div className="helpInfo">
+                <i className="fas fa-trash"></i>
+                <div>
+                    <h4>Eliminar sitio</h4>
+                    <p>
+                        Al darle click, le aparecerá un pop-up para confirmar su acción. Si usted dice que no simplemente se cierra el popup. Si usted dice que si toda la información 
+                        relacionada con el lugar será eliminada de nuestras bases de datos. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    )
+}
  
 function getCookie(name) {
     let cookieValue = null;

@@ -17,8 +17,10 @@ class Principal extends React.Component {
             },
             'formError' : null,
             'forPhotos' : [],
+            'time' : '15:00'
         };
         this.getPlaces();
+        setInterval(this.getTime, 1000); //To the clock
     }
 
     getPlaces = async () => {
@@ -30,6 +32,7 @@ class Principal extends React.Component {
 
     setSeeTo = (to) => {
         to == 'new' ? this.setState({'see' : to}, this.showMap) : this.setState({'see' : to}); //Callback if showMap is needed
+        this.setState({'time' : '15:00'}); //Restart the clock for help view
     }
 
     changeHover = (uuid) => {
@@ -351,6 +354,28 @@ class Principal extends React.Component {
         'popupSee' : true});
     }
 
+    getTime = () => {
+        const time = this.state.time;
+        let [minutes, seconds] = time.split(':');
+        minutes = parseFloat(minutes);
+        seconds = parseFloat(seconds);
+
+        let total = (minutes * 60) + seconds;
+        total -= 1;
+
+        if (total === 0) {
+            total = 900; //Restart the clock when is zero
+        } 
+
+        minutes = Math.floor(total / 60);
+        seconds = total % 60;
+        //Adding zeros
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        this.setState({'time' : `${minutes}:${seconds}`});
+    }
+
     render() {
         let see = null;
 
@@ -391,10 +416,16 @@ class Principal extends React.Component {
 
             case "help":
                 see = (<div>
-                    <div>
-                        
+                    <div id="clock">
+                        <i className="fas fa-clock"></i>
+                        <div>
+                            <h2>Recuerda que cualquier cambio no se verá en menos de</h2>
+                            <h3 id="minutes">{this.state.time} minutos</h3>
+                        </div>
                     </div>
+                    <HelpView />
                 </div>)
+                break;
         }
 
         return (
