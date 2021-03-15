@@ -76,7 +76,7 @@ body {
     height: 500%;
 }
 
-#popupDelete, #popupCode {
+.popUp {
     background-color: #fff;
     position: sticky;
     width: 50vw;
@@ -90,6 +90,11 @@ body {
 #popupCode {
     height: 80vh;
     top: 10vh;
+}
+
+#popInfo {
+    height: 60vh;
+    top: 20vh;
 }
 
 #background {
@@ -217,6 +222,11 @@ body {
     justify-content: space-between;
 }
 
+#photos a {
+    font-size: 15px;
+    color: #fff;
+}
+
 #newPlace #selectCategory div {
     width: 40%;
 }
@@ -324,4 +334,108 @@ body {
 
 #rejected {
     color: #df0909;
+}
+
+#popInfo h1 {
+    font-size: 50px;
+    text-align: center;
+    padding-top: 3vh;
+}
+
+.infoInfo {
+    display: flex;
+}
+
+#principalInfo {
+    margin-top: 5vh;
+    justify-content: space-evenly;
+}
+
+#principalInfo div h3 {
+    font-size: 80px;
+    text-align: center;
+}
+
+#principalInfo div h6 {
+    font-size: 35px;
+}
+
+#principalInfo div h6 i, #secondInfo div h6 i {
+    color: #ff3a3a;
+    position: relative;
+    right: 0.5vw;
+}
+
+#secondInfo {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    width: 90%;
+    margin-left: 5%;
+    justify-content: space-between;
+}
+
+#secondInfo div h5 {
+    font-size: 40px;
+    text-align: center;
+}
+
+#secondInfo div h6 {
+    font-size: 25px;
+}
+
+#clock {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    color: #fff;
+}
+
+#clock i {
+    font-size: 135px;
+    margin-right: 3vw;
+}
+
+#clock div h2 {
+    font-size: 25px;
+    font-weight: 300;
+    padding-top: 0.5vh;
+}
+
+#clock div h3 {
+    font-size: 80px;
+}
+
+.helpInfo {
+    width: 80vw;
+    margin-left: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6vh;
+}
+
+.helpInfo:nth-child(1) {
+    margin-top: 10vh;
+}
+
+.helpInfo i {
+    color: #fff;
+    font-size: 70px;
+    width: 10vw;
+    text-align: center;
+}
+
+.helpInfo div {
+    width: 70vw;
+}
+
+.helpInfo div h4 {
+    font-size: 25px;
+    color: #fff;
+}
+
+.helpInfo div p {
+    text-align: justify;
+    color: #fff;
+    padding-top: 1vh;
 }

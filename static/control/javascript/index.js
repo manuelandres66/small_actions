@@ -17,8 +17,10 @@ class Principal extends React.Component {
             },
             'formError' : null,
             'forPhotos' : [],
+            'time' : '15:00'
         };
         this.getPlaces();
+        setInterval(this.getTime, 1000); //To the clock
     }
 
     getPlaces = async () => {
@@ -30,6 +32,7 @@ class Principal extends React.Component {
 
     setSeeTo = (to) => {
         to == 'new' ? this.setState({'see' : to}, this.showMap) : this.setState({'see' : to}); //Callback if showMap is needed
+        this.setState({'time' : '15:00'}); //Restart the clock for help view
     }
 
     changeHover = (uuid) => {
@@ -303,7 +306,7 @@ class Principal extends React.Component {
             formInfo.longitude = coordinates.lng.toFixed(8);
 
             this.setState({'form' : formInfo});
-        });
+        }); 
 
     }
 
@@ -329,43 +332,101 @@ class Principal extends React.Component {
         const data = await for_data.json();
         
         this.setState({'form' : data.form, 'forPhotos' : data.photosId, 'see' : 'edit'}, () => this.showMap(data.form.latitude, data.form.longitude)); //Set map with the coordinates
+    }
 
+    showInfo = async (name, uuid) => {
+        const for_data = await fetch('/control/api/info', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken' : getCookie('csrftoken')
+            },
+            body: JSON.stringify({'uuid' : uuid})
+        });
+        const data = await for_data.json();
+
+        this.setState({'popup' : 
+        <div id='popupParent'>
+            <PopUpInfo see={this.setNoPopup} name={name} data={data}/>
+            <div id="background"></div>
+        </div>,
+
+        'popupSee' : true});
+    }
+
+    getTime = () => {
+        const time = this.state.time;
+        let [minutes, seconds] = time.split(':');
+        minutes = parseFloat(minutes);
+        seconds = parseFloat(seconds);
+
+        let total = (minutes * 60) + seconds;
+        total -= 1;
+
+        if (total === 0) {
+            total = 900; //Restart the clock when is zero
+        } 
+
+        minutes = Math.floor(total / 60);
+        seconds = total % 60;
+        //Adding zeros
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        this.setState({'time' : `${minutes}:${seconds}`});
     }
 
     render() {
         let see = null;
 
-        if (this.state.see === "places") {
-            see = (<div>
-                <div id="superiorInfo">
-                    <input type="text" placeholder="Buscar" onChange={this.searchPlace} id="searchBar"/>
-                    <div id="add" onClick={() => this.setSeeTo('new')}>Añadir Nuevo <i className="fas fa-plus"></i></div>
-                </div>
-                <div>
-                    <div id="places">
-                        {this.state.places.map(place => {
-                            return <Place name={place.name} image={place.image} url={place.url} hover={place.hover} to_hover={this.changeHover} 
-                            delete={this.deletePlace} uuid={place.uuid} forCode={this.showCode} toEdit={this.setToEdit} key={place.uuid}/>
-                        })}
+        switch (this.state.see) {
+            case "places":
+                see = (<div>
+                    <div id="superiorInfo">
+                        <input type="text" placeholder="Buscar" onChange={this.searchPlace} id="searchBar"/>
+                        <div id="add" onClick={() => this.setSeeTo('new')}>Añadir Nuevo <i className="fas fa-plus"></i></div>
                     </div>
-                </div>
-                {this.state.popupSee ? this.state.popup : null}</div>);
+                    <div>
+                        <div id="places">
+                            {this.state.places.map(place => {
+                                return <Place name={place.name} image={place.image} url={place.url} hover={place.hover} to_hover={this.changeHover} 
+                                delete={this.deletePlace} uuid={place.uuid} forCode={this.showCode} toEdit={this.setToEdit} showInfo={this.showInfo} key={place.uuid}/>
+                            })}
+                        </div>
+                    </div>
+                    {this.state.popupSee ? this.state.popup : null}</div>);
+                break;
 
-        } else if (this.state.see === "new") {
-            see = (<div>
-                <h1 id="createTitle">Crear un nuevo lugar</h1>
-                <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
-                dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={{}} edit={false} photos={[null, null, null, null]}/>
-            </div>);
+            case "new":
+                see = (<div>
+                    <h1 id="createTitle">Crear un nuevo lugar</h1>
+                    <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
+                    dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={{}} edit={false} photos={[null, null, null, null]}/>
+                </div>);
+                break;
+            
+            case "edit":
+                see = (<div>
+                    <h1 id="createTitle">Editar Lugar</h1>
+                    <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
+                    dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={this.state.form} edit={true}
+                    photos={this.state.forPhotos} />
+                </div>);
+                break;
 
-        } else if (this.state.see == "edit") {
-            see = (<div>
-                <h1 id="createTitle">Editar Lugar</h1>
-                <FormPlaces submit={this.newPlaceSubmit} setValue={this.setValueForm} dontShowCate={this.dontShowCategories} 
-                dontShowSub={this.dontShowSubCategories} error={this.state.formError} default={this.state.form} edit={true}
-                photos={this.state.forPhotos} />
-            </div>);
-        };
+            case "help":
+                see = (<div>
+                    <div id="clock">
+                        <i className="fas fa-clock"></i>
+                        <div>
+                            <h2>Recuerda que cualquier cambio no se verá en menos de</h2>
+                            <h3 id="minutes">{this.state.time} minutos</h3>
+                        </div>
+                    </div>
+                    <HelpView />
+                </div>)
+                break;
+        }
 
         return (
             <div>
@@ -374,7 +435,7 @@ class Principal extends React.Component {
                     <nav>
                         <a onClick={() => this.setSeeTo('places')}>Lugares</a>
                         <a>Organización</a>
-                        <a>Ayuda</a>
+                        <a onClick={() => this.setSeeTo('help')}>Ayuda</a>
                     </nav>
                 </div>
                 {see}

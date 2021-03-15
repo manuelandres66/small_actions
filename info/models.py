@@ -4,6 +4,8 @@ from django.core.validators import RegexValidator
 
 
 # Create your models here.
+class InstagramPublication (models.Model):
+    url = models.URLField()
 
 class Organization(models.Model):
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="El numero de telefono debe tener el codigo del pais. Ej: +573023986488. 15 Digitos permitidos")
@@ -20,6 +22,7 @@ class Organization(models.Model):
     quote = models.CharField(max_length=60) 
 
     user = models.OneToOneField(User, blank=True, null=True, on_delete=models.PROTECT, related_name='organization')
+    instagram_photos = models.ManyToManyField(InstagramPublication)
     
     def __str__(self):
         return f"{self.name}"

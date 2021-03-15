@@ -51,6 +51,12 @@
     <div id="map"></div>
     <div id="map_glass"></div>
 
+    <div id="publications">
+        {% for publication in org.instagram_photos.all %}
+        <iframe width="320" height="440" src="{{publication.url}}embed" frameborder="0"></iframe>
+        {% endfor %}
+    </div>
+
     <span id="org_id" style="display: none;">{{org.id}}</span>
     {% csrf_token %}
     <script src="{% static 'info/javascript/org.js' %}"></script>
