@@ -51,7 +51,8 @@ class apitest(TestCase):
                 short_description="Lorem ipsum dolor sit amet consectetur adipiscing elit placerat",
                 quote="Hello My Friends",
                 circular_icon = uploaded,
-                image = uploaded)
+                image = uploaded,
+                see=True)
 
         A1 = models.Help.objects.create(name="Cole", latitude=1.215, longitude=-77.276, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
         recomedations="Lorem ipsum dolor sit amet consectetur adipiscing..", organization=new_organization, temporal_code='AAD-458-JJU', category=cate)

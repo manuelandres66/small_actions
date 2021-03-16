@@ -17,4 +17,4 @@ class NewOrganization(forms.ModelForm):
      
     class Meta:
         model = Organization
-        exclude = ('user',)
+        exclude = ('user','instagram_photos','see')

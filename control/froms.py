@@ -1,7 +1,10 @@
 from django import forms
+from django.db import models
+from django.db.models import fields
 from .models import Report
 
 from maps.models import Help, HelpPhoto
+from info.models import Organization, InstagramPublication
 
 class ReportForm(forms.ModelForm):
     class Meta:
@@ -17,3 +20,13 @@ class CreatePhoto(forms.ModelForm):
     class Meta:
         model = HelpPhoto
         fields = ('photo',)
+
+class EditOrg(forms.ModelForm):
+    class Meta:
+        models = Organization
+        exclude = ('user', 'see')
+
+class EditInstagram(forms.ModelForm):
+    class Meta:
+        models = InstagramPublication
+        fields = ('url',)

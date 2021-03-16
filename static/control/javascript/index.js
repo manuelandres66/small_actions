@@ -17,7 +17,8 @@ class Principal extends React.Component {
             },
             'formError' : null,
             'forPhotos' : [],
-            'time' : '15:00'
+            'time' : '15:00',
+            'orgForm' : {},
         };
         this.getPlaces();
         setInterval(this.getTime, 1000); //To the clock
@@ -376,6 +377,12 @@ class Principal extends React.Component {
         this.setState({'time' : `${minutes}:${seconds}`});
     }
 
+    toOrg = async () => {
+        const for_data = await fetch('/control/api/org');
+        const data = await for_data.json();
+        this.setState({'orgForm' : data, 'see' : 'org'});
+    }
+
     render() {
         let see = null;
 
@@ -426,6 +433,13 @@ class Principal extends React.Component {
                     <HelpView />
                 </div>)
                 break;
+
+            case "org" :
+                see = (<div>
+                    <h1 id="createTitle">Editar Organización</h1>
+                </div>)
+
+                break;
         }
 
         return (
@@ -434,7 +448,7 @@ class Principal extends React.Component {
                     <h1>Small Actions - Control</h1>
                     <nav>
                         <a onClick={() => this.setSeeTo('places')}>Lugares</a>
-                        <a>Organización</a>
+                        <a onClick={this.toOrg}>Organización</a>
                         <a onClick={() => this.setSeeTo('help')}>Ayuda</a>
                     </nav>
                 </div>

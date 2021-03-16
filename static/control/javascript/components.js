@@ -233,6 +233,16 @@ const FormPlaces = (props) => {
     )
 }
 
+const FormOrg = (props) => {
+    return (
+        <div>
+            <form>
+                
+            </form>
+        </div>
+    )
+}
+
 //I really only do this fuction to not get long jsx-html code in the index.js
 const HelpView = (props) => {
     return (
@@ -308,7 +318,7 @@ const HelpView = (props) => {
                         Podemos restringir su cuenta si no cumple con esto.
                     </p>
                 </div>
-                <i className="fas fa-chart-line"></i>
+                <i className="fas fa-barcode"></i>
             </div>
             <div className="helpInfo">
                 <i className="fas fa-trash"></i>

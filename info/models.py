@@ -23,6 +23,8 @@ class Organization(models.Model):
 
     user = models.OneToOneField(User, blank=True, null=True, on_delete=models.PROTECT, related_name='organization')
     instagram_photos = models.ManyToManyField(InstagramPublication)
+
+    see = models.BooleanField()
     
     def __str__(self):
         return f"{self.name}"

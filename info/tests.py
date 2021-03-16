@@ -39,13 +39,15 @@ class OrgTest(TestCase):
                 short_description="Lorem ipsum dolor sit amet consectetur adipiscing elit placerat",
                 quote="Hello My Friends",
                 circular_icon = uploaded,
-                image = uploaded)
+                image = uploaded,
+                see=True)
 
         second_org = Organization.objects.create(name="Manuels test Organization", 
                 short_description="Lorem ipsum dolor sit amet consectetur adipiscing elit placerat",
                 quote="Hello My Friends",
                 circular_icon = uploaded,
-                image = uploaded)
+                image = uploaded,
+                see=True)
 
 
         self.help = Help.objects.create(name="Cole", latitude=1.215, longitude=-77.276, short_description="Lorem ipsum dolor sit amet consectetur adipiscing.", 
