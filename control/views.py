@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
-from django.http import JsonResponse, HttpResponse, response
+from django.http import JsonResponse, HttpResponse
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -40,9 +40,7 @@ def get_org(request):
 
     response = {
         'name' : org.name,
-        'phone' : org.phone_number,
-        'contact' : org.contact_name,
-        'contact_phone' : org.contact_phone_number,
+        'phone_number' : org.phone_number,
         'image' : org.image.url,
         'circular_icon' : org.circular_icon.url,
         'short_description' : org.short_description,
@@ -52,7 +50,8 @@ def get_org(request):
 
     return JsonResponse(response, status=200)
 
-
+def form_view(request):
+    return render(request, 'control/e.html', {'form' : EditInstagram()})
 
 @login_required(login_url='/account/login')
 @allowed(allowed_roles=['Organization'])

@@ -237,7 +237,44 @@ const FormOrg = (props) => {
     return (
         <div>
             <form>
-                
+                <div>
+                    <div>
+                        <label htmlFor="id_name">Nombre:</label>
+                        <input type="text" name="name" maxLength="20" required id="id_name" value={props.data.name} onChange={props.setValue}></input>
+                    </div>
+                    <div>
+                        <label htmlFor="id_phone_number">Numero de teléfono:</label>
+                        <input type="text" name="phone_number" maxLength="17" required id="id_phone_number" value={props.data.phone_number} onChange={props.setValue}></input>
+                    </div>
+                </div>
+                <label htmlFor="id_short_description">Descripción:</label>
+                <textarea name="short_description" cols="40" rows="10" maxLength="300" required id="id_short_description" value={props.data.short_description} onChange={props.setValue}></textarea>
+                <label htmlFor="id_quote">Lema:</label>
+                <input type="text" name="quote" maxLength="60" required id="id_quote" value={props.data.quote} onChange={props.setValue}></input>
+                <div>
+                    <div>
+                        <img src={props.data.image}></img>
+                        <div>
+                            <label htmlFor="id_image">Imagen:</label>
+                            <input type="file" name="image" accept="image/*" id="id_image"></input>
+                        </div>
+                    </div>
+                    <div>
+                        <img src={props.data.circular_icon}></img>
+                        <div>
+                            <label htmlFor="id_circular_icon">Circular icon:</label>
+                            <input type="file" name="circular_icon" accept="image/*" id="id_circular_icon"></input>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Fotos de instagram</h3>
+                    <h6>Copia el link de la publicacion de una cuenta publica, asegurate que termine en "/"</h6>
+                    {props.data.instagram_photos.map(photo => {
+                        return <input type="url" name="url" maxLength="200" required id="id_url" value={photo.url} onChange={(event) => props.setInstagram(event, photo.id)} key={photo.id}></input>
+                    })}
+                </div>
+                <input type="submit" value="Editar"/>
             </form>
         </div>
     )

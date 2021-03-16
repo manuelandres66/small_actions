@@ -23,10 +23,10 @@ class CreatePhoto(forms.ModelForm):
 
 class EditOrg(forms.ModelForm):
     class Meta:
-        models = Organization
-        exclude = ('user', 'see')
+        model = Organization
+        exclude = ('user', 'see', 'instagram_photos', 'contact_name', 'contact_phone_number')
 
 class EditInstagram(forms.ModelForm):
     class Meta:
-        models = InstagramPublication
+        model = InstagramPublication
         fields = ('url',)

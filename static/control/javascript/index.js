@@ -141,6 +141,12 @@ class Principal extends React.Component {
         this.setState({'form' : data});
     }
 
+    setValueOrgForm = (event) => {
+        let data = {...this.state.orgForm};
+        data[event.target.name] = event.target.value;
+        this.setState({'orgForm' : data});
+    }
+
     newPlaceSubmit = async (event, photoIds, edit) => { //Most large function, sorry dude
         event.preventDefault();
         const dataSubmit = {...this.state.form};
@@ -383,6 +389,20 @@ class Principal extends React.Component {
         this.setState({'orgForm' : data, 'see' : 'org'});
     }
 
+    setInstagram = (event, id) => {
+        let formData = [...this.state.orgForm.instagram_photos];
+        let to_edit = formData.find(photo => photo.id == id);
+        const index = formData.findIndex(photo => photo.id == id);
+
+        to_edit.url = event.target.value;
+        formData[index] = to_edit;
+
+        let orgData = {...this.state.orgForm};
+        orgData.instagram_photos = formData;
+
+        this.setState({'orgForm' : orgData});
+    }
+
     render() {
         let see = null;
 
@@ -437,6 +457,7 @@ class Principal extends React.Component {
             case "org" :
                 see = (<div>
                     <h1 id="createTitle">Editar Organización</h1>
+                    <FormOrg data={this.state.orgForm} setValue={this.setValueOrgForm} setInstagram={this.setInstagram}/>
                 </div>)
 
                 break;
