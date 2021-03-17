@@ -1,16 +1,13 @@
-"""
-WSGI config for small_actions project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/
-"""
-
 import os
 
-from django.core.wsgi import get_wsgi_application
+import sys
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'small_actions.settings')
+sys.path.append('/opt/bitnami/projects/small_actions')
+
+os.environ.setdefault("PYTHON_EGG_CACHE", "/opt/bitnami/projects/small_actions/egg_cache")
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "small_actions.settings")
+
+from django.core.wsgi import get_wsgi_application
 
 application = get_wsgi_application()
