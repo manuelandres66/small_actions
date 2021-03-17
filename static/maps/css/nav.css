@@ -84,6 +84,20 @@ html[theme='dark-mode'] img{
     border: 3px solid #ff3a3a;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #B31717;
+    border-radius: 6px;
+}
+
 @media screen and (max-width: 1300px) {
     #all_bar {
         margin-top: 2vh;

@@ -403,6 +403,71 @@ class Principal extends React.Component {
         this.setState({'orgForm' : orgData});
     }
 
+    submitOrg = async (e) => {
+        e.preventDefault();
+        let data = {...this.state.orgForm};
+        const photos = data.instagram_photos;
+        let check = true;
+        //Edit photos
+        for (let i = 0; i < photos.length; i++) {
+            if (photos[i].url != "") {
+                let formPhoto = new FormData();
+                formPhoto.append("csrfmiddlewaretoken", getCookie('csrftoken'));
+                formPhoto.append("id", photos[i].id);
+                formPhoto.append("url", photos[i].url);
+
+                const for_data = await fetch('/control/api/editInstagram', {
+                    method: "POST",
+                    body: formPhoto
+                });
+                const data = await for_data.json();
+                
+                if (data.error != undefined) {
+                    check = false;
+                    this.setState({"formError" : "Algun campo de fotos de instagram es incorrecto"});
+                    break;
+                }
+
+            } else {
+                check = false;
+                this.setState({"formError" : "Algun campo de fotos de instagram esta vacio"});
+                break;
+            }
+        }
+        
+        if (check) {
+            let formOrg = new FormData();
+            formOrg.append("csrfmiddlewaretoken", getCookie('csrftoken'));
+
+            //Photos
+            const imageField = document.querySelector("#id_image").files[0];
+            formOrg.append("image", imageField);
+            const circularField = document.querySelector("#id_circular_icon").files[0];
+            formOrg.append("circular_icon", circularField);
+
+            //Rest
+            for (const key in data) {
+                if (key != "instagram_photos" & key != "image" & key != "circular_icon") {
+                    formOrg.append(key, data[key]);
+                };
+            };
+
+            const for_data = await fetch('/control/api/editOrg', {
+                method: "POST",
+                body: formOrg
+            });
+            const responseData = await for_data.json();
+
+            if (responseData.error != undefined) {
+                this.setState({"formError" : responseData.error});
+            } else {
+                this.setSeeTo('places');
+            }
+
+        };
+
+    }
+
     render() {
         let see = null;
 
@@ -457,7 +522,8 @@ class Principal extends React.Component {
             case "org" :
                 see = (<div>
                     <h1 id="createTitle">Editar Organización</h1>
-                    <FormOrg data={this.state.orgForm} setValue={this.setValueOrgForm} setInstagram={this.setInstagram}/>
+                    <FormOrg data={this.state.orgForm} setValue={this.setValueOrgForm} setInstagram={this.setInstagram}
+                    error={this.state.formError} submit={this.submitOrg}/>
                 </div>)
 
                 break;

@@ -12,6 +12,7 @@ from .decorators import allowed
 
 from login.models import User
 from maps.models import Help, HelpPhoto
+from info.models import InstagramPublication, Organization
 
 import json
 import random
@@ -45,13 +46,50 @@ def get_org(request):
         'circular_icon' : org.circular_icon.url,
         'short_description' : org.short_description,
         'quote' : org.quote,
-        'instagram_photos' : [{'url' : ins.url, 'id' : ins.id} for ins in org.instagram_photos.all()]
+        'instagram_photos' : [{'url' : ins.url, 'id' : ins.id} for ins in org.instagram_photos.all()],
+        'id' : org.id
     }
 
     return JsonResponse(response, status=200)
 
-def form_view(request):
-    return render(request, 'control/e.html', {'form' : EditInstagram()})
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def edit_org(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+    
+    org = Organization.objects.get(pk=request.POST['id'])
+    form = EditOrg(request.POST, request.FILES, instance=org)
+    if form.is_valid():
+        org.name = form.cleaned_data['name']
+        org.phone_number = form.cleaned_data['phone_number']
+        org.short_description = form.cleaned_data['short_description']
+        org.quote = form.cleaned_data['quote']
+
+        if form.cleaned_data['image'] != "undefined":
+            org.image = form.cleaned_data['image'] 
+        if form.cleaned_data['circular_icon'] != "undefined":
+            org.circular_icon = form.cleaned_data['circular_icon'] 
+
+        org.save()
+        return JsonResponse({'mesagge' : 'All ok'}, status=200)
+
+    return JsonResponse({'error' : 'Invalid form'}, status=400)
+
+@login_required(login_url='/account/login')
+@allowed(allowed_roles=['Organization'])
+def edit_instagram(request):
+    if request.method != 'POST':
+        return JsonResponse({'error' : 'Invalid request'}, status=400)
+    
+    form = EditInstagram(request.POST)
+    if form.is_valid():
+        post = InstagramPublication.objects.get(pk=request.POST['id'])
+        post.url = form.cleaned_data['url']
+        post.save()
+        return JsonResponse({'message' : f'{post.id} saved'}, status=200)
+
+    return JsonResponse({'error' : 'Invalid form'}, status=400)
 
 @login_required(login_url='/account/login')
 @allowed(allowed_roles=['Organization'])

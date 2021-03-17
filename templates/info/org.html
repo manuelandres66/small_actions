@@ -54,7 +54,7 @@
     <div id="publications">
         {% for publication in org.instagram_photos.all %}
             {% if publication.url != "" %}
-                <iframe width="320" height="440" src="{{publication.url}}embed" frameborder="0"></iframe>
+                <iframe width="320" height="500" src="{{publication.url}}embed" frameborder="0"></iframe>
             {% endif %}
         {% endfor %}
     </div>

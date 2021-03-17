@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='controlIndex'),
-    path('e', views.form_view),
 
     path('api/places', views.places, name='apiPlaces'),
     path('api/delete', views.delete_place, name='apiDelete'),
@@ -18,6 +17,8 @@ urlpatterns = [
     path('api/edit', views.to_edit, name="apiEdit"),
     path('api/info', views.get_info, name="apiInfo"),
     path('api/org', views.get_org, name="apiInfoOrg"),
+    path('api/editInstagram', views.edit_instagram, name="apiEditIns"),
+    path('api/editOrg', views.edit_org, name="apiEditOrg"),
 
     path('report/', views.report_form, name='report'),
     path('photo', views.show_photo, name="showPhoto")
