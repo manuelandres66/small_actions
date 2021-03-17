@@ -17,7 +17,8 @@ class Principal extends React.Component {
             },
             'formError' : null,
             'forPhotos' : [],
-            'time' : '15:00'
+            'time' : '15:00',
+            'orgForm' : {},
         };
         this.getPlaces();
         setInterval(this.getTime, 1000); //To the clock
@@ -138,6 +139,12 @@ class Principal extends React.Component {
         let data = {...this.state.form};
         data[event.target.name] = event.target.value;
         this.setState({'form' : data});
+    }
+
+    setValueOrgForm = (event) => {
+        let data = {...this.state.orgForm};
+        data[event.target.name] = event.target.value;
+        this.setState({'orgForm' : data});
     }
 
     newPlaceSubmit = async (event, photoIds, edit) => { //Most large function, sorry dude
@@ -376,6 +383,91 @@ class Principal extends React.Component {
         this.setState({'time' : `${minutes}:${seconds}`});
     }
 
+    toOrg = async () => {
+        const for_data = await fetch('/control/api/org');
+        const data = await for_data.json();
+        this.setState({'orgForm' : data, 'see' : 'org'});
+    }
+
+    setInstagram = (event, id) => {
+        let formData = [...this.state.orgForm.instagram_photos];
+        let to_edit = formData.find(photo => photo.id == id);
+        const index = formData.findIndex(photo => photo.id == id);
+
+        to_edit.url = event.target.value;
+        formData[index] = to_edit;
+
+        let orgData = {...this.state.orgForm};
+        orgData.instagram_photos = formData;
+
+        this.setState({'orgForm' : orgData});
+    }
+
+    submitOrg = async (e) => {
+        e.preventDefault();
+        let data = {...this.state.orgForm};
+        const photos = data.instagram_photos;
+        let check = true;
+        //Edit photos
+        for (let i = 0; i < photos.length; i++) {
+            if (photos[i].url != "") {
+                let formPhoto = new FormData();
+                formPhoto.append("csrfmiddlewaretoken", getCookie('csrftoken'));
+                formPhoto.append("id", photos[i].id);
+                formPhoto.append("url", photos[i].url);
+
+                const for_data = await fetch('/control/api/editInstagram', {
+                    method: "POST",
+                    body: formPhoto
+                });
+                const data = await for_data.json();
+                
+                if (data.error != undefined) {
+                    check = false;
+                    this.setState({"formError" : "Algun campo de fotos de instagram es incorrecto"});
+                    break;
+                }
+
+            } else {
+                check = false;
+                this.setState({"formError" : "Algun campo de fotos de instagram esta vacio"});
+                break;
+            }
+        }
+        
+        if (check) {
+            let formOrg = new FormData();
+            formOrg.append("csrfmiddlewaretoken", getCookie('csrftoken'));
+
+            //Photos
+            const imageField = document.querySelector("#id_image").files[0];
+            formOrg.append("image", imageField);
+            const circularField = document.querySelector("#id_circular_icon").files[0];
+            formOrg.append("circular_icon", circularField);
+
+            //Rest
+            for (const key in data) {
+                if (key != "instagram_photos" & key != "image" & key != "circular_icon") {
+                    formOrg.append(key, data[key]);
+                };
+            };
+
+            const for_data = await fetch('/control/api/editOrg', {
+                method: "POST",
+                body: formOrg
+            });
+            const responseData = await for_data.json();
+
+            if (responseData.error != undefined) {
+                this.setState({"formError" : responseData.error});
+            } else {
+                this.setSeeTo('places');
+            }
+
+        };
+
+    }
+
     render() {
         let see = null;
 
@@ -426,6 +518,15 @@ class Principal extends React.Component {
                     <HelpView />
                 </div>)
                 break;
+
+            case "org" :
+                see = (<div>
+                    <h1 id="createTitle">Editar Organización</h1>
+                    <FormOrg data={this.state.orgForm} setValue={this.setValueOrgForm} setInstagram={this.setInstagram}
+                    error={this.state.formError} submit={this.submitOrg}/>
+                </div>)
+
+                break;
         }
 
         return (
@@ -434,7 +535,7 @@ class Principal extends React.Component {
                     <h1>Small Actions - Control</h1>
                     <nav>
                         <a onClick={() => this.setSeeTo('places')}>Lugares</a>
-                        <a>Organización</a>
+                        <a onClick={this.toOrg}>Organización</a>
                         <a onClick={() => this.setSeeTo('help')}>Ayuda</a>
                     </nav>
                 </div>

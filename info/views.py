@@ -7,7 +7,7 @@ from django.views.decorators.cache import cache_page
 from django.db.models import Q
 
 from .forms import NewOrganization
-from .models import Organization
+from .models import Organization, InstagramPublication
 
 from maps.models import Help, SubCategory, Category
 
@@ -17,7 +17,7 @@ import json
 def about_us(request):
     places = str(len(Help.objects.all()))
     place_str = [num for num in places]
-    photos = Organization.objects.annotate(p_count=Count('help_points')).order_by('-p_count')[:5]
+    photos = Organization.objects.annotate(p_count=Count('help_points')).order_by('-p_count').filter(see=True)[:5]
     return render(request, 'info/about_us.html', {'places' : place_str, 'photos' : photos})
 
 def category(request, category):
@@ -71,7 +71,7 @@ def api_category(request):
 def choose_category(request):
     return render(request, 'info/choose.html')
 
-# @cache_page(60 * 30)
+@cache_page(60 * 30)
 def organization(request, pk):
     org = Organization.objects.get(pk=pk)
     places = len(org.help_points.all())
@@ -119,7 +119,7 @@ def api_org(request):
 
 
 def search(request):
-    photos = Organization.objects.annotate(p_count=Count('help_points')).order_by('-p_count')[:8]
+    photos = Organization.objects.annotate(p_count=Count('help_points')).order_by('-p_count').filter(see=True)[:8]
     return render(request, 'info/search.html', {'photos' : photos})
 
 def api_search(request): 
@@ -128,9 +128,9 @@ def api_search(request):
     data = json.loads(request.body)
 
     if 'search' in data:
-        search = Organization.objects.filter(name__contains=data['search'])
-        search = search | Organization.objects.filter(short_description__contains=data['search'])
-        search = search | Organization.objects.filter(quote__contains=data['search'])
+        search = Organization.objects.filter(name__contains=data['search'], see=True)
+        search = search | Organization.objects.filter(short_description__contains=data['search'], see=True)
+        search = search | Organization.objects.filter(quote__contains=data['search'], see=True)
 
         response = {'results' : []}
         for organi in search[:8]:
@@ -160,7 +160,8 @@ def become(request):
                 short_description =     form.cleaned_data['short_description'],
                 quote =                 form.cleaned_data['quote'],
                 circular_icon =         form.cleaned_data['circular_icon'],
-                image =                 form.cleaned_data['image']
+                image =                 form.cleaned_data['image'],
+                see =                   False
             )
 
             message = "Solicitud enviada, entre 1 a 7 dias le llegara un mensaje al teléfono de la persona acargo"
@@ -170,6 +171,13 @@ def become(request):
                 settings.EMAIL_HOST_USER,
                 [settings.EMAIL_HOST_USER,],
             )
+
+            for _ in range(4): #Asign 4 instagram files (avoid errors)
+                new_organization.instagram_photos.add(
+                    InstagramPublication.objects.create()
+                )
+
+            new_organization.save()
 
 
     return render(request, 'info/become.html', {'form' : form, 'message' : message})
