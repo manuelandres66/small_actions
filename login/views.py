@@ -238,7 +238,7 @@ def forgot_password(request):
                 user.save()
                 
                 #Send Email
-                link = 'http://127.0.0.1:8000' + reverse('emailink', kwargs={'random_string' : user.random_string})
+                link = 'https://www.small-actions.com' + reverse('emailink', kwargs={'random_string' : user.random_string})
                 html_message = render_to_string('login/email.html', {'link': link})
 
                 send_mail('¿Olvidaste tu contraseña?',
