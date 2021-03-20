@@ -21,7 +21,6 @@
         <meta name="robots" content="index, follow">
     </head>
     <body>
-        {% cache 900 navbar %}
         <header id="all_bar">
             <div id="superior">
                 <img src="{% static 'maps/images/logo.svg' %}" id="principal_logo" alt="logo" width="500" height="65">
@@ -61,7 +60,6 @@
             </div>
             <script src="{% static 'maps/javascript/nav.js' %}"></script>
         </header>
-        {% endcache %}
 
 
         {% block content %}
