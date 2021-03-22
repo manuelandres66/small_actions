@@ -4,8 +4,8 @@
     {% block head %}
         <title>Ir a {{point.name}}</title>
 
-        <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-        <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+        <script src="{% static 'control/javascript/mapbox-gl.js' %}"></script>
+        <link href="{% static 'control/css/mapbox-gl.css' %}" rel='stylesheet' />
 
         <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
         <link
