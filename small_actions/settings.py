@@ -135,11 +135,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 #Email
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
+EMAIL_HOST = "smtp.yandex.com"
+EMAIL_PORT = 465
 EMAIL_HOST_USER = 'password@small-actions.com'
 EMAIL_HOST_PASSWORD = 'lol2Xd34'
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 #AWS
 # AWS_ACCESS_KEY_ID = 'AKIAVSVFXOEBAWSDYI7Z'
