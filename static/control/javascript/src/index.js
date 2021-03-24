@@ -166,12 +166,6 @@ class Principal extends React.Component {
             this.setState({'formError' : 'Categorias Incorrectas'});
         }
 
-        //Check one photo
-        if (photoIds.every(v => v === null)) { //All ids are null
-            checked = false;
-            this.setState({'formError' : 'Envia una por lo menos una foto'});
-        }
-
 
         if (checked) {
             const fileFields = document.querySelectorAll("#newPlace input[type='file']");
