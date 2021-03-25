@@ -89,7 +89,7 @@ const darkCircle = document.querySelector('#dark_circle');
 let translateLigth = '0.2vw';
 let translateDark = '-2.6vw';
 
-const mediaQuery = window.matchMedia('(max-width: 1300px)');
+const mediaQuery = window.matchMedia('(max-width: 1450px)');
 if (mediaQuery.matches) {
     translateLigth = '-8vw, -0.3vh';
     translateDark = '7vw, -0.3vh'

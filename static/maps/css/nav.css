@@ -98,7 +98,7 @@ html[theme='dark-mode'] img{
     border-radius: 6px;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
     #all_bar {
         margin-top: 2vh;
     } 

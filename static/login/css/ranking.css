@@ -160,7 +160,7 @@ h2 a, h3 a, h4 a {
     padding-left: 3vw;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
     h1 {
         font-size: 30px;
     }

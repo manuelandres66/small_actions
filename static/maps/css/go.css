@@ -152,7 +152,7 @@ form span {
 }
 
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
      #grid {
           display: block;
      }

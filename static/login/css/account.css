@@ -212,7 +212,7 @@ h5 span  {
     bottom: 2vh;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
     #info {
         display: block;
         width: 96vw;

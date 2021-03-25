@@ -264,7 +264,7 @@ span {
     cursor: pointer;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
 
     #grid_all {
         display: block;

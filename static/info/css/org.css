@@ -263,7 +263,7 @@
     margin-top: 2vh;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
     #title img {
         height: 10vh;
         width: 70vw;

@@ -129,7 +129,7 @@ body {
     animation-fill-mode: forwards;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
     #sigin {
         margin: 0;
         margin-left: 2vw;

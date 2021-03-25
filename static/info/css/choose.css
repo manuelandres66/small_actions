@@ -59,7 +59,7 @@ h1, h2, .category i {
     filter: brightness(85%);
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
     #for_grid {
         display: block;
     }
