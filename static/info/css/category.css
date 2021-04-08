@@ -177,7 +177,7 @@ html[theme="dark-mode"] .false_check, html[theme="dark-mode"] .false_subcheck {
         margin-bottom: 10vh;
         margin-top: 0;
         height: auto;
-        top: 100vh;
+        top: 125vh;
         background-color: rgba(178, 177, 177, 0.25);
         padding-bottom: 1vh;
     }
