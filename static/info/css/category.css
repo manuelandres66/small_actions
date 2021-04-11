@@ -180,7 +180,7 @@ html[theme="dark-mode"] .false_check, html[theme="dark-mode"] .false_subcheck {
         width: 90%;
         margin-left: 5%;
         margin-bottom: 10vh;
-        margin-top: 0;
+        margin-top: 5vh;
         height: auto;
         position: static;
         order: 2;
