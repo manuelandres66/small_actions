@@ -22,33 +22,35 @@
             <h2>{% if donate %} Donaciones {% else %} Voluntario {% endif %}</h2>
         </div>
     </div>
-    <div id="categories">
-        {% for category in categories %}
-        <div id="{{category.code}}" class="category" data-click="">
-            <div class="info">
-                <div>
-                    <input type="checkbox" value="{{category.code}}" class="check_cate">
-                    <div class="false_check" data-color="{{category.color}}"></div>
-                </div>
-                <h5>{{category.name}}</h5>
-                <i class="fas fa-chevron-down for_down"></i>    
-            </div>
-
-            <div class="sub_categories">
-                {% for sub_category in category.sub_categories.all %}
-                <div id="{{sub_category.code}}">
+    <div id="toflex">
+        <div id="categories">
+            {% for category in categories %}
+            <div id="{{category.code}}" class="category" data-click="">
+                <div class="info">
                     <div>
-                        <input type="checkbox" value="{{sub_category.code}}" class="check_sub">
-                        <div class="false_subcheck" data-color="{{category.color}}"></div>
+                        <input type="checkbox" value="{{category.code}}" class="check_cate">
+                        <div class="false_check" data-color="{{category.color}}"></div>
                     </div>
-                    <h6>{{sub_category.name}}</h6>
+                    <h5>{{category.name}}</h5>
+                    <i class="fas fa-chevron-down for_down"></i>    
                 </div>
-                {% endfor %}
+
+                <div class="sub_categories">
+                    {% for sub_category in category.sub_categories.all %}
+                    <div id="{{sub_category.code}}">
+                        <div>
+                            <input type="checkbox" value="{{sub_category.code}}" class="check_sub">
+                            <div class="false_subcheck" data-color="{{category.color}}"></div>
+                        </div>
+                        <h6>{{sub_category.name}}</h6>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <div id="map"></div>
     </div>
-    <div id="map"></div>
     {% csrf_token %}
     <script src="{% static 'info/javascript/category.js' %}"></script>
 {% endblock %}

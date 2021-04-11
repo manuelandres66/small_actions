@@ -171,13 +171,19 @@ html[theme="dark-mode"] .false_check, html[theme="dark-mode"] .false_subcheck {
         font-size: 62px;
     }
 
+    #toflex {
+        display: flex;
+        flex-direction: column;
+    }
+
     #categories {
         width: 90%;
         margin-left: 5%;
         margin-bottom: 10vh;
         margin-top: 0;
         height: auto;
-        top: 125vh;
+        position: static;
+        order: 2;
         background-color: rgba(178, 177, 177, 0.25);
         padding-bottom: 1vh;
     }
