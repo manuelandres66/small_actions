@@ -202,4 +202,5 @@ def search_helps(request):
     else:
         return JsonResponse({'error' : 'no search specified'}, status=400)
 
-    
+def chacha(request):
+    return render(request, 'emails/chacha.html')

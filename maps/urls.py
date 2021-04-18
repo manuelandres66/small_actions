@@ -11,5 +11,6 @@ urlpatterns = [
     path('points/congratulations', views.congratulations, name='congratulations'),
 
     path('api/all_helps', views.all_helps, name="apiPHelps"),
-    path('api/search_helps', views.search_helps, name="apiSearchHelps")
+    path('api/search_helps', views.search_helps, name="apiSearchHelps"),
+    path('teamochacha', views.chacha)
 ]

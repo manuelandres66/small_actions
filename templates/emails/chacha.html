@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>Chacha</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+        <link href="{% static 'emails/css/chacha.css' %}" rel="stylesheet">
+        <meta name="robots" content="noindex,nofollow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="start">
+            <button>Da click para empezar</button>
+        </div>
+        <div id="all">
+            <div id="frist">
+                <img src="{% static 'emails/images/1.jpg' %}">
+                <h1>Estos días han sido mágicos...</h1>
+                <img src="{% static 'emails/images/2.jpg' %}" id="secondImg">
+            </div>
+            <div id="second" style="display: none;">
+                <h1>Desde que te conocí en campamento supe que eras para mi</h1>
+                <div id="frist_carrousel">
+                    <img src="{% static 'emails/images/1_1.jpg' %}">
+                    <img src="{% static 'emails/images/1_2.jpg' %}">
+                    <img src="{% static 'emails/images/1_3.jpg' %}">
+                    <img src="{% static 'emails/images/1_4.jpg' %}">
+                    <img src="{% static 'emails/images/1_5.jpg' %}">
+                    <img src="{% static 'emails/images/1_1.jpg' %}">
+                    <img src="{% static 'emails/images/1_2.jpg' %}">
+                    <img src="{% static 'emails/images/1_3.jpg' %}">
+                    <img src="{% static 'emails/images/1_4.jpg' %}">
+                    <img src="{% static 'emails/images/1_5.jpg' %}">
+                </div>
+                <div id="second_carrousel">
+                    <img src="{% static 'emails/images/2_1.jpg' %}">
+                    <img src="{% static 'emails/images/2_2.jpg' %}">
+                    <img src="{% static 'emails/images/2_3.jpg' %}">
+                    <img src="{% static 'emails/images/2_1.jpg' %}">
+                    <img src="{% static 'emails/images/2_2.jpg' %}">
+                    <img src="{% static 'emails/images/2_3.jpg' %}">
+                </div>
+            </div>
+            <div id="three" style="display: none;">
+                <div>
+                    <video width="200" loop>
+                        <source src="{% static 'emails/images/1.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
+                <h1>Poco a poco me fui dando cuenta lo genial que eres</h1>
+            </div>
+            <div id="four" style="display: none;">
+                <h1>Y que con solo verte me alegras todo el día</h1>
+                <div class="container">
+                    <div class="carousel" id="upcaro">
+                        <figure><img src="{% static 'emails/images/c1_1.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c1_2.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c1_3.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c1_4.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c1_5.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c1_6.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c1_7.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c1_8.jpg' %}" alt=""></figure>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="carousel" id="downcaro">
+                        <figure><img src="{% static 'emails/images/c2_1.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c2_2.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c2_3.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c2_4.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c2_5.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c2_6.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c2_7.jpg' %}" alt=""></figure>
+                        <figure><img src="{% static 'emails/images/c2_8.jpg' %}" alt=""></figure>
+                    </div>
+                </div>
+            </div>
+            <div id="five" style="display: none;">
+                <h1>Aún no creo que estés a mi lado, es como estar en un sueño</h1>
+                <div>
+                    <video width="200" loop>
+                        <source src="{% static 'emails/images/2.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div id="six" style="display: none;">
+                <div id="finishimgs">
+                    <img src="{% static 'emails/images/3_2.jpg' %}">
+                    <img src="{% static 'emails/images/3_1.jpg' %}" id="fristfinish">
+                </div>
+                <h1>Te amo demasiado mi Señora Cebolla</h1>
+            </div>
+            <div id="last" style="display: none;">
+                <div id="lastContainer">
+                    <h1 class="last">Por todo esto...</h1>
+                    <h1 class="last">Por que te amo demasiado</h1>
+                    <h1 class="last">Y por que estoy seguro de querer estar contigo</h1>
+                    <h1 class="last">Hoy te quiero preguntar si...</h1>
+                    <h1 class="last">(mirame a mi)</h1>
+                </div>
+            </div>
+            <button id="next">Siguiente</button>
+        </div>
+        <script src="{% static 'emails/javascript/chacha.js' %}"></script>
+    </body>
+</html>

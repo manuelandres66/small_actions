@@ -1,0 +1,493 @@
+* {
+    font-family: 'Great Vibes', cursive;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes start {
+    0% {
+        bottom: 0;
+    }
+
+    100% {
+        bottom: 100vh;
+    }
+}
+
+.start {
+    width: 102vw;
+    height: 100vh;
+    background-color: #3D59EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 10;
+
+    animation-name: start;
+    animation-duration: 1s;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+}
+
+.start button {
+    background-color: #FFF;
+    color: #3D59EB;
+    border: none;
+    padding: 12px;
+    font-size: 40px;
+    border-radius: 10px;
+}
+
+#frist {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        bottom: 20vh;
+    }
+
+    100% {
+        opacity: 1;
+        bottom: 0;
+    }
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#frist h1 {
+    position: relative;
+    opacity: 0;
+    bottom: 20vh;
+
+    animation-name: appear;
+    animation-duration: 2s;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+}
+
+#frist img {
+    height: 30vh;
+    object-fit: contain;
+    margin: 5vh 0;
+    position: relative;
+    opacity: 0;
+}
+
+@keyframes appearRigth {
+    0% {
+        opacity: 0;
+        right: 50vw;
+    }
+
+    100% {
+        opacity: 1;
+        right: 0;
+    }
+}
+
+#frist img:nth-child(1) {
+    animation-name: appearRigth;
+    animation-duration: 3s;
+    animation-delay: 1.5s;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+}
+
+@keyframes appearLeft {
+    0% {
+        opacity: 0;
+        left: 50vw;
+    }
+
+    100% {
+        opacity: 1;
+        left: 0;
+    }
+}
+
+#secondImg {
+    animation-name: appearLeft;
+    animation-duration: 3s;
+    animation-delay: 3s;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+}
+
+#next {
+    background-color: #3D59EB;
+    color: #FFF;
+    border: none;
+    font-size: 30px;
+    padding: 4px 10px;
+    width: 35vw;
+    margin-left: 32.5vw;
+    border-radius: 10px;
+}
+
+@keyframes allappear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#second {
+    animation: allappear 3s forwards;
+    animation-play-state: paused;
+}
+
+#second h1 {
+    margin-top: 5vh;
+    margin-left: 5vw;
+    width: 90vw;
+    font-size: 30px;
+}
+
+@keyframes round {
+    0% {
+        transform: translate(-200vw);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+#frist_carrousel {
+    display: flex;
+    height: 30vh;
+    margin-top: 3vh;
+
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-name: round;
+    animation-timing-function: linear;
+}
+
+#frist_carrousel img {
+    width: 40vw;
+    object-fit: cover;
+}
+
+@keyframes invertround {
+    0% {
+        transform: translate(0);
+    }
+
+    100% {
+        transform: translate(-180vw);
+    }
+}
+
+#second_carrousel {
+    display: flex;
+    height: 30vh;
+    margin-top: 3vh;
+    margin-bottom: 4vh;
+
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-name: invertround;
+    animation-timing-function: linear;
+}
+
+#second_carrousel img {
+    width: 60vw;
+    object-fit: cover;
+}
+
+#three div {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+#three div video {
+    position: relative;
+    opacity: 0;
+
+    animation-name: allappear;
+    animation-duration: 3s;
+    animation-delay: 1.5s;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+}
+
+#three h1 {
+    margin: 5vh 0;
+    position: relative;
+    opacity: 0;
+    bottom: 20vh;
+
+    animation-name: appear;
+    animation-duration: 2s;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+}
+
+.container {
+    margin: 8vh auto;
+    width: 100vw;
+    height: 20vh;
+    position: relative;
+    perspective: 2000px;
+}
+
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+#upcaro {
+    animation: rotation 30s infinite linear;
+}
+
+#downcaro {
+    animation: invertRotation 30s infinite linear;
+}
+
+.carousel:hover {
+    animation-play-state: paused;
+}
+
+.carousel figure {
+    display: block;
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    left: 10px;
+    top: 10px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.carousel figure:nth-child(1) {
+    transform: rotateY(0deg) translateZ(225px);
+}
+.carousel figure:nth-child(2) {
+    transform: rotateY(45deg) translateZ(225px);
+}
+.carousel figure:nth-child(3) {
+    transform: rotateY(90deg) translateZ(225px);
+}
+.carousel figure:nth-child(4) {
+    transform: rotateY(135deg) translateZ(225px);
+}
+.carousel figure:nth-child(5) {
+    transform: rotateY(180deg) translateZ(225px);
+}
+.carousel figure:nth-child(6) {
+    transform: rotateY(225deg) translateZ(225px);
+}
+.carousel figure:nth-child(7) {
+    transform: rotateY(270deg) translateZ(225px);
+}
+.carousel figure:nth-child(8) {
+    transform: rotateY(315deg) translateZ(225px);
+}
+
+.carousel img {
+    cursor: pointer;
+    transition: all 0.5s ease;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel img:hover {
+    transform: scale(1.2, 1.2);
+}
+
+@keyframes rotation {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes invertRotation {
+    from {
+        transform: rotateY(360deg);
+    }
+    to {
+        transform: rotateY(0);
+    }
+}
+
+
+
+#four h1 {
+    padding-top: 5vh;
+}
+
+#four {
+    opacity: 0;
+
+    animation-name: allappear;
+    animation-duration: 3s;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+}
+
+#five div {
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes appearUp {
+    0% {
+        opacity: 0;
+        transform: translateY(-10vh);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#five h1 {
+    padding-top: 10vh;
+    opacity: 0;
+    transform: translateY(-10vh);
+
+    animation-name: appearUp;
+    animation-duration: 3s;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+    animation-delay: 1.5s;
+
+}
+
+#five video {
+    transform: rotate(90deg);
+    opacity: 0;
+
+    animation: allappear 2s forwards;
+    animation-play-state: paused;
+}
+
+#finishimgs {
+    margin-top: 10vh;
+    width: 90vw;
+    height: 40vh;
+    opacity: 0;
+    transform: translateY(-10vh);
+
+    animation: appearUp 2s forwards;
+    animation-play-state: paused;
+}
+
+#finishimgs img {
+    position: absolute;
+    top: 0.5vh;
+    left: 5vw;
+    width: 90vw;
+    height: 40vh;
+    object-fit: contain;
+    z-index: 1;
+}
+
+@keyframes changeImg {
+    0% {
+        opacity: 1;
+    }
+
+    49.9% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    99.9% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#fristfinish {
+    animation: changeImg 1s infinite linear;
+    z-index: 10;
+}
+
+#six h1 {
+    margin: 8vh 0;
+    opacity: 0;
+    left: 50vw;
+    position: relative;
+
+    animation: appearLeft 2s forwards;
+    animation-delay: 1s;
+}
+
+@keyframes back {
+    0% {
+        background-color: #FFF;
+    }
+    100% {
+        background-color: #3D59EB;
+    }
+}
+
+#last {
+    background-color: #FFF;
+    width: 100%;
+    height: 100vh;
+
+    animation: back 1s forwards;
+}
+
+#lastContainer {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    padding-top: 10vh;
+    justify-content: space-between;
+}
+
+.last {
+    width: 90vw;
+    margin-left: 5vw;
+    color: #FFF;
+    opacity: 0;
+
+    animation: allappear 2s forwards;
+}
+
+.last:nth-child(1) {
+    animation-delay: 1s;
+}
+.last:nth-child(2) {
+    animation-delay: 4s;
+}
+.last:nth-child(3) {
+    animation-delay: 7s;
+}
+.last:nth-child(4) {
+    animation-delay: 10s;
+}
+.last:nth-child(5) {
+    animation-delay: 13s;
+}
