@@ -7,8 +7,8 @@ class NewOrganization(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({'placeholder': 'Nombre de la organización'})
         self.fields['phone_number'].widget.attrs.update({'placeholder': 'Teléfono de la organización'})
-        self.fields['contact_name'].widget.attrs.update({'placeholder': 'Nombre de la persona acargo'})
-        self.fields['contact_phone_number'].widget.attrs.update({'placeholder': 'Teléfono de la persona acargo'})
+        self.fields['contact_name'].widget.attrs.update({'placeholder': 'Nombre de la persona a cargo'})
+        self.fields['contact_phone_number'].widget.attrs.update({'placeholder': 'Teléfono de la persona a cargo'})
         self.fields['short_description'].widget.attrs.update({'placeholder': 'Descripción de la organización'})
         self.fields['quote'].widget.attrs.update({'placeholder': 'Lema de la organización sin comillas'})
 
